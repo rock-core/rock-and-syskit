@@ -1,14 +1,14 @@
 # HowTo
 
-1. Install middleman (you might need to add `sudo` to the command):
-
-    `gem install middleman`
-
-2. Clone the repository:
+1. Clone the repository:
 
     `git clone git@github.com:rafaelsaback/rock_website.git`
 
-3. Go to the repository's folder and run:
+1. Go into the repository and run
+
+    `bundle install`
+
+1. Then
 
     `bundle exec middleman`
 
