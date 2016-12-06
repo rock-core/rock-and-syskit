@@ -2,5 +2,4 @@
 layout: tutorials
 ---
 
-<h1>Tutorials</h1>
-<hr>
+# Tutorials

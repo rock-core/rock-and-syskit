@@ -2,5 +2,4 @@
 layout: documentation
 ---
 
-<h1>Documentation</h1>
-<hr>
+# Documentation

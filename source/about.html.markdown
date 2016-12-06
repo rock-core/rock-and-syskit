@@ -2,5 +2,4 @@
 layout: about
 ---
 
-<h1>About</h1>
-<hr>
+# About
