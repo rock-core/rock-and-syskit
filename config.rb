@@ -2,6 +2,7 @@
 # Page options, layouts, aliases and proxies
 ###
 
+activate :syntax
 # Per-page layout changes:
 #
 # With no layout

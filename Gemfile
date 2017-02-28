@@ -11,5 +11,7 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 # Middleman Gems
 gem 'middleman', '>= 4.0.0'
 
+gem 'middleman-syntax'
+
 # Gem necessary to use execjs, hence necessary to run 'bundle exec middleman'
 gem 'therubyracer'
