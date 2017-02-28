@@ -41,9 +41,15 @@ represent the frames on the robot and/or in its environment.
   <div class="panel panel-heading">
     <h4>Setup</h4>
   </div>
+
   Geometry support requires that you have `drivers/orogen/transformer` in your
-  workspace. Moreover, the Syskit bundle must have
-  `Syskit.conf.transformer_enabled = true` in `config/init.rb`
+  workspace. Moreover, your Syskit bundle must have
+  ~~~ruby
+  Robot.init do
+    Syskit.conf.transformer_enabled = true
+  end
+  ~~~
+  in the robot configuration file (either `config/robots/default.rb` or a robot-specific configuration)
   {:.panel-body}
 </div>
 
@@ -233,7 +239,7 @@ Let's open a Syskit IDE and display a component's transform annotations (the
 component is [the `uwv_kalman_filters::VelocityProvider`](https://github.com/rock-slam/slam-orogen-uwv_kalman_filters)
 component).
 
-![Plain transformer information](VelocityProvider_plain_transformer.svg)
+![Plain transformer information](transformations/VelocityProvider_plain_transformer.svg)
 
 In this view, the frames are oval shaped, with the component-local frame name on
 the left of the equal sign, and the global frame name assigned to it on the
@@ -274,7 +280,7 @@ Let's take the `VelocityProvider` ports one by one.
   After reloading, this new relation is represented by an edge between the port
   and the frame:
 
-  ![body_efforts annotation](VelocityProvider_body_efforts.svg)
+  ![body_efforts annotation](transformations/VelocityProvider_body_efforts.svg)
 
 * `dvl_velocity_samples` is a `RigidBodyState` which represents the velocity of
   the vehicle expressed in the sensor's frame. It is therefore a dvl-to-dvl
@@ -287,7 +293,7 @@ Let's take the `VelocityProvider` ports one by one.
   The port-to-transform relation is represented by an edge between the port and
   the white dot in the middle of the transform:
 
-  ![body_efforts annotation](VelocityProvider_dvl.svg)
+  ![body_efforts annotation](transformations/VelocityProvider_dvl.svg)
 
 * `imu_sensor_samples` is represented in the sensor's frame
 
@@ -311,7 +317,7 @@ Let's take the `VelocityProvider` ports one by one.
 
 The final model looks like this:
 
-![All inputs modelled](VelocityProvider_all_annotations.svg)
+![All inputs modelled](transformations/VelocityProvider_all_annotations.svg)
 
 ### Enabling propagation: adding geometry modelling in components that do not use the transformer
 
@@ -384,7 +390,7 @@ this driver's own frame definitions - assuming that the device driver has the
 right `associate_frame_to...` annotations. In the case of the GPS, it would end
 up looking like:
 
-![GPS task with annotations](GPS_device_to_port.svg)
+![GPS task with annotations](transformations/GPS_device_to_port.svg)
 
 Where the device-assigned frames are shown with the `dev(...).frame_name`
 syntax.
@@ -395,7 +401,7 @@ are shown by default, visualizing transforms in a profile (as, in this case,
 a device definition), requires to show the transforms explicitly by clicking
 the "Show transforms" link:
 
-!["Show transforms" button](SyskitIDE_show_transforms.jpg)
+!["Show transforms" button](transformations/SyskitIDE_show_transforms.jpg)
 </div>
 
 ### Setting frames that can't be deduced by propagation {#use_frames_in_profiles}
@@ -415,7 +421,7 @@ could not find a frame for body in OroGen::UwvKalmanFilters::VelocityProvider
 This can be inspected in e.g. the profile page in the Syskit IDE (see the red
 'body' frame in the VelocityProvider component)
 
-![Missing body frame](VelocityProvider_no_body_frame.svg)
+![Missing body frame](transformations/VelocityProvider_no_body_frame.svg)
 
 To fix this, one must explicitly set the body frame in the profile with the
 `.use_frames` statement. Frame selection is recursive (a frame selected in a
@@ -482,35 +488,77 @@ or the input to a transform (associate_ports_to_transform)
 
 ## Describing frames and their relations using SDF
 
-### Frame definitions and static transforms
+The canonical way to describe all of a system's frames is to provide a SDF file
+that describes the vehicle, and another SDF file that represents its
+environment.
 
-### Dynamic transformations
+It is recommended to create the overall vehicle SDF model and visuals in a
+separate repository under the `robots/` category (e.g. `robots/shiny`).  The
+model itself must be installed under `share/sdf` (e.g. `share/sdf/shiny`) to be
+found automatically by Syskit.
 
-Transformations can either be static or provided dynamically, for instance
-because there is a joint in-between the two frames (e.g. a camera mounted on a
-PTU).
+Then, a `use_gazebo_model` stanza can be added in a profile to import the SDF
+information into the transformer:
 
-Syskit requires that one declares these dynamic producers. A dynamic
-transformation can be provided by anything that look like a Syskit component
-(profile definition, particular service of a profile definition, device, …)
+~~~ruby
+profile "Base" do
+  use_gazebo_model "model://shiny"
+end
+~~~
 
-These components are then declared as dynamic producers in the profile's
+The vehicle's base model frame and all the vehicle's links are represented as
+frames in the transformer. All links that are joined by a static joint (either
+a "static" joint or a dynamic joint with same min/max limits) are related by a
+static transform in the transformer configuration. Links are prefixed by the
+model name (e.g. `shiny::gps`)
+
+Providers for the transformation of dynamic joints (e.g. a camera mounted on a
+PTU) must be explicitly given. A dynamic transformation can be provided by
+anything that look like a Syskit component (profile definition, particular
+service of a profile definition, device, …). When deploying networks, if a
+component needs a certain dynamic transformation, Syskit will instantiate this
+component and add it to the network.
+
+These components are declared as dynamic producers in the profile's
 `transformer` block
 
 ~~~ruby
 profile "Base" do
-  use_gazebo_model 'model://vehicle/model.sdf'
-  use_sdf_world
+  use_gazebo_model 'model://shiny'
 
   robot do
     device Rock::Devices::PTU, as: 'ptu'
   end
                                                                                                                                                                                                     
   transformer do
-    dynamic_transform ptu_dev, 'vehicle::ptu_base' => 'vehicle::ptu_moving'
+    dynamic_transform ptu_dev,
+      'shiny::ptu_base' => 'shiny::ptu_moving'
   end
 end
 ~~~
+
+In addition to loading a vehicle model, it is possible to load a SDF world file
+to describe both apriori knowledge about the world, and "utility" frames within
+the world (such as e.g. a GPS local origin). This is done with the
+`use_sdf_world` stanza in the profile.
+
+~~~ruby
+profile "Base" do
+  use_gazebo_model 'model://shiny'
+  use_sdf_world
+end
+~~~
+
+The corresponding world must be loaded within the `requires` block of the robot
+configuration file:
+
+~~~ruby
+Robot.requires do
+  Syskit.conf.use_sdf_world 'empty_world'
+end
+~~~
+
+the actual world can be overriden 
 
 ## Caveats
 
@@ -527,6 +575,7 @@ having two samples on *every* dynamic transformation stream before it can play
 anything. In other words, the lowest bound of a transformer's actual latency is
 the period of its slowest dynamic transformation stream. If you were to have a
 very slow dynamic transformation producer, it will impact every component that
+use it.
 
 Make sure that all dynamic transformation producers are of sufficiently high
 frequency. The lowest producer in the system will drive the latency of all
@@ -537,6 +586,7 @@ transformer-based components that require it.
 
 **Component development**
 
+* really think before you use the transformer. Be aware of the {#caveats}.
 * use the transformer only to handle robot-internal transformations
 * make sure that the frames of all RigidBodyState outputs can be parametrized.
   Use the `$(framename)_frame` pattern to name the relevant properties
