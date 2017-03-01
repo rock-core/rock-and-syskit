@@ -3,6 +3,9 @@
 ###
 
 activate :syntax
+set :relative_links, true
+activate :relative_assets
+
 # Per-page layout changes:
 #
 # With no layout
