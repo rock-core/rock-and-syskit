@@ -455,11 +455,24 @@ look at how frames propagate through the ports.
 <div class="alert alert-info" markdown="1">
 **Message**: `could not find a frame for $frame_name in $component`
 
-**Problem**: A frame cannot be deduced by network propagation.
+**Problem**: a frame cannot be deduced by network propagation
 
-**Resolution**: if the frame is related to a port, make sure that [all
-frame-propagation annotations have been set](#component_annotations). Otherwise,
-set it explicitly [in the profile](#use_frames_in_profiles).
+**Resolution**: In a profile test or when inspecting a definition in the syskit
+IDE, this error indicates that some information is missing in the profile /
+network. If the frame is related to a port, make sure that [all
+frame-propagation annotations have been set](#component_annotations).
+Otherwise, set it explicitly [in the profile](#use_frames_in_profiles).
+
+This error is expected when inspecting a composition within the IDE. If it
+happens during a composition or task context test, one needs to explicitely
+provide dummy frames in the stub calls:
+  
+~~~ruby
+model = OrientationEstimator.
+    use_frames('map' => 'w', 'world' => 'w', 'imu' => 'body', 'body' => 'body').
+    transformer { frames 'w', 'body' }
+syskit_stub_deploy_and_configure(model)
+~~~
 </div>
 
 <div class="alert alert-info" markdown="1">
