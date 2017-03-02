@@ -160,9 +160,19 @@ else
 
 The first argument to `.get` controls what is the expected time of the queried
 transform. It is needed only if the transformer is expected to generate an
-_interpolated transform_ by setting the third argument to `true`. Note that the
-time can only be within the last and one-before-last samples received. The
-transformer does not keep a full history of everything it receives.
+_interpolated transform_ by setting the third argument to `true`. 
+
+When the third argument is `false`, the transformer computes the kinematic
+chain using the transforms whose timestamp is just before the given `time`. If
+it is `true`, it interpolates the transformation from the transforms it
+received with a timestamp just before the passed timestamp, with the transforms
+it received with a timestamp just after.
+
+Note that this functionality will only work reliably inside the transformer
+callbacks, since it ensures that the given time is ordered in time.  The
+transformer does not keep a full history of everything it receives, and is
+therefore very likely to fail to interpolate or even return a transform if
+called outside the stream alignment callbacks.
 
 As already noted, the transformer is a stream aligner. It's common to process
 the component's input streams aligned with the transformations, which is done by
