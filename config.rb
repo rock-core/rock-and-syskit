@@ -28,11 +28,11 @@ page '/*.txt', layout: false
 ###
 
 # Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+    def load_svg(file)
+        File.read(File.join(app.root, 'source', file))
+    end
+end
 
 # Build-specific configuration
 configure :build do
