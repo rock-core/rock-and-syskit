@@ -4,6 +4,7 @@
 
 activate :syntax
 set :relative_links, true
+set :latest_release, '2017.6'
 activate :relative_assets
 
 # Per-page layout changes:
