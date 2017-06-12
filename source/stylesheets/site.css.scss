@@ -2,3 +2,18 @@
 @import "normalize";
 @import "syntax";
 
+img.screenshot {
+    transform: scale(0.7);
+}
+
+.advanced {
+    margin: 20px;
+    padding: 20px;
+    background-color: #EFD7FF;
+    margin-top: 40px;
+
+    h1, h2 {
+        margin-top: 0px;
+    }
+}
+
