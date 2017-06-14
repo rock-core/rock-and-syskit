@@ -13,9 +13,7 @@ reused.
 In Syskit, one has to _declare_ how components must be connected together to
 form a function, and then can request the system to actually run that function.
 
-This page deals with the first step (design). The [next
-page](running_the_arm_control.html) will _deploy_ the network we just created so
-that we can run it.
+This page deals with the first step (design). The [next page](arm_cartesian_control_generator.html) will create the command generator, and we will then [_deploy_ the network](arm_control_deployment.html) and run it.
 
 But let's not get too ahead of ourselves, and install the control package that
 will implement the control.
@@ -264,4 +262,4 @@ bind two input ports or two input ports together.
 
 ![Example or a port export](arm_cartesian_control_export.png)
 
-Now, [let's do something with it](arm_control_deployment.html){: .btn .btn-primary}
+Before we can actually run the whole thing, [we must create a command generator for it](arm_cartesian_control_generator.html){: .btn .btn-primary}
