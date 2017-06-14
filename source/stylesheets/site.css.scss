@@ -2,8 +2,9 @@
 @import "normalize";
 @import "syntax";
 
-img.screenshot {
-    transform: scale(0.7);
+
+img {
+    padding: 20px;
 }
 .advanced_description {
     margin-left: 1em;

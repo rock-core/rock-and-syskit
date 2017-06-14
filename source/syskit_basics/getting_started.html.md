@@ -199,7 +199,7 @@ addition of the system plugin.
 
 The task contexts in our scene can be visualized with rock-display:
 
-<img src="rock_gazebo_task_contexts.jpg" class="screenshot" />
+![Components exported by a Gazebo instance under Rock](rock_gazebo_task_contexts.jpg)
 
 `rock-gazebo-viz` sets up the visualization to match the data in the SDF file and
 then listen to pose updates from the `rock_gazebo::ModelTask` components exposed by the
