@@ -31,7 +31,10 @@ components together - connecting outputs to inputs - that an active
 sensor-processing-actuator loop is created and that the robot can act and react
 in its environment. In addition to this _dataflow interface_ (data inputs and
 outputs), Rock components also offer a _configuration_ interface where parameters
-can be chosen and tested.
+can be chosen and tested. In Rock, these components are implemented in **oroGen
+packages**. They are described in an orogen file, which code-generates the
+skeleton of the components. oroGen packages also define the datatypes that
+can be transferred between the components.
 
 What sets Rock apart from other component-based systems is the ability to
 reconfigure the component network to fit the situation as best as possible.
