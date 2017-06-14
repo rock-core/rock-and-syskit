@@ -160,13 +160,14 @@ newly-created `config/robots/gazebo.rb` configuration file to add:
 
 ~~~ruby
 Robot.init do
-  # Keep the existing code from the generated template
+  # IMPORTANT: do not delete the code from the generated template
 
   # The rock-gazebo bridge requires models from the 'common_models' bundle.
   # It already depends on it, but we need to manually add the bundle to the
   # Roby search path
   Roby.app.search_path << File.expand_path('../../../common_models', __dir__)
   require 'rock_gazebo/syskit'
+  Conf.syskit.transformer_enabled = true
 end
 
 Robot.requires do
