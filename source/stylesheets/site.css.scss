@@ -5,6 +5,9 @@
 img.screenshot {
     transform: scale(0.7);
 }
+.advanced_description {
+    margin-left: 1em;
+}
 
 .advanced {
     margin: 20px;
@@ -17,3 +20,4 @@ img.screenshot {
     }
 }
 
+@import "bootstrap";

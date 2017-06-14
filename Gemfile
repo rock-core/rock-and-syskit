@@ -12,8 +12,11 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Middleman Gems
 gem 'middleman', '>= 4.0.0'
-
 gem 'middleman-syntax'
+
+gem 'sass'
+gem 'bootstrap-sass'
+gem 'susy', "~>1.0.1"
 
 # Gem necessary to use execjs, hence necessary to run 'bundle exec middleman'
 gem 'mini_racer'

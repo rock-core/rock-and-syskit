@@ -174,12 +174,17 @@ Robot.requires do
 end
 ~~~
 
-Now that we have a minimal scene and a working Gazebo installation, let's [do
-something with it](arm_control.html)
+Now that we have a minimal scene and a working Gazebo installation, [let's do
+something with it](arm_control.html){:.btn .btn-primary}
 
-<div class="advanced" markdown="1">
-## Under the hood
+<div class="panel panel-warning" markdown="1">
+<div class="panel-heading" markdown="1">
 
+<a class="btn btn-warning" role="button" data-toggle="collapse" href="#under_the_hood" aria-expanded="false" aria-controls="under_the_hood">
+  Advanced
+</a><span class="advanced_description">Under the hood: how does the Rock/Gazebo bridge work</span>
+</div>
+<div class="collapse panel-body" markdown="1" id="under_the_hood">
 Under the hood, the objects in the Gazebo instance are exposed to the Rock
 system by means of [a Gazebo system
 plugin](http://gazebosim.org/tutorials?tut=system_plugin). Each model, link,
@@ -200,5 +205,6 @@ The task contexts in our scene can be visualized with rock-display:
 then listen to pose updates from the `rock_gazebo::ModelTask` components exposed by the
 Gazebo process. Given that this data is only output if the components are running,
 `rock-gazebo-viz` starts them automatically. Use `--no-start` to avoid this.
+</div>
 </div>
 

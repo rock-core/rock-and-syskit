@@ -47,4 +47,4 @@ one component = one package. Libraries should be "fat", components "slim" (i.e.
 most of the functionality should be implemented as a component-independent
 library.
 
-That's all for now … let's get to describe a [system within Gazebo using SDF](sdf.html)
+That's all for now … [let's get started with our Syskit/Gazebo system](getting_started.html){:.btn .btn-primary}
