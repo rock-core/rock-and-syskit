@@ -14,6 +14,13 @@
 
 And voilà! The website should be available from your localhost. Just read the middleman messages to know how exactly to open it in the browser.
 
+# Publishing
+
+Run
+
+~~~
+bundle exec rake publish ALLOW_DIRTY=true
+~~~
 
 # Possible Errors
 
