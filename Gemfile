@@ -20,3 +20,5 @@ gem 'susy', "~>1.0.1"
 
 # Gem necessary to use execjs, hence necessary to run 'bundle exec middleman'
 gem 'mini_racer'
+
+gem 'html-proofer'

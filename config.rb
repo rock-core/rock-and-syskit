@@ -34,6 +34,16 @@ helpers do
     end
 end
 
+require 'html-proofer'
+
+after_build do |builder|
+    begin
+        HTMLProofer.check_directory(config[:build_dir], { assume_extension: true }).run
+    rescue RuntimeError => e
+        puts e
+    end
+end
+
 # Build-specific configuration
 configure :build do
   # Minify CSS on build
