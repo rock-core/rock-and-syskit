@@ -6,6 +6,16 @@ activate :syntax
 set :relative_links, true
 set :latest_release, '2017.6'
 activate :relative_assets
+activate :navtree do |options|
+    options.data_file = 'tree.yml' # The data file where our navtree is stored.
+    options.automatic_tree_updates = true # The tree.yml file will be updated automatically when source files are changed.
+    options.ignore_files = ['sitemap.xml', 'robots.txt', 'about.html.md'] # An array of files we want to ignore when building our tree.
+    options.ignore_dir = ['assets', 'media'] # An array of directories we want to ignore when building our tree.
+    options.home_title = 'Home' # The default link title of the home page (located at "/"), if otherwise not detected.
+    options.promote_files = [] # Any files we might want to promote to the front of our navigation
+    options.ext_whitelist = [] # If you add extensions (like '.md') to this array, it builds a whitelist of filetypes for inclusion in the navtree.
+    options.directory_indexes << 'index.html.md' << 'index.html.md.erb'
+end
 
 # Per-page layout changes:
 #

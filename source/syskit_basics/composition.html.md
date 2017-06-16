@@ -1,5 +1,7 @@
 ---
 layout: documentation
+title: Compositions
+sort_info: 20
 ---
 
 # Compositions: designing the network for the cartesian control of an arm
@@ -13,7 +15,9 @@ reused.
 In Syskit, one has to _declare_ how components must be connected together to
 form a function, and then can request the system to actually run that function.
 
-This page deals with the first step (design). The [next page](constant_generator.html) will create the command generator, and we will then [_deploy_ the network](deployment.html) and run it.
+This page deals with the first step (design). The [next
+page](constant_generator.html) will create the command generator, and we
+will then [_deploy_ the network](deployment.html) and run it.
 
 But let's not get too ahead of ourselves, and install the control package that
 will implement the control.
@@ -106,7 +110,7 @@ $ syskit gen cmp arm_cartesian_control_wdls
 #### OroGen packages in Syskit
 </div>
 <div class="panel-body" markdown="1">
-As described in our [brief introduction](brief_introduction.html), oroGen packages are
+As described in our [brief introduction](index.html), oroGen packages are
 where the functionality implemented in the library packages are "packaged" into things
 that can be used at runtime.
 

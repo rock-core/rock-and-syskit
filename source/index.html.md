@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: documentation
 ---
 
 # Building robots with Rock and Syskit
@@ -24,8 +24,8 @@ examples are mixed with more detailed descriptions, with an aim at being progres
 
 ## Basics
 
-1. [Installing Rock, day-to-day handling of packages](installation.html)
-2. [Running a simple system using Gazebo and Syskit](syskit_basics.html)
+1. [Installing Rock, day-to-day handling of packages](workspace/index.html)
+2. [Running a simple system using Gazebo and Syskit](syskit_basics/index.html)
 3. The development and runtime workflows
 
 ## Building systems

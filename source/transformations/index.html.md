@@ -1,5 +1,9 @@
 ---
 layout: documentation
+directory_title: Transformations
+directory_sort_info: 100
+title: Geometric Relations
+sort_info: 0
 ---
 
 # Geometric Relations

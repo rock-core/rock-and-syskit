@@ -1,5 +1,7 @@
 ---
 layout: documentation
+title: Constant Generator
+sort_info: 30
 ---
 
 # Creating our Command Generator

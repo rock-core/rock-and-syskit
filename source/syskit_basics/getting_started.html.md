@@ -1,5 +1,7 @@
 ---
 layout: documentation
+title: Getting Started
+sort_info: 10
 ---
 
 # Getting Started
@@ -19,7 +21,7 @@ For all intents and purposes, so far, bundles are a collection of Syskit models
 and model descriptions (`models/sdf/`).
 
 The following assumes that you have a [bootstrapped Rock
-installation](../installation.html), and that you have a terminal in which this
+installation](../workspace/index.html), and that you have a terminal in which this
 installation's `env.sh` file has been sourced.
 
 Let's create a new bundle. In your Rock's workspace do

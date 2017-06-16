@@ -1,5 +1,7 @@
 ---
 layout: documentation
+title: Deployment
+sort_info: 50
 ---
 
 # Profiles, Actions and Deployments:
@@ -119,6 +121,5 @@ Let's look at them one by one, to see what needs to actually be configured.
   and angular velocity fields. Let's set `0.1` in linear and `2.deg` in angular
   (the `.deg` suffix will convert a degree value in radians).
 - `robot_frames::SingleChainPublisher` only has robot model and tip/root parameters.
-
 
 

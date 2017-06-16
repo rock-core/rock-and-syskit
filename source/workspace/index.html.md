@@ -1,5 +1,9 @@
 ---
 layout: documentation
+title: Introduction
+sort_info: 0
+directory_title: The Workspace
+directory_sort_info: 0
 ---
 
 # Managing a Rock installation
@@ -31,7 +35,7 @@ cause problems. Windows has seen some preliminary usage.
 
 What will be covered here:
 
-- [Rock installation on a Linux system](installation/install.html)
-- day-to-day management of a Rock installation
+- [Rock installation on a Linux system](install.html)
+- [day-to-day management of a Rock installation](day_to_day.html)
 - debugging common problems
 

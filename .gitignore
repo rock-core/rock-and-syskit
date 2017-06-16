@@ -19,3 +19,5 @@
 
 # Ignore .swp files (VIM)
 *.swp
+
+data/tree.yml
