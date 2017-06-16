@@ -13,7 +13,7 @@ reused.
 In Syskit, one has to _declare_ how components must be connected together to
 form a function, and then can request the system to actually run that function.
 
-This page deals with the first step (design). The [next page](arm_cartesian_control_generator.html) will create the command generator, and we will then [_deploy_ the network](arm_control_deployment.html) and run it.
+This page deals with the first step (design). The [next page](constant_generator.html) will create the command generator, and we will then [_deploy_ the network](deployment.html) and run it.
 
 But let's not get too ahead of ourselves, and install the control package that
 will implement the control.
@@ -131,7 +131,7 @@ in a file and load it with `syskit ide`. If we do so in our newly created `model
 syskit ide models/compositions/arm_cartesian_control_wdls.rb
 ~~~
 
-![Name mapping between oroGen and Syskit](syskit_name_mapping.png)
+![Name mapping between oroGen and Syskit](media/syskit_name_mapping.png)
 </div>
 </div>
 
@@ -139,7 +139,7 @@ We now want to build the cartesian control network. What each component does in
 the `cart_ctrl_wdls` project can be found by reading the documentation displayed
 in the IDE (at the top of each component's page), and the documentation of the ports (displayed as tooltips).
 
-![Component information page](wdls_solver_page.png)
+![Component information page](media/wdls_solver_page.png)
 
 We will want to run the
 control components, and the simulated arm. The latter is represented by a
@@ -260,6 +260,6 @@ In the IDE, this is represented as a port on the composition, and a connection
 between this port and the exported port. These are the only connections that can
 bind two input ports or two input ports together.
 
-![Example or a port export](arm_cartesian_control_export.png)
+![Example or a port export](media/arm_cartesian_control_export.png)
 
-Before we can actually run the whole thing, [we must create a command generator for it](arm_cartesian_control_generator.html){: .btn .btn-primary}
+Before we can actually run the whole thing, [we must create a command generator for it](constant_generator.html){: .btn .btn-primary}

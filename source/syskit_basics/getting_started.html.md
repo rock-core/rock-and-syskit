@@ -62,7 +62,7 @@ default[INFO]: closed communication
 
 ## Robot and Scene description using SDF
 
-The [Scene Description Format](sdformat.org) is a XML format defined by the
+The [Scene Description Format](http://sdformat.org) is a XML format defined by the
 Gazebo developers to describe both scenes and objects in these scenes (as e.g.
 robots).
 
@@ -136,7 +136,7 @@ rock-gazebo-viz empty_world
 
 You're should be looking at the UR10 on the floor:
 
-<img src="initial_rock_gazebo_viz.jpg" class="screenshot" />
+![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg)
 
 ## Preparing the `gazebo` Syskit configuration
 
@@ -176,7 +176,7 @@ end
 ~~~
 
 Now that we have a minimal scene and a working Gazebo installation, [let's do
-something with it](arm_control.html){:.btn .btn-primary}
+something with it](composition.html){:.btn .btn-primary}
 
 <div class="panel panel-warning" markdown="1">
 <div class="panel-heading" markdown="1">
@@ -190,7 +190,7 @@ Under the hood, the objects in the Gazebo instance are exposed to the Rock
 system by means of [a Gazebo system
 plugin](http://gazebosim.org/tutorials?tut=system_plugin). Each model, link,
 sensor and some plugins are exposed this way. The plugin is implemented in the
-[`simulation/rock_gazebo` package](https://github.com/rock-gazebo/simulation-rock-gazebo). The components
+[`simulation/rock_gazebo` package](https://github.com/rock-gazebo/simulation-rock_gazebo). The components
 that implement this interface are implemented in the
 [`simulation/orogen/rock_gazebo` package](https://github.com/rock-gazebo/simulation-orogen-rock_gazebo),
 and are being run within the Gazebo process itself, synchronously with the
@@ -200,7 +200,7 @@ addition of the system plugin.
 
 The task contexts in our scene can be visualized with rock-display:
 
-![Components exported by a Gazebo instance under Rock](rock_gazebo_task_contexts.jpg)
+![Components exported by a Gazebo instance under Rock](media/rock_gazebo_task_contexts.jpg)
 
 `rock-gazebo-viz` sets up the visualization to match the data in the SDF file and
 then listen to pose updates from the `rock_gazebo::ModelTask` components exposed by the

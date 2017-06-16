@@ -4,12 +4,12 @@ layout: documentation
 
 # Creating our Command Generator
 
-[The control network we just created](arm_control.html) does not have a command
+[The control network we just created](composition.html) does not have a command
 generator. The first generator one usually creates is a constant one, creating an
 interface to send a constant command from Syskit into a control network.
 
 We will create the command generator on this page, and then [deploy and run
-it](arm_control_deployment.html).
+it](deployment.html).
 
 We will also learn how to write unit tests.
 
@@ -56,7 +56,7 @@ end
 
 which gives us
 
-![Cartesian constant generator](constant_generator.png)
+![Cartesian constant generator](media/constant_generator.png)
 
 The documentation of the `out` port tells us that its value is controlled by
 the 'values' arguments. Task arguments are ways to parametrize tasks from
@@ -348,4 +348,4 @@ it "forwards its setpoint argument to the generator child" do
 end
 ~~~
 
-We can now put those to good use … and [finally run our networks in simulation](arm_control_deployment.html){: .btn .btn-primary}
+We can now put those to good use … and [finally run our networks in simulation](deployment.html){: .btn .btn-primary}
