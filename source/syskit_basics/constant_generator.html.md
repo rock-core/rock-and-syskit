@@ -350,4 +350,6 @@ it "forwards its setpoint argument to the generator child" do
 end
 ~~~
 
-We can now put those to good use … and [finally run our networks in simulation](deployment.html){: .btn .btn-primary}
+We need now to map the composition's `arm` child to the arm within the simulation. Let's do
+[a detour to device models](devices.html){: .btn .btn-primary} to then finally [run our network](deployment.html){: .btn .btn-primary}
+
