@@ -174,7 +174,9 @@ files. The alternative is to open the `syskit ide` and inspect the composition
 file as follows (`-rgazebo` is necessary because we are importing models from
 `common_models`). **Leave the IDE open after this, we will reuse it**
 
+<div class="fluid-video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/hTBYnlc0J3Q?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 We may now start adding connections in the composition definition. The following
 code snippets will only reproduce the composition definition itself, omitting

@@ -173,7 +173,9 @@ the given robot configuration and allow to start them separately.  It also
 allows to auto-run all the discovered tests, and re-run tests when the files
 change, like so:
 
+<div class="fluid-video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/Z-asD-4yM8w?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 
 
