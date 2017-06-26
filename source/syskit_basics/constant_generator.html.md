@@ -15,7 +15,7 @@ it](deployment.html).
 
 We will also learn how to write unit tests.
 
-## The Constant Generator
+## The Cartesian Constant Generator
 
 For the command, let's generate a single constant command. It will allow us to
 move the arm tip from one point to another, expressed in the cartesian frame.
@@ -122,7 +122,7 @@ its correctness.
 
 Each time we ran `syskit gen`, files were created both in `models/` and
 `test/`. The default Syskit test framework is the spec implementation of
-[minitest](https://github.com/seattlerb/minitest)
+[minitest](https://github.com/seattlerb/minitest) {#run_test_command_line}
 
 Let's now write the tests for our generator.
 
@@ -171,7 +171,7 @@ $ syskit test -rgazebo
 The IDE also gives an interface to the tests. It will display all the tests for
 the given robot configuration and allow to start them separately.  It also
 allows to auto-run all the discovered tests, and re-run tests when the files
-change, like so:
+change, like so: {#run_test_ide}
 
 <div class="fluid-video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/Z-asD-4yM8w?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -272,7 +272,7 @@ levels of composition, which is resolved at the dataflow level.
 **Tip**: One can hide the compositions in the dataflow view to help readability with the `Hide compositions` button
 {: .callout .callout-info}
 
-Let's run the generated test now:
+Let's run the generated test now: {#missing_arguments}
 
 ~~~
 $ syskit test -rgazebo test/compositions/test_arm_cartesian_constant_control_wdls.rb
@@ -310,7 +310,10 @@ cmp_task = syskit_stub_deploy_configure_and_start(
   ArmCartesianConstantControlWdls)
 ~~~
 
-The error message is that `cannot find an ordering to configure 1 tasks`, the task being `SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator:0x2714010`. This is not our composition, but the constant generator. What's going on ?
+The error message is that `cannot find an ordering to configure 1 tasks`, the
+task being
+`SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator:0x2714010`.
+This is not our composition, but the constant generator. What's going on ?
 
 Syskit tasks can only be configured and started if all their arguments are set.
 Having unset arguments is a very common cause for the error we're having here,
@@ -319,7 +322,7 @@ and indeed we can see that `missing_arguments: setpoint, values`.
 In order to be able to see the encompassing `ArmCartesianConstantControlWdls`
 as a single component for the outside system, we would need to define a
 setpoint argument on it and forward it to the generator. This is a very common
-pattern, and Syskit supports it:
+pattern, and Syskit supports it: {#composition_forward_argument}
 
 ~~~ruby
 require 'models/compositions/arm_cartesian_constant_command_generator'
@@ -352,6 +355,161 @@ it "forwards its setpoint argument to the generator child" do
 end
 ~~~
 
-We need now to map the composition's `arm` child to the arm within the simulation. Let's do
-[a detour to device models](devices.html){: .btn .btn-primary} to then finally [run our network](deployment.html){: .btn .btn-primary}
+## The Joint Position Constant Generator {#joint_position_constant_generator}
+
+There's another control mode that we need. In order to either hold a position,
+or go into a safe position, one needs a joint position constant generator and
+the corresponding composition.
+
+The creation of this generator is left to the reader. 
+
+**Tip**: a good representation for the setpoint would be a `joint_name=>joint_position` hash.
+{: .callout .callout-info}
+
+<div class="panel panel-info" markdown="1">
+<div class="panel-heading" markdown="1">
+
+<a class="btn btn-info" role="button" data-toggle="collapse" href="#under_the_hood" aria-expanded="false" aria-controls="under_the_hood">
+  Solution
+</a><span class="advanced_description">The JointPositionConstantGenerator</span>
+</div>
+<div class="collapse panel-body" markdown="1" id="under_the_hood">
+Let's generate the files
+
+~~~
+syskit gen ruby_task joint_position_constant_generator
+~~~
+
+`models/compositions/joint_position_constant_generator.rb`:
+
+~~~ruby
+require 'models/compositions/constant_generator'
+import_types_from 'base'
+require 'base/float'
+
+module SyskitBasics
+  module Compositions
+    class JointPositionConstantGenerator <
+      CommonModels::Compositions::ConstantGenerator.
+        for('/base/commands/Joints')
+
+      # The setpoint as a hash of joint names to joint positions
+      argument :setpoint
+
+      def setpoint=(setpoint)
+        joint_names    = setpoint.keys
+        joint_commands = setpoint.each_value.map do |position|
+          Types.base.JointState.new(
+            position: position,
+            speed: Base.unset,
+            effort: Base.unset,
+            raw: Base.unset,
+            acceleration: Base.unset)
+        end
+        self.values = Hash['out' =>
+          Types.base.commands.Joints.new(
+            time: Time.at(0),
+            names: joint_names,
+            values: joint_commands)]
+      end
+
+      def values
+        if v = super
+          # Do not change the argument "under the hood"
+          sample = v['out'].dup
+          sample.time = Time.now
+          Hash['out' => sample]
+        end
+      end
+    end
+  end
+end
+~~~
+
+and the test `test/compositions/test_joint_position_constant_generator.rb`:
+
+~~~ruby
+require 'models/compositions/joint_position_constant_generator'
+
+module SyskitBasics
+  module Compositions
+    describe JointPositionConstantGenerator do
+      it "sets the names and positions based on the given hash" do
+        task = syskit_stub_deploy_configure_and_start(
+          JointPositionConstantGenerator.
+            with_arguments(setpoint: Hash['j0' => 10, 'j1' => 20]))
+        assert_equal ['j0', 'j1'], task.values['out'].names
+        assert_equal [10, 20], task.values['out'].elements.map(&:position)
+      end
+
+      it "returns the value with an updated timestamp" do
+        task = syskit_stub_deploy_configure_and_start(
+          JointPositionConstantGenerator.
+            with_arguments(setpoint: Hash['j0' => 10, 'j1' => 20]))
+        Timecop.freeze(expected_time = Time.now)
+        sample = expect_execution.to do
+          have_one_new_sample task.out_port
+        end
+        assert_in_delta expected_time, sample.time, 1e-6
+      end
+    end
+  end
+end
+~~~
+
+Let's now create the corresponding composition:
+
+~~~
+syskit gen cmp joint_position_constant_control
+~~~
+
+Fill the implementation in `models/compositions/joint_position_constant_control.rb`:
+
+~~~ruby
+require 'models/devices/gazebo/model'
+require 'models/compositions/joint_position_constant_generator'
+
+module SyskitBasics
+  module Compositions
+    class JointPositionConstantControl < Syskit::Composition
+      # The setpoint as a 'joint_name' => position_in_radians hash
+      argument :setpoint
+
+      add CommonModels::Devices::Gazebo::Model, as: 'arm'
+      add(JointPositionConstantGenerator, as: 'command').
+        with_arguments(setpoint: from(:parent_task).setpoint)
+
+      command_child.out_port.connect_to \
+        arm_child.joints_cmd_port
+    end
+  end
+end
+~~~
+
+And modify the test:
+
+~~~ruby
+require 'models/compositions/joint_position_constant_control'
+
+module SyskitBasics
+  module Compositions
+    describe JointPositionConstantControl do
+      it "forwards its setpoint argument to the constant generator" do
+        cmp_task = syskit_stub_deploy_configure_and_start(
+            JointPositionConstantControl.with_arguments(setpoint: Hash['j0' => 10]))
+        assert_equal Hash['j0' => 10], cmp_task.command_child.setpoint
+      end
+    end
+  end
+end
+~~~
+
+</div>
+</div>
+
+## Finally
+
+We can now map the composition's `arm` child to the arm within the simulation.
+Let's do [a detour to device models](devices.html){: .btn .btn-primary} to then
+finally [run our network](deployment.html){: .btn .btn-primary}
 

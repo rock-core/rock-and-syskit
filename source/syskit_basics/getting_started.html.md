@@ -82,13 +82,45 @@ SDF scenes are made of _models_. Loosely-speaking, each model represents one
 object in the scene. Moreover, models can be included in scenes through the
 `<include>` tags, allowing to reuse models in different scenes. In general,
 your robot should at least be described in a separate model to allow you to
-define different simulation scenarios.
+reuse it in different simulation scenes.
 
 For the purpose of this part of the documentation, we'll use Gazebo's UR10 arm
-model as our robot.
+model as our robot. We however need to integrate it in another model so that its
+base is fixed (using [this method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/))
+
+Let's create a new model. The models are saved in `models/sdf/`, let's create
+`models/sdf/ur10_fixed` and create a Gazebo model description file `models/sdf/ur10_fixed/model.config` with
+
+~~~xml
+<?xml version="1.0"?>
+
+<model>
+  <name>Universal Robotics UR10 robot arm on a fixed base</name>
+  <version>1.0.2</version>
+  <sdf>model.sdf</sdf>
+</model>
+~~~
+
+and the corresponding SDF model in `models/sdf/ur10_fixed/model.sdf`
+
+~~~xml
+<?xml version='1.0'?>
+<sdf version='1.5'>
+    <model name="ur10_fixed">
+        <include>
+          <name>ur10</name>
+          <uri>model://ur10</uri>
+        </include>
+        <joint name="attached_to_ground" type="fixed">
+            <parent>world</parent>
+            <child>ur10::base</child>
+        </joint>
+    </model>
+</sdf>
+~~~
 
 Usually, the first scene one creates is an empty one, which later will give us
-a basic environment in which to test basic functionality, without having to care
+an environment in which to test basic functionality, without having to care
 about collisions.
 
 In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
@@ -99,8 +131,7 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 <sdf version="1.6">
   <world name="empty_world">
     <include>
-      <name>ur10</name>
-      <uri>model://ur10</uri>
+      <uri>model://ur10_fixed</uri>
     </include>
     <include>
       <uri>model://ground_plane</uri>
@@ -110,10 +141,10 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 ~~~
 
 **Note** the rock-gazebo integration does not know yet how to download models
-from Gazebo's model repository. Run `rock-gazebo` on this scene once first to
+from Gazebo's model repository. Run `rock-gazebo --gui=gzclient empty_world` once first to
 make sure the models are downloaded. Wait for the scene to show up (Gazebo's
 splash screen disappears then), and quit it then.
-{: .warning}
+{: .callout .callout-warning}
 
 ## Running and visualizing a Gazebo environment
 
@@ -122,25 +153,17 @@ definitely want to augment the visualization of the world with e.g. algorithm
 feedback and/or sensor data, we'll be using this environment for the Gazebo
 world as well, instead of using Gazebo's client.
 
-The Gazebo instance and visualizations are started separately. Gazebo-related
-tools automatically find scenes in the bundle's `scenes/` folder, so just the
-world name is enough:
+The `rock-gazebo` tool starts a Vizkit3D visualization for the Gazebo scene.
 
 ~~~
-rock-gzserver empty_world
+rock-gazebo empty_world
 ~~~
 
-Then start the visualization
-
-~~~
-rock-gazebo-viz empty_world
-~~~
-
-You're should be looking at the UR10 on the floor:
+Starts both a Gazebo simulation and displays it:
 
 ![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg)
 
-## Preparing the `gazebo` Syskit configuration
+## Preparing the `gazebo` Syskit configuration {#syskit_gazebo_configuration}
 
 Syskit configuration in bundles may be split into multiple configurations /
 environments called "robots". A common organization is to create one bundle
