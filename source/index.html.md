@@ -22,6 +22,15 @@ you to build a _manageable_ system.
 A Rock newcomer should read this documentation sequentially. Tutorials and
 examples are mixed with more detailed descriptions, with an aim at being progressive.
 
+<div class="alert alert-warning" role="alert" markdown="1">
+As of today (June 2017), not all the software used in this guide has reached
+Rock mainline repositories. For this reason, one needs to start using the
+buildconf repository on GitHub's
+[`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
+the default one at
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](workspace/index.html) already reflects this.
+</div>
+
 ## Basics
 
 1. [Installing Rock, day-to-day handling of packages](workspace/index.html)

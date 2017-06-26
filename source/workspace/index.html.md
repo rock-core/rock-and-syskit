@@ -35,7 +35,69 @@ cause problems. Windows has seen some preliminary usage.
 
 What will be covered here:
 
-- [Rock installation on a Linux system](install.html)
+- [Rock installation on a Linux system](#install)
 - [day-to-day management of a Rock installation](day_to_day.html)
-- debugging common problems
+- common installation problems and how to solve them
+
+## Installation {#install}
+
+<div class="alert alert-warning" role="alert" markdown="1">
+As of today (June 2017), not all the software used in this guide has reached
+Rock mainline repositories. For this reason, one needs to start using the
+buildconf repository on GitHub's
+[`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
+the default one at
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](workspace/index.html) already reflects this.
+</div>
+
+Rock's current release requires **Ruby 2.1 or later**
+
+ 1. Install Ruby and verify that the version matches
+
+    ~~~
+    sudo apt-get install ruby
+    ruby --version
+    ~~~
+
+ 2. Create and "cd" into the directory in which you want to install the toolchain.
+
+    ~~~
+    mkdir dev
+    cd dev
+    ~~~
+
+ 3. Download autoproj's bootstrap script
+
+    ~~~
+    wget http://rock-robotics.org/autoproj_bootstrap
+    ~~~
+
+ 4. Bootstrap your installation. This installs autoproj and checks out
+    the build configuration, but does not check out packages
+
+    - if you want to create a new workspace based on the latest release, do
+
+      ~~~
+      ruby autoproj_bootstrap \
+          git https://github.com/rock-gazebo/buildconf \
+          tag=<%= config[:latest_release] %>
+      ~~~
+      
+    - if you want to use the `stable` or `master` flavors, do
+
+      ~~~
+      ruby autoproj_bootstrap \
+          git https://github.com/rock-gazebo/buildconf
+      ~~~
+
+ 5. Update and build the installation's default packages.
+
+    ~~~
+    aup --all -k
+    amake --all -k
+    ~~~
+
+ 5. Important: as the build tool tells you, you **must** load the generated env.sh script at the end of the build !!! You must also do in new terminals before you can interact with the Rock installation
+
+**Next**: [day-to-day interaction](day_to_day.html)
 
