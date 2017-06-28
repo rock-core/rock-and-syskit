@@ -10,14 +10,20 @@ robotic systems for wide variety of applications in research and industry. It
 contains a rich collection of ready to use drivers and modules for use in your
 own system, and can easily be extended by adding new components.
 
-This website focusses on building robot systems based on Rock and Syskit,
-Rock's system management layer. It will not cover issues related to Rock's Ruby
-and C++ execution APIs, or only in cases where these plug Syskit limitations.
+This documentation's focus is on building robot systems based on Rock and
+Syskit, Rock's system management layer. It will not cover issues related to
+Rock's lower-level Ruby and C++ execution APIs, or only in cases where these
+plug Syskit limitations.
 
 The most important aspect of this documentation is to explain both the _how_
 and the _why_, i.e. describe the parts of Syskit that are relevant to manage a
 robot system, but also to explain the underlying design principles that allow
-you to build a _manageable_ system.
+you to build a _manageable_ system. The documentation does not assume any prior
+knowledge about Rock, but does assume that you have more than basic knowledge
+on general software development practices. The tools being implemented in Ruby
+and C++, it's best to know about these languages. However, documentation on
+the basics and principles of a Rock-Syskit system can be followed with basic
+programming knowledge.
 
 A Rock newcomer should read this documentation sequentially. Tutorials and
 examples are mixed with more detailed descriptions, with an aim at being progressive.

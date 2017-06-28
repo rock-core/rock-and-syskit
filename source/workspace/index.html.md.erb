@@ -8,6 +8,19 @@ directory_sort_info: 0
 
 # Managing a Rock installation
 
+<div class="alert alert-warning" role="alert" markdown="1" id="not_mainline">
+As of today (June 2017), not all the software used in this guide has reached
+Rock mainline repositories. For this reason, one needs to start using the
+buildconf repository on GitHub's
+[`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
+the default one at
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf). This
+installation guide already reflects this. This configuration automatically
+selects the 'master' flavor as described in this section
+</div>
+
+## Rock Versions and Flavors
+
 A system can base itself on different "flavors" of Rock. One can basically
 choose one out of three:
 
@@ -41,15 +54,6 @@ What will be covered here:
 
 ## Installation {#install}
 
-<div class="alert alert-warning" role="alert" markdown="1">
-As of today (June 2017), not all the software used in this guide has reached
-Rock mainline repositories. For this reason, one needs to start using the
-buildconf repository on GitHub's
-[`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
-the default one at
-[`rock-core/buildconf`](https://github.com/rock-core/buildconf). This installation guide already reflects this.
-</div>
-
 Rock's current release is <%= config[:latest_release] %>, and requires **Ruby <%= config[:min_ruby_version] %> or later**
 
  1. Install Ruby and verify that the version matches
@@ -73,31 +77,30 @@ Rock's current release is <%= config[:latest_release] %>, and requires **Ruby <%
     ~~~
 
  4. Bootstrap your installation. This installs autoproj and checks out
-    the build configuration, but does not check out packages
-
-    - if you want to create a new workspace based on the latest release, do
-
-      ~~~
-      ruby autoproj_bootstrap \
-          git https://github.com/rock-gazebo/buildconf \
-          tag=<%= config[:latest_release] %>
-      ~~~
-      
-    - if you want to use the `stable` or `master` flavors, do
-
-      ~~~
-      ruby autoproj_bootstrap \
-          git https://github.com/rock-gazebo/buildconf
-      ~~~
-
- 5. Update and build the installation's default packages.
+    the main build configuration, but does not check out packages. As
+    [previously mentioned](#not_mainline), one must use the master flavor
+    of Rock to go through this documentation. Select the defaults for all
+    the proposed configuration options.
 
     ~~~
+    ruby autoproj_bootstrap \
+        git https://github.com/rock-gazebo/buildconf
+    ~~~
+
+ 5. Update and build the installation's default packages.Select the defaults for all
+    the proposed configuration options.
+
+    ~~~
+    source env.sh
     aup --all -k
     amake --all -k
     ~~~
 
- 5. Important: as the build tool tells you, you **must** load the generated env.sh script at the end of the build !!! You must also do in new terminals before you can interact with the Rock installation
+
+You **must** remember to source the generated env.sh script at the end of the
+update !!! You must also do in new terminals before you can interact with the
+Rock installation
+{: .callout .callout-warning}
 
 **Next**: [day-to-day interaction](day_to_day.html)
 

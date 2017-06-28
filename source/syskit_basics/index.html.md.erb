@@ -23,14 +23,24 @@ current terminal.
 
 When applicable, we will breach advanced topics, or explanations about how
 things are implemented under-the-hood. These will be clearly indicated by
-a box, just like this one.
+a box like this:
+
+<div class="panel panel-warning" markdown="1">
+<div class="panel-heading" markdown="1">
+
+<a class="btn btn-warning" role="button" data-toggle="collapse" href="#under_the_hood" aria-expanded="false" aria-controls="under_the_hood">
+  Advanced
+</a><span class="advanced_description">This will hold the summary. Just click on "Advanced".</span>
+</div>
+<div class="collapse panel-body" markdown="1" id="under_the_hood">
+The details will be here.
+</div>
+</div>
+
+
 {: .advanced-topic}
 
-We'll be following this flow (click on the steps title to go directly there):
-
-<%= load_svg "syskit_basics/media/flow.svg" %>
-
-## Basic Concepts
+## Basic Concepts {#concepts}
 
 **Design and runtime** Rock is a model-based architecture. A Rock system is
 described **at design time**, that is before any piece of the actual
@@ -75,5 +85,40 @@ Rock's only convention is to have a one library = one package correspondence or
 one component = one package. Libraries should be "fat", components "slim" (i.e.
 most of the functionality should be implemented as a component-independent
 library.
+
+## The Flow
+
+The rest of the basics section will be following this flow:
+
+<table class="table">
+<thead>
+    <tr>
+    <th>What you will do</th>
+    <th>What Syskit concepts are covered</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+    <td><%= link_to "Getting started", "getting_started.html" %></td>
+    <td>Bootstrapping a Syskit app with Gazebo and a SDF scene, running Gazebo and visualizing the scene</td>
+    </tr>
+    <tr>
+    <td><%= link_to "Creating an arm control network", "composition.html" %></td>
+    <td>Compositions</td>
+    </tr>
+    <tr>
+    <td><%= link_to "Holding position in the cartesian space", "constant_generator.html" %></td>
+    <td>Constant Generator, Profiles</td>
+    </tr>
+    <tr>
+    <td><%= link_to "Binding the component networks to the simulator", "devices.html" %></td>
+    <td>Devices</td>
+    </tr>
+    <tr>
+    <td><%= link_to "Running the networks", "deployment.html" %></td>
+    <td>Deployment and runtime</td>
+    </tr>
+</tbody>
+</table>
 
 That's all for now … [let's get started with our Syskit/Gazebo system](getting_started.html){:.btn .btn-primary}
