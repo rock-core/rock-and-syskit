@@ -122,7 +122,7 @@ its correctness.
 
 Each time we ran `syskit gen`, files were created both in `models/` and
 `test/`. The default Syskit test framework is the spec implementation of
-[minitest](https://github.com/seattlerb/minitest) {#run_test_command_line}
+[minitest](https://github.com/seattlerb/minitest)
 
 Let's now write the tests for our generator.
 
@@ -157,6 +157,7 @@ end
 ~~~
 
 From the command line, one runs the tests on a single file with:
+{: id="run_test_command_line"}
 
 ~~~
 $ syskit test -rgazebo test/compositions/test_arm_cartesian_constant_command_generator.rb
@@ -171,7 +172,8 @@ $ syskit test -rgazebo
 The IDE also gives an interface to the tests. It will display all the tests for
 the given robot configuration and allow to start them separately.  It also
 allows to auto-run all the discovered tests, and re-run tests when the files
-change, like so: {#run_test_ide}
+change, like so:
+{: id="run_test_ide"}
 
 <div class="fluid-video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/Z-asD-4yM8w?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -272,7 +274,8 @@ levels of composition, which is resolved at the dataflow level.
 **Tip**: One can hide the compositions in the dataflow view to help readability with the `Hide compositions` button
 {: .callout .callout-info}
 
-Let's run the generated test now: {#missing_arguments}
+Let's run the generated test now:
+{: id="missing_arguments"}
 
 ~~~
 $ syskit test -rgazebo test/compositions/test_arm_cartesian_constant_control_wdls.rb
@@ -322,7 +325,8 @@ and indeed we can see that `missing_arguments: setpoint, values`.
 In order to be able to see the encompassing `ArmCartesianConstantControlWdls`
 as a single component for the outside system, we would need to define a
 setpoint argument on it and forward it to the generator. This is a very common
-pattern, and Syskit supports it: {#composition_forward_argument}
+pattern, and Syskit supports it:
+{: id="composition_forward_argument"}
 
 ~~~ruby
 require 'models/compositions/arm_cartesian_constant_command_generator'

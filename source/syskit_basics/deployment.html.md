@@ -416,7 +416,7 @@ This is reflected in the class hierarchy on the Syskit side, which means that
 `AdaptiveWDLSSolver` does inherit the `configure` method we just wrote. Given
 that it does not overload this method itself, we can just delete the test.
 
-## Building the system's action interface
+## Building the system's action interface {#actions}
 
 A Syskit application exports functionality to the outside world as _actions_.
 For now, the only thing we'll see about actions is that they have a name,
