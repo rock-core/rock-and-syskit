@@ -2,7 +2,7 @@
 
 1. Clone the repository:
 
-    `git clone git@github.com:rafaelsaback/rock_website.git`
+    `git clone git@github.com:doudou/rock_website`
 
 1. Go into the repository and run
 
@@ -19,7 +19,7 @@ And voilà! The website should be available from your localhost. Just read the m
 Run
 
 ~~~
-bundle exec rake publish ALLOW_DIRTY=true
+bundle exec rake publish
 ~~~
 
 # Possible Errors
