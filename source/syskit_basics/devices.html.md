@@ -27,7 +27,7 @@ streams of data - one cannot duplicate devices.  They are bound to hardware,
 and we still don't know how to grow new devices on the robot on-demand.
 
 This difference also exists in the Syskit system. The robot interface, the
-devices, are described separately. We will just see how this is done, and
+devices, are described separately. We will now see how this is done, and
 how we can use these devices within our arm control network, binding the
 simulated arm with the control network.
 
@@ -64,7 +64,7 @@ module SyskitBasics
   module Profiles
     module Gazebo
       profile 'Base' do
-        use_gazebo_model 'model://ur10/ur10.sdf'
+        use_gazebo_model 'model://ur10_fixed/model.sdf'
         use_sdf_world
       end
     end
@@ -72,7 +72,7 @@ module SyskitBasics
 end
 ~~~
 
-And have a look at the generated devices:
+And have a look at the generated devices with `syskit ide -rgazebo models/profiles/gazebo/base.rb`:
 
 ![Devices from the UR10 model](media/devices.png)
 
@@ -96,6 +96,12 @@ We need to require the `Base` profile and `ArmCartesianControlWdls` composition
 definition.  Then, `define` the cartesian and joint position controls _for our
 UR10 robot in gazebo_ by injecting the UR10 device as the 'arm' child of the
 composition.
+
+The model name given to `define` in a profile is made out of a [demeter
+chain](https://martinfowler.com/bliki/FluentInterface.html). In Ruby, one can
+easily break the chain with a newline after each method call. Don't forget the
+dots !
+{: .callout .callout-warning}
 
 ~~~ruby
 require 'models/profiles/gazebo/base'

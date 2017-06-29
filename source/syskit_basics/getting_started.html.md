@@ -14,11 +14,9 @@ allow us to continue with actually doing something with the system.
 
 In Rock, the central place where the system design and integration happens is a
 _bundle_. A bundle package is created in the `bundles/` folder of your Rock
-workspace.
-
-For all intents and purposes, so far, bundles are a collection of Syskit models
-(in `models/`), configuration files (in `config/`) and SDF scene (`scenes/`)
-and model descriptions (`models/sdf/`).
+workspace. For the time being, you can see bundles as a collection of
+Syskit models (in `models/`), configuration files (in `config/`), SDF scenes
+(`scenes/`) and SDF models (`models/sdf/`).
 
 The following assumes that you have a [bootstrapped Rock
 installation](../workspace/index.html), and that you have a terminal in which this
@@ -66,14 +64,11 @@ default[INFO]: closed communication
 
 The [Scene Description Format](http://sdformat.org) is a XML format defined by the
 Gazebo developers to describe both scenes and objects in these scenes (as e.g.
-robots).
+robots). We're going to learn how to leverage the information present in an SDF
+file as possible, with the goal of having the SDF be the authoritative
+information source for any information that can be represented in it.
 
-What we're going to learn along this documentation is to leverage the
-information present in an SDF file as possible, with the goal of having the SDF
-be the authoritative information source for any information that can be
-represented in it.
-
-But for now, let's get to create ourselves a scene with a robot in it. This
+But for now, let's get to create ourselves a scene with a robot in it. We
 will **not** describe the SDF format in details, there's a lot of
 Gazebo-related documentation about that, [including a reference of the format
 on sdformat.org](http://sdformat.org/spec)
@@ -85,10 +80,9 @@ your robot should at least be described in a separate model to allow you to
 reuse it in different simulation scenes.
 
 For the purpose of this part of the documentation, we'll use Gazebo's UR10 arm
-model as our robot. We however need to integrate it in another model so that its
-base is fixed (using [this method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/))
-
-Let's create a new model. The models are saved in `models/sdf/`, let's create
+model as our robot. We however need to integrate it in another model so that
+its base is fixed (using [this
+method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)) Models are saved in `models/sdf/`, let's create
 `models/sdf/ur10_fixed` and create a Gazebo model description file `models/sdf/ur10_fixed/model.config` with
 
 ~~~xml
@@ -96,7 +90,7 @@ Let's create a new model. The models are saved in `models/sdf/`, let's create
 
 <model>
   <name>Universal Robotics UR10 robot arm on a fixed base</name>
-  <version>1.0.2</version>
+  <version>1.0</version>
   <sdf>model.sdf</sdf>
 </model>
 ~~~
@@ -185,7 +179,13 @@ newly-created `config/robots/gazebo.rb` configuration file to add:
 
 ~~~ruby
 Robot.init do
-  # IMPORTANT: do not delete the code from the generated template
+  ## You can load plugins here
+  # Roby.app.using 'fault_injection'
+  # Roby.app.using 'syskit'
+
+  ## Change the scheduler
+  require 'roby/schedulers/temporal'
+  Roby.scheduler = Roby::Schedulers::Temporal.new
 
   # The rock-gazebo bridge requires models from the 'common_models' bundle.
   # It already depends on it, but we need to manually add the bundle to the

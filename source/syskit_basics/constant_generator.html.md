@@ -10,8 +10,8 @@ sort_info: 30
 generator. The first generator one usually creates is a constant one, creating an
 interface to send a constant command from Syskit into a control network.
 
-We will create the command generator on this page, and then [deploy and run
-it](deployment.html).
+We will create the command generator now, then bind the result [to the simulation](devices.html)
+and finally [deploy and run it](deployment.html).
 
 We will also learn how to write unit tests.
 
@@ -21,14 +21,15 @@ For the command, let's generate a single constant command. It will allow us to
 move the arm tip from one point to another, expressed in the cartesian frame.
 
 `bundles/common_models` provides `Compositions::ConstantGenerator`, a generic
-component that produces a constant command of a certain type. This generator is
+implementation of a component that periodically emits a value of a certain type. This generator is
 a `Syskit::RubyTaskContext`, which is like an oroGen component that is part of
 the Syskit process. It's useful to create very simple components without having
-to get through the whole oroGen step, or stub existing components.
+to get through the whole oroGen step. It is also used in tests to stub existing components.
 
-`ConstantGenerator` is generic, so it's rarely used as-is. We will instead
-create a `Compositions::ArmCartesianConstantCommandGenerator` generator specialized
-for our purposes.
+`ConstantGenerator` is generic, so it's not used as-is. One instead
+creates a specific component for the task at hand. In our case, we'll create
+the `Compositions::ArmCartesianConstantCommandGenerator` generator specialized for
+our purposes.
 
 First, generate the new model
 
@@ -71,8 +72,7 @@ page.
 ## Improving the arguments
 
 The format of the 'values' is actually awkward for a command generator. Let's
-provide better arguments. We need to update `#values` when position or
-orientation are set.
+provide a better `setpoint` argument that is transformed to set `values`.
 
 ~~~ruby
 class ArmCartesianConstantCommandGenerator < ...
@@ -122,9 +122,8 @@ its correctness.
 
 Each time we ran `syskit gen`, files were created both in `models/` and
 `test/`. The default Syskit test framework is the spec implementation of
-[minitest](https://github.com/seattlerb/minitest)
-
-Let's now write the tests for our generator.
+[minitest](https://github.com/seattlerb/minitest). Let's now adapt these
+templates for our generator.
 
 Start by deleting the boilerplate test from `test/compositions/test_arm_cartesian_constant_command_generator.rb`.
 
@@ -240,8 +239,8 @@ end
 
 ## Creating the ArmCartesianConstantControlWdls Composition
 
-Whenever a control loop is created, it is common to also create both the corresponding
-constant generator (if it does not exist) and the corresponding composition.
+Now that we have a generator, let's bind it to our control loop to have
+something that can move and hold our arm to a given pose.
 
 We'll create the composition now.
 
@@ -414,7 +413,7 @@ module SyskitBasics
           Types.base.commands.Joints.new(
             time: Time.at(0),
             names: joint_names,
-            values: joint_commands)]
+            elements joint_commands)]
       end
 
       def values

@@ -107,7 +107,7 @@ $ syskit gen cmp arm_cartesian_control_wdls
 
 <div class="panel panel-info" markdown="1">
 <div class="panel-heading" markdown="1">
-#### OroGen packages in Syskit
+#### OroGen packages in Syskit {#orogen}
 </div>
 <div class="panel-body" markdown="1">
 As described in our [brief introduction](index.html), oroGen packages are
@@ -178,14 +178,14 @@ file as follows (`-rgazebo` is necessary because we are importing models from
 <iframe width="853" height="480" src="https://www.youtube.com/embed/hTBYnlc0J3Q?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-We may now start adding connections in the composition definition. The following
-code snippets will only reproduce the composition definition itself, omitting
-what is around it. The `as` arguments when adding composition elements create an
-accessor for the children. The children ports are then accessible with a `_port`
-accessor. For instance, the `ctrl_out` port of the `CartCtrl` component is
-accessed with `position2twist_child.ctrl_out_port`.
+We may now start adding connections in the composition definition. The `as`
+arguments when adding composition elements create an accessor for the children.
+The children ports are then accessible with a `_port` accessor. For instance,
+the `ctrl_out` port of the `CartCtrl` component is accessed with
+`position2twist_child.ctrl_out_port`.
 
-Let's connect that one to the `WDLSSolver` twist input, and the WDLSSolver command to the actual arm command input:
+Let's connect that one to the `WDLSSolver` twist input, and the WDLSSolver
+command to the actual arm command input:
 
 ~~~ruby
 class ArmCartesianControlWdls < Syskit::Composition
@@ -212,13 +212,13 @@ arm_child.joints_status_port.
 ~~~
 
 However, the cartesian position feedback is not directly provided by the Gazebo
-model. Fortunately, the `control/orogen/robot_frames` component does the
-joint-to-cartesian conversion.
+model. Fortunately, the `control/orogen/robot_frames` project provides components
+to do the joint-to-cartesian conversion.
 
 Let's add it to our workspace [in the same way we added
 `control/orogen/cart_ctrl_wdls`](#add_package), import it in the composition
-file with `using_task_library` and finally add it to the composition. You must
-restart the IDE after this.
+file with `using_task_library` and reload the models in the IDE.
+Then, finally add it to the composition.
 
 ~~~ruby
 # This is in bundles/common_models
@@ -233,16 +233,18 @@ module SyskitBasics
       add OroGen::CartCtrlWdls::WDLSSolver, as: 'twist2joint_velocity'
       add OroGen::CartCtrlWdls::CartCtrl, as: 'position2twist'
       add CommonModels::Devices::Gazebo::Model, as: 'arm'
-      add OroGen::RobotFrames::SingleChainProducer, as: 'joint2pose'
+      add OroGen::RobotFrames::SingleChainPublisher, as: 'joint2pose'
 
       position2twist_child.ctrl_out_port.
         connect_to twist2joint_velocity_child.desired_twist_port
       twist2joint_velocity_child.solver_output_port.
         connect_to arm_child.joints_cmd_port
       arm_child.joints_status_port.
-          connect_to joint2pose_child.joints_samples_port
+        connect_to twist2joint_velocity_child.joint_status_port
+      arm_child.joints_status_port.
+        connect_to joint2pose_child.joints_samples_port
       joint2pose_child.tip_pose_port.
-          connect_to position2twist_child.cartesian_status_port
+        connect_to position2twist_child.cartesian_status_port
     end
   end
 end
@@ -259,7 +261,7 @@ by **exporting** the command port on the composition interface. This is done
 with the `export` keyword, in the composition class context:
 
 ~~~ruby
-export position2twist.command_child
+export position2twist_child.command_port
 ~~~
 
 In the IDE, this is represented as a port on the composition, and a connection
