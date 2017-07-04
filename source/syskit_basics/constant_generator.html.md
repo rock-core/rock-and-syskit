@@ -413,7 +413,7 @@ module SyskitBasics
           Types.base.commands.Joints.new(
             time: Time.at(0),
             names: joint_names,
-            elements joint_commands)]
+            elements: joint_commands)]
       end
 
       def values
