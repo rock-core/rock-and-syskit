@@ -26,8 +26,8 @@ preprocessing component can be instantiated multiple times to process multiple
 streams of data - one cannot duplicate devices.  They are bound to hardware,
 and we still don't know how to grow new devices on the robot on-demand.
 
-This difference also exists in the Syskit system. The robot interface, the
-devices, are described separately. We will now see how this is done, and
+This difference also exists in the Syskit system. The robot interface and 
+devices are described separately. We will now see how this is done, and
 how we can use these devices within our arm control network, binding the
 simulated arm with the control network.
 
