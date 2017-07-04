@@ -24,6 +24,10 @@ will implement the control.
 
 ## Installing the necessary packages {#add_package}
 
+**COMMENT** Here the instructions are in respect to the autoproj folder, however
+the reader was in the bundles  folder and supposely has no previous knowledge about the
+rock folder organization 
+
 Packages in Rock are defined within _package sets_. These package sets define
 both how to build the package and where it should be downloaded from. The
 default installation imports at least the `rock.core` and the
@@ -95,6 +99,10 @@ addition, we will see later on that they can be seen by the rest of the system a
 components themselves, i.e. they can be used and connected in other
 compositions.
 
+**COMMENT** in the previous section you made the reader to change thing on the
+autoproj folder, now the command need to be run inside the bundle folder again.
+Maybe it is good to explicit that?
+
 Let's create our `arm_cartesian_control_wdls` composition
 
 ~~~
@@ -130,6 +138,8 @@ name, e.g. `cart_ctrl_wdls` becomes `CartCtrlWdls` and the
 
 In case you're not sure about the naming, just add the `using_task_library` statement
 in a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
+
+**COMMENT** where should the statement be added in the file?
 
 ~~~
 syskit ide models/compositions/arm_cartesian_control_wdls.rb
@@ -214,6 +224,9 @@ arm_child.joints_status_port.
 However, the cartesian position feedback is not directly provided by the Gazebo
 model. Fortunately, the `control/orogen/robot_frames` project provides components
 to do the joint-to-cartesian conversion.
+
+**COMMENT** Here I missed that I was needed to install the robot_frames package. I thought
+that the "same way" was what was explained in the following instructions
 
 Let's add it to our workspace [in the same way we added
 `control/orogen/cart_ctrl_wdls`](#add_package), import it in the composition
