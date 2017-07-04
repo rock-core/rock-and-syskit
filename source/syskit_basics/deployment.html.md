@@ -96,7 +96,7 @@ $ syskit gen orogenconf robot_frames::SingleChainPublisher
       create  config/orogen/robot_frames::SingleChainPublisher.yml
 ~~~
 
-Each properties in the generated files have their corresponding configuration.
+In result, a configuration file is generated for each task, containing the default value of every property.
 Let's look at them one by one, to see what needs to actually be configured.
 
 - `cart_ctrl_wdls::WDLSSolver`. There are robot model parameters as well as tip
