@@ -15,6 +15,9 @@ created](devices.html):
 
 ## Component deployment {#use_deployment}
 
+**COMMENT** "funcitonal encapsulation of a function" sounded repetitive, just "
+encapsulation of a function" works?
+
 When declared in oroGen files, components are a functional encapsulation of a
 function. At this stage, a "component" is really just a class which embeds code
 in a specific, normalized way, and that has predefined inputs, outputs and
@@ -112,6 +115,8 @@ Let's look at them one by one, to see what needs to actually be configured.
   (the `.deg` suffix will convert a degree value in radians).
 - `robot_frames::SingleChainPublisher` only has robot model that we will
   extract from the SDF model, and the tip/root parameters that have to be set
+
+**Comment** I could not see what is missing on the setence bellow to change it properly
 
 **Note** in order to ensure consistency between the tip and root parameters of
 `SingleChainPublisher` and `WDLSSolver`, another way to handle this is to make
