@@ -74,13 +74,13 @@ end
 
 And have a look at the generated devices with `syskit ide -rgazebo models/profiles/gazebo/base.rb`:
 
-![Devices from the UR10 model](media/devices.png)
+![Devices from the UR10 model](media/devices.png){: .img-responsive}
 
 One can see that there is one device definition per link in the model, and one
 for the model itself. Let's click on the model and have a look at the dataflow.
 Enable both "Show all ports" and "Show task info" to get port information .
 
-![ModelTask interface](media/device_dataflow.png)
+![ModelTask interface](media/device_dataflow.png){: .img-responsive}
 
 ## Injecting the device into the arm control network {#profile_define}
 
@@ -181,6 +181,6 @@ using the IDE
 
 Let's have a look at the final definition.
 
-![Final injected arm control network](media/injected_arm_control_network.png)
+![Final injected arm control network](media/injected_arm_control_network.png){: .img-responsive}
 
 We're almost there, just need now to map the components to actual processes, [a.k.a. deploy the network](deployment.html){: .btn .btn-primary}

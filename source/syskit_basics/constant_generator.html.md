@@ -59,7 +59,7 @@ end
 
 which gives us
 
-![Cartesian constant generator](media/constant_generator.png)
+![Cartesian constant generator](media/constant_generator.png){: .img-responsive}
 
 The documentation of the `out` port tells us that its value is controlled by
 the 'values' arguments. Task arguments are ways to parametrize tasks from
