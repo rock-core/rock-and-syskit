@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3" role="complementary">
-                <nav class="docs-sidebar">
+                <nav class="docs-sidebar" data-spy="affix">
                     <ul class="nav"><%= tree_to_html(data.tree) %></ul>
                 </nav>
             </div>
@@ -30,4 +30,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
 <% end %>
