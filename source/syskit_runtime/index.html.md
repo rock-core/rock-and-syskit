@@ -76,11 +76,11 @@ the `arm_safe_position_def` job looks like this:
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active"><img src="media/scheduling_1.png"></div>
-    <div class="item"><img src="media/scheduling_2.png"></div>
-    <div class="item"><img src="media/scheduling_3.png"></div>
-    <div class="item"><img src="media/scheduling_4.png"></div>
-    <div class="item"><img src="media/scheduling_5.png"></div>
+    <div class="item active"><img src="media/scheduling_1.png" alt="start of the root task"></div>
+    <div class="item"><img src="media/scheduling_2.png" alt="root task running, tasks being configured"></div>
+    <div class="item"><img src="media/scheduling_3.png" alt="async start of the components"></div>
+    <div class="item"><img src="media/scheduling_4.png" alt="ModelTask is running"></div>
+    <div class="item"><img src="media/scheduling_5.png" alt="all tasks are running"></div>
   </div>
 
   <!-- Controls -->
