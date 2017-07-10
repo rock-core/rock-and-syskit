@@ -29,3 +29,8 @@ h2, h3 {
     margin-top: 30px;
 }
 
+img.fullwidth {
+    @extend .img-responsive;
+    @extend .center-block;
+}
+

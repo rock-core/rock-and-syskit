@@ -155,7 +155,7 @@ rock-gazebo empty_world
 
 Starts both a Gazebo simulation and displays it:
 
-![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg){: .img-responsive}
+![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg){: .fullwidth}
 
 ## Preparing the `gazebo` Syskit configuration {#syskit_gazebo_configuration}
 
@@ -176,6 +176,7 @@ Bundles[INFO]: Active bundles: syskit_basics
 In order to setup Syskit to use the Gazebo instance, we first have to require
 integration code and then load the environment. This is done by modifying the
 newly-created `config/robots/gazebo.rb` configuration file to add:
+{: #initial_setup}
 
 ~~~ruby
 Robot.init do
@@ -225,7 +226,7 @@ addition of the system plugin.
 
 The task contexts in our scene can be visualized with rock-display:
 
-![Components exported by a Gazebo instance under Rock](media/rock_gazebo_task_contexts.jpg){: .img-responsive}
+![Components exported by a Gazebo instance under Rock](media/rock_gazebo_task_contexts.jpg){: .fullwidth}
 
 `rock-gazebo-viz` sets up the visualization to match the data in the SDF file and
 then listen to pose updates from the `rock_gazebo::ModelTask` components exposed by the

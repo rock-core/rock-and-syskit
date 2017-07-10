@@ -220,7 +220,7 @@ load a file named like the project in `models/orogen/`. In the case of the
 In the IDE, when displaying a task model under the `OroGen` namespace, a project
 that has no associated extension file in `models/orogen/` has the following message:
 
-![Message displayed by the IDE if there are no extension files](media/no_extension_file.png){: .img-responsive}
+![Message displayed by the IDE if there are no extension files](media/no_extension_file.png){: .fullwidth}
 
 Let's do exactly that
 
@@ -239,7 +239,7 @@ $ syskit gen orogen robot_frames
 
 After hitting the IDE's reload button, we now get the path to the extension file:
 
-![Message displayed by the IDE if there is an extension files](media/orogen_extension_file.png){: .img-responsive}
+![Message displayed by the IDE if there is an extension files](media/orogen_extension_file.png){: .fullwidth}
 
 Now, let's edit `models/orogen/cart_ctrl_wdls.rb`. There is one `class`
 statement per task model in the project, but we're currently only interested in
@@ -430,7 +430,7 @@ With the `missing_arguments:` line [we've already seen](constant_generator.html#
 
 Looking at `AdaptiveWDLSSolver`, we can see that it is subclassing `WDLSSolver`:
 
-![AdaptiveWDLSSolver subclassed from WDLSSolver](media/adaptive_wdlssolver_subclassed_from.png){: .img-responsive}
+![AdaptiveWDLSSolver subclassed from WDLSSolver](media/adaptive_wdlssolver_subclassed_from.png){: .fullwidth}
 
 This is reflected in the class hierarchy on the Syskit side, which means that
 `AdaptiveWDLSSolver` does inherit the `configure` method we just wrote. Given
@@ -468,7 +468,7 @@ After modifying the config file, the IDE needs to be quit and started again. We
 can then look at the `Main` interface and see that it indeed has `_dev` actions for
 the devices in `Base`, and `_def` actions for the definitions in `ArmControl`.
 
-![The Main interface with the arm control definition](media/main_action_with_arm_control_def.png){: .img-responsive}
+![The Main interface with the arm control definition](media/main_action_with_arm_control_def.png){: .fullwidth}
 
 Let's now run it
 
