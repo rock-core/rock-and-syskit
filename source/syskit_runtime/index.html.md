@@ -72,15 +72,23 @@ the `arm_safe_position_def` job looks like this:
     <li data-target="#job_start_step_by_step" data-slide-to="3"></li>
     <li data-target="#job_start_step_by_step" data-slide-to="4"></li>
     <li data-target="#job_start_step_by_step" data-slide-to="5"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="6"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="7"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="8"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="9"></li>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active"><img src="media/scheduling_1.png" alt="start of the root task"></div>
-    <div class="item"><img src="media/scheduling_2.png" alt="root task running, tasks being configured"></div>
-    <div class="item"><img src="media/scheduling_3.png" alt="async start of the components"></div>
-    <div class="item"><img src="media/scheduling_4.png" alt="ModelTask is running"></div>
-    <div class="item"><img src="media/scheduling_5.png" alt="all tasks are running"></div>
+    <div class="item active"><img src="media/scheduling_1.png" alt="start of the execution agents"></div>
+    <div class="item"><img src="media/scheduling_2.png" alt="RubyTask ready"></div>
+    <div class="item"><img src="media/scheduling_3.png" alt="Gazebo ready"></div>
+    <div class="item"><img src="media/scheduling_4.png" alt="start JointPositionGenerator"></div>
+    <div class="item"><img src="media/scheduling_5.png" alt="Wait"></div>
+    <div class="item"><img src="media/scheduling_6.png" alt="JointPositionGenerator started"></div>
+    <div class="item"><img src="media/scheduling_7.png" alt="Wait"></div>
+    <div class="item"><img src="media/scheduling_8.png" alt="start ModelTask"></div>
+    <div class="item"><img src="media/scheduling_9.png" alt="ModelTask running"></div>
   </div>
 
   <!-- Controls -->
@@ -168,12 +176,14 @@ _first_ and then the start. We would have basically had the same effect than in
 Now, what would have happened if I instead I sent the
 `arm_cartesian_constant_control_def!` and only then the `kill_job` ?
 
-TODO: video start-then-kill
+<div class="fluid-video">
+<iframe width="853" height="480" src="https://www.youtube.com/embed/LkmR9AFo5ek?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
-Ouch … I didn't reach the `kill_job`. The start command already generated a
-bunch of errors. This is because we've tried to run two different control
-chains that controlled the same device. This is an impossibility, and the
-request is therefore rejected by Syskit's **network generation**.
+Ouch … The start command failed. This is because we've tried to run two
+different control chains that controlled the same device. This is an
+impossibility, and the request is therefore rejected by Syskit's **network
+generation**.
 
 We'll now get to understand all of this step-by-step, starting with [Syskit's
 task structure](task_structure.html){: .btn .btn-primary}, how Syskit maintains

@@ -55,7 +55,7 @@ First and foremost, a component can be scheduled only if:
   tests](../syskit_basics/constant_generator.html#missing_arguments). At
   runtime, in the IDE, this is leads to the following message:
 
-  TODO: missing argument in IDE
+  ![Partially instantiated network in the IDE](media/missing_arguments.jpg){: .fullwidth}
 
 - its [execution agent](task_structure.html#execution_agents) is ready. Agents
   are expected to have a _ready_ event that is emitted when the agent reached a
@@ -68,10 +68,52 @@ In addition, the basic scheduling rules are:
   event has been emitted).
 - a component may be started only if all its inputs are connected
 
-To illustrate this, let's have a step-by-step look at the startup of the safe
-pose job. Try to notice where the cycle boundaries happen.
+To illustrate this, let's have again a look at the startup "from scratch" of
+the safe pose job. Each image represents one execution cycle. An empty circle
+is an event command and full circle an event emission. See how the compositions
+are both called (scheduled) and emitted in the same cycle while the components
+_start_ event are emitted in a different cycle than the one they have been
+called in. Finally, the cycle where seemingly nothing happens is due to the
+component configuration, which is not represented by an event.
 
-TODO: step-by-step of safe pose.
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="1"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="2"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="3"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="4"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="5"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="6"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="7"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="8"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="9"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active"><img src="media/scheduling_1.png" alt="start of the execution agents"></div>
+    <div class="item"><img src="media/scheduling_2.png" alt="RubyTask ready"></div>
+    <div class="item"><img src="media/scheduling_3.png" alt="Gazebo ready"></div>
+    <div class="item"><img src="media/scheduling_4.png" alt="start JointPositionGenerator"></div>
+    <div class="item"><img src="media/scheduling_5.png" alt="Wait"></div>
+    <div class="item"><img src="media/scheduling_6.png" alt="JointPositionGenerator started"></div>
+    <div class="item"><img src="media/scheduling_7.png" alt="Wait"></div>
+    <div class="item"><img src="media/scheduling_8.png" alt="start ModelTask"></div>
+    <div class="item"><img src="media/scheduling_9.png" alt="ModelTask running"></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#job_start_step_by_step" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#job_start_step_by_step" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 Under these rules, the semantic of "a component is running" is to represent
 that the system has  the _intent_ to achieve its role, but not that it actually
@@ -113,7 +155,15 @@ make it possible to determine when to connect, configure or start a component.
 With these assumptions, Syskit can generically sequence the startup and
 shutdown of a component network:
 
-TODO: component network sequencing
+- create new connections between non-dynamic ports that involve at least one
+  component that is not configured. Connections are parallelized. _Rationale:
+  the "components not configured" constraint ensures that we do not disrupt
+  existing components before the rest of the network is ready to run_.
+- configure components in parallel.
+- apply all connection modifications (addition and removal, in parallel)
+- start components (in parallel)
+
+Components are stopped through Syskit's garbage collection mechanism.
 
 All actions that involve a direct interaction with the component (sending the
 start command, writing properties, …) are done asynchronously in separate
@@ -124,11 +174,33 @@ executed sequentially within the main thread.
 ## Garbage Collection
 
 The garbage collection recursively stops tasks that are not useful for an
-active job, as in the following video. Note again the event cycle boundaries,
-and how they mark a difference between synchronous stops (compositions) and
-asynchronous ones (external components):
+active job, as in the following video. Note again that compositions's stop
+events are emitted in the same cycle as they are commanded, while components
+are stopped asynchronously:
 
-TODO: video step by step garbage collection
+<div id="garbage_collection_step_by_step" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#garbage_collection_step_by_step" data-slide-to="0" class="active"></li>
+    <li data-target="#garbage_collection_step_by_step" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active"><img src="media/gc_1.png" alt="composition stops and components are commanded to stop"></div>
+    <div class="item"><img src="media/gc_2.png" alt="all components stopped"></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#garbage_collection_step_by_step" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#garbage_collection_step_by_step" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 ## Component Reconfiguration
 
@@ -147,24 +219,13 @@ In the following video, we change the configuration file for our cartesian
 controller, reload the configuration and trigger a redeploy. We then see how
 this triggers a reconfiguration:
 
-TODO: video change configuration
+<div class="fluid-video">
+<iframe width="853" height="480" src="https://www.youtube.com/embed/IA4lY9HmD2M?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 Another source of reconfiguration is to transition between two networks that
-select different component configurations. Let's create two controller
-configurations in `config/orogen/cart_ctrl_wdls::WDLSSolver.yml`:
-
-~~~yaml
-~~~
-
-and two networks using these two different configurations in
-`models/profiles/gazebo/arm_control.rb`:
-
-~~~
-~~~
-
-We can then transition between the two and see the component be reconfigured:
-
-TODO: video
+select different component configurations. When this happens, Syskit will stop
+and reconfigure the affected components while deploying the new network.
 
 We've seen so far how things work _nominally_. Let's see [how Syskit reacts when
 things go wrong](exceptions.html){:.btn .btn-primary}.
