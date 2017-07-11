@@ -122,6 +122,12 @@ These properties are filled using YAML configuration files stored in
 component's class, in the extension file.
 {: #orogen_config}
 
+A configuration file for a component class is generated with
+
+~~~
+syskit gen orogenconf name_of_orogen_project::NameOfModelClass
+~~~
+
 ### Ruby Tasks {#ruby_tasks}
 
 In a system, one often needs to do some small tasks that are either too small
@@ -141,6 +147,12 @@ A canonical example for such a task is [the `common_models` bundle's `ConstantGe
 Whenever runtime code is present in tasks, as it often is in ruby tasks,
 **write tests**.
 {: .callout .callout-warning}
+
+A new Ruby task and associated test scaffold is generated with
+
+~~~
+syskit gen ruby_task class_name
+~~~
 
 ### Profiles
 
