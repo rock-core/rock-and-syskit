@@ -19,16 +19,24 @@ This page deals with the first step (design). The [next
 page](constant_generator.html) will create the command generator, and we
 will then [_deploy_ the network](deployment.html) and run it.
 
-But let's not get too ahead of ourselves, and install the control package that
-will implement the control.
+But let's not get too much ahead of ourselves. We will need to first install
+the control package that will implement the control.
 
 ## Installing the necessary packages {#add_package}
 
-Packages in Rock are defined within _package sets_. These package sets define
-both how to build the package and where it should be downloaded from. The
-default installation imports at least the `rock.core` and the
-`rock` package sets (see the `package_sets` section in `autoproj/manifest`). The
-latter is the one where the control packages are defined.
+Packages in Rock as maintained within the overall Rock workspace. Package
+related configuration is contained within the `autoproj/` folder within the
+workspace's root directory (where you [originally
+bootstrapped](../workspace/index.html)). When working in a terminal, you can go
+at any time to the workspace's root directory by running `acd` without
+arguments ([more about `acd`](../workspace/day_to_day.html#acd)).
+
+Within the `autoproj/` directory, packages are defined within _package sets_.
+These package sets define both how to build the package and where it should be
+downloaded from. The default installation imports at least the `rock.core` and
+the `rock` package sets (see the `package_sets` section in
+`autoproj/manifest`). The `rock` package set is where the control packages we
+will be using are defined.
 
 <div class="panel panel-warning" markdown="1">
 <div class="panel-heading" markdown="1">
@@ -67,7 +75,7 @@ The "first match" line is always the package set where the package is defined. I
 </div>
 </div>
 
-To install the package, add it in the `layout` section of your manifest:
+To install the package, add it in the `layout` section of `autoproj/manifest`:
 
 ~~~yaml
 layout:
@@ -89,6 +97,9 @@ amake --all
 ~~~
 
 ## Binding the components together {#composition}
+
+Now that everything's installed, go back within the bundle folder. You may for
+instance do `acd b/syskit` ([more about `acd`](../workspace/day_to_day.html#acd))
 
 Compositions declare groups of components and connects them together. In
 addition, we will see later on that they can be seen by the rest of the system as
@@ -129,7 +140,7 @@ name, e.g. `cart_ctrl_wdls` becomes `CartCtrlWdls` and the
 `OroGen::CartCtrlWdls::ToPosConverter` in Syskit.
 
 In case you're not sure about the naming, just add the `using_task_library` statement
-in a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
+at the beginning, toplevel of a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
 
 ~~~
 syskit ide models/compositions/arm_cartesian_control_wdls.rb
@@ -215,9 +226,9 @@ However, the cartesian position feedback is not directly provided by the Gazebo
 model. Fortunately, the `control/orogen/robot_frames` project provides components
 to do the joint-to-cartesian conversion.
 
-Let's add it to our workspace [in the same way we added
+Add it now to the workspace [in the same way we added
 `control/orogen/cart_ctrl_wdls`](#add_package), import it in the composition
-file with `using_task_library` and reload the models in the IDE.
+file with `using_task_library` and reload models within the IDE.
 Then, finally add it to the composition.
 
 ~~~ruby

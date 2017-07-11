@@ -15,9 +15,9 @@ created](devices.html):
 
 ## Component deployment {#use_deployment}
 
-When declared in oroGen files, components are a functional encapsulation of a
+When declared in oroGen files, components are an encapsulation of a
 function. At this stage, a "component" is really just a class which embeds code
-in a specific, normalized way, and that has predefined inputs, outputs and
+in a specific, normalized way, and that has defined inputs, outputs and
 configuration parameters.
 
 To actually run a component, one needs to declare how it will be supported by
@@ -96,7 +96,7 @@ $ syskit gen orogenconf robot_frames::SingleChainPublisher
       create  config/orogen/robot_frames::SingleChainPublisher.yml
 ~~~
 
-Each properties in the generated files have their corresponding configuration.
+The generators create a configuration file for each component class, containing the default value of every property.
 Let's look at them one by one, to see what needs to actually be configured.
 
 - `cart_ctrl_wdls::WDLSSolver`. There are robot model parameters as well as tip
