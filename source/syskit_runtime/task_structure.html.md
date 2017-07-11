@@ -91,8 +91,6 @@ Syskit-related planning is handled by `InstanceRequirementTask`:
   </a>
 </div>
 
-
-
 ## Jobs, Permanent Tasks and Usefulness {#usefulness}
 
 We've already seen the jobs. Internally, Syskit simply remembers that a certain
