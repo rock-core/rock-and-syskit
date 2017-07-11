@@ -436,6 +436,59 @@ This is reflected in the class hierarchy on the Syskit side, which means that
 `AdaptiveWDLSSolver` does inherit the `configure` method we just wrote. Given
 that it does not overload this method itself, we can just delete the test.
 
+Finally, we should run the whole test suite to verify we haven't broken anything:
+
+~~~
+syskit test -rgazebo
+~~~
+
+Which does generate errors in the compositions. The generated composition files
+test for configuration (which is usually where there is code). Let's adapt those
+to make sure they run. We basically need to provide a proper robot model and
+configurations for the `SingleChainPublisher` and `WDLSSolver` components, based
+on what we've already done for these two components.
+
+<div class="panel panel-info" markdown="1">
+<div class="panel-heading" markdown="1">
+
+<a class="btn btn-info" role="button" data-toggle="collapse" href="#fix_composition_tests" aria-expanded="false" aria-controls="fix_composition_tests">
+  Solution
+</a><span class="advanced_description">Fix the composition tests</span>
+</div>
+<div class="collapse panel-body" markdown="1" id="fix_composition_tests">
+Let's fix the test for ArmCartesianControlWdls first. We basically need to
+setup the 'default' configuration for the two components, and a proper robot
+model. Let's do it in the test's `before` block:
+
+~~~ruby
+before do
+  # Create a mock that has a robot model
+  xml = <<-EOSDF
+    <model name='test'>
+      <link name="root_test" />
+      <link name="tip_test" />
+    </model>
+  EOSDF
+  @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
+  syskit_stub_conf OroGen::CartCtrlWdls::WDLSSolver, 'default',
+    data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
+  syskit_stub_conf OroGen::RobotFrames::SingleChainPublisher, 'default',
+    data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
+end
+~~~
+
+and modify the test to pass the robot model
+
+~~~ruby
+cmp_task = syskit_stub_deploy_configure_and_start(
+  ArmCartesianControlWdls.with_arguments(robot: @profile))
+~~~
+
+Do the same modification for the `ArmCartesianConstantControlWdls` composition and now
+verify that the tests pass with `syskit test -rgazebo`.
+</div>
+</div>
+
 ## Building the system's action interface {#actions}
 
 A Syskit application exports functionality to the outside world as _actions_.
@@ -461,7 +514,7 @@ Robot.actions do
 end
 ~~~
 
-**Note**: the profile is available in the actions block because [we've required it in the requires block](#requires)
+**Note**: the profile is available in the actions block because [we've loaded it in the `requires` block](#requires)
 {: .callout .callout-info}
 
 After modifying the config file, the IDE needs to be quit and started again. We
