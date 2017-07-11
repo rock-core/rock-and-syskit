@@ -56,6 +56,43 @@ child in a dependency relation stops, the function can be recovered by e.g.
 simply restarting the child. If a component's agent dies, the component _is
 already dead_. This is unrecoverable.
 
+## Planning Tasks
+
+Jobs, when added to the system, are _abstract_. They represent the intent to
+deploy a certain component network, but the computation required to deploy the
+network has not yet been done. The jobs are related to another task that represents
+the process of computing the network through the **Planning** relation. This allows
+Syskit to represent error cases where the network cannot be computed (as e.g. the
+case we saw [at the end of the introduction](index.html#deployment_failure).
+
+Syskit-related planning is handled by `InstanceRequirementTask`:
+
+<div id="planned_by" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#planned_by" data-slide-to="0" class="active"></li>
+    <li data-target="#planned_by" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active"><img src="media/planned_by_1.png" alt="start of the execution agents"></div>
+    <div class="item"><img src="media/planned_by_2.png" alt="start of the execution agents"></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#planned_by" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#planned_by" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
 ## Jobs, Permanent Tasks and Usefulness {#usefulness}
 
 We've already seen the jobs. Internally, Syskit simply remembers that a certain

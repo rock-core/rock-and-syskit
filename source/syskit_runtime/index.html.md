@@ -184,6 +184,7 @@ Ouch … The start command failed. This is because we've tried to run two
 different control chains that controlled the same device. This is an
 impossibility, and the request is therefore rejected by Syskit's **network
 generation**.
+{: #deployment_failure}
 
 We'll now get to understand all of this step-by-step, starting with [Syskit's
 task structure](task_structure.html){: .btn .btn-primary}, how Syskit maintains
