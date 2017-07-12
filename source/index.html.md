@@ -21,7 +21,7 @@ robot system, but also to explain the underlying design principles that allow
 you to build a _manageable_ system. The documentation does not assume any prior
 knowledge about Rock, but does assume that you have more than basic knowledge
 on general software development practices. The tools being implemented in Ruby
-and C++, it's best to know about these languages. However, documentation on
+and C++, it is best to know about these languages. However, documentation on
 the basics and principles of a Rock-Syskit system can be followed with basic
 programming knowledge.
 
@@ -31,32 +31,41 @@ examples are mixed with more detailed descriptions, with an aim at being progres
 <div class="alert alert-warning" role="alert" markdown="1">
 As of today (June 2017), not all the software used in this guide has reached
 Rock mainline repositories. For this reason, one needs to start using the
-buildconf repository on GitHub's
+buildconf repository on GitHub
 [`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
 the default one at
 [`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](workspace/index.html) already reflects this.
 </div>
 
+## How to read this documentation
+
+The [Basics](#basics) section is meant to be read in its entirety. It covers
+presents the fundamentals of how a robotic system is integrated and managed
+at runtime within Rock and Syskit.
+
+After the basics, the rest of the documentation is meant to be read on a
+need-to-know basis. Pick the subjects that are of interest to you, or that you
+need to know at a certain point in time.
+
 ## Basics
 
 1. [Installing Rock, day-to-day handling of packages](workspace/index.html)
 2. [Running a simple system using Gazebo and Syskit](syskit_basics/index.html)
-3. The development and runtime workflows
+3. [The runtime workflow](syskit_runtime/index.html)
 
 ## Building systems
 
-4. Writing components for easier system building and management
-5. Generalizing and reusing component networks in Syskit
-6. Advanced processing concepts: stream aligner and transformer
+4. Writing components
+5. Reusable Syskit modelling
+6. Advanced data processing in a Rock network
 7. System coordination
 
 ## Development Workflow
 
 8. Tests
-9. Live data visualization
+9. Logging, Data Visualization and Building GUIs
 10. Inspecting coordination data
-11. Logging
-12. Debugging components
+11. Debugging components
 
 ### Join the force!
 [Top](#top)
