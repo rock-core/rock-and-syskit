@@ -16,12 +16,8 @@ Later on this page, I will give a high-level explanation of [the video we've
 seen at the end of the Basics
 section](../syskit_basics/deployment.html#final_video). We will then get deeper
 into each part of Syskit that handle Syskit's runtime behavior: an overview of
-the [Syskit execution](event_loop.html) and the [network generation and
-adaptation](network_adaptation.html). Finally, we will get to [exception
-representation and common exceptions](exceptions.html)
-
-This will lead us to a first [set of guidelines](design_guidelines.html)
-regarding the design of a system that uses Syskit.
+the [Syskit execution](event_loop.html) and of [error
+representation and common type of errors](exceptions.html)
 
 This is the first part that will deal with runtime aspects. For more advanced
 related topics, one may want to also read all about

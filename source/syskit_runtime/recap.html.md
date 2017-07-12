@@ -18,7 +18,7 @@ sort_info: 100
 - Components that are not useful to the goals are automatically stopped by
   [Syskit's garbage collection mechanism](event_loop.html#garbage_collection)
 - The task structure also defines constraints between the components. Failure to
-  meet these constraints is what Syskit interprets as [errors](errors.html)
+  meet these constraints is what Syskit interprets as [errors](exceptions.html)
 
 Between this part and the [Basics](../syskit_basics), we've covered most of the basics
 aspects of running a Syskit system. The rest of the subjects covered in this documentation

@@ -275,7 +275,8 @@ end
 
 Now, to ensure consistency, we should verify that the `tip` and `root`
 properties are set to actual links in the provided model. Let's do this in
-`WDLSSolver`: {: #validate_tip_and_root_links}
+`WDLSSolver`:
+{: #validate_tip_and_root_links}
 
 ~~~ruby
 argument :robot

@@ -37,7 +37,7 @@ the default one at
 [`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](workspace/index.html) already reflects this.
 </div>
 
-## How to read this documentation
+## How to read this documentation {#how_to_read}
 
 The [Basics](#basics) section is meant to be read in its entirety. It covers
 presents the fundamentals of how a robotic system is integrated and managed
@@ -66,6 +66,7 @@ need to know at a certain point in time.
 9. Logging, Data Visualization and Building GUIs
 10. Inspecting coordination data
 11. Debugging components
+12. Deployment
 
 ### Join the force!
 [Top](#top)

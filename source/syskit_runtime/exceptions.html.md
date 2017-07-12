@@ -50,7 +50,7 @@ components that were enclosing the faulty relation if specific relation(s) are
 associated with the error, or the faulty task if not. Tasks that were needed
 only by said jobs are stopped by the garbage collection pass.
 
-## The Dependency Error
+## The Dependency Error {#dependency_error}
 
 Let's see what happens if we run the arm controller and manually stop the
 `CartCtrl` component:

@@ -171,7 +171,7 @@ threads, and will be done in parallel if more than one component are being
 setup. All actions that involve code written within the Syskit app itself are
 executed sequentially within the main thread.
 
-## Garbage Collection
+## Garbage Collection {#garbage_collection}
 
 The garbage collection recursively stops tasks that are not useful for an
 active job, as in the following video. Note again that compositions's stop
@@ -202,7 +202,7 @@ are stopped asynchronously:
   </a>
 </div>
 
-## Component Reconfiguration
+## Component Reconfiguration {#reconfiguration}
 
 As [already mentioned](task_structure.html#usefulness), external processes are
 marked as permanent by default within Syskit. One of the main reasons is that

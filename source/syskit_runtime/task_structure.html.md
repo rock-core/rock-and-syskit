@@ -56,7 +56,7 @@ child in a dependency relation stops, the function can be recovered by e.g.
 simply restarting the child. If a component's agent dies, the component _is
 already dead_. This is unrecoverable.
 
-## Planning Tasks
+## Planning Tasks {#planning_task}
 
 Jobs, when added to the system, are _abstract_. They represent the intent to
 deploy a certain component network, but the computation required to deploy the
