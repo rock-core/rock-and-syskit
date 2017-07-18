@@ -2,7 +2,7 @@
 layout: documentation
 title: Introduction
 sort_info: 0
-directory_title: Overview of Runtime Aspects
+directory_title: Runtime Basics
 directory_sort_info: 30
 ---
 

@@ -11,6 +11,9 @@ sort_info: 100
   should run, or -- as we will see later -- a goal to achieve.
 - Components are related to each other by [the task
   structure](task_structure.html).
+- Syskit has assumptions about how components should be implemented. We'll
+  recollect those when we get to [how to implement
+  components](component_implementation.html)
 - Components are configured and started "when possible" by [the
   scheduler](event_loop.html#scheduling)
 - Components are transparently [reconfigured](event_loop.html#reconfiguration)

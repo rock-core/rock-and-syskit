@@ -1,4 +1,5 @@
 ---
+layout: documentation
 title: Live Data Visualization
 sort_info: 55
 ---

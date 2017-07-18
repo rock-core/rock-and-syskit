@@ -50,15 +50,16 @@ need to know at a certain point in time.
 ## Basics
 
 1. [Installing Rock, day-to-day handling of packages](workspace/index.html)
-2. [Running a simple system using Gazebo and Syskit](syskit_basics/index.html)
-3. [The runtime workflow](syskit_runtime/index.html)
+2. [Design Basics: Building a simple system using Gazebo and Syskit](syskit_basics/index.html)
+3. [Runtime Basics: Running the basic system](syskit_runtime/index.html)
 
-## Building systems
+## Building Systems
 
 4. Writing components
 5. Reusable Syskit modelling
-6. Advanced data processing in a Rock network
+6. Advanced data processing in Components
 7. System coordination
+8. Error Handling
 
 ## Development Workflow
 
@@ -66,7 +67,7 @@ need to know at a certain point in time.
 9. Logging, Data Visualization and Building GUIs
 10. Inspecting coordination data
 11. Debugging components
-12. Deployment
+12. Advanced Deployment
 
 ### Join the force!
 [Top](#top)

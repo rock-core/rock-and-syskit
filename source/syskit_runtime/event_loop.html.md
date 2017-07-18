@@ -53,7 +53,7 @@ First and foremost, a component can be scheduled only if:
 - it has all its parameters set. This is a common problem, that some arguments
   are unset and the network does not run. This can be caught [in
   tests](../syskit_basics/constant_generator.html#missing_arguments). At
-  runtime, in the IDE, this is leads to the following message:
+  runtime, in the IDE, this is leads to the `partially instanciated` message:
 
   ![Partially instantiated network in the IDE](media/missing_arguments.jpg){: .fullwidth}
 
@@ -132,25 +132,25 @@ will be more about this in [the coordination part](../syskit_coordination/).
 ## Component Lifecycle, Configuration, Startup and Shutdown
 
 Rock components have a lifecycle of their own. This lifecyle is what makes a
-generic coordination of them possible: one can expect a standardized behavior.
-
-The lifecycle of a single component is a state machine that looks like this
-(without error states represented):
+generic coordination of them possible: it is possible to expect a standardized
+behavior. The nominal lifecycle - that is, without error states - is the
+following state machine:
 
 ![Nominal component state machine](media/state_machine.svg){: .fullwidth}
 
 This is the lifecycle of a single component. Sequencing of the startup and
-shutdown of a network is more complicated, and it relies on assumptions that
-make it possible to determine when to connect, configure or start a component.
+shutdown of a network is more complicated. Syskit relies on some assumptions
+to make it possible:
 
-1. Component's `configure` transition is expected to mostly be standalone -
-   i.e. not rely on other components. The exception to this rule are devices
-   that rely on data bus components (e.g. a CAN device on a CAN bus).
+1. Component's `configure` transition is expected to be standalone - i.e. not
+   rely on other components. The exception to this rule are devices that rely
+   on data bus components (e.g. a CAN device on a CAN bus). We will see those
+   in the advanced coordination section.
 2. Components have the ability to create new ports dynamically, which is
    usually controlled by their configuration. Syskit may therefore not expect
-   all ports to be available before the component is configured. Syskit
-   restricts dynamic port creation to `configure`, and their destruction to
-   `cleanup`.
+   all ports to be available before the component is configured. However,
+   Syskit restricts dynamic port creation to `configure`, and expects them
+   to be destroyed during `cleanup`.
    
 With these assumptions, Syskit can generically sequence the startup and
 shutdown of a component network:
@@ -159,11 +159,13 @@ shutdown of a component network:
   component that is not configured. Connections are parallelized. _Rationale:
   the "components not configured" constraint ensures that we do not disrupt
   existing components before the rest of the network is ready to run_.
-- configure components in parallel.
-- apply all connection modifications (addition and removal, in parallel)
+- configure components in parallel. _Rationale: the component configurations
+  are standalone_.
+- apply the remaining connection modifications (addition and removal, in parallel)
 - start components (in parallel)
 
-Components are stopped through Syskit's garbage collection mechanism.
+Components are stopped through Syskit's garbage collection mechanism. Connections
+are garbage collected when the corresponding component(s) are.
 
 All actions that involve a direct interaction with the component (sending the
 start command, writing properties, …) are done asynchronously in separate
@@ -174,7 +176,7 @@ executed sequentially within the main thread.
 ## Garbage Collection {#garbage_collection}
 
 The garbage collection recursively stops tasks that are not useful for an
-active job, as in the following video. Note again that compositions's stop
+active job, as in the following video. Note again that the compositions' stop
 events are emitted in the same cycle as they are commanded, while components
 are stopped asynchronously:
 

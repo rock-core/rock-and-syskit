@@ -99,12 +99,11 @@ what tasks are not useful by following the task structure.
 
 Because it is more optimal sometimes to keep some tasks alive, even though
 these tasks are not useful to the jobs, Syskit also maintains a set of
-_permanent tasks_.  One can see in the video below that once the cartesian
-control is started, its deployment keeps on running even if the job is stopped.
-Because of the high cost of starting a whole process, and of configuring a
-component, Syskit marks the deployments as permanent. If one of them was to be
-killed, this would not affect the rest of the system, and it would be restarted
-when needed.
+_permanent tasks_. Once the cartesian control is started, its deployment keeps
+on running even if the job is stopped.  Because of the high cost of starting a
+whole process, and of configuring a component, Syskit marks the deployments as
+permanent. If one of them was to be killed, this would not affect the rest of
+the system, and it would be restarted when needed.
 
 Now that we understand how Syskit determines a component's usefulness, we may
 get to [the event loop](event_loop.html){: .btn .btn-primary} which will detail among other things
