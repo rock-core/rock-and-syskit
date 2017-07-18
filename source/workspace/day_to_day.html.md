@@ -69,6 +69,15 @@ $ acd c/kdl_par
 but are installed in `tools/`)
 {: .callout .callout-info}
 
+The `-b` and `-p` options allow to move to a package's build and prefix directories. 
+
+~~~
+$ acd -b s/gaz
+# Now in simulation/gazebo/build
+$ acd -p c/kdl
+# Now in install/
+~~~
+
 ### Updating
 
 Most of the time, you will want to update the whole workspace (the `-k` option
