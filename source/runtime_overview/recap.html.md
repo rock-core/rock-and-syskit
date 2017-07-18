@@ -13,7 +13,7 @@ sort_info: 100
   structure](task_structure.html).
 - Syskit has assumptions about how components should be implemented. We'll
   recollect those when we get to [how to implement
-  components](component_implementation.html)
+  components](../writing_components/index.html)
 - Components are configured and started "when possible" by [the
   scheduler](event_loop.html#scheduling)
 - Components are transparently [reconfigured](event_loop.html#reconfiguration)
@@ -23,7 +23,7 @@ sort_info: 100
 - The task structure also defines constraints between the components. Failure to
   meet these constraints is what Syskit interprets as [errors](exceptions.html)
 
-Between this part and the [Basics](../syskit_basics), we've covered most of the basics
+Between this part and the [Basics](../basics), we've covered most of the basics
 aspects of running a Syskit system. The rest of the subjects covered in this documentation
 can be seen more as a need-to-know basis. See [how to read this documentation](../index.html#how_to_read).
 

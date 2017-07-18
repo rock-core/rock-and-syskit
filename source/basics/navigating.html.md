@@ -1,7 +1,7 @@
 ---
 layout: documentation
-title: Day-to-day
-sort_info: 20
+title: Navigating in a Workspace
+sort_info: 7
 ---
 
 # Day-to-day interaction with a Rock installation

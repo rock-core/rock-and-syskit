@@ -27,9 +27,9 @@ the control package that will implement the control.
 Packages in Rock as maintained within the overall Rock workspace. Package
 related configuration is contained within the `autoproj/` folder within the
 workspace's root directory (where you [originally
-bootstrapped](../workspace/index.html)). When working in a terminal, you can go
+bootstrapped](installation.html)). When working in a terminal, you can go
 at any time to the workspace's root directory by running `acd` without
-arguments ([more about `acd`](../workspace/day_to_day.html#acd)).
+arguments ([more about `acd`](navigating.html#acd)).
 
 Within the `autoproj/` directory, packages are defined within _package sets_.
 These package sets define both how to build the package and where it should be
@@ -99,7 +99,7 @@ amake --all
 ## Binding the components together {#composition}
 
 Now that everything's installed, go back within the bundle folder. You may for
-instance do `acd b/syskit` ([more about `acd`](../workspace/day_to_day.html#acd))
+instance do `acd b/syskit` ([more about `acd`](navigating.html#acd))
 
 Compositions declare groups of components and connects them together. In
 addition, we will see later on that they can be seen by the rest of the system as

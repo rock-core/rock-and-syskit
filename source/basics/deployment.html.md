@@ -537,7 +537,7 @@ rock-gazebo empty_world
 Once started, the simulation can stay running regardless of whether the Syskit
 app itself gets restarted. You can then start the app using the IDE, and
 send the command through the Syskit shell. The following video show you the process. Its goal
-is to give you a feeling for Syskit's runtime workflow. Detailed explanations will come later [in the runtime part of this documentation](../syskit_runtime/index.html)
+is to give you a feeling for Syskit's runtime workflow. Detailed explanations will come later [in the runtime overview](../runtime_overview/index.html)
 
 <div class="fluid-video" id="final_video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/wXYb7f_xNZo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>

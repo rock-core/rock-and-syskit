@@ -2,7 +2,7 @@
 layout: documentation
 title: Introduction
 sort_info: 0
-directory_title: Runtime Basics
+directory_title: Runtime Overview
 directory_sort_info: 30
 ---
 
@@ -14,7 +14,7 @@ and how a user can interact with a Syskit system.
 
 Later on this page, I will give a high-level explanation of [the video we've
 seen at the end of the Basics
-section](../syskit_basics/deployment.html#final_video). We will then get deeper
+section](../basics/deployment.html#final_video). We will then get deeper
 into each part of Syskit that handle Syskit's runtime behavior: an overview of
 the [Syskit execution](event_loop.html) and of [error
 representation and common type of errors](exceptions.html)
@@ -25,10 +25,10 @@ related topics, one may want to also read all about
 
 ## Actions and Jobs
 
-In the [Basics](../syskit_basics) part, we've seen how to define network of
+In the [Basics](../basics) part, we've seen how to define network of
 components on a profile, and that this profile could be then exposed on an
 action interface, which allowed us [in the last
-part](../syskit_basics/deployment.html) to control the system.
+part](../basics/deployment.html) to control the system.
 
 An _action_ is an abstract concept that represents one thing the system can do.
 In order to actually have it executed, one starts a _job_. In the shell we've
@@ -56,7 +56,7 @@ The sequencing of these different actions is controlled by Syskit's
 **scheduler**. While the overall scheduler could be in principle arbitrary,
 Syskit internally relies on services that are currently provided by
 the temporal scheduler (that you had to set [in the initial bundle
-setup](../syskit_basics/getting_started.html#initial_setup)). Startup of
+setup](../basics/getting_started.html#initial_setup)). Startup of
 the `arm_safe_position_def` job looks like this:
 
 <div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
@@ -135,7 +135,7 @@ In a nutshell, so far:
 One of Syskit's most important features is its ability to transparently
 _transform_ the component network to build one or a combination of behaviors.
 We have seen this interactively in the video we saw [at the end of the Basics
-section](../syskit_basics/deployment.html#final_video): the system was maintaining the
+section](../basics/deployment.html#final_video): the system was maintaining the
 `arm_safe_position_def` and we transitioned it into a parametrized
 `arm_cartesian_constant_control_def` to move its tip into a given cartesian
 position. This entailed changing the network from a simple joint command to a

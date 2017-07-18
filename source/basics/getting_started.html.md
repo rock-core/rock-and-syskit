@@ -19,7 +19,7 @@ Syskit models (in `models/`), configuration files (in `config/`), SDF scenes
 (`scenes/`) and SDF models (`models/sdf/`).
 
 The following assumes that you have a [bootstrapped Rock
-installation](../workspace/index.html), and that you have a terminal in which this
+installation](installation.html), and that you have a terminal in which this
 installation's `env.sh` file has been sourced.
 
 Let's create a new bundle. In your Rock's workspace do

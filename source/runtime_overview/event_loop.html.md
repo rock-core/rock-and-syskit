@@ -52,7 +52,7 @@ First and foremost, a component can be scheduled only if:
 
 - it has all its parameters set. This is a common problem, that some arguments
   are unset and the network does not run. This can be caught [in
-  tests](../syskit_basics/constant_generator.html#missing_arguments). At
+  tests](../basics/constant_generator.html#missing_arguments). At
   runtime, in the IDE, this is leads to the `partially instanciated` message:
 
   ![Partially instantiated network in the IDE](media/missing_arguments.jpg){: .fullwidth}

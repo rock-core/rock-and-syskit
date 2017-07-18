@@ -34,7 +34,7 @@ Rock mainline repositories. For this reason, one needs to start using the
 buildconf repository on GitHub
 [`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
 the default one at
-[`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](workspace/index.html) already reflects this.
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](basics/installation.html) already reflects this.
 </div>
 
 ## How to read this documentation {#how_to_read}
@@ -49,14 +49,13 @@ need to know at a certain point in time.
 
 ## Basics
 
-1. [Installing Rock, day-to-day handling of packages](workspace/index.html)
-2. [Design Basics: Building a simple system using Gazebo and Syskit](syskit_basics/index.html)
-3. [Runtime Basics: Running the basic system](syskit_runtime/index.html)
+1. [Basics: Installing Rock and Building a simple system using Gazebo and Syskit](basics/index.html)
+2. [Runtime Basics: Running the basic system](runtime_overview/index.html)
 
 ## Building Systems
 
-4. Writing components
-5. Reusable Syskit modelling
+3. [Writing components](writing_components/index.html)
+4. Reusable Syskit modelling
 6. Advanced data processing in Components
 7. System coordination
 8. Error Handling

@@ -15,7 +15,7 @@ of integration of the Rock software. The role of a workspace build
 configuration is to ensure repeatability in the installation of a system's
 software
 
-- [the initial bootstrap](../workspace/index.html) installs a predefined set of
+- [the initial bootstrap](installation.html) installs a predefined set of
   packages as defined by a given build configuration
 - packages are also [added during development](composition.html#add_package),
   when the functionality is required
@@ -233,4 +233,4 @@ Definitions from a profile [are exported on the Main interface](deployment.html#
 
 ### Runtime
 
-We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../syskit_runtime/index.html){: .btn .btn-primary}
+We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../runtime_overview/index.html){: .btn .btn-primary}
