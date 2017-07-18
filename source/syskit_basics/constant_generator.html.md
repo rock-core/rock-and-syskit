@@ -20,6 +20,17 @@ We will also learn how to write unit tests.
 For the command, let's generate a single constant command. It will allow us to
 move the arm tip from one point to another, expressed in the cartesian frame.
 
+The first thing is to find out what's the data type of the port. If we look at
+the dataflow in the `ArmCartesianControlWdls` composition, we find:
+
+![Datatype of the cartesian command](media/arm_cartesian_control_wdls_dataflow.svg){: .fullwidth}
+
+The type name is `/base/samples/RigidBodyState`. This type has been defined
+when components have been created, which is something we will see [when we
+learn about creating components](../writing_components/types.html). You can
+have an overview of the types available in a Rock system by starting the
+`rock-browse` tool.
+
 `bundles/common_models` provides `Compositions::ConstantGenerator`, a generic
 implementation of a component that periodically emits a value of a certain type. This generator is
 a `Syskit::RubyTaskContext`, which is like an oroGen component that is part of
@@ -89,6 +100,12 @@ class ArmCartesianConstantCommandGenerator < ...
   end
 end
 ~~~
+
+**Note**: the position and orientation here are assumed to be respectively a
+vector (of type Eigen::Vector3) and a quaternion (of type Eigen::Quaternion).
+The underlying type system [is a subject for another
+part](../writing_components/types.html). For now, just accept it.
+{: .callout .callout-info}
 
 This kind of "high-level argument shadowing low-level
 arguments must have a one-to-N relationship (usually one-to-one). It is
@@ -366,8 +383,34 @@ the corresponding composition.
 
 The creation of this generator is left to the reader. 
 
-**Tip**: a good representation for the setpoint would be a `joint_name=>joint_position` hash.
-{: .callout .callout-info}
+<div class="callout callout-info" markdown="1">
+**Tip**: a good representation for the setpoint would be a
+`joint_name=>joint_position` hash, where `joint_name` is a string and
+`joint_position` a floating-point value (always in radians !). Given that we've
+not yet dealt with the type system, you will also need to know that to create
+a `/base/commands/Joints` from within Ruby, you do:
+
+~~~
+Types.base.commands.Joints.new(
+  time: Time.at(0),
+  names: joint_names,
+  elements: joint_commands)
+~~~
+
+where `joint_names` is an array of strings and `joint_commands` an array of
+
+~~~
+Types.base.JointState.new(
+  position: position,
+  speed: Float::NAN
+  effort: Float::NAN
+  raw: Float::NAN
+  acceleration: Float::NAN)
+~~~
+
+`NaN` is used within Rock to indicate either 'unset' (for commands) or
+'unknown' (for sensor readings)
+</div>
 
 <div class="panel panel-info" markdown="1">
 <div class="panel-heading" markdown="1">
