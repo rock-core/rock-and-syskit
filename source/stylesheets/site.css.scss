@@ -62,3 +62,8 @@ nav.docs-sidebar.affix {
     @extend .btn;
     @extend .btn-primary;
 }
+
+.tip {
+    @extend .callout;
+    @extend .callout-info;
+}

@@ -54,11 +54,12 @@ need to know at a certain point in time.
 
 ## Building Systems
 
-3. [Writing components](writing_components/index.html)
-4. Reusable Syskit modelling
-6. Advanced data processing in Components
-7. System coordination
-8. Error Handling
+3. [Workspace and Packages](workspace/index.html)
+4. [Writing components](writing_components/index.html)
+5. Reusable Syskit modelling
+7. Advanced data processing in Components
+8. System coordination
+9. Error Handling
 
 ## Development Workflow
 

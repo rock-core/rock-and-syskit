@@ -3,7 +3,7 @@ layout: documentation
 title: Introduction
 sort_info: 0
 directory_title: Runtime Overview
-directory_sort_info: 30
+directory_sort_info: 20
 ---
 
 # Syskit Runtime Behavior
