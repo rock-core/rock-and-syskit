@@ -5,6 +5,11 @@ sort_info: 20
 ---
 
 # Starting a new project
+{:.no_toc}
+
+- TOC
+{:toc}
+
 
 ## Main build configuration
 

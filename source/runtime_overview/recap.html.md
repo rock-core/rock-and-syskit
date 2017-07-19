@@ -1,10 +1,10 @@
 ---
 layout: documentation
 title: Recap
-sort_info: 100
+sort_info: 50
 ---
 
-# Runtime Overview: Recap
+# Recap
 
 - Syskit maintains the set of _jobs_ or _missions_, that is the set of goals
   that the system has the intent to reach. They can represent a function that

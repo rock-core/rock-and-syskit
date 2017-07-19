@@ -8,24 +8,53 @@ ul.nav li ul {
   margin-bottom: 20px;
 }
 
-/* All levels of nav */
-.docs-sidebar .nav > li > a,
-.docs-sidebar .nav > li > span > a {
+.toc-link {
   display: block;
   padding: 4px 20px;
   font-size: 13px;
   font-weight: 500;
   color: #767676;
 }
-.docs-sidebar .nav > li > a:hover,
-.docs-sidebar .nav > li > a:focus,
-.docs-sidebar .nav > li > span > a:hover,
-.docs-sidebar .nav > li > span > a:focus {
+
+.toc-link-hover {
   padding-left: 19px;
   color: #563d7c;
   text-decoration: none;
   background-color: transparent;
   border-left: 1px solid #563d7c;
+}
+
+.toc-link-active {
+  padding-left: 18px;
+  font-weight: bold;
+  color: #563d7c;
+  background-color: transparent;
+  border-left: 2px solid #563d7c;
+}
+
+.toc-level2-link {
+  @extend .toc-link;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 30px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.toc-level2-link-hover {
+  padding-left: 29px;
+}
+
+/* All levels of nav */
+.docs-sidebar .nav > li > a,
+.docs-sidebar .nav > li > span > a {
+    @extend .toc-link;
+}
+.docs-sidebar .nav > li > a:hover,
+.docs-sidebar .nav > li > a:focus,
+.docs-sidebar .nav > li > span > a:hover,
+.docs-sidebar .nav > li > span > a:focus {
+    @extend .toc-link-hover;
 }
 .docs-sidebar .nav > .active > a,
 .docs-sidebar .nav > .active:hover > a,
@@ -33,11 +62,7 @@ ul.nav li ul {
 .docs-sidebar .nav > .active > span > a,
 .docs-sidebar .nav > .active:hover > span > a,
 .docs-sidebar .nav > .active:focus > span > a {
-  padding-left: 18px;
-  font-weight: bold;
-  color: #563d7c;
-  background-color: transparent;
-  border-left: 2px solid #563d7c;
+  @extend .toc-link-active;
 }
 
 /* Nav: second level (shown on .active) */
@@ -47,17 +72,13 @@ ul.nav li ul {
 }
 .docs-sidebar .nav .nav > li > a,
 .docs-sidebar .nav .nav > li > span > a {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 30px;
-  font-size: 12px;
-  font-weight: normal;
+  @extend .toc-level2-link;
 }
 .docs-sidebar .nav .nav > li > a:hover,
 .docs-sidebar .nav .nav > li > a:focus,
 .docs-sidebar .nav .nav > li > span > a:hover,
 .docs-sidebar .nav .nav > li > span > a:focus {
-  padding-left: 29px;
+  @extend .toc-level2-link-hover;
 }
 .docs-sidebar .nav .nav > .active > a,
 .docs-sidebar .nav .nav > .active:hover > a,

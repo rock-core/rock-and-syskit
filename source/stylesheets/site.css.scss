@@ -67,3 +67,42 @@ nav.docs-sidebar.affix {
     @extend .callout;
     @extend .callout-info;
 }
+
+div.highlight > pre.highlight {
+    padding: .5em;
+    margin-bottom: 0;
+    border: none;
+}
+
+#markdown-toc > li > a {
+    margin-left: 19px;
+    @extend .toc-link;
+}
+#markdown-toc > li > a:hover,
+#markdown-toc > li > a:focus {
+    @extend .toc-link-hover;
+}
+#markdown-toc > li > ul > li > a {
+    @extend .toc-level2-link;
+}
+#markdown-toc > li > ul > li > a:hover,
+#markdown-toc > li > ul > li > a:focus {
+    @extend .toc-level2-link-hover;
+}
+
+#markdown-toc {
+    @extend .navbar-right;
+    @extend .nav;
+    margin-left: 19px;
+    margin-right: 5px;
+    margin-bottom: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    width: 40%;
+    background: #f5f5f5;
+}
+
+#markdown-toc > li > ul {
+    padding-left: 19px;
+    @extend .nav;
+}

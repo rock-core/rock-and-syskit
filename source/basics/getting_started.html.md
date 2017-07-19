@@ -5,6 +5,10 @@ sort_info: 10
 ---
 
 # Getting Started
+{:.no_toc}
+
+- TOC
+{:toc}
 
 We'll be getting right into the meat of things by creating a system's
 integration package (a `bundle`), and setup a gazebo environment that will

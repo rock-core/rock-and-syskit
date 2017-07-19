@@ -5,6 +5,11 @@ sort_info: 10
 ---
 
 # Task Structures
+{:.no_toc}
+
+- TOC
+{:toc}
+
 
 Key to the scheduler and garbage collection mechanisms is Syskit's ability to
 maintain the set of components that are useful for the currently active jobs.

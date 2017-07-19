@@ -5,6 +5,10 @@ sort_info: 7
 ---
 
 # Day-to-day interaction with a Rock installation
+{:.no_toc}
+
+- TOC
+{:toc}
 
 This page covers the autoproj commands and behavior that make most of the days
 within a Rock workspace. More advanced topics are covered later in the
@@ -134,3 +138,4 @@ To restrict the build to the package, excluding its dependencies, add `--deps=f`
 located in the current directory
 {: .callout .callout-info}
 
+Let's get now to [the meat of things now](getting_started.html)

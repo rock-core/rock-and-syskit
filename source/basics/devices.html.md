@@ -5,6 +5,10 @@ sort_info: 40
 ---
 
 # Devices
+{:.no_toc}
+
+- TOC
+{:toc}
 
 So far, we have a control composition. But as we noticed when we created [the
 arm control network](composition.html), it is not using a real component as the

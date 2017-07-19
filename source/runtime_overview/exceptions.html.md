@@ -1,10 +1,14 @@
 ---
 layout: documentation
 title: Errors
-sort_info: 90
+sort_info: 30
 ---
 
 # Error Representation
+{:.no_toc}
+
+- TOC
+{:toc}
 
 So far, we've touched execution in Syskit when everything is going fine. This
 is hardly the case, both in development and in production systems. Robots have

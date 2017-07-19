@@ -5,6 +5,10 @@ sort_info: 30
 ---
 
 # Creating our Command Generator
+{:.no_toc}
+
+- TOC
+{:toc}
 
 [The control network we just created](composition.html) does not have a command
 generator. The first generator one usually creates is a constant one, creating an

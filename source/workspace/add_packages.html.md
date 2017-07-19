@@ -5,6 +5,11 @@ sort_info: 30
 ---
 
 # Adding new Packages
+{:.no_toc}
+
+- TOC
+{:toc}
+
   
 As we already mentioned [in the introduction](index.html), within Rock, none of
 the packages should actually rely on Autoproj, Rock's build system. C++ Rock

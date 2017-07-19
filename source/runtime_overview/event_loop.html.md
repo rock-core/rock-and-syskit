@@ -5,6 +5,10 @@ sort_info: 20
 ---
 
 # Syskit's event loop
+{:.no_toc}
+
+- TOC
+{:toc}
 
 This page will be the first one that will go deeper in Syskit's execution
 model. This one will present Syskit's event loop structure, detailing how
@@ -230,4 +234,4 @@ select different component configurations. When this happens, Syskit will stop
 and reconfigure the affected components while deploying the new network.
 
 We've seen so far how things work _nominally_. Let's see [how Syskit reacts when
-things go wrong](exceptions.html){:.btn .btn-primary}.
+things go wrong](exceptions.html){:.btn-next-page}

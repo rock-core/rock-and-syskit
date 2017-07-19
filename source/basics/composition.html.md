@@ -5,6 +5,10 @@ sort_info: 20
 ---
 
 # Compositions: designing the network for the cartesian control of an arm
+{:.no_toc}
+
+- TOC
+{:toc}
 
 We are now going to try and do simple control [of our simulated
 arm](getting_started.html). We are going to do the integration of the control
@@ -118,7 +122,7 @@ $ syskit gen cmp arm_cartesian_control_wdls
 
 <div class="panel panel-info" markdown="1">
 <div class="panel-heading" markdown="1">
-#### OroGen packages in Syskit {#orogen}
+OroGen packages in Syskit {: #orogen}
 </div>
 <div class="panel-body" markdown="1">
 As described in our [brief introduction](index.html), oroGen packages are

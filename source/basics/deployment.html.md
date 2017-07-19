@@ -5,13 +5,15 @@ sort_info: 50
 ---
 
 # Deployment
+{:.no_toc}
+
+- TOC
+{:toc}
 
 A few things are missing before we can actually run [the network we just
-created](devices.html):
-
-1. [Deploy the components](#use_deployment)
-2. [Configure the components](#configuration)
-3. [Export the network as a Syskit Action so that we can instruct Syskit to start it](#actions)
+created](devices.html). Mainly related to giving names to actual components,
+providing proper configurations and registering an action so that we can tell
+Syskit to start our network.
 
 ## Component deployment {#use_deployment}
 
@@ -73,6 +75,7 @@ Configuration of components in a Syskit system is split into two parts:
   of this section.
 
 ### Static configuration of oroGen components
+{:.no_toc}
 
 The static configuration is stored within YAML files in `config/orogen/`. Each
 file is named after the component model that is configured, so for instance
@@ -129,6 +132,7 @@ inspected using the `rock-transformer` tool:
 </div>
 
 ### Dynamic and system-wide configuration
+{:.no_toc}
 
 The robot model need to be extracted from the SDF and passed to the components
 that require it. The convention when integrating SDF models in Syskit is to

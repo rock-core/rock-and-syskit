@@ -5,6 +5,11 @@ sort_info: 10
 ---
 
 # Conventions
+{:.no_toc}
+
+- TOC
+{:toc}
+
 
 In order to keep a workspace set of packages "understandable", Rock has a few
 conventions that govern how packages should be named. The first one is that
