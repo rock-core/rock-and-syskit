@@ -1,11 +1,19 @@
+/*
+ * Fine-tune navigation elements.
+ *
+ * There are mainly two navigation elements: the left sidebar and the page TOC.
+ *
+ * They are both based on Bootstrap's own documentation style. The style is
+ * defined in the .toc classes, and then extends the panel nav styles
+ * (.docs-sidenav and children) and the page TOC (#markdown-toc and children)
+ */
+
+/**
+ * Shared classes
+ */
+
 ul.nav li ul {
     @extend .nav;
-}
-
-/* First level of nav */
-.docs-sidenav {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .toc-link {
@@ -43,6 +51,20 @@ ul.nav li ul {
 
 .toc-level2-link-hover {
   padding-left: 29px;
+}
+
+
+
+
+
+/**
+ * Sidebar navigation
+ */
+
+/* First level of nav */
+.docs-sidenav {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* All levels of nav */
@@ -92,5 +114,50 @@ ul.nav li ul {
 
 .docs-sidebar .nav li.active ul {
   display: block;
+}
+
+nav.docs-sidebar.affix {
+  top: 20px;
+}
+
+
+
+
+
+/**
+ * Page TOC
+ */
+
+#markdown-toc > li > a {
+    margin-left: 19px;
+    @extend .toc-link;
+}
+#markdown-toc > li > a:hover,
+#markdown-toc > li > a:focus {
+    @extend .toc-link-hover;
+}
+#markdown-toc > li > ul > li > a {
+    @extend .toc-level2-link;
+}
+#markdown-toc > li > ul > li > a:hover,
+#markdown-toc > li > ul > li > a:focus {
+    @extend .toc-level2-link-hover;
+}
+
+#markdown-toc {
+    @extend .navbar-right;
+    @extend .nav;
+    margin-left: 19px;
+    margin-right: 5px;
+    margin-bottom: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    width: 40%;
+    background: #f5f5f5;
+}
+
+#markdown-toc > li > ul {
+    padding-left: 19px;
+    @extend .nav;
 }
 

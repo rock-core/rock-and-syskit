@@ -2,107 +2,44 @@
 
 @import "normalize";
 @import "syntax";
+@import "bootstrap";
+@import "bootstrap_fine_tuning";
+@import "fluid_video";
+@import "callouts";
+@import "navigation";
 
-img {
-    padding: 20px;
-}
 .advanced_description {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
 .advanced {
-    margin: 20px;
-    padding: 20px;
-    background-color: #EFD7FF;
-    margin-top: 40px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #EFD7FF;
+  margin-top: 40px;
 
-    h1, h2 {
-        margin-top: 0px;
-    }
-}
-
-@import "bootstrap";
-@import "fluid_video";
-@import "callouts";
-@import "docs_sidebar_nav";
-
-h2, h3 {
-    margin-top: 30px;
+  h1, h2 {
+    margin-top: 0px;
+  }
 }
 
 img.fullwidth {
-    @extend .img-responsive;
-    @extend .center-block;
-}
-
-nav.docs-sidebar.affix {
-    top: 20px;
-}
-
-.carousel {
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-
-.carousel-control.left,
-.carousel-control.right {
-    background-image: none;
-}
-
-.carousel-indicators li {
-  background-color: #999;
-  background-color: rgba(70,70,70,.25);
-}
-
-.carousel-indicators .active {
-  background-color: #444;
+  @extend .img-responsive;
+  @extend .center-block;
 }
 
 .btn-next-page {
-    @extend .btn;
-    @extend .btn-primary;
+  @extend .btn;
+  @extend .btn-primary;
 }
 
 .tip {
-    @extend .callout;
-    @extend .callout-info;
+  @extend .callout;
+  @extend .callout-info;
 }
 
-div.highlight > pre.highlight {
-    padding: .5em;
-    margin-bottom: 0;
-    border: none;
+.important {
+  @extend .callout;
+  @extend .callout-warning;
 }
 
-#markdown-toc > li > a {
-    margin-left: 19px;
-    @extend .toc-link;
-}
-#markdown-toc > li > a:hover,
-#markdown-toc > li > a:focus {
-    @extend .toc-link-hover;
-}
-#markdown-toc > li > ul > li > a {
-    @extend .toc-level2-link;
-}
-#markdown-toc > li > ul > li > a:hover,
-#markdown-toc > li > ul > li > a:focus {
-    @extend .toc-level2-link-hover;
-}
-
-#markdown-toc {
-    @extend .navbar-right;
-    @extend .nav;
-    margin-left: 19px;
-    margin-right: 5px;
-    margin-bottom: 1em;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    width: 40%;
-    background: #f5f5f5;
-}
-
-#markdown-toc > li > ul {
-    padding-left: 19px;
-    @extend .nav;
-}
