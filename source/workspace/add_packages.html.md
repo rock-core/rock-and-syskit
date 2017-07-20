@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Adding new Packages
+title: Adding new packages
 sort_info: 30
 ---
 
@@ -38,6 +38,72 @@ version control information straight into the main build configuration (the
 `autoproj/` folder). The version control information in this case is stored in
 the `overrides.yml` file instead of `source.yml`.
 {: .tip}
+
+## Creating a package
+
+The first step in creating a package is [to pick a name](conventions.html#naming)
+
+If you create a package from scratch, Rock provides a set of command-line tools
+to generate package scaffolds for you:
+
+- `rock-create-lib` for a C++ library
+- `rock-create-rubylib` for Ruby libraries
+- `rock-create-orogen` for [an oroGen component](../writing_components/index.html#create)
+- `rock-create-bundle` for [a bundle](../basics/getting_started.html)
+
+If you are integrating a package that already exists, it should be easy enough
+provided that the package uses widespread build systems and follows common
+conventions (such as having a separate source and build folder, and having an
+install step).
+
+## Package Description and Dependencies
+
+For documentation reason, the packages are expected to provide metadata such as
+a description of its purpose, the author(s), license, … Additionally, it is
+common for packages to depend on each other, meaning that a package needs
+another package to be there first, for it to build and/or run successfully. The
+dependency may be another package declared in autoproj or a package provided by
+the underlying operating system through [the osdep system we will see
+later](os_dependencies.html).
+
+All this information is stored in a package's `manifest.xml` file. This file has
+the following format:
+
+~~~xml
+<?xml version="1.0"?>
+
+<package>
+  <description brief="one line of text">
+    long description goes here, 
+    <em>XHTML is allowed</em>
+  </description>
+  <author>Alice/alice@somewhere.bar</author>
+  <author>Bob/bob@nowhere.foo</author>
+  <license>BSD</license>
+  <url>http://rock-robotics.org/</url>
+
+  <depend package="pkgname"/>
+  <depend package="common"/>
+  <!-- depend can handle both source and osdep packages -->
+  <depend package="ruby-dev" />
+  <!-- a dependency that will only be installed for testing -->
+  <test_depend package="minitest" />
+  <!-- a dependency that can be ignored if it is not available -->
+  <depend_optional package="gui/vizkit3d" />
+</package>
+~~~
+
+The `<test_depend …>` tag is used for dependencies that are specific to [the
+package's test suite](../basics/day_to_day.html#test). The `<depend_optional
+…>` allows to [avoid building some dependencies within some builds](managing.html).
+
+If the package has been created for Rock specifically, the common practice is
+to put the `manifest.xml` file directly at the root of the package. For
+packages that already exist but are being integrated in Rock, the
+`manifest.xml` file should be saved in the package set under
+`manifests/package/name.xml` (e.g. `simulation/gazebo`'s manifest is saved in
+`manifests/simulation/gazebo.xml`). This is how dependencies to non-Rock
+packages should be declared as well.
 
 ## Declaring a package {#autobuild}
 
@@ -165,9 +231,6 @@ import_package "package_name" do |pkg|
 end
 ~~~
 
-See [this page](writing_package_handlers.html) about some __very important__ issues when writing such command
-blocks.
-
 ## Version Control Resolution {#version_control_resolution}
 
 The general format of version control entries is:
@@ -232,8 +295,7 @@ source definition
     branch: syskit2-test-refactoring
 ~~~
 
-The `$VARIABLE` syntax will be clarified [later in the optional functionality
-section](optional_functionality.html).  We will now see what version control
+The `$VARIABLE` syntax will be clarified [later](managing.html#configuration_options).  We will now see what version control
 systems are supported by autoproj.
 
 ## Available Version Control Systems {#version_control}
@@ -379,3 +441,4 @@ package_name:
 
 Let's get into [using packages from the underlying
 OS or from language-specific handlers](os_dependencies.html){: .btn-next-page}
+

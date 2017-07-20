@@ -33,7 +33,7 @@ related configuration is contained within the `autoproj/` folder within the
 workspace's root directory (where you [originally
 bootstrapped](installation.html)). When working in a terminal, you can go
 at any time to the workspace's root directory by running `acd` without
-arguments ([more about `acd`](navigating.html#acd)).
+arguments ([more about `acd`](day_to_day.html#acd)).
 
 Within the `autoproj/` directory, packages are defined within _package sets_.
 These package sets define both how to build the package and where it should be
@@ -103,7 +103,7 @@ amake --all
 ## Binding the components together {#composition}
 
 Now that everything's installed, go back within the bundle folder. You may for
-instance do `acd b/syskit` ([more about `acd`](navigating.html#acd))
+instance do `acd b/syskit` ([more about `acd`](day_to_day.html#acd))
 
 Compositions declare groups of components and connects them together. In
 addition, we will see later on that they can be seen by the rest of the system as
@@ -121,8 +121,8 @@ $ syskit gen cmp arm_cartesian_control_wdls
 ~~~
 
 <div class="panel panel-info" markdown="1">
-<div class="panel-heading" markdown="1">
-OroGen packages in Syskit {: #orogen}
+<div class="panel-heading" id="orogen" markdown="1">
+OroGen packages in Syskit
 </div>
 <div class="panel-body" markdown="1">
 As described in our [brief introduction](index.html), oroGen packages are

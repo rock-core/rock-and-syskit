@@ -1,10 +1,10 @@
 ---
 layout: documentation
-title: Navigating in a Workspace
+title: Day-to-day Workspace Commands
 sort_info: 7
 ---
 
-# Day-to-day interaction with a Rock installation
+# Day-to-day workspace commands
 {:.no_toc}
 
 - TOC
@@ -139,3 +139,42 @@ located in the current directory
 {: .callout .callout-info}
 
 Let's get now to [the meat of things now](getting_started.html)
+
+### Configuration
+
+Build configurations may have some configuration options that the user needs to
+answer on first time building. If you need to change the answers after the first
+run, execute
+
+~~~
+autoproj reconfigure
+~~~
+
+### Running Tests {#test}
+
+Test suites are expensive to build, and one does not want every test suite from
+every package to be available at all time. For this reason, test suite building
+is by default disabled for all packages. If you do want to use/develop the test
+suite of a package (great idea !), you need first to enable it, update and
+rebuild. The 'update' step is needed as some dependencies are only installed
+for the purpose of testing.
+
+From within the package's directory,
+
+~~~
+autoproj test enable .
+aup --no-deps
+amake
+~~~
+
+Use `autoproj test list` to see which packages do have a test suite and for
+which packages it is enabled. Running `autoproj test disable` disables all test
+suites again.
+
+Running the tests can either be done using the package's test method, or through
+autoproj by running
+
+~~~
+autoproj test .
+~~~
+

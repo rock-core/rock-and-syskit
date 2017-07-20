@@ -13,6 +13,13 @@ management. We will go beyond the subject of importing existing packages,
 [which we have already done in the Basics
 part](../basics/composition.html#add_package).
 
+The most important design driver, when building your workspace and build
+configuration, is to ensure **repeatability**. The goal is to make sure one can
+at any time rebuild a workspace from scratch, of course on developer's
+machines, but also in continuous integration environments, or on embedded
+systems.
+{: .important}
+
 We'll first have a presentation of [the conventions that govern the structure
 of a workspace](conventions.html). We'll then see [how to setup a new project,
 and how to create new package sets](setup.html).
@@ -31,12 +38,12 @@ As such, autoproj mainly needs to know two things about a package:
 - how to download it
 
 These two things are what is needed to [add a package in an autoproj build
-configuration](add_package.html)
+configuration](add_packages.html)
 
 In order to leverage the underlying OS, autoproj also allows to use OS-provided
 packages, or language-specific packages -- such as Python pip packages or
 RubyGems in a workspace. This will be [covered as well](os_dependencies.html).
 
-Finally, we will go through how to deal [with optional
-functionality](optional_functionality.html).
+Finally, we will go through the more general subject of [designing and managing
+a build configuration](managing.html)
 

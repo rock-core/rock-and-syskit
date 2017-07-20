@@ -81,8 +81,18 @@ package_sets:
   url: URL
 ~~~
 
+In addition, one usually would want to build all packages defined in the package
+set (i.e. all packages from the project). This is done by adding the package set
+name in the `layout` section:
+{: #add_package_set_in_layout}
+
+~~~yaml
+layout:
+- company.project
+~~~
+
 There are other import possibilities, listed in the [adding new
-packages](add_packages.html) section.
+packages](add_packages.html#version_control) section.
 
 After having added the package, check it out with:
 
