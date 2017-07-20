@@ -111,6 +111,6 @@ permanent. If one of them was to be killed, this would not affect the rest of
 the system, and it would be restarted when needed.
 
 Now that we understand how Syskit determines a component's usefulness, we may
-get to [the event loop](event_loop.html){: .btn .btn-primary} which will detail among other things
+get to [the event loop](event_loop.html){: .btn-next-page} which will detail among other things
 the scheduling and garbage collection mechanisms.
 

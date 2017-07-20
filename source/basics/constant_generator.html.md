@@ -560,6 +560,6 @@ end
 ## Finally
 
 We can now map the composition's `arm` child to the arm within the simulation.
-Let's do [a detour to device models](devices.html){: .btn .btn-primary} to then
-finally [run our network](deployment.html){: .btn .btn-primary}
+Let's do [a detour to device models](devices.html){: .btn-next-page} to then
+finally [run our network](deployment.html){: .btn-next-page}
 

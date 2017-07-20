@@ -285,4 +285,4 @@ bind two input ports or two input ports together.
 
 ![Example or a port export](media/arm_cartesian_control_export.png){: .fullwidth}
 
-Before we can actually run the whole thing, [we must create a command generator for it](constant_generator.html){: .btn .btn-primary}
+Before we can actually run the whole thing, [we must create a command generator for it](constant_generator.html){: .btn-next-page}

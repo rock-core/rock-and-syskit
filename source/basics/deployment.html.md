@@ -547,4 +547,4 @@ is to give you a feeling for Syskit's runtime workflow. Detailed explanations wi
 <iframe width="853" height="480" src="https://www.youtube.com/embed/wXYb7f_xNZo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-Before we move on to the Syskit runtime aspects, [let's recap what we've just seen](recap.html){:.btn .btn-primary}
+Before we move on to the Syskit runtime aspects, [let's recap what we've just seen](recap.html){:.btn-next-page}

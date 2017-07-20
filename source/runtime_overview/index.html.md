@@ -183,6 +183,6 @@ generation**.
 {: #deployment_failure}
 
 We'll now get to understand all of this step-by-step, starting with [Syskit's
-task structure](task_structure.html){: .btn .btn-primary}, how Syskit maintains
+task structure](task_structure.html){: .btn-next-page}, how Syskit maintains
 what is and isn't useful in the system (among other things …)
 

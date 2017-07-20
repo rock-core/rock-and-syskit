@@ -206,6 +206,6 @@ needed by the system, this error would not affect the running jobs.
 {: .callout .callout-info}
 
 This concludes this overview of the Syskit runtime aspects. We'll make a detour
-through [live data visualization](live_data.html){: .btn .btn-primary} and then get to the [part
-recap](recap.html){: .btn .btn-primary} before we move on to more advanced
+through [live data visualization](live_data.html){: .btn-next-page} and then get to the [part
+recap](recap.html){: .btn-next-page} before we move on to more advanced
 topics.

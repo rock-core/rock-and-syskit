@@ -233,4 +233,4 @@ Definitions from a profile [are exported on the Main interface](deployment.html#
 
 ### Runtime
 
-We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../runtime_overview/index.html){: .btn .btn-primary}
+We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../runtime_overview/index.html){: .btn-next-page}

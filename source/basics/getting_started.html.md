@@ -206,7 +206,7 @@ end
 ~~~
 
 Now that we have a minimal scene and a working Gazebo installation, [let's do
-something with it](composition.html){:.btn .btn-primary}
+something with it](composition.html){:.btn-next-page}
 
 <div class="panel panel-warning" markdown="1">
 <div class="panel-heading" markdown="1">
