@@ -42,14 +42,14 @@ the `rock` package sets (see the `package_sets` section in
 `autoproj/manifest`). The `rock` package set is where the control packages we
 will be using are defined.
 
-<div class="panel panel-warning" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-warning">
+<div class="panel-heading">
 <a class="btn btn-warning" role="button" data-toggle="collapse" href="#autoproj_show" aria-expanded="false" aria-controls="autoproj_show">
   Advanced
 </a><span class="advanced_description">Finding more about a package using `autoproj show`</span>
 </div>
 
-<div class="collapse panel-body" markdown="1" id="autoproj_show">
+<div class="collapse panel-body" id="autoproj_show">
 Use `autoproj show` to find more about a given package. For `cart_ctrl_wdls`, this gives:
 
 ~~~
@@ -120,11 +120,11 @@ $ syskit gen cmp arm_cartesian_control_wdls
       create  test/compositions/test_arm_cartesian_control_wdls.rb
 ~~~
 
-<div class="panel panel-info" markdown="1">
-<div class="panel-heading" id="orogen" markdown="1">
+<div class="panel panel-info">
+<div class="panel-heading" id="orogen">
 OroGen packages in Syskit
 </div>
-<div class="panel-body" markdown="1">
+<div class="panel-body">
 As described in our [brief introduction](index.html), oroGen packages are
 where the functionality implemented in the library packages are "packaged" into things
 that can be used at runtime.

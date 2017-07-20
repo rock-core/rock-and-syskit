@@ -28,7 +28,7 @@ programming knowledge.
 A Rock newcomer should read this documentation sequentially. Tutorials and
 examples are mixed with more detailed descriptions, with an aim at being progressive.
 
-<div class="alert alert-warning" role="alert" markdown="1">
+<div class="alert alert-warning" role="alert">
 As of today (June 2017), not all the software used in this guide has reached
 Rock mainline repositories. For this reason, one needs to start using the
 buildconf repository on GitHub

@@ -209,14 +209,14 @@ end
 something with it](composition.html)
 {: .next-page}
 
-<div class="panel panel-warning" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-warning">
+<div class="panel-heading">
 
 <a class="btn btn-warning" role="button" data-toggle="collapse" href="#under_the_hood" aria-expanded="false" aria-controls="under_the_hood">
   Advanced
 </a><span class="advanced_description">Under the hood: how does the Rock/Gazebo bridge work</span>
 </div>
-<div class="collapse panel-body" markdown="1" id="under_the_hood">
+<div class="collapse panel-body" id="under_the_hood">
 Under the hood, the objects in the Gazebo instance are exposed to the Rock
 system by means of [a Gazebo system
 plugin](http://gazebosim.org/tutorials?tut=system_plugin). Each model, link,

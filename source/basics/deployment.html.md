@@ -141,14 +141,14 @@ this to the components. This centralizes the difficulty of resolving the
 relationships between SDF models, and provides flexibility to tune the model
 before it is passed to the component.
 
-<div class="panel panel-warning" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-warning">
+<div class="panel-heading">
 <a class="btn btn-warning" role="button" data-toggle="collapse" href="#sdf_load" aria-expanded="false" aria-controls="sdf_load">
   Advanced
 </a><span class="advanced_description">Mechanisms involved in SDF file loading in Rock</span>
 </div>
 
-<div class="collapse panel-body" markdown="1" id="sdf_load">
+<div class="collapse panel-body" id="sdf_load">
 The difficulty when loading a SDF file is that SDF allows files to refer to
 each other through the include mechanism, which can be used in a
 [world](http://sdformat.org/spec?ver=1.6&elem=world#world_include) as well as a
@@ -314,14 +314,14 @@ def configure
 end
 ~~~
 
-<div class="panel panel-warning" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-warning">
+<div class="panel-heading">
 <a class="btn btn-warning" role="button" data-toggle="collapse" href="#lib_helpers" aria-expanded="false" aria-controls="lib_helpers">
   Advanced
 </a><span class="advanced_description">Writing helpers in Syskit apps</span>
 </div>
 
-<div class="collapse panel-body" markdown="1" id="lib_helpers">
+<div class="collapse panel-body" id="lib_helpers">
 The `verify_link_in_model` functionality is obviously a good target for
 being factored out as a standalone helper. In Syskit apps, these helpers
 are stored within the `lib/<app_name>/` folder (e.g. `lib/syskit_basics/`).
@@ -453,14 +453,14 @@ to make sure they run. We basically need to provide a proper robot model and
 configurations for the `SingleChainPublisher` and `WDLSSolver` components, based
 on what we've already done for these two components.
 
-<div class="panel panel-info" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-info">
+<div class="panel-heading">
 
 <a class="btn btn-info" role="button" data-toggle="collapse" href="#fix_composition_tests" aria-expanded="false" aria-controls="fix_composition_tests">
   Solution
 </a><span class="advanced_description">Fix the composition tests</span>
 </div>
-<div class="collapse panel-body" markdown="1" id="fix_composition_tests">
+<div class="collapse panel-body" id="fix_composition_tests">
 Let's fix the test for ArmCartesianControlWdls first. We basically need to
 setup the 'default' configuration for the two components, and a proper robot
 model. Let's do it in the test's `before` block:

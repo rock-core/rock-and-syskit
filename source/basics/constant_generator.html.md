@@ -387,7 +387,7 @@ the corresponding composition.
 
 The creation of this generator is left to the reader. 
 
-<div class="callout callout-info" markdown="1">
+<div class="callout callout-info">
 **Tip**: a good representation for the setpoint would be a
 `joint_name=>joint_position` hash, where `joint_name` is a string and
 `joint_position` a floating-point value (always in radians !). Given that we've
@@ -416,14 +416,14 @@ Types.base.JointState.new(
 'unknown' (for sensor readings)
 </div>
 
-<div class="panel panel-info" markdown="1">
-<div class="panel-heading" markdown="1">
+<div class="panel panel-info">
+<div class="panel-heading">
 
 <a class="btn btn-info" role="button" data-toggle="collapse" href="#under_the_hood" aria-expanded="false" aria-controls="under_the_hood">
   Solution
 </a><span class="advanced_description">The JointPositionConstantGenerator</span>
 </div>
-<div class="collapse panel-body" markdown="1" id="under_the_hood">
+<div class="collapse panel-body" id="under_the_hood">
 Let's generate the files
 
 ~~~
