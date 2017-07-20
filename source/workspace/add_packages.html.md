@@ -56,7 +56,7 @@ provided that the package uses widespread build systems and follows common
 conventions (such as having a separate source and build folder, and having an
 install step).
 
-## Package Description and Dependencies
+## Package Description and Dependencies {#manifest_xml}
 
 For documentation reason, the packages are expected to provide metadata such as
 a description of its purpose, the author(s), license, … Additionally, it is

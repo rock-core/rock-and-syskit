@@ -22,7 +22,7 @@ At any point, the autoproj CLI is documented through the --help option.
 autoproj --help
 ~~~
 
-### Folder Structure
+### Folder Structure {#layout}
 
 <dl>
 <dt>Workspace root</dt>

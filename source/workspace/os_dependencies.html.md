@@ -11,12 +11,12 @@ sort_info: 40
 {:toc}
 
 
-While the main purpose of Autoproj is to allow to build packages from source,
-it would be silly to not rely on prebuilt packages offered by the underlying
-operating system. To that effect, Autoproj has a mechanism to declare packages
-that are provided by external package managers. One may also automatically fall
-back to source-based packages on platforms where the prebuilt package is either
-not suitable, or not available.
+While the main purpose of Autoproj is to build packages from source, it would
+be silly to not rely on prebuilt packages offered by the underlying operating
+system. Autoproj does it by integrating with other package managers. One may
+also automatically fall back to source-based packages on platforms where the
+prebuilt package is either not suitable (e.g. too old or too new), or not
+available.
 
 The main purpose of the osdeps system is to provide a mapping from a package
 name (which is arbitrary) to a set of packages that should be installed by
@@ -25,7 +25,9 @@ external means. We will see examples of this in follow-up sections.
 There are mainly two types of "os dependencies" (a.k.a. osdeps) in autoproj.
 First is the package system offered by the platform itself (e.g. APT on Ubuntu).
 Second is external package managers that can be installed on top of a platform,
-such as RubyGems for Ruby or macports
+such as RubyGems for Ruby.
+
+## osdeps files
 
 OS dependencies ("osdeps") are listed in a YAML file with the `.osdeps`
 extension. One usually creates a single `packages.osdeps` file in new package
@@ -62,7 +64,7 @@ the osdep 'thor'
       default: gem
 ~~~
 
-This section will list all about the OS dependencies: first how to declare them
+This section will be all about the OS dependencies: first how to declare them
 and then general "cookbook-style" patterns that offer fine-grained setup of the
 osdeps usage.
 
@@ -70,7 +72,8 @@ osdeps usage.
 
 When using the platform package manager, one does not list the package
 manager's name, but resolves packages by the platform name and (optionally)
-version. For instance, Ubuntu 16.04 would be listed as:
+version. Autoproj auto-detects the platform, and knows which package manager
+should be used. For instance, Ubuntu 16.04 would be listed as:
 
 ~~~
 package_name:
@@ -84,22 +87,49 @@ Autoproj supports the following platforms. The first word is the codename for
 the platform, that should be used in the osdeps files. The rest gives details
 about which package manager is being used.
 
-- `ubuntu` and `debian` for Ubuntu and Debian, using APT. In addition to the
-  package name, a package version constraint can appended to a package name,
-  e.g.  `package_name=1:2.0.3`.
-- `gentoo`: Gentoo using emerge
-- `macos-brew`: MacOSX HomeBrew, used by default when running on MacOSX.
-- `macos-port`: MacPorts can be used instead of HomeBrew on MacOSX by setting
-  `AUTOPROJ_MACOSX_PACKAGE_MANAGER` to `macos-port`.
-- `arch`: Arch using pacman
-- `rhel` and `fedora`: RedHat Entreprise Linux and Fedora, using `yum`
-- `opensuse`: OpenSUSE using zipper
-- `freebsd`: FreeBSD using pkg
+<dl>
+<dt>`ubuntu` and `debian`
+</dt>
+<dd>Respectively Ubuntu and Debian, using APT. In addition to the package
+name, a package version constraint can appended to a package name, e.g.
+`package_name=1:2.0.3`.
+</dd>
+<dt>`gentoo`
+</dt>
+<dd>Gentoo using emerge
+</dd>
+<dt>`macos-brew`
+</dt>
+<dd>MacOSX HomeBrew, used by default when running on MacOSX.
+</dd>
+<dt>`macos-port`
+</dt>
+<dd>MacPorts can be used instead of HomeBrew on MacOSX by setting
+`AUTOPROJ_MACOSX_PACKAGE_MANAGER` to `macos-port`.
+</dd>
+<dt>`arch`
+</dt>
+<dd>Arch, using pacman
+</dd>
+<dt>`rhel` and `fedora`
+</dt>
+<dd>RedHat Entreprise Linux and Fedora, using `yum`
+</dd>
+<dt>`opensuse`
+</dt>
+<dd>OpenSUSE using zipper
+</dd>
+<dt>`freebsd`
+</dt>
+<dd>FreeBSD using pkg
+</dd>
+</dl>
 
-What Autoproj detects on your system can be found with
+How Autoproj detects your system, and which package manager it will attempt to
+use can be found with
 
 ~~~
-$ autoproj osdeps --system-info --debug
+$ autoproj osdeps --system-info
 OS Names:    ubuntu, debian
 OS Versions: 16.04, 16.04.2, lts, xenial, xerus
 OS Package Manager: apt-dpkg
@@ -107,12 +137,11 @@ Available Package Managers: gem, pip
 ~~~
 
 Because some platforms share an underlying system (and a lot of packages) with
-others, there are also some fallbacks:
-
-- an Ubuntu system will use a `debian` entry if no `ubuntu` entry is present.
-  Moreover, most Debian derivatives will be detected as `debian` until a
-  specific guessing logic is added to Autoproj for them.
-- a RHEL system will use a `fedora` entry if no `rhel` entry is present
+others, there are also some fallbacks. In the example above, the Ubuntu system
+will use the `debian` entries if there are no `ubuntu` entries. Additionally,
+most Debian derivatives will attempt to install the `debian` packages even if
+they have no specific detection logic for them. A RHEL system will use a
+`fedora` entry if no `rhel` entry is present
 
 Finally, the `default` entry allows to match "any version not explicitely
 listed". For instance, the following `default` entry would match any Ubuntu
@@ -187,10 +216,11 @@ enabled for a given workspace, regardless of gems that might have been
 installed by other workspaces. This speeds up bootstrapping quite a bit, as the
 common gem install location ensures that they have to be installed only once.
 
-The Gemfile and the bundler binstubs are installed in the workspace's prefix
-under `gems/`. `gems/bin/` is automatically added to the PATH.
+The Gemfile and the bundler binstubs are installed in [the workspace's
+prefix](../basics/day_to_day.html#layout) under `gems/`. `gems/bin/` is
+automatically added to the PATH.
 
-The package manager integration supports explicit version constraints, that is:
+It supports explicit version constraints, that is:
 
 ~~~
 package_name:
@@ -198,14 +228,14 @@ package_name:
 ~~~
 
 Because Bundler sets up the environment so that it is completely isolated from
-the other workspace's, installing gems that are not part of the osdeps system -
-for instance for debugging purposes needs to be done in a separate
-[Gemfile](http://bundler.io/v1.15/man/gemfile.5.html) in `autoproj/Gemfile`.
+the other workspace's, gems that are not part of the osdeps system - installed
+for instance for debugging purposes -- need to be added in a separate
+[Gemfile](http://bundler.io/v1.15/man/gemfile.5.html), in `autoproj/Gemfile`.
 You **must** run `autoproj osdeps` after changing this file.
 
 `autoproj/Gemfile` is usually not checked in the version control system - if
 you need a permanent dependency installed, define an osdep for it and depend on
-this package.
+the osdep.
 {: .callout .callout-warning}
 
 ## The PIP Package Manager
@@ -217,18 +247,20 @@ automatically added to the PATH.
 ## Interactions Between Source and OSDep Packages {#source_osdep_interactions}
 
 The most common source/osdep package interaction is that any source package can
-depend on an osdep package, listed in the package `manifest.xml` as a `<depend
-…>` tag.
+depend on an osdep package, listed in a `<depend …>` tag in [the package
+`manifest.xml`](add_packages.html#manifest_xml).
 
-Another way is that Autoproj will allow you to define an osdep package with the
+Autoproj also allows you to define an osdep package with the
 _same name_ as a source package. When this happens autoproj will:
 
 - install the osdep package on platforms where it is available
 - use the source package otherwise.
 
 If the osdep and source packages are already defined and don't have the same
-name (for any reason), one can [alias the osdep package] to match the source
-package name.
+name (for any reason), one can [alias the osdep package](#alias) to match the source
+package name. If the behavior is undesired (i.e. if one wants to force the installation
+of the source package), it [can also be done](#force_source_package) (but with
+caveats ! Read that part well !)
 
 ## Reusing other osdeps entries {#reusing_entries}
 
@@ -240,7 +272,7 @@ See the cookbook below for examples
 
 ## The `osdeps` system cookbook
 
-### Aliases
+### Aliases {#alias}
 
 Using [the `osdep` special keyword](#reusing_entries), one can alias a name to another:
 
@@ -278,12 +310,13 @@ nokogiri:
   - libxslt
 ~~~
 
-### Forcing usage of a source package even if a corresponding osdep package exists
+### Forcing usage of a source package even if a corresponding osdep package exists {#force_source_package}
 
 One can use 'nonexistent' instead of a list of packages to force the osdep system
 to assume that the package is not available. This can be used to force using a
 source package instead of an osdep package. The best place to do so is by
-adding an `overrides.osdeps` file in your main build configuration, for instance:
+adding an `overrides.osdeps` file in your main build configuration and add an
+entry for the package:
 
 ~~~yaml
 simulation/gazebo: nonexistent
@@ -294,9 +327,9 @@ delegated to the underlying package system. When forcing usage of a source
 package instead of an osdep, Autoproj will not require the installation
 of said package. However, if other OS packages depend on it, it will still
 get installed.
-{: .callout .callout-warning}
+{: .important}
 
-### Best way to format OS version entries
+### Future-proof OS version entries
 
 The best way to format OS version entries in order to have them as future-proof
 as possible is to explicitly list old versions and then use the current version
@@ -324,9 +357,9 @@ gdal:
     - libgdal-dev
 ~~~
 
-This way, all versions from 14.04 up to 15.10 had a suitable entry requiring no
-change. Versions following 16.04 will have a suitable entry, also requiring no
-change, until the Ubuntu package name changes again.
+This way, from 14.04 up to 15.10, one did not have to change the entry. When
+16.04 got out, we needed to update the entry, but won't have to do it until the
+package name changes again.
 
 **Next**: now that you have a deeper understanding of what are packages and how they
 are integrated in an autoproj build [let's discuss how to organize the overall build

@@ -111,7 +111,7 @@ permanent. If one of them was to be killed, this would not affect the rest of
 the system, and it would be restarted when needed.
 
 **Next**: now that we understand how Syskit determines a component's
-usefulness, we may get to [the event loop](event_loop.html){: .btn-next-page}
+usefulness, we may get to [the event loop](event_loop.html)
 which will detail among other things the scheduling and garbage collection
 mechanisms.
 {: .next-page}

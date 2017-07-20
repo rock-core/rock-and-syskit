@@ -187,4 +187,6 @@ Let's have a look at the final definition.
 
 ![Final injected arm control network](media/injected_arm_control_network.png){: .fullwidth}
 
-We're almost there, just need now to map the components to actual processes, [a.k.a. deploy the network](deployment.html){: .btn-next-page}
+**Next**: we're almost there, just need now to map the components to actual processes,
+[a.k.a. deploy the network](deployment.html)
+{: .next-page}

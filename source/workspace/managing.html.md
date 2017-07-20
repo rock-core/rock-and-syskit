@@ -45,15 +45,16 @@ log it when necessary.
 There is a cost in having too many package sets. Usually one should strive in
 not separating too much, because their interactions can become hard to
 understand (especially when it comes to [osdeps](os_dependencies.html) or
-[version control overrides](add_packages.html#version_control_resolution).
+[version control overrides](add_packages.html#version_control_resolution)).
 
 Splitting package sets is most often not needed. Package sets only define
-packages, not anything else, and as such one does not need to build
-**everything** in the package set.  If subsets of the packages are often used,
-one can easily group them using metapackages ([see below](#metapackages))
+packages and shouldn't do anything else, and as such one does not need to build
+**everything** that is declared in the package set. If it becomes practical to
+define some subsets of the packages, one can easily group them using
+metapackages ([see below](#metapackages))
 
-Generally speaking, start with one project for your organization and one for
-projects - for big projects.
+Generally speaking, start with one package set for your organization, and start
+creating package sets for projects only when it starts to make sense.
 
 ## Metapackages {#metapackages}
 
@@ -72,17 +73,18 @@ metapackage 'name_of_metapackage',
 All packages defined in a package set are automatically added into two
 metapackages: the `package_set_name` metapackage and the `package_set_name.all`
 metapackage. We are using this when we recommend to [add the package set to the
-manifest's `layout`](setup.html#add_package_set_in_layout). If a package should
-not end up in this default metapackage, it can removed after it has been
-defined with:
+manifest's `layout`](setup.html#add_package_set_in_layout). The `.all`
+metapackage is meant to _always_ include all packages from the package set.
+However, the other default metapackage is meant to be tuned to list the
+"sensible default" list of packages. If a package should not end up in it, it
+can removed after it has been defined with:
 
 ~~~
 remove_from_default 'pkg1', 'pkg2'
 ~~~
 
 **Tip**: packages from other package sets can also be added to the default package
-set with `add_to_default 'pkg1', 'pkg2', …`. Use this to create a "default set of
-packages.
+set with `add_to_default 'pkg1', 'pkg2', …`.
 {: .tip}
 
 ## Choosing what to build where
@@ -115,7 +117,7 @@ exclude_packages:
 
 By default, autoproj will fail to build if a package set depends on an excluded
 package. This is the recommended default for the "terminal" package sets --
-such as the metapackages you will have defined for your project. However,
+such as the metapackages you will have defined for your roles. However,
 shared package sets sometime require to be more lax. The default can be changed
 after the metapackage is defined with:
 
@@ -132,7 +134,7 @@ actually have multiple manifest files with a `.role` suffix (e.g.
 autoproj manifest autoproj/manifest.dev`
 ~~~
 
-**Tip**: keep the default manifest the 'developer' manifest and use this
+**Tip**: make the default manifest the 'developer' manifest and use this
 mechanism for development roles.
 {: .tip}
 
@@ -157,9 +159,8 @@ excluded do they differ in behavior.
 
 Autoproj also has an interface to ask the developer configuration questions,
 that can then be used either in the version control information, or within the
-autobuild files to build optional behavior.
-
-You've already seen those when bootstrapping Rock
+autobuild files to build optional behavior. You've already seen those when
+bootstrapping Rock.
 
 Configuration options can be declared in an `.autobuild` file, within the
 `init.rb` file of the package set or in `autoproj/init.rb` with:
@@ -191,4 +192,4 @@ Within the version control information, it is expanded using the
 
 That's all for the Workspace documentation. Go back to the [documentation main
 index](../index.html#how_to_read) for more topics.
-{: next-page}
+{: .next-page}
