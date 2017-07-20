@@ -138,8 +138,6 @@ To restrict the build to the package, excluding its dependencies, add `--deps=f`
 located in the current directory
 {: .callout .callout-info}
 
-Let's get now to [the meat of things now](getting_started.html)
-
 ### Configuration
 
 Build configurations may have some configuration options that the user needs to
@@ -177,4 +175,7 @@ autoproj by running
 ~~~
 autoproj test .
 ~~~
+
+**Next**: let's get to [create our first system integration](getting_started.html)
+{: .next-page}
 

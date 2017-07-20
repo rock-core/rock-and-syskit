@@ -26,4 +26,5 @@ sort_info: 50
 Between this part and the [Basics](../basics), we've covered most of the basics
 aspects of running a Syskit system. The rest of the subjects covered in this documentation
 can be seen more as a need-to-know basis. See [how to read this documentation](../index.html#how_to_read).
+{: .next-page}
 

@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Designing and managing a build configuration
+title: Build configuration design
 sort_info: 50
 ---
 
@@ -190,5 +190,5 @@ Within the version control information, it is expanded using the
 `$CONFIGURATION_OPTION_NAME` syntax.
 
 That's all for the Workspace documentation. Go back to the [documentation main
-index](../index.html#how_to_read){: .btn-next-page} for more topics.
-
+index](../index.html#how_to_read) for more topics.
+{: next-page}

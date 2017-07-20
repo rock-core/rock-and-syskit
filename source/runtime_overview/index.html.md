@@ -182,7 +182,8 @@ impossibility, and the request is therefore rejected by Syskit's **network
 generation**.
 {: #deployment_failure}
 
-We'll now get to understand all of this step-by-step, starting with [Syskit's
-task structure](task_structure.html){: .btn-next-page}, how Syskit maintains
+**Next**: We'll now get to understand all of this step-by-step, starting with [Syskit's
+task structure](task_structure.html), how Syskit maintains
 what is and isn't useful in the system (among other things …)
+{: .next-page}
 

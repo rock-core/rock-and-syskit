@@ -557,9 +557,7 @@ end
 </div>
 </div>
 
-## Finally
-
-We can now map the composition's `arm` child to the arm within the simulation.
-Let's do [a detour to device models](devices.html){: .btn-next-page} to then
-finally [run our network](deployment.html){: .btn-next-page}
-
+**Next**: We can now map the composition's `arm` child to the arm within the
+simulation.  Let's do [a detour to device models](devices.html) to then finally
+[run our network](deployment.html)
+{: .next-page}

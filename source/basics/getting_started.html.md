@@ -205,8 +205,9 @@ Robot.requires do
 end
 ~~~
 
-Now that we have a minimal scene and a working Gazebo installation, [let's do
-something with it](composition.html){:.btn-next-page}
+**Next**: now that we have a minimal scene and a working Gazebo installation, [let's do
+something with it](composition.html)
+{: .next-page}
 
 <div class="panel panel-warning" markdown="1">
 <div class="panel-heading" markdown="1">

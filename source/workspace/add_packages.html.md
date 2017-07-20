@@ -439,6 +439,7 @@ package_name:
     - $AUTOPROJ_SOURCE_DIR/blablabla-02.patch
 ~~~
 
-Let's get into [using packages from the underlying
-OS or from language-specific handlers](os_dependencies.html){: .btn-next-page}
+**Next**: let's get into [using packages from the underlying
+OS or from language-specific handlers](os_dependencies.html)
+{: .next-page}
 

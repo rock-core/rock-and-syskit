@@ -233,5 +233,6 @@ Another source of reconfiguration is to transition between two networks that
 select different component configurations. When this happens, Syskit will stop
 and reconfigure the affected components while deploying the new network.
 
-We've seen so far how things work _nominally_. Let's see [how Syskit reacts when
-things go wrong](exceptions.html){:.btn-next-page}
+**Next**: let's see [how Syskit reacts when things go
+wrong](exceptions.html)
+{: .next-page}

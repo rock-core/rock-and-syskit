@@ -45,15 +45,12 @@ One often also ends up with one package set per project.
 The only thing that autoproj requires to successfully import a package set is
 to have a `source.yml` YAML file in it with a `name:` field. A common
 convention is to use `company.project` for a project-specific package set or
-just `company` for the organization one.
-
-For example purposes, the rest of this page will use `company.project` as the
-package set name.
+just `company` for the organization one. For example purposes, the rest of this
+page will use `company.project` as the package set name.
 
 Assuming you're using git and github, create a new repository on github,
-following the `company.project-package_set` pattern, create and push the empty
-package set to the repo. Create an empty directory and do (replacing URL by
-your repository's URL):
+following the `company.project-package_set` pattern. Create an empty directory
+and do (replacing URL by your repository's URL):
 
 ~~~
 git init
@@ -101,7 +98,12 @@ aup --config
 ~~~
 
 The package set is now in `autoproj/remotes/company.project`.  You can go
-straight to it with `acd company.project`.
+straight to it with
 
-Let's now learn how to [add new packages](add_packages.html)
+~~~
+acd company.project
+~~~
+
+**Next**: let's learn how to [add new packages](add_packages.html)
+{: .next-page}
 

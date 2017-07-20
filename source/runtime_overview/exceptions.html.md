@@ -205,7 +205,8 @@ when they are stopped. Given that they are usually stopped when they are not
 needed by the system, this error would not affect the running jobs.
 {: .callout .callout-info}
 
-This concludes this overview of the Syskit runtime aspects. We'll make a detour
-through [live data visualization](live_data.html){: .btn-next-page} and then get to the [part
-recap](recap.html){: .btn-next-page} before we move on to more advanced
+**Next**. This concludes this overview of the Syskit runtime aspects. We will make a detour
+through [live data visualization](live_data.html) and then get to the [part
+recap](recap.html) before we move on to more advanced
 topics.
+{: .next-page}

@@ -231,6 +231,5 @@ standard channels (IDE, shell).
 
 Definitions from a profile [are exported on the Main interface](deployment.html#main).
 
-### Runtime
-
-We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../runtime_overview/index.html){: .btn-next-page}
+**Next**: We've only had a glimpse on the Syskit runtime workflow. [Let's dig deeper](../runtime_overview/index.html)
+{: .next-page}

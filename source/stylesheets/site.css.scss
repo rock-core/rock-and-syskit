@@ -43,3 +43,8 @@ img.fullwidth {
   @extend .callout-warning;
 }
 
+.next-page {
+  margin: 35px;
+  padding: 25px;
+  @extend .bg-info;
+}

@@ -87,3 +87,6 @@ following the scheme: `devicetype_manufacturer` or
 developers are expected to use their best judgment - and check what already
 exists !
 
+**Next**: now that you have a broad overview of a workspace structure and rules, [let's
+create a new workspace for our project](setup.html)
+{: .next-page}

@@ -30,4 +30,5 @@ need to close and re-open widgets across Syskit restarts or across the start
 and stop of jobs.
 {: .callout .callout-info}
 
-Let's finally get [to the part recap](recap.html){: .btn-next-page}
+**Next**: let's finally get [to the part recap](recap.html)
+{: .next-page}

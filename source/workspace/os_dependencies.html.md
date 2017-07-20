@@ -328,3 +328,7 @@ This way, all versions from 14.04 up to 15.10 had a suitable entry requiring no
 change. Versions following 16.04 will have a suitable entry, also requiring no
 change, until the Ubuntu package name changes again.
 
+**Next**: now that you have a deeper understanding of what are packages and how they
+are integrated in an autoproj build [let's discuss how to organize the overall build
+configuration itself](managing.html)
+{: .next-page}
