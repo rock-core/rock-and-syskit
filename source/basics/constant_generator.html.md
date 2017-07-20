@@ -29,10 +29,10 @@ the dataflow in the `ArmCartesianControlWdls` composition, we find:
 
 ![Datatype of the cartesian command](media/arm_cartesian_control_wdls_dataflow.svg){: .fullwidth}
 
-The type name is `/base/samples/RigidBodyState`. This type has been defined
-when components have been created, which is something we will see [when we
-learn about creating components](../writing_components/types.html). You can
-have an overview of the types available in a Rock system by starting the
+The type name is `/base/samples/RigidBodyState`. Types like this one are
+defined when implementing components, which is something we will see
+[later](../writing_components/types.html). You can have an overview of the
+types already available in your Rock workspace by starting the
 `rock-browse` tool.
 
 `bundles/common_models` provides `Compositions::ConstantGenerator`, a generic
