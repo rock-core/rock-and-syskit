@@ -3,7 +3,7 @@ layout: documentation
 title: Introduction
 sort_info: 0
 directory_title: Coordination
-directory_sort_info: 40
+directory_sort_info: 45
 ---
 
 # Coordination in a Syskit system
