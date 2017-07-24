@@ -38,6 +38,11 @@ img.fullwidth {
   @extend .callout-info;
 }
 
+.note {
+  @extend .callout;
+  @extend .callout-info;
+}
+
 .important {
   @extend .callout;
   @extend .callout-warning;
