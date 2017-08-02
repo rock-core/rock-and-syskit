@@ -7,6 +7,7 @@ set :relative_links, true
 set :latest_release, '2017.6'
 set :min_ruby_version, '2.1'
 set :markdown, parse_block_html: true
+activate :livereload
 activate :relative_assets
 activate :navtree do |options|
     options.data_file = 'tree.yml' # The data file where our navtree is stored.
