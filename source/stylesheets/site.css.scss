@@ -53,3 +53,9 @@ img.fullwidth {
   padding: 25px;
   @extend .bg-info;
 }
+
+@media screen and (max-width: 992px) {
+    nav.docs-sidebar.affix {
+        position: relative;
+    }
+}
