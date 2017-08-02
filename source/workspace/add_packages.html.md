@@ -319,6 +319,7 @@ package_name:
   branch: branch_name
   tag: tag_name # it is branch OR tag
   commit: commit_id # it is tag OR commit ID
+  with_submodules: false # true to checkout and update submodules
 ~~~
 
 Autoproj will maintain an 'autobuild' remote on the checked out repository:
