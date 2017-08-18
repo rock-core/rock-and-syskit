@@ -59,7 +59,7 @@ the temporal scheduler (that you had to set [in the initial bundle
 setup](../basics/getting_started.html#initial_setup)). Startup of
 the `arm_safe_position_def` job looks like this:
 
-<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
