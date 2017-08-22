@@ -80,7 +80,7 @@ _start_ event are emitted in a different cycle than the one they have been
 called in. Finally, the cycle where seemingly nothing happens is due to the
 component configuration, which is not represented by an event.
 
-<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
@@ -184,7 +184,7 @@ active job, as in the following video. Note again that the compositions' stop
 events are emitted in the same cycle as they are commanded, while components
 are stopped asynchronously:
 
-<div id="garbage_collection_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="garbage_collection_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#garbage_collection_step_by_step" data-slide-to="0" class="active"></li>
