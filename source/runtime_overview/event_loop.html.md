@@ -222,11 +222,15 @@ configuration. Otherwise, it will only have to start it. `cleanup` is also done
 asynchronously to avoid blocking the main thread execution.
 
 In the following video, we change the configuration file for our cartesian
-controller, reload the configuration and trigger a redeploy. We then see how
-this triggers a reconfiguration:
+controller, reload the configuration and trigger a reconfiguration.
+
+**Note** the "reload" step only loads the modified files from the disk into the
+Syskit process. The "reconfigure" step will change configuration on already
+running tasks.
+{: .note}
 
 <div class="fluid-video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/IA4lY9HmD2M?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/zqvzdHg6wfg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 Another source of reconfiguration is to transition between two networks that
