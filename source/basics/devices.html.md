@@ -107,6 +107,11 @@ easily break the chain with a newline after each method call. Don't forget the
 dots !
 {: .callout .callout-warning}
 
+A device model is accessed using the device's name with a `_dev` suffix on the
+profile it is defined. Here `Base.ur10_fixed_dev` is the `ur10_fixed` device
+defined on the robot definition in `Base`.
+{: .callout .callout-info}
+
 ~~~ruby
 require 'models/profiles/gazebo/base'
 require 'models/compositions/arm_cartesian_constant_control_wdls'
@@ -172,11 +177,6 @@ module SyskitBasics
   end
 end
 ~~~
-
-A device model is accessed using the device's name with a `_dev` suffix on the
-profile it is defined. Here `Base.ur10_fixed_dev` is the `ur10_fixed` device
-defined on the robot definition in `Base`.
-{: .callout .callout-info}
 
 **Note** when building profiles, the require lines as well as the names of
 models and roles that can be used in the `use` statement can easily be browsed
