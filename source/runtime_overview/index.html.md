@@ -31,11 +31,9 @@ action interface, which allowed us [in the last
 part](../basics/deployment.html) to control the system.
 
 An _action_ is an abstract concept that represents one thing the system can do.
-In order to actually have it executed, one starts a _job_. In the shell we've
-seen in the video, this is done with the `action_name!(arguments)` syntax.
-Once a job has been started it has a job ID that is displayed both by the IDE
-and by the shell. This job ID can then be used to kill the job with `kill_job
-JOB_ID`.
+In order to actually have it executed, one starts a _job_.
+Once a job has been started it can be dropped, that is tell Syskit that this
+particular job is not part of current system's goal.
 
 All job-related commands are processed in batches: they are queued and only
 sent to the Syskit app when the `process` command is entered. We will see the
@@ -59,7 +57,7 @@ the temporal scheduler (that you had to set [in the initial bundle
 setup](../basics/getting_started.html#initial_setup)). Startup of
 the `arm_safe_position_def` job looks like this:
 
-<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
@@ -106,7 +104,7 @@ on the right panel, that shows the state of the "real" components (i.e. not the
 compositions).
 
 <div class="fluid-video" id="start_stop_video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/DBsJxvX1rVs?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/OHFCvVYZSO8?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 When `arm_safe_position_def` was stopped, only the setpoint generator
@@ -143,43 +141,36 @@ network that can do cartesian arm control. What we saw was that the transition
 happened smoothly: the arm was controlled during the change of system
 configuration.
 
-The same mechanisms are key to autonomously transitioning between behaviours,
-which we will see in the [coordination](../syskit_coordination/index.html) part
-of this documentation.
+The same mechanisms are key to autonomously transitioning between behaviours.
+This is how one can build [coordination](../syskit_coordination/index.html) models.
 
-When we transitioned from the joint control to the cartesian control, I've sent
-first a `action_name!` command to start an action, and a `kill_job` command to
-stop the running joint control action. These two commands were displayed by the
-shell as follows:
-
-![Pending start and kill commands in the shell](media/shell_pending_start_and_kill.png){: .fullwidth}
-
-The header says `2 actions queued in the current batch, use #process to send,
-#cancel to delete`. `#process`. When I sent `process`, the two were processed
-_together_. That is, Syskit could understand that the intent was to stop an
-action and start a new one _at the same time_, which it handled as a transition.
+When we transitioned from the joint control to the cartesian control, we first
+**queued** the action start and the action drop and then processed them at
+once.  When we clicked `Process`, the two changes were processed _together_.
+That is, Syskit could understand that the intent was to stop an action and
+start a new one _at the same time_, which it handled as a transition.
 
 Syskit's execution engine acts as an **event loop**, in which all events that
 are received at the same time are processed _as if_ they happened at the exact
 same time.
 
-So, what would have happened if I sent the `kill_job` first and then the
-`arm_cartesian_constant_control_def!` ? Syskit would have applied the kill
-_first_ and then the start. We would have basically had the same effect than in
-[the video we just saw](#start_stop_video), with the arm falling uncontrolled.
+So, what would have happened if we dropped the action first, and only then
+started `arm_cartesian_constant_control_def` ? Syskit would have applied the
+kill _first_ and then the start. We would have basically had the same effect
+than in [the video we just saw](#start_stop_video), with the arm falling
+uncontrolled.
 
-
-Now, what would have happened if I instead I sent the
-`arm_cartesian_constant_control_def!` and only then the `kill_job` ?
+Now, what would have happened if instead we started
+`arm_cartesian_constant_control_def` and only then dropped the existing job ?
 
 <div class="fluid-video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/LkmR9AFo5ek?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/0N3ux-1pj4s?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 Ouch … The start command failed. This is because we've tried to run two
 different control chains that controlled the same device. This is an
-impossibility, and the request is therefore rejected by Syskit's **network
-generation**.
+impossibility, and the request is therefore rejected by Syskit's network
+generation.
 {: #deployment_failure}
 
 **Next**: We'll now get to understand all of this step-by-step, starting with [Syskit's

@@ -253,7 +253,9 @@ version_control:
 
 Follow-up package sets (following the order of the build configuration's
 manifest) might also have matching entries in their `source.yml` files, in the
-`overrides:` section:
+`overrides:` section. These `overrides` apply only to packages from other
+package sets. Only entries in `version_control` apply to the packages from the
+same package set.
 
 ~~~yaml
 overrides:

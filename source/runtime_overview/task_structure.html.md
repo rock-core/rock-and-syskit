@@ -72,7 +72,7 @@ case we saw [at the end of the introduction](index.html#deployment_failure).
 
 Syskit-related planning is handled by `InstanceRequirementTask`:
 
-<div id="planned_by" class="carousel slide" data-ride="carousel">
+<div id="planned_by" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#planned_by" data-slide-to="0" class="active"></li>

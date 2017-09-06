@@ -80,7 +80,7 @@ _start_ event are emitted in a different cycle than the one they have been
 called in. Finally, the cycle where seemingly nothing happens is due to the
 component configuration, which is not represented by an event.
 
-<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
@@ -184,7 +184,7 @@ active job, as in the following video. Note again that the compositions' stop
 events are emitted in the same cycle as they are commanded, while components
 are stopped asynchronously:
 
-<div id="garbage_collection_step_by_step" class="carousel slide" data-ride="carousel">
+<div id="garbage_collection_step_by_step" class="carousel slide" data-ride="carousel" markdown="0">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#garbage_collection_step_by_step" data-slide-to="0" class="active"></li>
@@ -222,11 +222,15 @@ configuration. Otherwise, it will only have to start it. `cleanup` is also done
 asynchronously to avoid blocking the main thread execution.
 
 In the following video, we change the configuration file for our cartesian
-controller, reload the configuration and trigger a redeploy. We then see how
-this triggers a reconfiguration:
+controller, reload the configuration and trigger a reconfiguration.
+
+**Note** the "reload" step only loads the modified files from the disk into the
+Syskit process. The "reconfigure" step will change configuration on already
+running tasks.
+{: .note}
 
 <div class="fluid-video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/IA4lY9HmD2M?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/zqvzdHg6wfg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 Another source of reconfiguration is to transition between two networks that

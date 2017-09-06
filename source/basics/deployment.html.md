@@ -544,7 +544,7 @@ send the command through the Syskit shell. The following video show you the proc
 is to give you a feeling for Syskit's runtime workflow. Detailed explanations will come later [in the runtime overview](../runtime_overview/index.html)
 
 <div class="fluid-video" id="final_video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/wXYb7f_xNZo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/969tvEwx_NE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 **Next**: Before we move on to the Syskit runtime aspects, [let's recap what we've just seen](recap.html)
