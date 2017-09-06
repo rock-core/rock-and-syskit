@@ -225,7 +225,7 @@ asynchronous in tests. Sending and receiving samples requires the constant
 generator to be executed, and therefore Syskit's own execution loop.
 {: .callout .callout-info}
 
-Rock's time representation has a precision of one microseconds, while Linux
+Rock's time representation has a precision of one microsecond, while Linux
 (and therefore Ruby's Time class) go to the nanoseconds. This is why the
 time comparison is not done using `assert_equal`, but `assert_in_delta`.
 {: .callout .callout-warning}
