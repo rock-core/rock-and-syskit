@@ -86,36 +86,7 @@ reuse it in different simulation scenes.
 For the purpose of this part of the documentation, we'll use Gazebo's UR10 arm
 model as our robot. We however need to integrate it in another model so that
 its base is fixed (using [this
-method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)) Models are saved in `models/sdf/`, let's create
-`models/sdf/ur10_fixed` and create a Gazebo model description file `models/sdf/ur10_fixed/model.config` with
-
-~~~xml
-<?xml version="1.0"?>
-
-<model>
-  <name>Universal Robotics UR10 robot arm on a fixed base</name>
-  <version>1.0</version>
-  <sdf>model.sdf</sdf>
-</model>
-~~~
-
-and the corresponding SDF model in `models/sdf/ur10_fixed/model.sdf`
-
-~~~xml
-<?xml version='1.0'?>
-<sdf version='1.5'>
-    <model name="ur10_fixed">
-        <include>
-          <name>ur10</name>
-          <uri>model://ur10</uri>
-        </include>
-        <joint name="attached_to_ground" type="fixed">
-            <parent>world</parent>
-            <child>ur10::base</child>
-        </joint>
-    </model>
-</sdf>
-~~~
+method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)).
 
 Usually, the first scene one creates is an empty one, which later will give us
 an environment in which to test basic functionality, without having to care
@@ -128,9 +99,16 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 <?xml version="1.0"?>
 <sdf version="1.6">
   <world name="empty_world">
-    <include>
-      <uri>model://ur10_fixed</uri>
-    </include>
+    <model name="ur10_fixed">
+        <include>
+          <name>ur10</name>
+          <uri>model://ur10</uri>
+        </include>
+        <joint name="attached_to_ground" type="fixed">
+          <parent>world</parent>
+          <child>ur10::base</child>
+        </joint>
+    </model>
     <include>
       <uri>model://ground_plane</uri>
     </include>

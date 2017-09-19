@@ -33,7 +33,7 @@ related configuration is contained within the `autoproj/` folder within the
 workspace's root directory (where you [originally
 bootstrapped](installation.html)). When working in a terminal, you can go
 at any time to the workspace's root directory by running `acd` without
-arguments ([more about `acd`](day_to_day.html#acd)).
+arguments (there's more about `acd` in this section's [Day to Day Commands](day_to_day.html#acd)).
 
 Within the `autoproj/` directory, packages are defined within _package sets_.
 These package sets define both how to build the package and where it should be
@@ -127,9 +127,7 @@ OroGen packages in Syskit
 <div class="panel-body">
 As described in our [brief introduction](index.html), oroGen packages are
 where the functionality implemented in the library packages are "packaged" into things
-that can be used at runtime.
-
-To be used in Syskit, these oroGen components must be first imported using the
+that can be used at runtime. To be used in Syskit, these oroGen components must be first imported using the
 `using_task_library` statement. In our case, `cart_ctrl_wdls`, this is done with
 
 ~~~ruby
@@ -144,7 +142,7 @@ name, e.g. `cart_ctrl_wdls` becomes `CartCtrlWdls` and the
 `OroGen::CartCtrlWdls::ToPosConverter` in Syskit.
 
 In case you're not sure about the naming, just add the `using_task_library` statement
-at the beginning, toplevel of a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
+at the toplevel of a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
 
 ~~~
 syskit ide models/compositions/arm_cartesian_control_wdls.rb
@@ -185,7 +183,7 @@ end
 
 At this stage, we will have to connect the ports together. To see what inputs
 and outputs are available, one can have a look at the component's `.orogen`
-files. The alternative is to open the `syskit ide` and inspect the composition
+files. The alternative is to open the `syskit ide -rgazebo` and inspect the composition
 file as follows (`-rgazebo` is necessary because we are importing models from
 `common_models`). **Leave the IDE open after this, we will reuse it**
 

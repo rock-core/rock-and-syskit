@@ -121,9 +121,8 @@ Let's look at them one by one, to see what needs to actually be configured.
 them parameters of the compositions.
 {: .callout .callout-info}
 
-The root and tip in our case are the base and hand of the robot. The link names are prefixed
-with the model name (here, `ur10_fixed`) so `root` should
-be `ur10_fixed::ur10::base` and `tip` should be `ur10_fixed::ur10::wrist_3`. One can find this out by looking at
+The root and tip in our case are the base and hand of the robot. So `root` should
+be `ur10::base` and `tip` should be `ur10::wrist_3`. One can find this out by looking at
 the SDF file.  Alternatively, the chain can be
 inspected using the `rock-transformer` tool:
 
@@ -209,7 +208,7 @@ the relevant robot in the profile directly:
 ~~~ruby
 define 'arm_cartesian_constant_control',
   Compositions::ArmCartesianConstantControlWdls.
-    use(Base.ur10_fixed_dev).
+    use(Base.ur10_dev).
     with_arguments(robot: Base)
 ~~~
 
@@ -544,7 +543,7 @@ send the command through the Syskit shell. The following video show you the proc
 is to give you a feeling for Syskit's runtime workflow. Detailed explanations will come later [in the runtime overview](../runtime_overview/index.html)
 
 <div class="fluid-video" id="final_video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/969tvEwx_NE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/JrgS23xEK9g?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 **Next**: Before we move on to the Syskit runtime aspects, [let's recap what we've just seen](recap.html)

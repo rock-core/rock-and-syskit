@@ -68,7 +68,8 @@ module SyskitBasics
   module Profiles
     module Gazebo
       profile 'Base' do
-        use_gazebo_model 'model://ur10_fixed/model.sdf'
+        use_gazebo_model 'model://ur10',
+          prefix_device_with_name: true
         use_sdf_world
       end
     end
@@ -76,15 +77,20 @@ module SyskitBasics
 end
 ~~~
 
+**Note** the `prefix_device_with_name` argument is here for backward
+compatibility reasons. Syskit will issue a deprecation warning if you forget
+it.
+{: .note}
+
 And have a look at the generated devices with `syskit ide -rgazebo models/profiles/gazebo/base.rb`:
 
 ![Devices from the UR10 model](media/devices.png){: .fullwidth}
 
 One can see that there is one device definition per link in the model, and one
-for the model itself. Let's click on the model and have a look at the dataflow.
+for the model itself. Let's click on the model and have a look at the **Dataflow** section.
 Enable both "Show all ports" and "Show task info" to get port information .
 
-![ModelTask interface](media/device_dataflow.png){: .fullwidth}
+![ModelTask interface](media/ur10_dev.svg){: .fullwidth}
 
 ## Injecting the device into the arm control network {#profile_define}
 
@@ -102,9 +108,9 @@ UR10 robot in gazebo_ by injecting the UR10 device as the 'arm' child of the
 composition.
 
 The model name given to `define` in a profile is made out of a [demeter
-chain](https://martinfowler.com/bliki/FluentInterface.html). In Ruby, one can
-easily break the chain with a newline after each method call. Don't forget the
-dots !
+chain](https://martinfowler.com/bliki/FluentInterface.html). In Ruby, this is usually
+done by breaking each method call with a newline, leaving a trailing dot on the
+previous line. Don't forget these dots !
 {: .callout .callout-warning}
 
 ~~~ruby
@@ -118,13 +124,10 @@ module SyskitBasics
       profile 'ArmControl' do
         define 'arm_cartesian_constant_control',
           Compositions::ArmCartesianConstantControlWdls.
-            use(Base.ur10_fixed_dev)
+            use(Base.ur10_dev)
         define 'arm_joint_position_constant_control',
           Compositions::JointPositionConstantControl.
-            use(Base.ur10_fixed_dev)
-        define 'arm_safe_position',
-          arm_joint_position_constant_control_def.
-            with_arguments(setpoint: UR10_SAFE_POSITION)
+            use(Base.ur10_dev)
       end
     end
   end
@@ -135,10 +138,10 @@ As we mentioned [when we defined it](constant_generator.html#joint_position_cons
 the joint position constant control has been defined with the goal of providing a sane default
 position. Let's make sure this is available easily by creating a definition with a default
 setpoint. This will reuse the `arm_joint_position_constant_control` definition, which is accessed
-with the `_def` suffix. Usable joint positions can be found using the `rock-transformer` tool:
+with the `_def` suffix. Usable joint positions can be found using the `rock-roboviz` tool:
 
 ~~~
-$ rock-transformer models/sdf/ur10_fixed/model.sdf
+$ rock-roboviz model://ur10
 ~~~
 
 ~~~ruby
@@ -150,20 +153,20 @@ module SyskitBasics
   module Profiles
     module Gazebo
       UR10_SAFE_POSITION = Hash[
-        'ur10_fixed::ur10::shoulder_pan'  => 0,
-        'ur10_fixed::ur10::shoulder_lift' => -Math::PI/2,
-        'ur10_fixed::ur10::elbow'         => Math::PI/2,
-        'ur10_fixed::ur10::wrist_1'       => 0,
-        'ur10_fixed::ur10::wrist_2'       => 0,
-        'ur10_fixed::ur10::wrist_3'       => 0]
+        'shoulder_pan'  => 0,
+        'shoulder_lift' => -Math::PI/2,
+        'elbow'         => Math::PI/2,
+        'wrist_1'       => 0,
+        'wrist_2'       => 0,
+        'wrist_3'       => 0]
 
       profile 'ArmControl' do
         define 'arm_cartesian_constant_control',
           Compositions::ArmCartesianConstantControlWdls.
-            use(Base.ur10_fixed_dev)
+            use(Base.ur10_dev)
         define 'arm_joint_position_constant_control',
           Compositions::JointPositionConstantControl.
-            use(Base.ur10_fixed_dev)
+            use(Base.ur10_dev)
         define 'arm_safe_position',
           arm_joint_position_constant_control_def.
             with_arguments(setpoint: UR10_SAFE_POSITION)
@@ -174,7 +177,7 @@ end
 ~~~
 
 A device model is accessed using the device's name with a `_dev` suffix on the
-profile it is defined. Here `Base.ur10_fixed_dev` is the `ur10_fixed` device
+profile it is defined. Here `Base.ur10_dev` is the `ur10` device
 defined on the robot definition in `Base`.
 {: .callout .callout-info}
 
@@ -183,9 +186,9 @@ models and roles that can be used in the `use` statement can easily be browsed
 using the IDE
 {: .callout .callout-info}
 
-Let's have a look at the final definition.
+Let's have a look at the final `arm_cartesian_control` definition.
 
-![Final injected arm control network](media/injected_arm_control_network.png){: .fullwidth}
+![Final injected arm control network](media/injected_arm_control_network.svg){: .fullwidth}
 
 **Next**: we're almost there, just need now to map the components to actual processes,
 [a.k.a. deploy the network](deployment.html)
