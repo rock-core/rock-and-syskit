@@ -87,9 +87,19 @@ one component to one package. Libraries should be "fat", components "slim". That
 most of the functionality should be implemented as a component-independent
 library.
 
-## The Flow
+## Progression
 
-The rest of the basics section will be following this flow:
+After having [installed Rock](installation.html) and [learn a bit how to manage
+a Rock workspace](day_to_day.html), we'll get into [creating a new Syskit app
+with a SDF scene](getting_started.html).
+
+After this, we will learn how to use an arm interface component provided by the
+Gazebo interface as well as existing Rock components to implement cartesian
+and joint control networks for this arm.
+
+Functionally, this will look like:
+
+![Schematic of the arm control networks](media/progression_initial.svg){: .fullwidth}
 
 <table class="table">
 <thead>
@@ -99,10 +109,6 @@ The rest of the basics section will be following this flow:
     </tr>
 </thead>
 <tbody>
-    <tr>
-    <td><%= link_to "Getting started", "getting_started.html" %></td>
-    <td>Bootstrapping a Syskit app with Gazebo and a SDF scene, running Gazebo and visualizing the scene</td>
-    </tr>
     <tr>
     <td><%= link_to "Creating an arm control network", "composition.html" %></td>
     <td>Compositions</td>

@@ -7,13 +7,24 @@ sort_info: 40
 # Devices
 {:.no_toc}
 
+<div class="callout callout-info">
+**Where are we ?** So far, we have a control composition. But as we noticed
+when we created [the arm control network](composition.html), it is not using a
+real component as the arm, only a device model. This page will be talking about
+devices, and telling how one replaces the device model by something that can be
+run.
+
+There are no pages in blue this time … the purpose of this page will be to
+replace the Model device (in red) by the actual device ... but first to learn
+about devices themselves.
+
+![Where are we ?](media/progression_devices.svg){: .fullwidth}
+</div>
+
+
 - TOC
 {:toc}
 
-So far, we have a control composition. But as we noticed when we created [the
-arm control network](composition.html), it is not using a real component as the
-arm, only a device model. This page will be talking about devices, and telling
-how one replaces the device model by something that can be run.
 
 One can partition a component network into three categories:
 

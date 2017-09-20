@@ -7,14 +7,22 @@ sort_info: 20
 # Compositions: designing the network for the cartesian control of an arm
 {:.no_toc}
 
-- TOC
-{:toc}
-
-We are now going to try and do simple control [of our simulated
+<div class="callout callout-info">
+**Where are we ?** We are now going to try and do simple control [of our simulated
 arm](getting_started.html). We are going to do the integration of the control
 components and UR10 arm on Gazebo from scratch. However, we are going to see
 later than Syskit allows to make this integration generic, so that it can be
 reused.
+
+Below, the parts we will handle on this page are <span style="color:
+#5bc0de;">in blue</span> and the things that will be handled later <span
+style="opacity: 0.4;">in grey</span>
+
+![Where are we ?](media/progression_composition.svg){: .fullwidth}
+</div>
+
+- TOC
+{:toc}
 
 In Syskit, one has to _declare_ how components must be connected together to
 form a function, and then can request the system to actually run that function.

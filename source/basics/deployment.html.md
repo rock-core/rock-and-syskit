@@ -7,13 +7,16 @@ sort_info: 50
 # Deployment
 {:.no_toc}
 
+<div class="callout callout-info">
+**Where are we ?** A few things are missing before we can actually run [the
+network we just created](devices.html). Mainly related to giving names to
+actual components, providing proper configurations and registering an action so
+that we can tell Syskit to start our network.
+</div>
+
 - TOC
 {:toc}
 
-A few things are missing before we can actually run [the network we just
-created](devices.html). Mainly related to giving names to actual components,
-providing proper configurations and registering an action so that we can tell
-Syskit to start our network.
 
 ## Component deployment {#use_deployment}
 

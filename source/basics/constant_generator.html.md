@@ -7,6 +7,19 @@ sort_info: 30
 # Creating our Command Generator
 {:.no_toc}
 
+<div class="callout callout-info">
+**Where are we ?** We have created
+`SyskitBasics::Compositions::ArmCartesianControlWdls`, which positions an arm
+at a cartesian position. The cartesian position is provided outside the
+network. We will now create and integrate both the generator to provide this
+setpoint, as well as the generator to maintain a constant joint position.
+
+Below, the parts we will handle on this page are <span style="color:
+#5bc0de;">in blue</span>.
+
+![Where are we ?](media/progression_constant_generator.svg){: .fullwidth}
+</div>
+
 - TOC
 {:toc}
 
