@@ -82,6 +82,28 @@ $ acd -p c/kdl
 # Now in install/
 ~~~
 
+### Error Logs
+
+During build, and less often during updates, the tools autoproj calls will
+error out. However, to keep the output of autoproj manageable, it redirects the
+command output - where the error details usually are - to separate files.
+
+When one error does happen, autoproj displays the last 10 lines of that
+command. The intent is that these 10 lines may contain the error. If it does
+not, the easiest way to display the output of the failed command is to run
+`alog` with either the name of the failed package or its path
+
+~~~
+alog name/of/package
+alog path/to/package
+~~~
+
+Or, if your shell is already within a folder of said package,
+
+~~~
+alog .
+~~~
+
 ### Updating
 
 Most of the time, you will want to update the whole workspace (the `-k` option
