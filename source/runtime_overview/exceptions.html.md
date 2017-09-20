@@ -114,7 +114,7 @@ relation between a composition and its children.
 
 Let's emulate an error by mis-configuring `cart_ctrl_wdl::WDLSSolver`. With the
 [work we've done validating the tip and root
-links](../basics/deployment.html#validate_tip_and_root_links), we'll
+links](../basics/validation.html), we'll
 just edit the task's configuration file and trigger a reconfiguration:
 
 <div class="fluid-video">
