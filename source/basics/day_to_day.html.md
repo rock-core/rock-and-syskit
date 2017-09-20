@@ -24,7 +24,7 @@ autoproj --help
 
 ### Folder Structure {#layout}
 
-<dl>
+<dl markdown="0">
 <dt>Workspace root</dt>
 <dd>Where your ran <a href="index.html">the bootstrap</a>, and where the <code>env.sh</code> script is located</dd>
 <dt>The autoproj/ folder</dt>
@@ -39,10 +39,10 @@ repository).</dd>
 <dd>Packages in autoproj can either be checked out and built from source.
 Alternatively, autoproj allows to interact with the host OS package system
 (e.g. APT on Ubuntu). The osdep system is what makes this possible.</dd>
-<dt>Build folders</dt>
+<dt id="build_directory">Build folders</dt>
 <dd>When packages have build byproducts, they are saved within the package
 build folder. This is by default the <code>build/</code> directory under the packages.</dd>
-<dt>Prefix folder</dt>
+<dt id="prefix_directory">Prefix folder</dt>
 <dd>Packages that require an install step will install under this folder. By
 default the <code>install/</code> folder under the workspace root</dd>
 <dt>Logs</dt>
@@ -68,12 +68,13 @@ $ acd c/kdl_par
 # Now in control/kdl_parser
 ~~~
 
-`acd` expects package names. A few packages -- mainly orogen, typelib and rtt
--- do not include the package's category in them (they are named e.g. 'orogen'
-but are installed in `tools/`)
+`acd` expects package names or package directories. A few packages -- mainly
+orogen, typelib and rtt -- do not include the package's category in them (they
+are named e.g. 'orogen' but are installed in `tools/`). `autoproj show
+path/to/directory` will allow you to find this out.
 {: .callout .callout-info}
 
-The `-b` and `-p` options allow to move to a package's build and prefix directories. 
+The `-b` and `-p` options allow to move to a package's [build](#build_directory) and [prefix](#prefix_directory) directories. 
 
 ~~~
 $ acd -b s/gaz
