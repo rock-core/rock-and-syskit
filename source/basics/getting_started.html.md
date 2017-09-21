@@ -116,11 +116,13 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 </sdf>
 ~~~
 
-**Note** the rock-gazebo integration does not know yet how to download models
-from Gazebo's model repository. Run `rock-gazebo --gui=gzclient empty_world` once first to
-make sure the models are downloaded. Wait for the scene to show up (Gazebo's
-splash screen disappears then), and quit it then.
-{: .callout .callout-warning}
+The `ur10` and `ground_plane` models we are referencing in this world file need
+to be downloaded from Gazebo's model repository. This is done automatically by
+`rock-gazebo` the first time they're needed, but can also be done explicitly with
+
+~~~
+rock-gazebo --download-only
+~~~
 
 ## Running and visualizing a Gazebo environment
 
