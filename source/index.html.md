@@ -55,7 +55,8 @@ need to know at a certain point in time.
 ## Building Systems
 
 3. [Workspace and Packages](workspace/index.html)
-4. [Writing components](writing_components/index.html)
+3. [The Type System](type_system/index.html)
+4. [Integrating Functionality](integrating_functionality/index.html)
 5. Reusable Syskit modelling
 7. Advanced data processing in Components
 8. System coordination

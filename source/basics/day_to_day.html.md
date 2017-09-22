@@ -83,7 +83,7 @@ $ acd -p c/kdl
 # Now in install/
 ~~~
 
-### Error Logs
+### Logs {#alog}
 
 During build, and less often during updates, the tools autoproj calls will
 error out. However, to keep the output of autoproj manageable, it redirects the

@@ -44,7 +44,7 @@ the dataflow in the `ArmCartesianControlWdls` composition, we find:
 
 The type name is `/base/samples/RigidBodyState`. Types like this one are
 defined when implementing components, which is something we will see
-[later](../writing_components/types.html). You can have an overview of the
+[later](../type_system). You can have an overview of the
 types already available in your Rock workspace by starting the
 `rock-browse` tool.
 
@@ -121,7 +121,7 @@ end
 **Note**: the position and orientation here are assumed to be respectively a
 vector (of type Eigen::Vector3) and a quaternion (of type Eigen::Quaternion).
 The underlying type system [is a subject for another
-part](../writing_components/types.html). For now, just accept it.
+part](../type_system). For now, just accept it.
 {: .callout .callout-info}
 
 This kind of "high-level argument shadowing low-level
