@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Devices
+title: Profiles and Devices
 sort_info: 40
 ---
 
@@ -48,11 +48,10 @@ simulated arm with the control network.
 
 ## Defining devices for the Gazebo system
 
-The robot definition is done within a Syskit _profile_. Profiles are the models
+A robot definition is created within a Syskit _profile_. Profiles are the models
 that bind network definitions (compositions) with devices and other
-compositions. It's also where the robot definition happens.
-
-As a matter of convention, one usually creates a per-robot `Base` profile that
+compositions. It's also where the robot definition happens.  
+By convention, one usually creates a per-robot `Base` profile that
 contains the robot definition.  Let's do that now.
 
 ~~~
@@ -164,12 +163,12 @@ module SyskitBasics
   module Profiles
     module Gazebo
       UR10_SAFE_POSITION = Hash[
-        'shoulder_pan'  => 0,
-        'shoulder_lift' => -Math::PI/2,
-        'elbow'         => Math::PI/2,
-        'wrist_1'       => 0,
-        'wrist_2'       => 0,
-        'wrist_3'       => 0]
+        'ur10::shoulder_pan'  => 0,
+        'ur10::shoulder_lift' => -Math::PI/2,
+        'ur10::elbow'         => Math::PI/2,
+        'ur10::wrist_1'       => 0,
+        'ur10::wrist_2'       => 0,
+        'ur10::wrist_3'       => 0]
 
       profile 'ArmControl' do
         define 'arm_cartesian_constant_control',
@@ -197,7 +196,7 @@ models and roles that can be used in the `use` statement can easily be browsed
 using the IDE
 {: .callout .callout-info}
 
-Let's have a look at the final `arm_cartesian_control` definition.
+Let's have a look at the final `arm_cartesian_constant_control` definition.
 
 ![Final injected arm control network](media/injected_arm_control_network.svg){: .fullwidth}
 

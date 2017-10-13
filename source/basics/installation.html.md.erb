@@ -50,18 +50,20 @@ cause problems. Windows has seen some preliminary usage.
 
 ## Installation {#install}
 
-Rock's current release is <%= config[:latest_release] %>, and requires **Ruby <%= config[:min_ruby_version] %> or later**
+The code that is needed to follow this guide is not yet part of a core release.
 
  1. [Install Gazebo 8](http://gazebosim.org).
 
- 1. Install Ruby and verify that the version matches
+ 1. Install Ruby and verify that the version matches (must be 2.1 or later, we recommend 2.3.x)
 
     ~~~
     sudo apt-get install ruby
     ruby --version
     ~~~
 
- 2. Create and "cd" into the directory in which you want to install the toolchain.
+ 2. Create and "cd" into the directory in which you want to work. This directory will
+    contain both the toolchain (that we will install in the next steps), as well as your
+    own code. This is called a _workspace_.
 
     ~~~
     mkdir dev
@@ -75,8 +77,8 @@ Rock's current release is <%= config[:latest_release] %>, and requires **Ruby <%
     ~~~
 
  4. Bootstrap your installation. This installs autoproj and checks out
-    the main build configuration, but does not check out packages. As
-    [previously mentioned](#not_mainline), one must use the master flavor
+    the main build configuration, but does not check out packages. Because
+    [this guide relies on code not yet in rock-core itself](#not_mainline), one must use the master flavor
     of Rock to go through this documentation. Select the defaults for all
     the proposed configuration options.
 
@@ -96,8 +98,8 @@ Rock's current release is <%= config[:latest_release] %>, and requires **Ruby <%
 
 
 You **must** remember to source the generated env.sh script at the end of the
-update !!! You must also do in new terminals before you can interact with the
-Rock installation
+amake command !!! You must also do in new terminals before you can interact with
+the Rock installation
 {: .callout .callout-warning}
 
 **Next**: an overview of [how to interact day-to-day with the Rock

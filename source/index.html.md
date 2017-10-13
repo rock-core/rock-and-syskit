@@ -49,8 +49,8 @@ need to know at a certain point in time.
 
 ## Basics
 
-1. [Basics: Installing Rock and Building a simple system using Gazebo and Syskit](basics/index.html)
-2. [Runtime Basics: Running the basic system](runtime_overview/index.html)
+1. [Basics: Integrating a system from scratch using Gazebo and Syskit](basics/index.html)
+2. [Runtime: Details of running a Syskit system](runtime_overview/index.html)
 
 ## Building Systems
 

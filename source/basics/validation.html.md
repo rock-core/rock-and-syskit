@@ -225,9 +225,9 @@ before do
     </model>
   EOSDF
   @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
-  syskit_stub_conf OroGen::CartCtrlWdls::WDLSSolver, 'default',
+  syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
     data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
-  syskit_stub_conf OroGen::RobotFrames::SingleChainPublisher, 'default',
+  syskit_stub_conf OroGen.robot_frames.SingleChainPublisher, 'default',
     data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
 end
 ~~~

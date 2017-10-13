@@ -116,14 +116,6 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 </sdf>
 ~~~
 
-The `ur10` and `ground_plane` models we are referencing in this world file need
-to be downloaded from Gazebo's model repository. This is done automatically by
-`rock-gazebo` the first time they're needed, but can also be done explicitly with
-
-~~~
-rock-gazebo --download-only
-~~~
-
 ## Running and visualizing a Gazebo environment
 
 Rock offers `vizkit3d`, its own 3D visualization environment. Since we will
@@ -140,6 +132,17 @@ rock-gazebo empty_world
 Starts both a Gazebo simulation and displays it:
 
 ![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg){: .fullwidth}
+
+<div class="note">
+The `ur10` and `ground_plane` models we are referencing in this world file need
+to be downloaded from Gazebo's model repository. This is done automatically by
+`rock-gazebo` the first time they're needed, but can also be done explicitly with
+the `--download-only` option, e.g.
+
+~~~
+rock-gazebo --download-only empty_world
+~~~
+</div>
 
 ## Preparing the `gazebo` Syskit configuration {#syskit_gazebo_configuration}
 

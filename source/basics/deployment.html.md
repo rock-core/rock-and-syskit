@@ -35,9 +35,9 @@ can be found in the data logged at runtime.
 All oroGen components have a default deployment scheme of one component per
 process. The triggering mechanism does not have a default, but the
 `port_driven` scheme (where the component is triggered whenever data is
-received on its inputs) is a very common scheme. If you look into the
-`cart_ctrl_wdls` package, you would see that it's what the package's components
-use.
+received on its inputs) is commonly used. If you look into the
+`cart_ctrl_wdls.orogen` file in `control/orogen/cart_ctrl_wdls`, you would see
+that it is indeed what the package components uses.
 
 One usually starts with the defaults defined in the oroGen file. We therefore
 only have left to give a name to the components Syskit is using. This is done
@@ -49,9 +49,9 @@ Robot.requires do
   Syskit.conf.use_gazebo_world('empty_world')
 
   require 'models/profiles/gazebo/arm_control'
-  Syskit.conf.use_deployment 'cart_ctrl_wdls::CartCtrl' => 'arm_pos2twist'
-  Syskit.conf.use_deployment 'cart_ctrl_wdls::WDLSSolver' => 'arm_twist2joint'
-  Syskit.conf.use_deployment 'robot_frames::SingleChainPublisher' => 'arm_chain_publisher'
+  Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.CartCtrl => 'arm_pos2twist'
+  Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.WDLSSolver => 'arm_twist2joint'
+  Syskit.conf.use_deployment OroGen.robot_frames.SingleChainPublisher => 'arm_chain_publisher'
   Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator => 'arm_constant_setpoint'
   Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::JointPositionConstantGenerator => 'joint_position_setpoint'
 end
@@ -82,9 +82,9 @@ Configuration of components in a Syskit system is split into two parts:
 
 The static configuration is stored within YAML files in `config/orogen/`. Each
 file is named after the component model that is configured, so for instance
-`config/orogen/cart_ctrl_wdls::WDLSSolver` stores the configuration of all
+`config/orogen/cart_ctrl_wdls::WDLSSolver.yml` stores the configuration of all
 components under that name. Each file can contain multiple configurations
-within sections, but for now we'll only use the `default` configuration,
+within sections, but for now we will only use the `default` configuration,
 which is the one that is loaded by default unless specified otherwise.
 
 Let's generate configuration file templates for the components we are using. The
@@ -111,6 +111,21 @@ Let's look at them one by one, to see what needs to actually be configured.
   have a sane default is the `lambda` parameter. The documentation mentions 0.1
   has a known-good parameter for some arm, let's pick that and keep in mind
   that it might be wrong.
+
+  The root and tip in our case are the base and hand of the robot. So `root` should
+  be `ur10::base` and `tip` should be `ur10::wrist_3`. One can find this out by looking at
+  the SDF file.  Alternatively, the chain can be
+  inspected using the `rock-transformer` tool:
+
+  The parameters that have to be set should look like the following. Better
+  keep the rest, as it provides documentation about which parameters are
+  available.
+  
+  ~~~ yaml
+  root: 'ur10::base'
+  tip: 'ur10::wrist_3'
+  ~~~
+
 - `cart_ctrl_wdls::CartCtrl`. The one parameter that is probably best changed is
   the max output. The component's designer decided to pick `RigidBodyState` to
   represent a twist, which means that we only need to update the velocity
@@ -118,16 +133,17 @@ Let's look at them one by one, to see what needs to actually be configured.
   (the `.deg` suffix will convert a degree value in radians).
 - `robot_frames::SingleChainPublisher` only has robot model that we will
   extract from the SDF model, and the tip/root parameters that have to be set
+  
+  ~~~ yaml
+  chain:
+    root_link: 'ur10::base'
+    tip_link: 'ur10::wrist_3'
+  ~~~
 
-**Note** in order to ensure consistency between the tip and root parameters of
-`SingleChainPublisher` and `WDLSSolver`, another way to handle this is to make
-them parameters of the compositions.
+**Note** one might want at some point to use a task argument for the tip and
+root parameters of `SingleChainPublisher` and `WDLSSolver`, to ensure
+consistency between the components.
 {: .callout .callout-info}
-
-The root and tip in our case are the base and hand of the robot. So `root` should
-be `ur10::base` and `tip` should be `ur10::wrist_3`. One can find this out by looking at
-the SDF file.  Alternatively, the chain can be
-inspected using the `rock-transformer` tool:
 
 <div class="fluid-video">
 <iframe width="853" height="480" src="https://www.youtube.com/embed/ShYmPgIZ1Oc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -198,9 +214,9 @@ class ArmCartesianControlWdls < Syskit::Composition
   # @return [Profile]
   argument :robot
   ...
-  add(OroGen::CartCtrlWdls::WDLSSolver, as: 'twist2joint_velocity').
+  add(OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity').
     with_arguments(robot: from(:parent_task).robot)
-  add(OroGen::RobotFrames::SingleChainPublisher, as: 'joint2pose').
+  add(OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose').
     with_arguments(robot: from(:parent_task).robot)
 end
 ~~~
@@ -215,7 +231,7 @@ define 'arm_cartesian_constant_control',
     with_arguments(robot: Base)
 ~~~
 
-We now need to modify the oroGen component models to use the robot argument.
+We need to modify the oroGen component models to use the robot argument.
 Since oroGen components are auto-generated by Syskit, there's a special
 mechanism to allow modifying the generated classes after the fact. When Syskit
 loads an oroGen package, and after it has created the task classes, it will attempt to
@@ -243,18 +259,18 @@ $ syskit gen orogen robot_frames
       create  test/orogen/test_robot_frames.rb
 ~~~
 
-After hitting the IDE's reload button, we now get the path to the extension file:
+After hitting the IDE's reload button, the IDE displays the path to the extension file:
 
 ![Message displayed by the IDE if there is an extension files](media/orogen_extension_file.png){: .fullwidth}
 
-Now, let's edit `models/orogen/cart_ctrl_wdls.rb`. There is one `class`
+Let's edit first `models/orogen/cart_ctrl_wdls.rb`. There is one `Syskit.extend_model`
 statement per task model in the project, but we're currently only interested in
 the `WDLSSolver` task. Let's add the `robot` argument, and tune the
 `configure` method that is described in the template to forward the model on to
 the task's properties.
 
 ~~~ruby
-class OroGen::CartCtrlWdls::WDLSSolver
+Syskit.extend_model OroGen.cart_ctrl_wdls.WDLSSolver
   argument :robot
   def configure
     super # call super as described in the template
@@ -268,7 +284,7 @@ end
 and in `models/orogen/robot_frames.rb`:
 
 ~~~ruby
-class OroGen::RobotFrames::SingleChainPublisher
+Syskit.extend_model OroGen.robot_frames.SingleChainPublisher
   argument :robot
   def configure
     super # call super as described in the template
@@ -282,7 +298,7 @@ end
 ## Building the system's action interface {#actions}
 
 A Syskit application exports functionality to the outside world as _actions_.
-For now, the only thing we'll see about actions is that they have a name,
+The only thing we will see about actions in this section is that they have a name,
 arguments and a lifetime. They either finish by themselves -- if they have a
 goal -- or run forever until they are "dropped" by the app's user.
 

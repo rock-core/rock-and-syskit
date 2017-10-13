@@ -58,8 +58,8 @@ shortened as long as the result is unambiguous.
 For instance, in the default Rock installation:
 
 ~~~
-$ acd s/gaz
-# Now in simulation/gazebo
+$ acd d/g
+# Now in drivers/gps_base
 $ acd c/k
 multiple packages match 'c/k' in the current autoproj installation: control/kdl, control/kdl_parser
 $ acd c/kdl
@@ -74,11 +74,11 @@ are named e.g. 'orogen' but are installed in `tools/`). `autoproj show
 path/to/directory` will allow you to find this out.
 {: .callout .callout-info}
 
-The `-b` and `-p` options allow to move to a package's [build](#build_directory) and [prefix](#prefix_directory) directories. 
+The `-b` and `-p` options allow to move to a package's [build](#build_directory) and [prefix](#prefix_directory) directories.
 
 ~~~
-$ acd -b s/gaz
-# Now in simulation/gazebo/build
+$ acd -b d/gps
+# Now in drivers/gps_base/build
 $ acd -p c/kdl
 # Now in install/
 ~~~
@@ -105,6 +105,11 @@ Or, if your shell is already within a folder of said package,
 alog .
 ~~~
 
+**Note** that the logs are ordered by last modified date (the most recently
+modified being first). The first entry is therefore most likely the one you're
+looking for after an update or build failure.
+{: .tip}
+
 ### Updating
 
 Most of the time, you will want to update the whole workspace (the `-k` option
@@ -122,13 +127,15 @@ name or path on the command line
 aup simulation/rock_gazebo
 ~~~
 
-To restrict the update to the package, excluding its dependencies, add `--deps=f`.
+To restrict the update to the package, excluding its dependencies, add `-n`.
+`--checkout-only` will not update already checked out packages, but only check
+out not currently present in the system. This is useful if you want to install
+new packages, but not modify the already-installed ones.
 
-`--checkout-only` will not update already checked out packages, but
-only check out not currently present in the system.
-
-`aup` without arguments is equivalent to `aup .`, i.e. update the package
-located in the current directory
+`aup` without arguments is equivalent to `aup .`: update the package
+located in the current directory. If called outside of a package, it means
+"update all packages under this directory". `aup` in the root of the workspace
+is therefore equivalent to `aup --all`.
 {: .callout .callout-info}
 
 In some situations, or if you're trying to keep track of all the changes that
@@ -155,16 +162,18 @@ name or path on the command line
 amake simulation/rock_gazebo
 ~~~
 
-To restrict the build to the package, excluding its dependencies, add `--deps=f`.
+To restrict the build to the package, excluding its dependencies, add `-n`.
 
-`amake` without arguments is equivalent to `amake .`, i.e. build the package
-located in the current directory
+`amake` without arguments is equivalent to `amake .`: update the package
+located in the current directory. If called outside of a package, it means
+"update all packages under this directory". `amake` in the root of the workspace
+is therefore equivalent to `amake --all`.
 {: .callout .callout-info}
 
 ### Configuration
 
-Build configurations may have some configuration options that the user needs to
-answer on first time building. If you need to change the answers after the first
+Build configurations may have some configuration options. These options are
+asked during the first build. If you need to change the answers after the first
 run, execute
 
 ~~~
@@ -188,9 +197,10 @@ aup --no-deps
 amake
 ~~~
 
+`autoproj disable path/to/package` does the reverse.
+
 Use `autoproj test list` to see which packages do have a test suite and for
-which packages it is enabled. Running `autoproj test disable` disables all test
-suites again.
+which packages it is enabled.
 
 Running the tests can either be done using the package's test method, or through
 autoproj by running
@@ -198,6 +208,9 @@ autoproj by running
 ~~~
 autoproj test .
 ~~~
+
+If you do want to enable all unit tests for all packages, run `enable` without
+arguments. `disable` without arguments disables all test suites.
 
 **Next**: let's get to [create our first system integration](getting_started.html)
 {: .next-page}
