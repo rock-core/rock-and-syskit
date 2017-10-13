@@ -229,3 +229,6 @@ operation('operationName').
     runs_in_caller_thread
 ~~~
 
+We've covered most of the topic of writing a component. Let's now see how it is
+[executed](deployment.html).
+{: .next-page}

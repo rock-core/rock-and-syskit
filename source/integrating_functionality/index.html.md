@@ -12,8 +12,7 @@ You should have at this stage read the Basics section of this documentation.
 Where Basics was all about dealing with system integration, we are going to
 discuss in this section how new functionality is presented in a form that
 can be used in a system.
-
-This part will assume that you've understood the notions of
+This part assumes that you've understood the notions of
 [dataflow](../basics/composition.html) and [execution
 lifecycle](../runtime_overview/event_loop.html)
 

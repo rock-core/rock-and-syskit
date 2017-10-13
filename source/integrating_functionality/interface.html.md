@@ -15,6 +15,7 @@ presented in this page are to be included in a component definition, i.e.
 between 'do' and 'end' in
 
 ~~~ ruby
+# Documentation of the task context
 task_context "ClassName" do
    needs_configuration
 
@@ -27,21 +28,6 @@ project name. How one is meant to interact with these elements in the task's
 own code is dealt with [later](writing_the_hooks.html)
 
 The `needs_configuration` statement is historical and should always be present.
-
-## Abstract Tasks {#abstract}
-
-orogen supports subclassing a component class into another component class. Of
-course, in some cases, one would create a component class that is only meant to
-be subclasses. This is declared with the `abstract` statement, which ensures that
-orogen will not attempt (nor allow to) create a component instance from this class.
-
-~~~ ruby
-task_context "ClassName" do
-  needs_configuration
-  abstract
-  ...
-end
-~~~
 
 ## Interface Elements
 
@@ -57,6 +43,9 @@ As a general rule of thumb, the components should communicate with each other
 only through ports. The properties and operations (as well as the state machine
 covered in [the next page](state_machine.html)) are meant to be used by
 a coordination layer, namely Syskit in our case.
+
+Documentation for an interface element should be written as a comment directly
+on top of the declaration.
 
 ### Ports
 Ports are defined with
@@ -88,13 +77,29 @@ property('name', 'configuration_type').
 ~~~
 
 **Don't make everything dynamic**. Use dynamic properties only for things that
-(1) won't affect the component functionality when the property is changed and
+(1) won't cause unacceptable latency in the component's processing and
 (2) for which the "dynamicity" is easy to implement. A counter example is for
 instance a device whose change in parameter would take a few seconds. This
 should definitely *not* be dynamic. A good example would be a simple scaling
 parameter, which is only injected in a numerical equation - that is something
 that won't require any internal reinitialization.
 {: .important}
+
+Properties using simple types (booleans, ints, enums, …) can have a default
+value specified directly in the orogen file:
+
+~~~ ruby
+# If true, the image is halved
+property 'downscale_2x', '/bool', false
+~~~
+
+For more complex types, the initialization should be done in the task's constructors, e.g.
+
+~~~ cpp
+Task::Task(...) {
+  _initial_position.set(Eigen::Vector3.Zero)
+}
+~~~
 
 ### Operations
 
@@ -111,6 +116,7 @@ operation('commandName').
 Additionally, a return type can be added with
 
 ~~~ ruby
+# Documentation of the operation
 operation('operationName').
     returns('int').
     argument('arg0', '/arg/type').
@@ -166,9 +172,9 @@ task_context "SubTask", subclasses: "Task" do
 end
 ~~~
 
-When one does so, the component's subclass inherits from the parent. This means
-that it has access to the methods defined on the parent class, and also that
-it inherits the parent's class interface.
+When one does so, the component's subclass inherits from the parent's class, in
+the C++ way. This of course means that it has access to the methods defined on the parent
+class. From a component point of view, it also means that it inherits the parent's class interface.
 
 When inheriting between task contexts, the following constraints will apply:
 

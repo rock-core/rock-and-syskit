@@ -10,6 +10,12 @@ sort_info: 50
 - TOC
 {:toc}
 
+So far, we have declared and written a C++ component _class_. That is, we
+implemented the component's computation. We have however not yet breached the
+subject of describing when the component's methods
+([Hooks](writing_the_hooks.html)) are called. This is what the **deployment**
+is all about.
+
 In Rock, each deployment is a separate binary (UNIX process) in which a certain
 number of tasks have been _instanciated_. The role of the deployment is to:
  - group threads in processes
@@ -20,14 +26,14 @@ number of tasks have been _instanciated_. The role of the deployment is to:
 The combination of thread information and triggering mechanism is called an
 **activity**.
 
-## Default Deployments
+## Default Deployments {#default}
 
 orogen creates a default deployment for each declared
 [non-abstract](interface.html#abstract) task. This default deployment puts each
 component in a single thread, in its own process. It uses a default triggering
 mechanism that is defined on the task context. This default activity should be
 considered a "sane default", but components should in general not rely on this
-activity being "the" component activity.
+activity being the only way it could be deployed.
 
 In some cases, it is beneficial to deploy components differently than the
 default. This is done by defining explicit deployments.
@@ -64,33 +70,6 @@ task 'TaskName', 'orogen_project::TaskClass'
 
 It will create a task with the given name and class. By default, that task will
 have its own thread. Use `using_task_library` to import tasks from another project.
-
-## Use in Syskit
-
-To use a task's default deployment, one adds
-
-~~~ ruby
-Syskit.conf.use_deployment 'model::Task' => 'task_name'
-~~~
-
-Which deploys a task called `task_name` using the component's default
-deployment. Explicit deployments can be used as-is
-
-~~~ ruby
-Syskit.conf.use_deployment 'test'
-~~~
-
-however, this way, only one of the `test` deployment can be started at a given
-time. To start multiple ones, one must prefix the task's names:
-
-~~~ ruby
-Syskit.conf.use_deployment 'test' => 'left:'
-Syskit.conf.use_deployment 'test' => 'right:'
-~~~
-
-This prefixes the task names with resp. `left:` and `right:`. If `test` had a
-task called `task`, the deployed tasks would be called `left:task` and
-`right:task`.
 
 ## Triggers
 
@@ -164,7 +143,7 @@ end
 ~~~
 
 During runtime, the `updateHook` method will be called when new data arrives on
-the listed ports (in this case 'image').  Other input ports are ignored by the
+the listed ports (in this case `image`).  Other input ports are ignored by the
 triggering mechanism. Obviously, the listed ports must be input ports. In
 addition, they must be declared _before_ the call to `port_driven`.
 
@@ -181,7 +160,7 @@ task_context "Task" do
 end
 ~~~
 
-both 'parameters' and 'image' are triggering. Now, in
+both `parameters` and `image` are triggering. Now, in the following declaration, only `image` will be:
 
 ~~~ ruby
 task_context "Task" do
@@ -191,8 +170,6 @@ task_context "Task" do
     output_port 'features' '/SIFT/FeatureSet'
 end
 ~~~
-
-only 'image' is.
 
 ### FD-Driven Triggering (`fd_driven`)
 
@@ -247,7 +224,7 @@ bool MyTask::configureHook()
 ~~~
 
 It is possible to list multiple file descriptors by having multiple calls to
-watch(). 
+`watch()`.
 
 One can set a timeout in milliseconds, in which case `updateHook` with be
 called after that many milliseconds after the last successful trigger.
@@ -340,8 +317,6 @@ The second case is called a sequential activity and is declared with:
     sequential
 ~~~
 
-**Next** this is mostly all. [The next page](plugins.html) describes how it is
-possible to extend the oroGen specification. You may want to simply remember
-that it exists on first read and come back to it later. And instead go to the
-[documentation's overview](../index.html#how_to_read).
+**Next** this is mostly all. [The next page](syskit_integration.html) describes
+how components are integrated in Syskit.
 {: .next-page}

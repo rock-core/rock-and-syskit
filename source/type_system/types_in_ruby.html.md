@@ -90,7 +90,9 @@ Orocos.load_typekit 'base'
 
 From their on, all the types that the `base` typekit define are made available
 under the `Types` object. For instance, the `base::Time` type is available
-as `Types.base.Time`.
+as `Types.base.Time`. Containers based on `std::vector` are mapped using
+functions, e.g. `Types.std.vector(Types.base.Time)` for
+`/std/vector</base/Time>`.
 
 New objects can thus be created `Types.base.Time.new`. New objects - except
 enums - are left uninitialized. Enums are initialized to the first valid value
@@ -132,9 +134,7 @@ Time using the given block. Note that the Ruby type is optional in this case
 **Where to define these ?** One-shot conversions can be defined straight into
 your system (ruby script or Syskit app). For conversions that are too widespread
 for that, consider installing a `typelib_plugin.rb` file under a folder that is resolved
-by `RUBYLIB` (e.g. `mylib/typelib_plugin.rb`). This would either be a plain Ruby package
-or a file installed by a C++ package within the Ruby search path. Both methods are
-described in more details in the [Creating Functionality](../integrating_functionality/ruby_libraries.html) section.
+by `RUBYLIB` (e.g. `mylib/typelib_plugin.rb`), most likely [a Ruby package](../integrating_functionality/ruby_libraries.html). 
 
 The inverse conversion may also be provided
 

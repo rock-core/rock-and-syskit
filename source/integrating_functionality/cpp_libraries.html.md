@@ -79,8 +79,7 @@ There's a small number of conventions that Rock libraries follow:
   `src/`. Tests are in `test/`.
 
 If the ultimate goal of a data type is to be used as an interface type on a
-Rock component, you must have first read and understood the [type
-system](../type_system) description.
+Rock component, you must have first read and understood the [limits this entails system](../type_system)
 
 ## Tests
 
@@ -116,11 +115,11 @@ Rock conventions, Rock provides CMake macros that are somewhat easier to use.
 The following describes them. The macros can be found in
 `base/cmake/modules/Rock.cmake` in a rock installation. There are also specific
 support for other tools within the Rock system (such as
-[vizkit3d](todo_link_to_vizkit3d)), but these will be introduced when
-applicable.
+[vizkit3d](todo_link_to_vizkit3d)), but these will be introduced at another point.
 
 The end of this page will detail this macro. But unless you need them, you may
 want to go to the next topic: [the integration of Ruby packages](ruby_libraries.html)
+{: .next-page}
 
 ## Rock.cmake Reference Documentation
 

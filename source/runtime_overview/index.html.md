@@ -26,20 +26,19 @@ related topics, one may want to also read all about
 ## Actions and Jobs
 
 In the [Basics](../basics) part, we've seen how to define network of
-components on a profile, and that this profile could be then exposed on an
+components on a [profile](../basics/devices.html), and that this profile could be then exposed on an
 action interface, which allowed us [in the last
 part](../basics/deployment.html) to control the system.
-
-An _action_ is an abstract concept that represents one thing the system can do.
-In order to actually have it executed, one starts a _job_.
+An **action** is an abstract concept that represents one thing the system can do.
+In order to actually have it executed, one starts a **job**.
 Once a job has been started it can be dropped, that is tell Syskit that this
 particular job is not part of current system's goal.
 
-All job-related commands are processed in batches: they are queued and only
-sent to the Syskit app when the `process` command is entered. We will see the
-reason for this later.
+All job-related commands are processed in batches: they are queued, and sent
+to the Syskit app and processed by it all at once. We will see the
+reason for this later in this section.
 
-## Starting and Stopping
+## Scheduling and Garbage Collection
 
 Starting the first two jobs from the IDE seemed to be a very transparent
 process. However, behind the scenes, even this seemingly simple actions require
@@ -149,18 +148,17 @@ When we transitioned from the joint control to the cartesian control, we first
 once.  When we clicked `Process`, the two changes were processed _together_.
 That is, Syskit could understand that the intent was to stop an action and
 start a new one _at the same time_, which it handled as a transition.
-
-Syskit's execution engine acts as an **event loop**, in which all events that
-are received at the same time are processed _as if_ they happened at the exact
+Generally speaking, Syskit's execution engine acts as an **event loop**, in which all events that
+are received at the same time are processed _as if_ they happened at the
 same time.
 
-So, what would have happened if we dropped the action first, and only then
+What if we dropped the action first, and only then
 started `arm_cartesian_constant_control_def` ? Syskit would have applied the
 kill _first_ and then the start. We would have basically had the same effect
 than in [the video we just saw](#start_stop_video), with the arm falling
 uncontrolled.
 
-Now, what would have happened if instead we started
+What if we started
 `arm_cartesian_constant_control_def` and only then dropped the existing job ?
 
 <div class="fluid-video">
@@ -174,7 +172,6 @@ generation.
 {: #deployment_failure}
 
 **Next**: We'll now get to understand all of this step-by-step, starting with [Syskit's
-task structure](task_structure.html), how Syskit maintains
-what is and isn't useful in the system (among other things …)
+task structure](task_structure.html), how Syskit tracks a system's state.
 {: .next-page}
 
