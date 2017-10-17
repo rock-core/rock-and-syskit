@@ -118,9 +118,8 @@ Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
 end
 ~~~
 
-[The next page](plugins.html) describes how it is possible to extend the oroGen
-specification. You may want to simply remember that it exists on first read and
-come back to it later. And instead go to the [documentation's
-overview](../index.html#how_to_read).
+This is all on the subject of adding new functionality in a Rock system. Go
+back to the [documentation's overview](../index.html#how_to_read) if you're
+looking for more.
 {: .next-page}
 
