@@ -24,7 +24,7 @@ autoproj --help
 
 ### Folder Structure {#layout}
 
-<dl>
+<dl markdown="0">
 <dt>Workspace root</dt>
 <dd>Where your ran <a href="index.html">the bootstrap</a>, and where the <code>env.sh</code> script is located</dd>
 <dt>The autoproj/ folder</dt>
@@ -39,10 +39,10 @@ repository).</dd>
 <dd>Packages in autoproj can either be checked out and built from source.
 Alternatively, autoproj allows to interact with the host OS package system
 (e.g. APT on Ubuntu). The osdep system is what makes this possible.</dd>
-<dt>Build folders</dt>
+<dt id="build_directory">Build folders</dt>
 <dd>When packages have build byproducts, they are saved within the package
 build folder. This is by default the <code>build/</code> directory under the packages.</dd>
-<dt>Prefix folder</dt>
+<dt id="prefix_directory">Prefix folder</dt>
 <dd>Packages that require an install step will install under this folder. By
 default the <code>install/</code> folder under the workspace root</dd>
 <dt>Logs</dt>
@@ -58,8 +58,8 @@ shortened as long as the result is unambiguous.
 For instance, in the default Rock installation:
 
 ~~~
-$ acd s/gaz
-# Now in simulation/gazebo
+$ acd d/g
+# Now in drivers/gps_base
 $ acd c/k
 multiple packages match 'c/k' in the current autoproj installation: control/kdl, control/kdl_parser
 $ acd c/kdl
@@ -68,19 +68,47 @@ $ acd c/kdl_par
 # Now in control/kdl_parser
 ~~~
 
-`acd` expects package names. A few packages -- mainly orogen, typelib and rtt
--- do not include the package's category in them (they are named e.g. 'orogen'
-but are installed in `tools/`)
+`acd` expects package names or package directories. A few packages -- mainly
+orogen, typelib and rtt -- do not include the package's category in them (they
+are named e.g. 'orogen' but are installed in `tools/`). `autoproj show
+path/to/directory` will allow you to find this out.
 {: .callout .callout-info}
 
-The `-b` and `-p` options allow to move to a package's build and prefix directories. 
+The `-b` and `-p` options allow to move to a package's [build](#build_directory) and [prefix](#prefix_directory) directories.
 
 ~~~
-$ acd -b s/gaz
-# Now in simulation/gazebo/build
+$ acd -b d/gps
+# Now in drivers/gps_base/build
 $ acd -p c/kdl
 # Now in install/
 ~~~
+
+### Logs {#alog}
+
+During build, and less often during updates, the tools autoproj calls will
+error out. However, to keep the output of autoproj manageable, it redirects the
+command output - where the error details usually are - to separate files.
+
+When one error does happen, autoproj displays the last 10 lines of that
+command. The intent is that these 10 lines may contain the error. If it does
+not, the easiest way to display the output of the failed command is to run
+`alog` with either the name of the failed package or its path
+
+~~~
+alog name/of/package
+alog path/to/package
+~~~
+
+Or, if your shell is already within a folder of said package,
+
+~~~
+alog .
+~~~
+
+**Note** that the logs are ordered by last modified date (the most recently
+modified being first). The first entry is therefore most likely the one you're
+looking for after an update or build failure.
+{: .tip}
 
 ### Updating
 
@@ -99,13 +127,15 @@ name or path on the command line
 aup simulation/rock_gazebo
 ~~~
 
-To restrict the update to the package, excluding its dependencies, add `--deps=f`.
+To restrict the update to the package, excluding its dependencies, add `-n`.
+`--checkout-only` will not update already checked out packages, but only check
+out not currently present in the system. This is useful if you want to install
+new packages, but not modify the already-installed ones.
 
-`--checkout-only` will not update already checked out packages, but
-only check out not currently present in the system.
-
-`aup` without arguments is equivalent to `aup .`, i.e. update the package
-located in the current directory
+`aup` without arguments is equivalent to `aup .`: update the package
+located in the current directory. If called outside of a package, it means
+"update all packages under this directory". `aup` in the root of the workspace
+is therefore equivalent to `aup --all`.
 {: .callout .callout-info}
 
 In some situations, or if you're trying to keep track of all the changes that
@@ -132,16 +162,18 @@ name or path on the command line
 amake simulation/rock_gazebo
 ~~~
 
-To restrict the build to the package, excluding its dependencies, add `--deps=f`.
+To restrict the build to the package, excluding its dependencies, add `-n`.
 
-`amake` without arguments is equivalent to `amake .`, i.e. build the package
-located in the current directory
+`amake` without arguments is equivalent to `amake .`: update the package
+located in the current directory. If called outside of a package, it means
+"update all packages under this directory". `amake` in the root of the workspace
+is therefore equivalent to `amake --all`.
 {: .callout .callout-info}
 
 ### Configuration
 
-Build configurations may have some configuration options that the user needs to
-answer on first time building. If you need to change the answers after the first
+Build configurations may have some configuration options. These options are
+asked during the first build. If you need to change the answers after the first
 run, execute
 
 ~~~
@@ -165,9 +197,10 @@ aup --no-deps
 amake
 ~~~
 
+`autoproj disable path/to/package` does the reverse.
+
 Use `autoproj test list` to see which packages do have a test suite and for
-which packages it is enabled. Running `autoproj test disable` disables all test
-suites again.
+which packages it is enabled.
 
 Running the tests can either be done using the package's test method, or through
 autoproj by running
@@ -175,6 +208,9 @@ autoproj by running
 ~~~
 autoproj test .
 ~~~
+
+If you do want to enable all unit tests for all packages, run `enable` without
+arguments. `disable` without arguments disables all test suites.
 
 **Next**: let's get to [create our first system integration](getting_started.html)
 {: .next-page}

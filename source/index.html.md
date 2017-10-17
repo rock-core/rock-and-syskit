@@ -49,13 +49,14 @@ need to know at a certain point in time.
 
 ## Basics
 
-1. [Basics: Installing Rock and Building a simple system using Gazebo and Syskit](basics/index.html)
-2. [Runtime Basics: Running the basic system](runtime_overview/index.html)
+1. [Basics: Integrating a system from scratch using Gazebo and Syskit](basics/index.html)
+2. [Runtime: Details of running a Syskit system](runtime_overview/index.html)
 
 ## Building Systems
 
 3. [Workspace and Packages](workspace/index.html)
-4. [Writing components](writing_components/index.html)
+3. [The Type System](type_system/index.html)
+4. [Integrating Functionality](integrating_functionality/index.html)
 5. Reusable Syskit modelling
 7. Advanced data processing in Components
 8. System coordination

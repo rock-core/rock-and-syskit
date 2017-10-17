@@ -7,39 +7,45 @@ sort_info: 30
 # Creating our Command Generator
 {:.no_toc}
 
+<div class="callout callout-info">
+**Where are we ?** We have created
+[The `SyskitBasics::Compositions::ArmCartesianControlWdls` composition](composition.html), which positions an arm
+at a given cartesian position. The cartesian position is provided outside the
+network. We will now create and integrate both the generator to provide this
+setpoint, as well as the generator to maintain a constant joint position.
+The next pages will then bind the result to the simulation and finally deploy and run it.
+We will also learn how to write unit tests.
+
+Below, the parts we will handle on this page are <span style="color:
+#5bc0de;">in blue</span>.
+
+![Where are we ?](media/progression_constant_generator.svg){: .fullwidth}
+</div>
+
 - TOC
 {:toc}
-
-[The control network we just created](composition.html) does not have a command
-generator. The first generator one usually creates is a constant one, creating an
-interface to send a constant command from Syskit into a control network.
-
-We will create the command generator now, then bind the result [to the simulation](devices.html)
-and finally [deploy and run it](deployment.html).
-
-We will also learn how to write unit tests.
 
 ## The Cartesian Constant Generator
 
 For the command, let's generate a single constant command. It will allow us to
 move the arm tip from one point to another, expressed in the cartesian frame.
-
-The first thing is to find out what's the data type of the port. If we look at
+The first step is to find out what's the data type of the port. If we look at
 the dataflow in the `ArmCartesianControlWdls` composition, we find:
 
 ![Datatype of the cartesian command](media/arm_cartesian_control_wdls_dataflow.svg){: .fullwidth}
 
 The type name is `/base/samples/RigidBodyState`. Types like this one are
 defined when implementing components, which is something we will see
-[later](../writing_components/types.html). You can have an overview of the
-types already available in your Rock workspace by starting the
-`rock-browse` tool.
+[later](../type_system). You can have an overview of the
+types already available in your Rock workspace by looking at the `Types` section
+in the IDE's model browser. Clicking on a port will lead you to this port's
+type page. Right-clicking on any page allows to go to previous pages.
 
 `bundles/common_models` provides `Compositions::ConstantGenerator`, a generic
 implementation of a component that periodically emits a value of a certain type. This generator is
-a `Syskit::RubyTaskContext`, which is like an oroGen component that is part of
-the Syskit process. It's useful to create very simple components without having
-to get through the whole oroGen step. It is also used in tests to stub existing components.
+a `Syskit::RubyTaskContext`, which a component that is executed as part of
+the Syskit process. It is useful to create very simple components without having
+to get through the process of creating a full-fledged C++ component. It is also used in tests to stub existing components.
 
 `ConstantGenerator` is generic, so it's not used as-is. One instead
 creates a specific component for the task at hand. In our case, we'll create
@@ -57,7 +63,13 @@ $ syskit gen ruby_task arm_cartesian_constant_command_generator
 ~~~
 
 The easiest way to reuse the constant generator is to subclass our generator
-from it, by using the `ConstantGenerator.for(type)` method:
+from it, by using the `ConstantGenerator.for(type)` method. We first have
+to import the type. `typekits` are the units that define types in a rock system, so we have to import
+`/base/samples/RigidBodyState`'s typekit, which is listed on the type's page:
+
+![Finding a typekit for a type](media/type_to_typekit.png){: .fullwidth}
+
+To import it, one must use the `import_types_from` stanza. Let's put it all together:
 
 ~~~ruby
 import_types_from 'base'
@@ -108,11 +120,11 @@ end
 **Note**: the position and orientation here are assumed to be respectively a
 vector (of type Eigen::Vector3) and a quaternion (of type Eigen::Quaternion).
 The underlying type system [is a subject for another
-part](../writing_components/types.html). For now, just accept it.
+part](../type_system). For now, just accept it.
 {: .callout .callout-info}
 
 This kind of "high-level argument shadowing low-level
-arguments must have a one-to-N relationship (usually one-to-one). It is
+arguments" sugar must have a one-to-N relationship (usually one-to-one). It is
 possible but not trivial, under the Syskit argument handling, to "aggregate"
 multiple high-level arguments into a low-level one.
 {: .callout .callout-warning}
@@ -189,6 +201,10 @@ and all the tests for a given robot configuration with
 $ syskit test -rgazebo
 ~~~
 
+**Note** that the our new tests would not be run by simply calling `syskit test
+-rgazebo`, as the generator and composition models are not loaded within the gazebo configuration (yet).
+{: .note}
+
 The IDE also gives an interface to the tests. It will display all the tests for
 the given robot configuration and allow to start them separately.  It also
 allows to auto-run all the discovered tests, and re-run tests when the files
@@ -222,7 +238,7 @@ end
 
 The `expect_execution` construct is the Syskit starting point for all things
 asynchronous in tests. Sending and receiving samples requires the constant
-generator to be executed, and therefore Syskit's own execution loop.
+generator to be executed - and therefore Syskit's own execution loop as well.
 {: .callout .callout-info}
 
 Rock's time representation has a precision of one microsecond, while Linux
@@ -261,9 +277,8 @@ end
 ## Creating the ArmCartesianConstantControlWdls Composition
 
 Now that we have a generator, let's bind it to our control loop to have
-something that can move and hold our arm to a given pose.
-
-We'll create the composition now.
+something that can move and hold our arm to a given pose. This is obviously
+going to be done by a composition as well.
 
 ~~~
 $ syskit gen cmp arm_cartesian_constant_control_wdls
@@ -435,7 +450,6 @@ syskit gen ruby_task joint_position_constant_generator
 ~~~ruby
 require 'models/compositions/constant_generator'
 import_types_from 'base'
-require 'base/float'
 
 module SyskitBasics
   module Compositions
@@ -451,10 +465,10 @@ module SyskitBasics
         joint_commands = setpoint.each_value.map do |position|
           Types.base.JointState.new(
             position: position,
-            speed: Base.unset,
-            effort: Base.unset,
-            raw: Base.unset,
-            acceleration: Base.unset)
+            speed: Float::NAN,
+            effort: Float::NAN,
+            raw: Float::NAN,
+            acceleration: Float::NAN)
         end
         self.values = Hash['out' =>
           Types.base.commands.Joints.new(

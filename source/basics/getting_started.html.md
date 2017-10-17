@@ -86,36 +86,7 @@ reuse it in different simulation scenes.
 For the purpose of this part of the documentation, we'll use Gazebo's UR10 arm
 model as our robot. We however need to integrate it in another model so that
 its base is fixed (using [this
-method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)) Models are saved in `models/sdf/`, let's create
-`models/sdf/ur10_fixed` and create a Gazebo model description file `models/sdf/ur10_fixed/model.config` with
-
-~~~xml
-<?xml version="1.0"?>
-
-<model>
-  <name>Universal Robotics UR10 robot arm on a fixed base</name>
-  <version>1.0</version>
-  <sdf>model.sdf</sdf>
-</model>
-~~~
-
-and the corresponding SDF model in `models/sdf/ur10_fixed/model.sdf`
-
-~~~xml
-<?xml version='1.0'?>
-<sdf version='1.5'>
-    <model name="ur10_fixed">
-        <include>
-          <name>ur10</name>
-          <uri>model://ur10</uri>
-        </include>
-        <joint name="attached_to_ground" type="fixed">
-            <parent>world</parent>
-            <child>ur10::base</child>
-        </joint>
-    </model>
-</sdf>
-~~~
+method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)).
 
 Usually, the first scene one creates is an empty one, which later will give us
 an environment in which to test basic functionality, without having to care
@@ -128,21 +99,22 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 <?xml version="1.0"?>
 <sdf version="1.6">
   <world name="empty_world">
-    <include>
-      <uri>model://ur10_fixed</uri>
-    </include>
+    <model name="ur10_fixed">
+        <include>
+          <name>ur10</name>
+          <uri>model://ur10</uri>
+        </include>
+        <joint name="attached_to_ground" type="fixed">
+          <parent>world</parent>
+          <child>ur10::base</child>
+        </joint>
+    </model>
     <include>
       <uri>model://ground_plane</uri>
     </include>
   </world>
 </sdf>
 ~~~
-
-**Note** the rock-gazebo integration does not know yet how to download models
-from Gazebo's model repository. Run `rock-gazebo --gui=gzclient empty_world` once first to
-make sure the models are downloaded. Wait for the scene to show up (Gazebo's
-splash screen disappears then), and quit it then.
-{: .callout .callout-warning}
 
 ## Running and visualizing a Gazebo environment
 
@@ -160,6 +132,17 @@ rock-gazebo empty_world
 Starts both a Gazebo simulation and displays it:
 
 ![Visualization of the simulation state with rock-gazebo-viz](media/initial_rock_gazebo_viz.jpg){: .fullwidth}
+
+<div class="note">
+The `ur10` and `ground_plane` models we are referencing in this world file need
+to be downloaded from Gazebo's model repository. This is done automatically by
+`rock-gazebo` the first time they're needed, but can also be done explicitly with
+the `--download-only` option, e.g.
+
+~~~
+rock-gazebo --download-only empty_world
+~~~
+</div>
 
 ## Preparing the `gazebo` Syskit configuration {#syskit_gazebo_configuration}
 

@@ -6,7 +6,7 @@ directory_title: Basics
 directory_sort_info: 10
 ---
 
-# Running a simple system using Gazebo and Syskit
+# Basics in integrating a system from scratch using Gazebo and Syskit
 
 Rock and Syskit provide a seamless integration with Gazebo. We will leverage
 this integration in this section to discover how to use existing components to
@@ -16,8 +16,8 @@ offers at runtime as well as the basics of package and component management.
 This will cover building a simple system and simulating using Gazebo. It will
 only base itself on existing components (no new components will be developed).
 
-This section assumes that you have a [bootstrapped Rock
-installation](installation.html).  All examples that have to be run inside a
+This section will start by [bootstrapping a Rock
+installation](installation.html). After the install, all examples that have to be run inside a
 terminal assume that you have sourced this installation's `env.sh` file in the
 current terminal.
 
@@ -61,13 +61,15 @@ functionality should be integrated to offer a "runtime", i.e. how the actual
 data being processed can be passed to the processing code in the libraries,
 from the sensors to the actuators, to turn all that code into a robot.
 
-The paradigm that Rock follows is the one of **components**. Components are
-black boxes that have inputs and produce outputs. It's by meshing these
+To integrate these libraries at runtime, Rock uses a **components** paradigm. Components are
+black boxes that have inputs and produce outputs - exchanging data through streams. It's by meshing these
 components together - connecting outputs to inputs - that an active
 sensor-processing-actuator loop is created and that the robot can act and react
 in its environment. In addition to this _dataflow interface_ (data inputs and
 outputs), Rock components also offer a _configuration_ interface where parameters
-can be chosen and tested. In Rock, these components are implemented in **oroGen
+can be chosen and tested.
+
+In Rock, these components are implemented in **oroGen
 packages**. They are described in an orogen file, which code-generates the
 skeleton of the components. oroGen packages also define the datatypes that
 can be transferred between the components.
@@ -87,25 +89,31 @@ one component to one package. Libraries should be "fat", components "slim". That
 most of the functionality should be implemented as a component-independent
 library.
 
-## The Flow
+## Progression
 
-The rest of the basics section will be following this flow:
+After having [installed Rock](installation.html) and [learn a bit how to manage
+a Rock workspace](day_to_day.html), we'll get into [creating a new Syskit app
+with a SDF scene](getting_started.html).
+
+After this, we will learn how to use an arm interface component provided by the
+Gazebo interface as well as existing Rock components to implement cartesian
+and joint control networks for this arm.
+
+Functionally, this will look like:
+
+![Schematic of the arm control networks](media/progression_initial.svg){: .fullwidth}
 
 <table class="table">
 <thead>
     <tr>
     <th>What you will do</th>
-    <th>What Syskit concepts are covered</th>
+    <th>What concepts are covered</th>
     </tr>
 </thead>
 <tbody>
     <tr>
-    <td><%= link_to "Getting started", "getting_started.html" %></td>
-    <td>Bootstrapping a Syskit app with Gazebo and a SDF scene, running Gazebo and visualizing the scene</td>
-    </tr>
-    <tr>
     <td><%= link_to "Creating an arm control network", "composition.html" %></td>
-    <td>Compositions</td>
+    <td>Installing new packages, Compositions</td>
     </tr>
     <tr>
     <td><%= link_to "Holding position in the cartesian space", "constant_generator.html" %></td>
@@ -122,5 +130,5 @@ The rest of the basics section will be following this flow:
 </tbody>
 </table>
 
-**Next**: [let's get started by installing Rock](installation.html)
+**Next**: [let's get started by creating a new Rock workspace](installation.html)
 {: .next-page}

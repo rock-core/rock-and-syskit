@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Recap
-sort_info: 60
+sort_info: 70
 ---
 
 # Recap

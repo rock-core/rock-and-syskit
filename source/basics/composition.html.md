@@ -7,21 +7,28 @@ sort_info: 20
 # Compositions: designing the network for the cartesian control of an arm
 {:.no_toc}
 
-- TOC
-{:toc}
-
-We are now going to try and do simple control [of our simulated
+<div class="callout callout-info">
+**Where are we ?** We are now going to try and do simple control [of our simulated
 arm](getting_started.html). We are going to do the integration of the control
 components and UR10 arm on Gazebo from scratch. However, we are going to see
 later than Syskit allows to make this integration generic, so that it can be
 reused.
 
+Below, the parts we will handle on this page are <span style="color:
+#5bc0de;">in blue</span> and the things that will be handled later <span
+style="opacity: 0.4;">in grey</span>
+
+![Where are we ?](media/progression_composition.svg){: .fullwidth}
+</div>
+
+- TOC
+{:toc}
+
 In Syskit, one has to _declare_ how components must be connected together to
 form a function, and then can request the system to actually run that function.
-
 This page deals with the first step (design). The [next
-page](constant_generator.html) will create the command generator, and we
-will then [_deploy_ the network](deployment.html) and run it.
+page](constant_generator.html) will create the command generator, and we will
+then [_deploy_ the network](deployment.html) and run it.
 
 But let's not get too much ahead of ourselves. We will need to first install
 the control package that will implement the control.
@@ -33,7 +40,7 @@ related configuration is contained within the `autoproj/` folder within the
 workspace's root directory (where you [originally
 bootstrapped](installation.html)). When working in a terminal, you can go
 at any time to the workspace's root directory by running `acd` without
-arguments ([more about `acd`](day_to_day.html#acd)).
+arguments (there's more about `acd` in this section's [Day to Day Commands](day_to_day.html#acd)).
 
 Within the `autoproj/` directory, packages are defined within _package sets_.
 These package sets define both how to build the package and where it should be
@@ -79,7 +86,9 @@ The "first match" line is always the package set where the package is defined. I
 </div>
 </div>
 
-To install the package, add it in the `layout` section of `autoproj/manifest`:
+In this tutorial, we will want to use the `control/orogen/cart_ctrl_wdls` which
+uses the KDL library to do cartesian control of a robotic arm.  To install the
+package, add it in the `layout` section of `autoproj/manifest`:
 
 ~~~yaml
 layout:
@@ -100,17 +109,17 @@ And finally build and install
 amake --all
 ~~~
 
-## Binding the components together {#composition}
+## Using the installed components
 
-Now that everything's installed, go back within the bundle folder. You may for
-instance do `acd b/syskit` ([more about `acd`](day_to_day.html#acd))
+Now that everything's installed, go back within the bundle folder. You may not
+use `acd` for this ([more about `acd`](day_to_day.html#acd)) yet, since the
+bundle has not been registered in autoproj.
 
-Compositions declare groups of components and connects them together. In
-addition, we will see later on that they can be seen by the rest of the system as
-components themselves, i.e. they can be used and connected in other
-compositions.
+Compositions declare groups of components and connects them together. Once
+defined, compositions can be used in other compositions to build more complex
+networks.
 
-Let's create our `arm_cartesian_control_wdls` composition
+Let's create our first building block, the `ArmCartesianControlWdls` composition
 
 ~~~
 $ syskit gen cmp arm_cartesian_control_wdls
@@ -120,39 +129,37 @@ $ syskit gen cmp arm_cartesian_control_wdls
       create  test/compositions/test_arm_cartesian_control_wdls.rb
 ~~~
 
-<div class="panel panel-info">
-<div class="panel-heading" id="orogen">
-OroGen packages in Syskit
-</div>
-<div class="panel-body">
-As described in our [brief introduction](index.html), oroGen packages are
-where the functionality implemented in the library packages are "packaged" into things
-that can be used at runtime.
-
-To be used in Syskit, these oroGen components must be first imported using the
-`using_task_library` statement. In our case, `cart_ctrl_wdls`, this is done with
+As described in our [brief introduction](index.html), oroGen packages are where
+the functionality implemented in the library packages are "packaged" into
+things that can be used at runtime. To be used in Syskit, these oroGen
+components must be first imported using the `using_task_library` statement. In
+our case, `cart_ctrl_wdls`, this is done with
 
 ~~~ruby
 using_task_library "cart_ctrl_wdls"
 ~~~
 
 This loads the oroGen project, and imports the components in it to make them
-available in the Syskit models. The name of the imported models is mapped from
-the oroGen naming scheme to the Syskit naming scheme by CamelCasing the project
-name, e.g. `cart_ctrl_wdls` becomes `CartCtrlWdls` and the
+available in the Syskit models. The task models from the oroGen project are
+then made available within the Syskit app under the
+`OroGen.project_name.ComponentName` scheme, e.g. the
 `cart_ctrl_wdls::ToPosConverter` component is accessible under
-`OroGen::CartCtrlWdls::ToPosConverter` in Syskit.
+`OroGen.cart_ctrl_wdls.ToPosConverter` in Syskit.
 
-In case you're not sure about the naming, just add the `using_task_library` statement
-at the beginning, toplevel of a file and load it with `syskit ide`. If we do so in our newly created `models/compositions/arm_cartesian_control_wdls.rb` and run
+In case you're not sure about the naming, just add the `using_task_library`
+statement at the toplevel of a file and load it with `syskit ide`.
+
+Let's do so in our newly created
+`models/compositions/arm_cartesian_control_wdls.rb`. Then, run
 
 ~~~
-syskit ide models/compositions/arm_cartesian_control_wdls.rb
+syskit ide -rgazebo models/compositions/arm_cartesian_control_wdls.rb
 ~~~
 
 ![Name mapping between oroGen and Syskit](media/syskit_name_mapping.png){: .fullwidth}
-</div>
-</div>
+
+**Note** Leave the IDE open, we will reuse it
+{: .note}
 
 We now want to build the cartesian control network. What each component does in
 the `cart_ctrl_wdls` project can be found by reading the documentation displayed
@@ -175,8 +182,8 @@ using_task_library 'cart_ctrl_wdls'
 module SyskitBasics
   module Compositions
     class ArmCartesianControlWdls < Syskit::Composition
-      add OroGen::CartCtrlWdls::WDLSSolver, as: 'twist2joint_velocity'
-      add OroGen::CartCtrlWdls::CartCtrl, as: 'position2twist'
+      add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+      add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
       add CommonModels::Devices::Gazebo::Model, as: 'arm'
     end
   end
@@ -185,12 +192,11 @@ end
 
 At this stage, we will have to connect the ports together. To see what inputs
 and outputs are available, one can have a look at the component's `.orogen`
-files. The alternative is to open the `syskit ide` and inspect the composition
-file as follows (`-rgazebo` is necessary because we are importing models from
-`common_models`). **Leave the IDE open after this, we will reuse it**
+files. The alternative is to use the IDE. Click the `Reload Models` button and
+open the composition page:
 
 <div class="fluid-video">
-<iframe width="853" height="480" src="https://www.youtube.com/embed/hTBYnlc0J3Q?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/9Sz7gREngHM?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 We may now start adding connections in the composition definition. The `as`
@@ -204,8 +210,8 @@ command to the actual arm command input:
 
 ~~~ruby
 class ArmCartesianControlWdls < Syskit::Composition
-  add OroGen::CartCtrlWdls::WDLSSolver, as: 'twist2joint_velocity'
-  add OroGen::CartCtrlWdls::CartCtrl, as: 'position2twist'
+  add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+  add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
   add CommonModels::Devices::Gazebo::Model, as: 'arm'
 
   position2twist_child.ctrl_out_port.
@@ -215,7 +221,9 @@ class ArmCartesianControlWdls < Syskit::Composition
 end
 ~~~
 
-And hit the "Reload Models" button at the top of the IDE window
+And hit the "Reload Models" button at the top of the IDE window. Syntax errors
+(such as a misspelled port name) are shows at the bottom of the view. Just
+click reload after you fixed them.
 
 Let's inspect the remaining unconnected input ports. There's `command`,
 `cartesian_status` and `joint_status` ports that obviously need to be connected
@@ -228,9 +236,7 @@ arm_child.joints_status_port.
 
 However, the cartesian position feedback is not directly provided by the Gazebo
 model. Fortunately, the `control/orogen/robot_frames` project provides components
-to do the joint-to-cartesian conversion.
-
-Add it now to the workspace [in the same way we added
+to do the joint-to-cartesian conversion. Add it now to the workspace [in the same way we added
 `control/orogen/cart_ctrl_wdls`](#add_package), import it in the composition
 file with `using_task_library` and reload models within the IDE.
 Then, finally add it to the composition.
@@ -245,10 +251,10 @@ using_task_library 'robot_frames'
 module SyskitBasics
   module Compositions
     class ArmCartesianControlWdls < Syskit::Composition
-      add OroGen::CartCtrlWdls::WDLSSolver, as: 'twist2joint_velocity'
-      add OroGen::CartCtrlWdls::CartCtrl, as: 'position2twist'
+      add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+      add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
       add CommonModels::Devices::Gazebo::Model, as: 'arm'
-      add OroGen::RobotFrames::SingleChainPublisher, as: 'joint2pose'
+      add OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose'
 
       position2twist_child.ctrl_out_port.
         connect_to twist2joint_velocity_child.desired_twist_port
