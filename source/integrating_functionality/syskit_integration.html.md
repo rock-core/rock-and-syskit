@@ -70,7 +70,7 @@ default configuration is what is being applied if no other configurations is
 specified.
 
 Whenever an oroGen component, that is either in a
-[composition](../basics/composition.thml) or [in a Syskit
+[composition](../basics/composition.html) or [in a Syskit
 profile](../basics/devices.html), a non-default configuration can be selected
 with the `with_conf` call, e.g.
 

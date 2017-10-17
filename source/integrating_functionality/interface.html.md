@@ -160,7 +160,7 @@ This is details [later in this section](writing_the_hooks.html#dynamic_ports)
 Syskit expects dynamic ports to be created at configuration time and removed at
 cleanup time. 
 
-## Inheritance
+## Inheritance {#inheritance}
 
 It is possible to make the components inherit from each other, and have the
 other oroGen features play well.

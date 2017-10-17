@@ -111,10 +111,9 @@ Types.base.samples.RigidBodyState
 ~~~
 
 On import, Syskit builds a component model that represents the oroGen
-component. This model is accessible [within the `OroGen`
-namespace](composition.html#orogen). It can also be extended to reflect needs
-in the Syskit app, for instance configuration, using [extension
-files](deployment.html#orogen_extension_files).
+component. This model is accessible as `OroGen.project_name.TaskName`. It can
+also be extended to reflect needs in the Syskit app, for instance
+configuration, using [extension files](deployment.html#orogen_extension_files).
 
 oroGen components provide a configuration interface as a set of properties.
 These properties are filled using YAML configuration files stored in

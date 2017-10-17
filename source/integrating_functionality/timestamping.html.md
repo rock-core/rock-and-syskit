@@ -102,8 +102,8 @@ and a _jitter_ (variability).
 
 Since most sensors have a fixed acquisition period, the jitter can be filtered
 out over time by estimating the average sensor period and base time. In Rock,
-this is done by the `aggregator::TimestampEstimator` class [that we're going to
-describe next](timestamp_estimator_usage.html).
+this is done by the `aggregator::TimestampEstimator` class [that is
+described later on this page](#timestamp_estimator)
 
 The average latency, however, is a different issue altogether. It
 originates from different sources, each of which have to be solved by different
@@ -145,7 +145,7 @@ Timestamped data samples within Rock's base types are all defined within the
 add one following the same When applicable (that is, mostly all the time), the
 Rock data types
 
-## Filtering Latency with the Timestamp Estimator
+## Filtering Latency with the Timestamp Estimator {#timestamp_estimator}
 
 The TimestampEstimator class, which lies in the aggregator package, is used to
 remove the jitter out of a periodic time stream. Basically, once configured, one

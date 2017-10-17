@@ -29,7 +29,7 @@ The combination of thread information and triggering mechanism is called an
 ## Default Deployments {#default}
 
 orogen creates a default deployment for each declared
-[non-abstract](interface.html#abstract) task. This default deployment puts each
+[non-abstract](interface.html#inheritance) task. This default deployment puts each
 component in a single thread, in its own process. It uses a default triggering
 mechanism that is defined on the task context. This default activity should be
 considered a "sane default", but components should in general not rely on this
