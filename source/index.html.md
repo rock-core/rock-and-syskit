@@ -25,9 +25,6 @@ and C++, it is best to know about these languages. However, documentation on
 the basics and principles of a Rock-Syskit system can be followed with basic
 programming knowledge.
 
-A Rock newcomer should read this documentation sequentially. Tutorials and
-examples are mixed with more detailed descriptions, with an aim at being progressive.
-
 <div class="alert alert-warning" role="alert">
 As of today (June 2017), not all the software used in this guide has reached
 Rock mainline repositories. For this reason, one needs to start using the
@@ -41,7 +38,9 @@ the default one at
 
 The [Basics](#basics) section is meant to be read in its entirety. It covers
 presents the fundamentals of how a robotic system is integrated and managed
-at runtime within Rock and Syskit.
+at runtime within Rock and Syskit. A Rock newcomer should read this
+part sequentially. Tutorials and examples are mixed with more detailed
+descriptions, with an aim at being progressive.
 
 After the basics, the rest of the documentation is meant to be read on a
 need-to-know basis. Pick the subjects that are of interest to you, or that you
@@ -57,8 +56,9 @@ need to know at a certain point in time.
 3. [Workspace and Packages](workspace/index.html)
 3. [The Type System](type_system/index.html)
 4. [Integrating Functionality](integrating_functionality/index.html)
+6. Working with SDF
 5. Reusable Syskit modelling
-7. Advanced data processing in Components
+6. Advanced Deployment
 8. System coordination
 9. Error Handling
 
@@ -68,19 +68,4 @@ need to know at a certain point in time.
 9. Logging, Data Visualization and Building GUIs
 10. Inspecting coordination data
 11. Debugging components
-12. Advanced Deployment
 
-### Join the force!
-[Top](#top)
-
-Bla bla bla.
-
-### Getting to know Syskit
-[Top](#top)
-
-Bla bla bla.
-
-### New Website
-[Top](#top)
-
-Welcome to rock's new website.
