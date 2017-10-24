@@ -67,7 +67,42 @@ syskit gen orogenconf imu_advanced_navigation_anpp::Task
 The YAML file is split into named sections. The section separator is `---
 name:SECTION_NAME`. If no section name is given, then `default` is assumed. The
 default configuration is what is being applied if no other configurations is
-specified.
+specified. The YAML content is a map with one entry per property, and a
+representation of the property value mapped to YAML:
+
+- structures are represented by maps, with one entry per field, e.g. a
+  `timeout` property of type `/base/Time` is
+
+  ~~~ yaml
+  timeout:
+    microseconds: 1000
+  ~~~
+
+  All fields of a struct do not need to be set. If some fields are left unset,
+  the default value for this field will be used (default value being the value
+  written at initialization by the component)
+- arrays and containers are represented by arrays
+- `/std/string` is represented by strings
+- enums are represented by strings
+
+Moreover, to facilitate writing configuration files, Syskit knows how to
+interpret some unit specifiers. These specifiers work by converting the
+value of the specified unit into the equivalent standard SI unit. When scale
+specifiers apply, the following only shows the most useful ones.
+
+- `.deg` converts a value in degrees into radians (e.g. `20.deg`)
+- `.g` converts a gram into kilograms. Standard scale modifiers apply (kilogram
+  `.kg`, milligram `.mg`)
+- `.N` specifies the Newton (which is its own unit). Standard scale modifiers
+  apply (kiloNewton `.kN`, milliNewton `.mN`)
+- `.P` specifies the Pascal (which is its own unit). Standard scale modifiers
+  apply (hectoPascal `.hP`, kiloPascal `.kP`, milliPascal `.mP`)
+- `.bar` converts a bar into pascals. Standard scale modifiers apply (`.mbar`)
+
+**Note** that the toolchain does not validate yet that the field is compatible with
+the value's unit (i.e. you can assign a `.deg` to a pressure), but probably will in
+the future.
+{: .important}
 
 Whenever an oroGen component, that is either in a
 [composition](../basics/composition.html) or [in a Syskit
