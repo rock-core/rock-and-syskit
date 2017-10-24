@@ -10,7 +10,7 @@ sort_info: 20
 - TOC
 {:toc}
 
-[Compositions](compositions.html) allow to define self-contained networks.
+[Compositions](composition.html) allow to define self-contained networks.
 These networks have to be exposed as _actions_ into the system, which is what
 is accessible to the [coordination layer](../coordination) and externally to
 the user. Moreover, these networks aim ultimately at being as system- and
@@ -20,7 +20,7 @@ and/or with different configurations.
 The place where they are exported as actions, and fine-tuned to an
 application/system need is the **Profile**. We will go through the basics
 about profiles in this section, to significantly expand in the next, where we
-talk about [reusable models](reusable_models.html).
+talk about [reusable models](reusable_networks.html).
 
 ## Definition
 
@@ -96,7 +96,7 @@ define 'arm_safe_position', arm_joint_position_constant_control_def.
 ~~~
 
 We will also talk more about compositions in the [next
-section](reusable_models.html). The rest of this section will deal with common
+section](reusable_networks.html). The rest of this section will deal with common
 patterns related to profiles. You may want to skim through it quickly at first
 read, and come back to it later.
 {: .next-page}
@@ -115,14 +115,14 @@ define 'arm_safe_position', arm_joint_position_constant_control_def.
 
 In addition, it is possible to change the configuration/arguments of a child of
 a composition. This uses dependency injection mechanisms that will be detailed
-[in the next section](reusable_models.html), but the pattern is easy enough to use:
+[in the next section](reusable_networks.html), but the pattern is easy enough to use:
+{: #dependency_injection}
 
 ~~~ ruby
 define 'cartesian_control_wdls_slow', arm_cartesian_constant_control_def.
   use('control.twist2joint_velocity' =>
     OroGen.cart_ctrl_wdls.WDLSSolver.with_conf('default', 'slow'))
 ~~~
-{: #dependency_injection}
 
 The string in the `use` statement is the path to the child that is being
 refined (in this case, the `twist2joint_velocity` child of the `control` child
@@ -146,7 +146,7 @@ has a `setpoint` argument, and that is therefore how it has been implemented.
 {: .note}
 
 This is all the basics about profiles. Let's now deepen our understanding of
-how we can make [reusable models](reusable_models.html) using these basic tools
+how we can make [reusable models](reusable_networks.html) using these basic tools
 and one additional: the data service.
 {: .next-page}
 

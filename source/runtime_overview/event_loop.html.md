@@ -130,7 +130,7 @@ be an important distinction when building more complex, coordinated systems.
 
 Note that this is a simplification that is "good enough" for now. These are
 default rules, that can be overridden explicitly on a case-by-case basis. There
-will be more about this in [the coordination part](../syskit_coordination/).
+will be more about this in [the coordination part](../coordination/).
 {: .callout .callout-info}
 
 ## Component Lifecycle, Configuration, Startup and Shutdown

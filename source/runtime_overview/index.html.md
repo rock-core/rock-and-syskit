@@ -21,7 +21,7 @@ representation and common type of errors](exceptions.html)
 
 This is the first part that will deal with runtime aspects. For more advanced
 related topics, one may want to also read all about
-[coordination](../syskit_coordination/index.html).
+[coordination](../coordination/index.html).
 
 ## Actions and Jobs
 
@@ -141,7 +141,7 @@ happened smoothly: the arm was controlled during the change of system
 configuration.
 
 The same mechanisms are key to autonomously transitioning between behaviours.
-This is how one can build [coordination](../syskit_coordination/index.html) models.
+This is how one can build [coordination](../coordination/index.html) models.
 
 When we transitioned from the joint control to the cartesian control, we first
 **queued** the action start and the action drop and then processed them at

@@ -208,7 +208,7 @@ One gets the expected:
 ## Using Data Services as Children in Compositions
 
 Data services can be used as-is in compositions. In fact, the device model [we
-have used in the basics chapter](../basics/compositions.html) is at its core a
+have used in the basics chapter](../basics/composition.html) is at its core a
 data service.  The joint control composition
 [from the Basics](../basics/composition.html) should be rewritten using a data service.
 This requires to replace the device model by the data service, but also to change the
@@ -317,7 +317,7 @@ The result of the `use` statements can be used anywhere a component or service
 can be used, as for instance as a composition child or profile definition. It
 can be chained with other model modifiers such as `with_arguments` or
 `with_conf`. This is how we injected [the robot device in out control
-compositions](../basics/profiles.html):
+compositions](../basics/devices.html):
 
 ~~~ ruby
 profile 'ArmControl' do

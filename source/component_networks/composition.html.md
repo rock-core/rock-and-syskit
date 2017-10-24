@@ -144,7 +144,7 @@ composition's exported port can be itself exported in a parent compositions,
 and so on and so forth.
 {: .note}
 
-## Configuration
+## Configuration {#configurations}
 
 In the same way than compositions do not really have ports, but only "export"
 the ports of its children, compositions do not have configurations by
@@ -186,11 +186,11 @@ end
 
 At this stage of the chapter, this would be only useful to create a "core"
 network that is refined in subclasses. We will see momentarily that it has also
-its usefulness in the [reusable models](reusable_models.html) and later in
+its usefulness in the [reusable networks](reusable_networks.html) and later in
 building [coordination code](../coordination/index.html)
 
 We will also talk more about compositions when we get into the
-[reusable models](reusable_models.html) section. The rest of this section will
+[reusable networks](reusable_networks.html) section. The rest of this section will
 deal with common implementation patterns related to compositions. You may want
 to skim through it quickly at first read, and come back to it later. The next
 subject is [Profiles](profiles.html)
@@ -229,7 +229,7 @@ from parent to child: `add(...).with_arguments(conf: from(:parent_task).conf)`.
 {: .note}
 
 This is all the basics about compositions. We will come back to it once we talk
-about [reusing models](reusing_models.html). But first, the next subject is
+about [reusing networks](reusable_networks.html). But first, the next subject is
 [Profiles](profiles.html)
 {: .next-page}
 

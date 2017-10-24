@@ -28,7 +28,7 @@ from the world and being processed in an asynchronous way _but in realtime_.
 This has a lot of ramifications. We will deal with in this page with the one that has
 the most impact on writing libraries and components for the robotics world: _timestamping_.
 A related issue, the one of time-ordered data processing, will be dealt with [in the dataflow
-design](../dataflow_design/stream_aligner.html) section.
+design](../component_networks/stream_aligner.html) section.
 
 ## Timestamping
 

@@ -55,7 +55,7 @@ seen in the [basics](../basics) chapter. We are assuming that you have read the
 Integrating Functionality chapter, so we're going to jump straight at
 [compositions](composition.html) and [profiles](profiles.html). We will then go
 into the mechanisms that allow to build [reusable
-models](reusable_models.html), a.k.a.  how to make most of the models
+models](reusable_networks.html), a.k.a.  how to make most of the models
 robot-independent, to then fine-tune the models for each system.
 
 The next step will be to detail Syskit's [network merge
@@ -75,6 +75,6 @@ components that are (mostly) system-independent, promoting reuse.
 We will then conclude on some [words of advice](best_practices.html) about
 modelling component networks in Syskit.
 
-Let's now get into the first item of business, the [data services](data_services.html)
+Let's now get into the first item of business, the [compositions](composition.html)
 {: .next-page}
 
