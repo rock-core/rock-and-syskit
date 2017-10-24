@@ -78,14 +78,13 @@ obj.status # => :OK
 obj.status = :FAILED
 ~~~
 
-## Loading and Accessing Types
+## Loading and Accessing Types {#import_types_from}
 
-To get access to registered types, one needs to initialize the orocos.rb library and load the corresponding typekits:
+To get access to registered types within Syskit, one needs to call
+`import_types_from` at toplevel with the oroGen project that defines the type:
 
 ~~~ ruby
-require 'orocos'
-Orocos.initialize
-Orocos.load_typekit 'base'
+import_types_from 'base'
 ~~~
 
 From their on, all the types that the `base` typekit define are made available
