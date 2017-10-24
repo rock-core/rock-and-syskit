@@ -4,7 +4,7 @@ title: Profiles and Devices
 sort_info: 40
 ---
 
-# Devices
+# Profiles and Devices
 {:.no_toc}
 
 <div class="callout callout-info">
@@ -185,6 +185,7 @@ module SyskitBasics
   end
 end
 ~~~
+{: .dependency_injection}
 
 A device model is accessed using the device's name with a `_dev` suffix on the
 profile it is defined. Here `Base.ur10_dev` is the `ur10` device

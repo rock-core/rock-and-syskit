@@ -56,16 +56,16 @@ need to know at a certain point in time.
 3. [Workspace and Packages](workspace/index.html)
 3. [The Type System](type_system/index.html)
 4. [Integrating Functionality](integrating_functionality/index.html)
-6. Working with SDF
-5. Reusable Syskit modelling
-6. Advanced Deployment
+5. Working with SDF
+6. [Designing Component Networks](component_networks/index.html)
+7. Advanced Component Deployment
 8. System coordination
 9. Error Handling
 
 ## Development Workflow
 
-8. Tests
-9. Logging, Data Visualization and Building GUIs
-10. Inspecting coordination data
-11. Debugging components
+10. Tests
+11. Logging, Data Visualization and Building GUIs
+12. Inspecting coordination data
+13. Debugging components
 
