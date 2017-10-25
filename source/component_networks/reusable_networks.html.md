@@ -190,7 +190,7 @@ The resulting data service would be this:
 
 By explicitly mapping the provided service ports with:
 
-~~~
+~~~ ruby
 data_service_type 'Pose' do
   output_port 'pose_samples', '/base/samples/RigidBodyState'
   provides Position, 'position_samples' => 'pose_samples'
@@ -213,6 +213,7 @@ data service.  The joint control composition
 [from the Basics](../basics/composition.html) should be rewritten using a data service.
 This requires to replace the device model by the data service, but also to change the
 port names (obviously)
+{: #armcartesiancontrol_with_data_service}
 
 ~~~ ruby
 # This is in bundles/common_models. The _control_loop files define a set of
@@ -294,7 +295,7 @@ Syskit validates type compatibility, of course, that is the replacement is
 valid only if it is another service that provides the child's or a component
 that does. If the types are incompatible, one gets the following message:
 
-~~~ ruby
+~~~
 invalid selection for arm
 got OroGen.cart_ctrl_wdls.CartCtrl
 which provides
@@ -321,25 +322,212 @@ compositions](../basics/devices.html):
 
 ~~~ ruby
 profile 'ArmControl' do
-	define 'arm_cartesian_constant_control',
-		Compositions::ArmCartesianConstantControlWdls.
-			use(Base.ur10_dev)
-	define 'arm_joint_position_constant_control',
-		Compositions::JointPositionConstantControl.
-			use(Base.ur10_dev)
-	define 'arm_safe_position',
-		arm_joint_position_constant_control_def.
-			with_arguments(setpoint: UR10_SAFE_POSITION)
+  define 'arm_cartesian_constant_control',
+    Compositions::ArmCartesianConstantControlWdls.
+      use(Base.ur10_dev)
+  define 'arm_joint_position_constant_control',
+  	Compositions::JointPositionConstantControl.
+  	  use(Base.ur10_dev)
+  define 'arm_safe_position',
+  	arm_joint_position_constant_control_def.
+  	  with_arguments(setpoint: UR10_SAFE_POSITION)
 end
 ~~~
+
 
 ## Managing Reusability in Profiles
 
 Profiles are the objects that expose the "final" networks, that is the networks
 that are going to be used at runtime. As such, they usually are the place where
-the replacement of services by actual concrete components happen.
+the replacement of services by actual concrete components happen, rather by doing
+it with subclassing of compositions.
 
+**Composition overload vs. injection in profiles** As the saying goes, there
+are only two hard things in computer science: caching invalidation and naming
+things. Doing the data service replacements using dependency injection avoid
+polluting the composition namespaces with all the possible combinations of
+services. Use subclassing when the subclass need changes related to
+coordination. Stick to profiles in all other cases.
+{: .important}
 
+In complex systems, one often ends up two or three layers of profiles, to share
+the definitions between the simulated and real systems. The two layer structure
+is:
+
+1. Root layer, defines networks that are still generic, but are already tuned
+   to the needs of your application
+2. Configuration-specific layer, where the networks are ready to run.
+
+The third layer (actually, layer 0) exists when one creates a domain-specific
+bundle, that is defines networks that are meant to be used widely by whole
+communities (i.e. manipulation, …). In this case, Layer 1 would refine these
+networks and add new ones that are specific to your application.
+
+When used in profiles, one does not see which data services a composition has.
+In complex systems, relying on the knowledge of which data services need to be
+replaced is borderline impossible. In order to keep this manageable, profiles
+define _tags_. Tags are profile-level services that represent a so-called
+_inflexion point_, that is a point that is available for adaptation of the
+profile. These tags can then be injected in the definitions to "replace" the
+composition's data services. A tag is defined with
+
+~~~ ruby
+tag 'tag_name', Services::Model
+~~~
+
+and are then accessed with the `${tag_name}_tag` pattern. For instance, the arm
+control based on data services [we just defined](#armcartesiancontrol_with_data_service)
+would be integrated in a Root profile with:
+
+~~~ ruby
+module SyskitBasics
+  module Profiles
+    profile 'ArmControl' do
+      tag 'arm', CommonModels::Services::JointsControlledSystem
+
+      define 'arm_cartesian_constant_control',
+        Compositions::ArmCartesianConstantControlWdls.
+          use(arm_tag)
+      define 'arm_joint_position_constant_control',
+        Compositions::JointPositionConstantControl.
+          use(arm_tag)
+      define 'arm_safe_position',
+        arm_joint_position_constant_control_def
+    end
+  end
+end
+~~~
+
+**Note** that we removed the default joint position in the `arm_safe_position`
+definition, which is obviously UR10-specific
+{: .note}
+
+A root profile is then imported within the configuration-specific layer with
+the `use_profile` statement. Tags are replaced by providing the `"tag_name"
+=> tag_replacement` syntax. Our UR10 profile would be defined with:
+
+~~~ ruby
+module SyskitBasics
+  module Profiles
+    module Gazebo
+      profile 'ArmControl' do
+        use_profile Profiles::ArmControl,
+          'arm' => Base.ur10_dev
+      end
+    end
+  end
+end
+~~~
+
+If further refinement, such as default arguments, are necessary, they are using
+the `define` syntax, but then use the `_def` accessor directly:
+
+~~~ ruby
+module SyskitBasics
+  module Profiles
+    module Gazebo
+      profile 'ArmControl' do
+        use_profile Profiles::ArmControl,
+          'arm' => Base.ur10_dev
+        define 'arm_safe_position', arm_safe_position_def.
+          with_arguments(setpoint: UR10_SAFE_POSITION)
+      end
+    end
+  end
+end
+~~~
+
+**Naming scheme and file structure** root ("generic") profiles are defined
+within the root `${appname}::Profiles` namespace, and saved within `models/profiles/`.
+Configuration-specific profiles are saved within
+`${appname}::Profiles::${ConfigurationName}` (e.g. `Profiles::Gazebo`) and saved within
+`models/profiles/configuration_name/` (e.g. `models/profiles/gazebo`). Use the
+`-r` option of `syskit gen profile` can be used to create the new profile under
+the right folder, e.g. `syskit gen profile -rgazebo arm_control`
+{: .note}
+
+**Profile properties** a profile can be _self-contained_, _ready to
+instanciate_ and _ready to deploy_ (and it is **broken** if it is none of
+these).
+
+A **self contained profiles** is a profile where the only abstract parts are
+tags defined within itself. The default tests for profiles contain the `it {
+is_self_contained }` lines which verifies this property. Being self-contained
+ensures that, when reusing the profile, the only thing the developer needs to
+know are this profile's tags, which can be easily read and documented. As the
+generated test file says: "You usually want this. Really. Keep it there.". This
+is the only test you usually will want in layer 0 and 1 profiles.
+
+A **ready-to-instanciate profile** is a profile that has no abstract parts.
+This is what you want in the layer 2 profiles and is tested with `it {
+can_instanciate }`. It obviously implies that the profile is self-contained.
+But as the generated tests say, keep both. This ensures that if you remove
+the `can_instanciate` test, you'll still be testing that the profile is
+self-contained.
+
+A **ready-to-deployed profile** is a profile that has no abstract parts and for
+which all components are assigned a proper deployment. This is usually what
+you want in the layer 2 profiles and is tested with `it { can_deploy }`. It
+obviously implies that the profile is self-contained and can be instantiated.
+But as the generated tests say, keep all three. This ensures that if you remove the
+`can_deploy` test, you'll still be testing for the two other properties.
+
+## Deployments
+
+During the basics, we've seen that one must define
+[deployments](../basics/deployment.html#use_deployment) to be able to run the
+network. We also discussed have seen in more details how deployments are
+created [within oroGen projects](../integrating_functionality/deployment.html).
+
+Defining deployments within a robot's configuration `requires` block is often
+the only thing you need to do. The only case where you will need more is when
+more than one deployment exists of a certain component. In this case, you will
+need to specify which deployment the networks should use with the
+`prefer_deployed_tasks` specification. The specification either takes a string
+- in which case it must match the deployment name exactly - or a regular
+expression.
+
+A canonical example would be a robot with two arms. Our `ArmControl` profile
+could be refined into two, one for each arm:
+
+~~~ ruby
+profile 'LeftArmControl' do
+  use_profile Profiles::ArmControl,
+    'arm' => Base.left_arm_dev
+
+  each_definition do |definition|
+    define definition.name, definition.
+      prefer_deployed_tasks(/^left_/)
+  end
+end
+~~~
+
+and
+
+~~~ ruby
+profile 'RightArmControl' do
+  use_profile ArmControl,
+    'arm' => Base.left_arm_dev
+
+  each_definition do |definition|
+    define definition.name, definition.
+      prefer_deployed_tasks(/^right_/)
+  end
+end
+~~~
+
+**Note** the two profiles share the same definition names, which means that
+they cannot be directly used at the same time [in the action
+interface](../basics/#actions). It is possible to transform the definition
+names within the `use_profile` statement with the `transform_names` option:
+
+~~~ ruby
+profile 'RightArmControl' do
+  use_profile ArmControl,
+    'arm' => Base.left_arm_dev,
+    transform_names: ->(base_name) { "left_#{base_name}" }
+end
+~~~
 
 ## A Word of Warning
 
@@ -349,9 +537,14 @@ engineer aspiration of making everything general and reusable.
 So **be careful with this**. A Syskit model set that is all-general will be
 also all-unmanageable. In most cases, make _resonably large_ compositions that
 contain few data services. Don't reuse compositions just because the other
-composition existed.
+composition existed. Reuse compositions because there is either a semantic link
+between the two, or because there is a practical reason to. There is no clear
+rule to follow, so it is something that you have to keep in mind so that you
+keep it under control.
 
-Syskit acts as a type and test system. Its aim is to make refactoring
-painless. Don't over-think your designs, splitting common functionality when
-necessary.
+Syskit acts as a type and test system. Its aim is to make refactoring as easy
+as it can be. Don't over-think your designs in advance. Rather, be too specific
+and refactor as necessary.
 
+Now that we know how networks are built and exposed in a Syskit system, let's
+see how Syskit [merges them together](network_merge.html)
