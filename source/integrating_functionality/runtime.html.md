@@ -1,10 +1,10 @@
 ---
 layout: documentation
-title: Syskit Integration
+title: Runtime
 sort_info: 55
 ---
 
-# Syskit Integration
+# Running Components
 {:.no_toc}
 
 - TOC
@@ -135,6 +135,37 @@ The configurations are overlaid one on top of each other, from left to right.
 In the example above, the values in the `high_dynamics` section will override
 those in the `default` section.
 
+## Quickly Running New Components
+
+One usually wants to quickly run a new component "just to check". Having to
+integrate it all the way in the app, through the profile, action and robot
+configuration is a hassle at this stage. You may run a single-file "app"
+instead of a whole robot configuration for this purpose. For instance, to run
+Rock's `imu_advanced_navigation_anpp::Task` driver one would create a `test.rb`
+file with:
+
+~~~ ruby
+using_task_library 'imu_advanced_navigation_anpp'
+Syskit.conf.use_deployment OroGen.imu_advanced_navigation_anpp.Task => 'imu'
+Robot.controller do
+  plan.add_mission_task(OroGen.imu_advanced_navigation_anpp.Task)
+end
+~~~
+
+which you can then run with
+
+~~~
+syskit run test.rb
+~~~
+
+You can put anything in the `add_mission_task` that you would put in a
+profile's `define` statement. I.e. you may define a composition in the file and
+run it, reuse definition from your app's profiles, … If you provide a robot
+configuration with `-r`, the app's `requires` block is executed first, so all
+models loaded by the configuration can also be used as-is in the file.
+
+If you have an IDE opened, it will connect to this app and give you its status.
+
 ## Component Extension File
 
 To handle a Syskit app's configuration needs, one often has to create a
@@ -169,6 +200,35 @@ Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
   end
 end
 ~~~
+
+## Runtime Environment
+
+Syskit starts all the components under a common log directory, within the app's
+`logs` directory. The log directory of the last started Syskit instance is
+available as `logs/current`. If your component saves files in relative paths,
+they will be saved there (which is a good thing). The output of each component
+process is redirected into a file in this folder, with the name
+`${deployment_name}-${PID}.txt`. Assuming that the process ID of following deployment
+is `2345`, the log file name would be `imu-2345.txt`.
+
+~~~
+Syskit.conf.use_deployment OroGen.imu_advanced_navigation_anpp.Task => 'imu'
+~~~
+
+For debugging purposes, Syskit natively supports starting deployments under a
+`gdbserver` instance.  IDEs commonly support connecting to these `gdbserver`
+and debug it.
+
+To enable this, just add the `gdb: true` option to the `use_deployment` statement:
+
+~~~
+Syskit.conf.use_deployment OroGen.imu_advanced_navigation_anpp.Task => 'imu', gdb: true
+~~~
+
+The first job that use this deployment will stay in `READY` state in the IDE
+until you connect a debugger to the process. The port at which one must connect
+is contained in the component's log file. Look for a message of the form
+`Listening to port XXXXX`
 
 This is all on the subject of adding new functionality in a Rock system. Go
 back to the [documentation's overview](../index.html#how_to_read) if you're
