@@ -266,7 +266,7 @@ end
 ~~~
 
 **Devices vs. data services ?** Generally speaking, one seldom use a device in
-a compositions. Do you really need a Garmin GPS in a particular network ? Can't
+a composition. Do you really need a Garmin GPS in a particular network ? Can't
 it work with any other receiver ? Or even a complete network that does pose
 estimation instead of a GPS ? Using devices in compositions breaks generality
 with zero advantage, since one still has to do things at the profile level to
@@ -365,7 +365,7 @@ services. Use subclassing when the subclass need changes related to
 coordination. Stick to profiles in all other cases.
 {: .important}
 
-In complex systems, one often ends up two or three layers of profiles, to share
+In complex systems, one often ends up with two or three layers of profiles, to share
 the definitions between the simulated and real systems. The two layer structure
 is:
 
@@ -497,13 +497,45 @@ created [within oroGen projects](../integrating_functionality/deployment.html).
 Defining deployments within a robot's configuration `requires` block is often
 the only thing you need to do. The only case where you will need more is when
 more than one deployment exists of a certain component. In this case, you will
-need to specify which deployment the networks should use with the
+need to create [multiple deployments of the same task
+model](../integrating_functionality/syskit_integration.html), and Syskit will
+require you to specify which deployment the networks should use with the
 `prefer_deployed_tasks` specification. The specification either takes a string
 - in which case it must match the deployment name exactly - or a regular
-expression.
+expression. The preferred patterns are inherited in the hierarchy, so the
+specification can be given at the composition level to be applied to the
+components. With a systematic use of patterns in deployment names, one can use
+regular expressions to disambiguate whole networks. Strings are used to match
+the names exactly
 
-A canonical example would be a robot with two arms. Our `ArmControl` profile
-could be refined into two, one for each arm:
+For instance, the left and right camera deployments of a stereo processing
+composition could be selected with:
+
+~~~ ruby
+profile 'Perception' do
+  define 'stereo_depth_processing', Compositions::StereoDepthProcessing.
+    use('left_camera' => Camera.prefer_deployed_tasks('left_camera'),
+        'right_camera' => Camera.prefer_deployed_tasks('right_camera'))
+end
+~~~
+
+But if one needs whole processing chains for both cameras, one could decide
+that all deployments related to the left camera are prefixed with `left_` and
+all deployments related to the right camera are prefixed with `right_`. Regular
+expressions will then help:
+
+~~~ ruby
+profile 'Perception' do
+  define 'left_preprocessed_camera', Compositions::CameraPreprocessing.
+    prefer_deployed_tasks(/^left_/)
+  define 'right_preprocessed_camera', Compositions::CameraPreprocessing.
+    prefer_deployed_tasks(/^right_/)
+end
+~~~
+
+The last example would be to select a deployed tasks pattern on a whole
+profile. The Profile API does not allow to do this directly, but it can
+easily be done with:
 
 ~~~ ruby
 profile 'LeftArmControl' do
