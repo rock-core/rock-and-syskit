@@ -12,8 +12,8 @@ sort_info: 55
 
 When new components are created, they can be used as-is within a Syskit app.
 The only thing one has to do is declare them as [a new
-deployment](../basics/deployment.html#use_deployment) in the Syskit
-configuration.
+deployment](../basics/deployment.html#use_deployment) in the `Robot.requires`
+block of your app's configuration.
 
 To use a task's default deployment, one adds
 
@@ -39,6 +39,23 @@ Syskit.conf.use_deployment 'test' => 'right:'
 This prefixes the task names with resp. `left:` and `right:`. For instance, if
 `test` had a task called `task`, the deployed tasks would be called `left:task`
 and `right:task`.
+
+When multiple deployment exists for a given task model, the "right" deployment
+needs to be explicitly selected, either in the composition or in the profile. Otherwise,
+one gets the following error:
+
+~~~
+cannot deploy the following tasks,
+  <description of the tasks>
+  <task>: multiple possible deployments, choose one with #prefer_deployed_tasks(deployed_task_name):
+     task left:task from deployment <deployment>,
+     task right:task from deployment <deployment>
+~~~
+
+Where and how to use the `prefer_deployed_tasks` statement is a topic that is
+covered in the [Reusable
+Networks](../component_networks/reusable_networks.html#deployments) section of the
+[Designing Component Networks](../component_networks) chapter.
 
 ## Component Model
 

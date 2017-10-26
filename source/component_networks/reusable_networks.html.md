@@ -472,7 +472,7 @@ obviously implies that the profile is self-contained and can be instantiated.
 But as the generated tests say, keep all three. This ensures that if you remove the
 `can_deploy` test, you'll still be testing for the two other properties.
 
-## Deployments
+## Deployments {#deployments}
 
 During the basics, we've seen that one must define
 [deployments](../basics/deployment.html#use_deployment) to be able to run the
