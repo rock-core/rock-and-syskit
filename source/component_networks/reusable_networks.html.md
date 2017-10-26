@@ -80,10 +80,25 @@ Data services do not have tests.
 
 ## Data Service Providers
 
-Components and compositions can **provide** data services. That is, they model
-that they are providing a service. In its simplest form, this is done by using
-the `provide` statement with the service model and a service name. The latter has
-to be unique in the context of the component.
+Components and compositions **provide** data services. That is, they offer to
+the system the port interface, and pledge to offer the service's role in the
+system through that interface.
+
+For instance, a camera obviously provides an image service. Most cameras,
+however, would not provide a depth image service. Even if both use the same
+data type for data representation, the data service system allows to make the
+difference.
+
+Another example, `common_models` `JointsControlledSystem` service. This
+represents a set of joints that can be controlled **in addition to** a feedback
+stream. In case the motor driver implementation requires one component per
+motor, one would export a whole arm using multiplexer/demultiplexer and a
+composition. The composition would then provide the `JointsControlledSystem`
+service.
+
+In its simplest form, the `provide` statement with the service model and a
+service name can be added to the component or composition. The name has to be
+unique in the context of the component.
 
 Let's assume a `gps::Task` component which has the following interface definition:
 
@@ -104,7 +119,7 @@ end
 
 To be able to call `provide` like this, each of the data services ports must
 have a **single port** on the component (exported port in the case of
-compositions) that matches the port direction and type. If there case more
+compositions) that matches the port direction and type. In case
 there is more than one match, the ports must be matched explicitly by passing a
 mapping from the service's position name to the component's. If our gps
 component had an interface like:
@@ -139,10 +154,10 @@ Syskit.extend_model OroGen.gps.Task do
 end
 ~~~
 
-**Data services and component subclassing** The data service system in effect
+**Data services and component subclassing** The data service system
 allows to exchange components that are unrelated code-wise but have a
-relationship from a semantic point of view. This is the preferred way. Don't
-subclass two orogen components if they don't share a significant amount of
+relationship from a semantic point of view. This is the preferred way.
+Subclass two orogen components only if they share a significant amount of
 code.
 {: .important}
 
@@ -548,3 +563,4 @@ and refactor as necessary.
 
 Now that we know how networks are built and exposed in a Syskit system, let's
 see how Syskit [merges them together](network_merge.html)
+{: .next-page}
