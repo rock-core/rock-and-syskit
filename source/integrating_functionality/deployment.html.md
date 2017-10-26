@@ -26,6 +26,12 @@ number of tasks have been _instanciated_. The role of the deployment is to:
 The combination of thread information and triggering mechanism is called an
 **activity**.
 
+All the deployment definitions that are covered in this section are defined
+within an oroGen project. They can either be done in the same project that
+defines the tasks, or use tasks from other projects by loading them beforehand
+with `using_task_library 'project_name'`.
+{: .important}
+
 ## Default Deployments {#default}
 
 orogen creates a default deployment for each declared
