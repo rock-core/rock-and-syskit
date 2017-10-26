@@ -518,7 +518,7 @@ end
 
 **Note** the two profiles share the same definition names, which means that
 they cannot be directly used at the same time [in the action
-interface](../basics/#actions). It is possible to transform the definition
+interface](../basics/deployment.html#actions). It is possible to transform the definition
 names within the `use_profile` statement with the `transform_names` option:
 
 ~~~ ruby
