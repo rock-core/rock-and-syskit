@@ -125,26 +125,26 @@ describes the functionality of the base logger and how to
 use it.
 
 When using the Rock CMake Macros, integration of the base logger is fairly
-easy.  All you need to do is adding _base-logger_ to your list of package config
-dependencies and include the header _base/logger/Logger.hpp_ where logging is needed. 
+easy.  All you need to do is adding _base-logging to your list of package config
+dependencies and include the header _base/logging/Logging.hpp_ where logging is needed. 
 
 ~~~
 rock_library(test_library 
-         DEPS_PKGCONFIG base-logger
+         DEPS_PKGCONFIG base-logging
          ...)
 ~~~
 
 and
 
 ~~~
-#include <base-logger/Logger.hpp>
+#include <base-logging/Logging.hpp>
 ~~~
 
 The logger allows you to log either using a printf-style function, or
 stream-style.
 
 ~~~ cpp
-#include <base-logger/Logger.hpp>
+#include <base-logging/Logging.hpp>
 
 ...
 // printf-style logging
