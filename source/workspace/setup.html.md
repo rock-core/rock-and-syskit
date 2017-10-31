@@ -55,7 +55,8 @@ and do (replacing URL by your repository's URL):
 ~~~
 git init
 echo "name: company.project" > source.yml
-git add source.yml
+touch packages.autobuild packages.osdeps init.rb overrides.rb
+git add .
 git commit -m "Initial commit"
 git push URL master
 ~~~
