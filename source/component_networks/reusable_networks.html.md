@@ -45,9 +45,9 @@ is registered on the enclosing module, e.g.
 
 ~~~ ruby
 module CommonModels
-  module DataServices
-    data_service_type 'Pose' do
-      output_port 'pose_samples', '/base/samples/RigidBodyState'
+  module Services
+    data_service_type 'GlobalPosition' do
+      output_port 'position_samples', '/base/samples/RigidBodyState'
     end
   end
 end
@@ -60,21 +60,29 @@ relevant [`import_types_from` statement at toplevel](../type_system/types_in_rub
 __Naming Convention__ data services are by convention defined in the `AppName::Services`
 module, and are saved in `models/services/name_of_service.rb`. For instance,
 the `Pose` data service in the `CommonModels` bundle is saved in
-`models/services/pose.rb` and the full service name would be
-`CommonModels::Services::Pose`.
+`models/services/global_position.rb` and the full service name would be
+`CommonModels::Services::GlobalPosition`.
 
 __Generation__ A template for a new data service, following Syskit's naming
 conventions and file system structure, can be generated with
 
 ~~~
-syskit gen srv namespace/name_of_service
+syskit gen srv name_of_service
 ~~~
 
 for instance
 
 ~~~
-syskit gen srv pose
+syskit gen srv global_position
 ~~~
+
+If needed, service models can be defined in namespaces, with e.g.
+
+~~~
+syskit gen srv control/joints
+~~~
+
+which defines the service as `Services::Control::Joints`
 
 Data services do not have tests.
 
@@ -108,11 +116,11 @@ task_context 'Task' do
 end
 ~~~
 
-One can declare that this component provides the position data service from `common_models` with:
+One can declare that this component provides the `GlobalPosition` data service from `common_models` with:
 
 ~~~ ruby
 Syskit.extend_model OroGen.gps.Task do
-  provides CommonModels::Services::Position,
+  provides CommonModels::Services::GlobalPosition,
     as: 'position'
 end
 ~~~
@@ -138,7 +146,7 @@ end
 Then attempting to provide the service without mapping information would cause the following error:
 
 ~~~
-OroGen.gps.Task does not provide the 'CommonModels::Services::Position' service's interface
+OroGen.gps.Task does not provide the 'CommonModels::Services::GlobalPosition' service's interface
  there are multiple candidates to map position_samples[/base/samples/RigidBodyState]: local_position_samples, utm_position_samples
 ~~~
 
@@ -149,7 +157,7 @@ The mapping must be provided explicitly:
 Syskit.extend_model OroGen.gps.Task do
   provides CommonModels::Services::Position, as: 'local_position',
     'position_samples' => 'local_position_samples'
-  provides CommonModels::Services::Position, as: 'utm_position',
+  provides CommonModels::Services::GlobalPosition, as: 'utm_position',
     'position_samples' => 'utm_position_samples'
 end
 ~~~
@@ -183,11 +191,14 @@ provided service ports to the provider's. It will instead, by default, **add**
 the provided service ports to the provider interface. Port mappings are instead
 required to avoid the port creation.
 
-For instance, if one would define the `Position`, `Orientation` and `Pose` services like this:
+For instance, if one would define the `GlobalPosition`, `Position`, `Orientation` and `Pose` services like this:
 
 ~~~ ruby
 data_service_type 'Position' do
   output_port 'position_samples', '/base/samples/RigidBodyState'
+end
+data_service_type 'GlobalPosition' do
+  provides Position
 end
 data_service_type 'Orientation' do
   output_port 'orientation_samples', '/base/samples/RigidBodyState'
