@@ -361,6 +361,17 @@ This way, from 14.04 up to 15.10, one did not have to change the entry. When
 16.04 got out, we needed to update the entry, but won't have to do it until the
 package name changes again.
 
+Combined with the `nonexistent` keyword, this also allows to fall back to the source
+package for older OS versions:
+
+~~~yaml
+control/visp:
+  ubuntu:
+    '14.04,14.10,15.04,15.10': nonexistent
+    default:
+    - libvisp-core3.0-dev
+~~~
+
 **Next**: now that you have a deeper understanding of what are packages and how they
 are integrated in an autoproj build [let's discuss how to organize the overall build
 configuration itself](managing.html)

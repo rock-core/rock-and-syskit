@@ -229,6 +229,6 @@ operation('operationName').
     runs_in_caller_thread
 ~~~
 
-We've covered most of the topic of writing a component. Let's now see how it is
-[executed](deployment.html).
+We've covered how a component's code is structured inside the component's state machine.
+Let's move on to more specific implementation topics, chief of which the one of [timestamping](timestamping.html).
 {: .next-page}

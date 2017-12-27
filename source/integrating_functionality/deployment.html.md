@@ -26,10 +26,16 @@ number of tasks have been _instanciated_. The role of the deployment is to:
 The combination of thread information and triggering mechanism is called an
 **activity**.
 
+All the deployment definitions that are covered in this section are defined
+within an oroGen project. They can either be done in the same project that
+defines the tasks, or use tasks from other projects by loading them beforehand
+with `using_task_library 'project_name'`.
+{: .important}
+
 ## Default Deployments {#default}
 
 orogen creates a default deployment for each declared
-[non-abstract](interface.html#abstract) task. This default deployment puts each
+[non-abstract](interface.html#inheritance) task. This default deployment puts each
 component in a single thread, in its own process. It uses a default triggering
 mechanism that is defined on the task context. This default activity should be
 considered a "sane default", but components should in general not rely on this

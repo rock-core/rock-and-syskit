@@ -29,6 +29,8 @@ autoproj --help
 <dd>Where your ran <a href="index.html">the bootstrap</a>, and where the <code>env.sh</code> script is located</dd>
 <dt>The autoproj/ folder</dt>
 <dd>Located at the root of the workspace, it contains all the build configuration</dd>
+<dt>Remotes</dt>
+<dd>The package build configuration downloaded by Autoproj, they are made available in autoproj/remotes/</dd>
 <dt>Package</dt>
 <dd>Packages are the unit that autoproj deals with. The Rock software is split
 into separate types of packages that are defined in the build configuration.
@@ -127,21 +129,57 @@ name or path on the command line
 aup simulation/rock_gazebo
 ~~~
 
-To restrict the update to the package, excluding its dependencies, add `-n`.
-`--checkout-only` will not update already checked out packages, but only check
-out not currently present in the system. This is useful if you want to install
-new packages, but not modify the already-installed ones.
+If given the path to a directory (as opposed to an actual package), it will
+update all packages under this directory
 
-`aup` without arguments is equivalent to `aup .`: update the package
-located in the current directory. If called outside of a package, it means
-"update all packages under this directory". `aup` in the root of the workspace
-is therefore equivalent to `aup --all`.
+~~~
+# Update all drivers libraries and orogen packages
+aup drivers/
+~~~
+
+Without arguments, it will update the package within the current directory
+
+~~~
+aup
+# Which is basically equivalent to
+aup .
+~~~
+
+If you want to update a package but not its dependencies, use `-n`, e.g.
+
+~~~
+aup -n
+aup -n simulation/rock_gazebo
+cd simulation
+aup -n rock_gazebo
+~~~
+
+Finally, if you want to checkout missing packages, but without updating already
+checked out packages, use `--checkout-only`. This is useful if you want to
+install new packages, but not modify the already-installed ones.
+
+~~~
+# Checkout all missing packages in the dependency chain of drivers/orogen/iodrivers_base
+aup --checkout-only drivers/orogen/iodrivers_base
+~~~
+
+All `aup` commands that concern specific package(s) will __not__ update the
+workspace configuration. To update everything __including the configuration__,
+either run `aup` from within the workspace root, or `aup --all` from any
+directory. If you want to only update the configuration, do `aup --config`
 {: .callout .callout-info}
 
 In some situations, or if you're trying to keep track of all the changes that
 are happening to your system, you want want to check what will be pulled by
 `aup`. `autoproj status` allows to compare the status of the workspace w.r.t.
-the repositories.
+the repositories. In case the changes would modify the configuration, it's a
+good idea to first update the configuration and re-run `autoproj status` to
+include possible changes in the package source information:
+
+~~~
+aup --config
+autoproj status
+~~~
 
 ### Building
 
