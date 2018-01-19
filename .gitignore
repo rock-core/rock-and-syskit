@@ -23,3 +23,6 @@
 data/tree.yml
 
 draft/
+
+vendor/
+tmp/

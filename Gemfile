@@ -24,3 +24,8 @@ gem 'mini_racer'
 
 gem 'html-proofer'
 gem 'middleman-navtree', git: 'https://github.com/doudou/middleman-navtree'
+
+group :features do
+    gem 'cucumber'
+    gem 'aruba', git: 'https://github.com/thirteenltda/aruba', branch: 'still'
+end
