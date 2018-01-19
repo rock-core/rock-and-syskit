@@ -23,4 +23,4 @@ gem 'susy', "~>1.0.1"
 gem 'mini_racer'
 
 gem 'html-proofer'
-gem 'middleman-navtree', github: 'doudou/middleman-navtree'
+gem 'middleman-navtree', git: 'https://github.com/doudou/middleman-navtree'
