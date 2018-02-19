@@ -31,19 +31,15 @@ Let's create a new bundle. In your Rock's workspace do
 ~~~
 acd
 cd bundles
-roby init syskit_basics
+syskit gen app syskit_basics
 cd syskit_basics
 ~~~
 
 This creates a Roby application, Roby being the underlying application framework
-and execution engine that Syskit is based on. To be able to use Syskit in this new
-application, we must explicitly load it in `config/init.rb` by adding
+and execution engine that Syskit is based on. In addition, it loads and sets up
+Syskit in the applications `config/init.rb`.
 
-~~~ruby
-Roby.app.using 'syskit'
-~~~
-
-We can now verify that the generated application at loads with
+We can now verify that the generated application loads with
 
 ~~~
 $ syskit run
@@ -167,14 +163,6 @@ newly-created `config/robots/gazebo.rb` configuration file to add:
 
 ~~~ruby
 Robot.init do
-  ## You can load plugins here
-  # Roby.app.using 'fault_injection'
-  # Roby.app.using 'syskit'
-
-  ## Change the scheduler
-  require 'roby/schedulers/temporal'
-  Roby.scheduler = Roby::Schedulers::Temporal.new
-
   # The rock-gazebo bridge requires models from the 'common_models' bundle.
   # It already depends on it, but we need to manually add the bundle to the
   # Roby search path
