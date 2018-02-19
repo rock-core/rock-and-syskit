@@ -31,8 +31,9 @@ Let's create a new bundle. In your Rock's workspace do
 ~~~
 acd
 cd bundles
-roby init syskit_basics
+mkdir syskit_basics
 cd syskit_basics
+roby init
 ~~~
 
 This creates a Roby application, Roby being the underlying application framework
