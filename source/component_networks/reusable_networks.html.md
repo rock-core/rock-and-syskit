@@ -59,7 +59,7 @@ relevant [`import_types_from` statement at toplevel](../type_system/types_in_rub
 
 __Naming Convention__ data services are by convention defined in the `AppName::Services`
 module, and are saved in `models/services/name_of_service.rb`. For instance,
-the `Pose` data service in the `CommonModels` bundle is saved in
+the `GlobalPosition` data service in the `CommonModels` bundle is saved in
 `models/services/global_position.rb` and the full service name would be
 `CommonModels::Services::GlobalPosition`.
 
@@ -174,7 +174,7 @@ code.
 Data types sometimes are semantically complex, that is combine more than one
 data into a single sample. The canonical example is a pose, which provides both
 a position and an orientation. However, there are other systems that may provide
-only an orientation or only a pose. Within Rock, in order to allow a pose
+only an orientation or only a position. Within Rock, in order to allow a pose
 output to be connected to an orientation input, one must use the same data
 type. This means that the type (in our pose example,
 `/base/samples/RigidBodyState`) can represent a complex data (the full pose) as
