@@ -428,9 +428,10 @@ end
 definition, which is obviously UR10-specific
 {: .note}
 
-A root profile is then imported within the configuration-specific layer with
-the `use_profile` statement. Tags are replaced by providing the `"tag_name"
-=> tag_replacement` syntax. Our UR10 profile would be defined with:
+A root profile is then imported within the configuration-specific layer with the
+`use_profile` statement. This statement imports all the definitions from the used profile
+in the target profile. Tags are replaced by providing the `"tag_name" => tag_replacement`
+syntax. Our UR10 profile would be defined with:
 
 ~~~ ruby
 module SyskitBasics
@@ -445,8 +446,11 @@ module SyskitBasics
 end
 ~~~
 
-If further refinement, such as default arguments, are necessary, they are using
-the `define` syntax, but then use the `_def` accessor directly:
+At this point, `SyskitBasics::Profiles::Gazebo::ArmControl` has all the same definitions
+than `SyskitBasics::Profiles::ArmControl`, only with the `arm` tag replaced by
+`Base.ur10_dev`. Sometimes, more refinements are necessary, such as adding default
+arguments. You need then to use `define`, basing the new definition from its current
+version by using the `_def` accessor directly:
 
 ~~~ ruby
 module SyskitBasics
