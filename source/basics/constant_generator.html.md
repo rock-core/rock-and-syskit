@@ -73,7 +73,7 @@ To import it, one must use the `import_types_from` stanza. Let's put it all toge
 
 ~~~ruby
 import_types_from 'base'
-require 'models/compositions/constant_generator'
+require 'common_models/models/compositions/constant_generator'
 
 module SyskitBasics
   module Compositions
@@ -287,8 +287,8 @@ $ syskit gen cmp arm_cartesian_constant_control_wdls
 Trivially, the network just binds the control network with the generator:
 
 ~~~ruby
-require 'models/compositions/arm_cartesian_constant_command_generator'
-require 'models/compositions/arm_cartesian_control_wdls'
+require 'syskit_basics/models/compositions/arm_cartesian_constant_command_generator'
+require 'syskit_basics/models/compositions/arm_cartesian_control_wdls'
 
 module SyskitBasics
   module Compositions
@@ -364,8 +364,8 @@ pattern, and Syskit supports it:
 {: id="composition_forward_argument"}
 
 ~~~ruby
-require 'models/compositions/arm_cartesian_constant_command_generator'
-require 'models/compositions/arm_cartesian_control_wdls'
+require 'syskit_basics/models/compositions/arm_cartesian_constant_command_generator'
+require 'syskit_basics/models/compositions/arm_cartesian_control_wdls'
 
 module SyskitBasics
   module Compositions
@@ -448,7 +448,7 @@ syskit gen ruby_task joint_position_constant_generator
 `models/compositions/joint_position_constant_generator.rb`:
 
 ~~~ruby
-require 'models/compositions/constant_generator'
+require 'common_models/models/compositions/constant_generator'
 import_types_from 'base'
 
 module SyskitBasics
@@ -493,7 +493,7 @@ end
 and the test `test/compositions/test_joint_position_constant_generator.rb`:
 
 ~~~ruby
-require 'models/compositions/joint_position_constant_generator'
+require 'syskit_basics/models/compositions/joint_position_constant_generator'
 
 module SyskitBasics
   module Compositions
@@ -530,8 +530,8 @@ syskit gen cmp joint_position_constant_control
 Fill the implementation in `models/compositions/joint_position_constant_control.rb`:
 
 ~~~ruby
-require 'models/devices/gazebo/model'
-require 'models/compositions/joint_position_constant_generator'
+require 'common_models/models/devices/gazebo/model'
+require 'syskit_basics/models/compositions/joint_position_constant_generator'
 
 module SyskitBasics
   module Compositions
@@ -553,7 +553,7 @@ end
 And modify the test:
 
 ~~~ruby
-require 'models/compositions/joint_position_constant_control'
+require 'syskit_basics/models/compositions/joint_position_constant_control'
 
 module SyskitBasics
   module Compositions

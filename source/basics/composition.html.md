@@ -174,8 +174,7 @@ later point). So edit the newly-created
 `models/compositions/arm_cartesian_control_wdls.rb` and `add` the components
 
 ~~~ruby
-# This is in bundles/common_models
-require 'models/devices/gazebo/model'
+require 'common_models/models/devices/gazebo/model'
 # Load the oroGen project
 using_task_library 'cart_ctrl_wdls'
 
@@ -243,7 +242,7 @@ Then, finally add it to the composition.
 
 ~~~ruby
 # This is in bundles/common_models
-require 'models/devices/gazebo/model'
+require 'common_models/models/devices/gazebo/model'
 # Load the oroGen projects
 using_task_library 'cart_ctrl_wdls'
 using_task_library 'robot_frames'

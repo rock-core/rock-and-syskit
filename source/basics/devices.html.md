@@ -124,9 +124,9 @@ previous line. Don't forget these dots !
 {: .callout .callout-warning}
 
 ~~~ruby
-require 'models/profiles/gazebo/base'
-require 'models/compositions/arm_cartesian_constant_control_wdls'
-require 'models/compositions/joint_position_constant_control'
+require 'syskit_basics/models/profiles/gazebo/base'
+require 'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'
+require 'syskit_basics/models/compositions/joint_position_constant_control'
 
 module SyskitBasics
   module Profiles
@@ -155,9 +155,9 @@ $ rock-roboviz model://ur10
 ~~~
 
 ~~~ruby
-require 'models/profiles/gazebo/base'
-require 'models/compositions/arm_cartesian_constant_control_wdls'
-require 'models/compositions/joint_position_constant_control'
+require 'syskit_basics/models/profiles/gazebo/base'
+require 'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'
+require 'syskit_basics/models/compositions/joint_position_constant_control'
 
 module SyskitBasics
   module Profiles

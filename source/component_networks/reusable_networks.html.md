@@ -242,9 +242,9 @@ port names (obviously)
 {: #armcartesiancontrol_with_data_service}
 
 ~~~ ruby
-# This is in bundles/common_models. The _control_loop files define a set of
-# data services related to controlling using the /base/samples/Joints data type
-require 'models/services/joints_control_loop'
+# The _control_loop files define a set of data services related to
+# controlling using the /base/samples/Joints data type
+require 'common_models/models/services/joints_control_loop'
 # Load the oroGen projects
 using_task_library 'cart_ctrl_wdls'
 using_task_library 'robot_frames'

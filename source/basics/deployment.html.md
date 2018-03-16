@@ -48,7 +48,7 @@ in the robot's config file with:
 Robot.requires do
   Syskit.conf.use_gazebo_world('empty_world')
 
-  require 'models/profiles/gazebo/arm_control'
+  require 'syskit_basics/models/profiles/gazebo/arm_control'
   Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.CartCtrl => 'arm_pos2twist'
   Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.WDLSSolver => 'arm_twist2joint'
   Syskit.conf.use_deployment OroGen.robot_frames.SingleChainPublisher => 'arm_chain_publisher'
