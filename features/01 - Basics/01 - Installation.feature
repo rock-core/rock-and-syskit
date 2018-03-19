@@ -38,7 +38,6 @@ Feature: Installation
         aup --all -k
         amake --all -k
         """
-        And I answer "" to "How should I interact with gitorious.org"
         And I answer "" to "How should I interact with github.com"
         And I answer "" to "whether C++11 should be enabled"
         And I answer "" to "Do you need compatibility with OCL ?"
