@@ -13,7 +13,10 @@ def patch_file(file_content, patch_content)
   file_content = file_content.split("\n")
   patch_content.split("\n").each do |line|
     if line.start_with?("+")
-      output_file << line[1..-1]
+      new_content = line[1..-1]
+      if file_content[current_index].strip != new_content.strip
+        output_file << new_content
+      end
     elsif line.start_with?("-")
       new_index = patch_find_line(file_content, current_index, line[1..-1].strip)
       output_file.concat(file_content[current_index...new_index])
