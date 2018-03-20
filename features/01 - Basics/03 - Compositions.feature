@@ -32,7 +32,7 @@ Feature: Compositions
         When I overwrite "models/compositions/arm_cartesian_control_wdls.rb" with:
         """
         # This is in bundles/common_models
-        require 'models/devices/gazebo/model'
+        require 'common_models/models/devices/gazebo/model'
         # Load the oroGen project
         using_task_library 'cart_ctrl_wdls'
 
@@ -86,7 +86,7 @@ Feature: Compositions
         And I overwrite "models/compositions/arm_cartesian_control_wdls.rb" with:
         """
         # This is in bundles/common_models
-        require 'models/devices/gazebo/model'
+        require 'common_models/models/devices/gazebo/model'
         # Load the oroGen projects
         using_task_library 'cart_ctrl_wdls'
         using_task_library 'robot_frames'
