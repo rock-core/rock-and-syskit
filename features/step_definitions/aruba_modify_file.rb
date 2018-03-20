@@ -4,7 +4,7 @@ def patch_find_line(content, current, line)
     return current if content[current].strip == line
     current += 1
   end
-  raise LineNotFound, "cannot find #{line}"
+  raise LineNotFound, "cannot find #{line.inspect}"
 end
 
 def patch_file(file_content, patch_content)
