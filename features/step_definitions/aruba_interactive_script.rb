@@ -46,6 +46,9 @@ end
 
 When(/^I wait for (stdout|stderr) to have "([^"]+)"(?: within (\d+) seconds)?$/) do |channel, pattern_string, timeout|
     commands = all_commands
+    if commands.empty?
+        raise "no commands in the background"
+    end
     if !timeout || timeout == 0
         timeout = default_answer_timeout
     end
