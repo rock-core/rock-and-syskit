@@ -30,11 +30,8 @@ Feature: Installation
         Then the exit status should be 0
         Then the output should contain "successfully"
 
-        When I run the following script interactively:
+        When within the autoproj workspace, I run the following script interactively:
         """bash
-        set -e
-        echo $PWD
-        source env.sh
         aup --all -k
         amake --all -k
         """

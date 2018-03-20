@@ -3,10 +3,8 @@ Feature: Getting Started
     @no-clobber
     Scenario: Creating the bundle
         Given I cd to "dev"
-        And I successfully run the following script:
-        """bash
-        set -e
-        source env.sh
+        And within the workspace, I successfully run the following script:
+        """
         acd
         cd bundles
         syskit gen app syskit_basics
@@ -14,18 +12,14 @@ Feature: Getting Started
         """
 
         When I cd to "bundles/syskit_basics"
-        And I run the following script in background:
-        """bash
-        set -e
-        source ../../env.sh
+        And within the workspace, I run the following script in background:
+        """
         syskit run
         """
         Then stdout gets "ready" within 5 seconds
 
-        When I successfully run the following script:
-        """bash
-        set -e
-        source ../../env.sh
+        When within the workspace, I successfully run the following script:
+        """
         syskit quit
         """
         Then the output should contain "closed communication"
@@ -37,7 +31,7 @@ Feature: Getting Started
     @no-clobber
     Scenario: Setting up the scene
         Given I cd to "dev/bundles/syskit_basics"
-        And given a file named "scenes/empty_world/empty_world.world" with:
+        And a file named "scenes/empty_world/empty_world.world" with:
         """
         <?xml version="1.0"?>
         <sdf version="1.6">
@@ -59,10 +53,8 @@ Feature: Getting Started
         </sdf>
         """
 
-        Then I successfully run the following script:
+        Then within the workspace, I successfully run the following script:
         """bash
-        set -e
-        source ../../env.sh
         rock-gazebo --download-only empty_world
         """
 
@@ -89,10 +81,5 @@ Feature: Getting Started
         Robot.requires do
         +    Syskit.conf.use_gazebo_world('empty_world')
         """
-        Then I successfully run the following script:
-        """bash
-        set -e
-        source ../../env.sh
-        syskit check -r gazebo
-        """
+        Then the "gazebo" configuration is valid for Syskit
 
