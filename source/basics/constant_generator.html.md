@@ -158,7 +158,20 @@ Each time we ran `syskit gen`, files were created both in `models/` and
 [minitest](https://github.com/seattlerb/minitest). Let's now adapt these
 templates for our generator.
 
-Start by deleting the default test from `test/compositions/test_arm_cartesian_constant_command_generator.rb`.
+Start by deleting the default test from
+`test/compositions/test_arm_cartesian_constant_command_generator.rb`, to keep
+only the describe block:
+
+~~~
+require 'models/compositions/arm_cartesian_constant_command_generator'
+
+module SyskitBasics
+    module Compositions
+        describe ArmCartesianConstantCommandGenerator do
+        end
+    end
+end
+~~~
 
 The first step in each test usually is to get a deployed, ready-to-test instance
 of our component or composition model. The test harness provides a set of methods

@@ -4,6 +4,10 @@ source #{File.join(Aruba.config.root_directory, Aruba.config.working_directory, 
 #{script}"
 end
 
+Then(/^within the workspace, I run the following script:$/) do |script|
+    step "I run the following script:", make_workspace_script(script)
+end
+
 Then(/^within the workspace, I run the following script in background:$/) do |script|
     step "I run the following script in background:", make_workspace_script(script)
 end
