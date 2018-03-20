@@ -22,7 +22,7 @@ When(/^I run the following (?:commands|script)(?: (?:with|in) `([^`]+)`)? intera
   step 'I run `myscript` interactively'
 end
 
-When(/^I successfully run the following (?:commands|script)(?: (?:with|in) `([^`]+)`)?:$/) do |shell, commands|
+When(/^I successfully run the following (?:commands|script)(?: for up to (\d+) seconds)?:$/) do |timeout, commands|
   prepend_environment_variable('PATH', expand_path('bin') + File::PATH_SEPARATOR)
 
   Aruba.platform.mkdir(expand_path('bin'))
@@ -30,7 +30,9 @@ When(/^I successfully run the following (?:commands|script)(?: (?:with|in) `([^`
 
   Aruba::ScriptFile.new(:interpreter => shell, :content => commands,
                         :path => expand_path('bin/myscript')).call
-  step "I successfully run `myscript` for up to #{aruba.config.exit_timeout} seconds"
+
+  timeout = aruba.config.exit_timeout if timeout == 0
+  step "I successfully run `myscript` for up to #{timeout} seconds"
 end
 
 When(/^I answer "([^"]*)" to "([^"]+)"(?: from (\w+))?$/) do |answer, question, channel|
