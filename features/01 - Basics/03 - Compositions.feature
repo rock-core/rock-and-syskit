@@ -1,7 +1,7 @@
-Feature: Compositions
+Feature: 03. Compositions
     @disable-bundler
     @no-clobber
-    Scenario: Installing the necessary packages
+    Scenario: 01. Installing the necessary packages
         Given I cd to "dev"
         And I modify the file "autoproj/manifest" with:
         """
@@ -17,7 +17,7 @@ Feature: Compositions
 
     @disable-bundler
     @no-clobber
-    Scenario: Using the installed component
+    Scenario: 02. Using the installed component
         Given I cd to "dev/bundles/syskit_basics"
         And within the workspace, I successfully run the following script:
         """

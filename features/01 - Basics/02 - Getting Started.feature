@@ -1,7 +1,7 @@
-Feature: Getting Started
+Feature: 02. Getting Started
     @disable-bundler
     @no-clobber
-    Scenario: Creating the bundle
+    Scenario: 01. Creating the bundle
         Given I cd to "dev"
         And within the workspace, I successfully run the following script:
         """
@@ -29,7 +29,7 @@ Feature: Getting Started
 
     @disable-bundler
     @no-clobber
-    Scenario: Setting up the scene
+    Scenario: 02. Setting up the scene
         Given I cd to "dev/bundles/syskit_basics"
         And a file named "scenes/empty_world/empty_world.world" with:
         """
@@ -60,7 +60,7 @@ Feature: Getting Started
 
     @disable-bundler
     @no-clobber
-    Scenario: Preparing the gazebo Syskit configuration
+    Scenario: 03. Preparing the gazebo Syskit configuration
         Given I cd to "dev/bundles/syskit_basics"
         Then I successfully run the following script:
         """bash

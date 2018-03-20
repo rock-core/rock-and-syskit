@@ -1,6 +1,6 @@
-Feature: Installation
+Feature: 01. Installation
     @disable-bundler
-    Scenario: Bootstrapping
+    Scenario: 01. Bootstrapping
         # High timeout, we're building and installing stuff
         Given the aruba exit timeout is 3600 seconds
         # High timeout because of variability due to network access
