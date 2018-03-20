@@ -54,7 +54,6 @@ When(/^I wait for (stdout|stderr) to have "([^"]+)"(?: within (\d+) seconds)?$/)
     end
     deadline = Time.now + Integer(timeout)
     pattern  = Regexp.new(Regexp.quote(pattern_string))
-    puts "#{pattern} #{timeout}"
     while true
       combined_output = commands.map do |c|
         c.send(channel.to_sym, wait_for_io: 0).chomp
@@ -62,7 +61,6 @@ When(/^I wait for (stdout|stderr) to have "([^"]+)"(?: within (\d+) seconds)?$/)
       if combined_output =~ pattern
         break
       elsif commands.all? { |c| c.stopped? }
-          puts "ALL STOPPED #{commands.map { |c| c.to_s }}"
         step "stdout should contain \"#{pattern_string}\""
       elsif Time.now > deadline
           raise "timed out (#{timeout} seconds) while waiting for #{combined_output} to contain #{pattern_string}"
