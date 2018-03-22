@@ -30,7 +30,7 @@ Feature: 01. Installation
         Then the exit status should be 0
         Then the output should contain "successfully"
 
-        When within the autoproj workspace, I run the following script interactively:
+        When within the workspace, I run the following script interactively:
         """bash
         aup --all -k
         amake --all -k
