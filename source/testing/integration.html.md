@@ -4,6 +4,12 @@ title: Integration Tests
 sort_info: 100
 ---
 
+# Integration Tests
+{:.no_toc}
+
+- TOC
+{:toc}
+
 The last level of tests that a Rock/Syskit system supports is the one of
 integration or acceptance tests. In a nutshell, these tests see your system
 as a blackbox, run actions and verify the result of these actions. They

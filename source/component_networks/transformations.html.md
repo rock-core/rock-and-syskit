@@ -5,6 +5,10 @@ sort_info: 40
 ---
 
 # Geometric Relations
+{:.no_toc}
+
+- TOC
+{:toc}
 
 One of the most common tasks in a robotic systems is to represent the
 relationship between a robot body (or one of its parts) and the world. E.g. a
