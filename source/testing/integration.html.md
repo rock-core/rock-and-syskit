@@ -222,7 +222,7 @@ Then after 20s # this transitions from actionA to actionB and waits 20s
 In addition, a set of `Given` steps can be given before the app startup to initialize
 it with a set of actions.
 
-For instance, let's test the [`syskit_basics`](../syskit_basics/) cartesian movement:
+For instance, let's test the [`syskit_basics`](../basics/devices.html) cartesian movement:
 
 ~~~cucumber
 Feature: cartesian movement
