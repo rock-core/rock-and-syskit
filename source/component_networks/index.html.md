@@ -51,7 +51,7 @@ exposed to the coordination layer.
 
 In this chapter, we will start by detailing and expanding what we have already
 seen in the [basics](../basics) chapter. We are assuming that you have read the
-[Syskit integration section](../integrating_functionality/syskit_integration.html) of the
+[Runtime section](../integrating_functionality/runtime.html) of the
 Integrating Functionality chapter, so we're going to jump straight at
 [compositions](composition.html) and [profiles](profiles.html). We will then go
 into the mechanisms that allow to build [reusable
@@ -67,10 +67,9 @@ together. The goal will be to give you the tools to understand these errors.
 The rest of the chapter will details more advanced aspects of the design of the
 component network(s). [Connection policies](connection_policies.html) and
 [transports](transports.html) are important tuning knobs within a Rock/Syskit
-system. The handling of transformation
-([modelling](transformation_modelling.html) and [handling in
-components](transformation_in_components.html)) are a critical tool to build
-components that are (mostly) system-independent, promoting reuse.
+system. Generic [transformation handling](transformations.html) is a critical
+tool to build components that are (mostly) system-independent, promoting
+reuse.
 
 We will then conclude on some [words of advice](best_practices.html) about
 modelling component networks in Syskit.

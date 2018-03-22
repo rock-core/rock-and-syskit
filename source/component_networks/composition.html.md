@@ -96,7 +96,7 @@ defines it.
 
 Modifiers on the children have to be added to the return value of the `add`
 statement. The
-[`with_conf`](../integrating_functionality/syskit_integration.html) statement
+[`with_conf`](../integrating_functionality/runtime.html) statement
 for components for instance would be added like this:
 
 ~~~ ruby

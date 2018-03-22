@@ -64,8 +64,7 @@ need to know at a certain point in time.
 
 ## Development Workflow
 
-10. Tests
+10. [Testing and Debugging](testing/index.html)
 11. Logging, Data Visualization and Building GUIs
 12. Inspecting coordination data
-13. Debugging components
 

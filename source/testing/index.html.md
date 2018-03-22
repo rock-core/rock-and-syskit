@@ -23,7 +23,7 @@ roles: library, component, system. Rock has support for all these levels. At
 the library level, it integrates existing testing libraries. On higher
 levels, it has testing harnesses suitable for these particular purposes,
 always building on top of existing testing tools and frameworks when
-possible. This section will base its examples on the [Basics tutorial](../syskit_basics/index.html).
+possible. This section will base its examples on the [Basics tutorial](../basics/index.html).
 
 * **Library unit tests** The roles of writing unit tests for the libraries
   is obviously to check that their implementation match their declared

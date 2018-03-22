@@ -323,6 +323,6 @@ The second case is called a sequential activity and is declared with:
     sequential
 ~~~
 
-**Next** this is mostly all. [The next page](syskit_integration.html) describes
+**Next** this is mostly all. [The next page](runtime.html) describes
 how components are integrated in Syskit.
 {: .next-page}
