@@ -5,6 +5,9 @@ Aruba.configure do |config|
     config.io_wait_timeout = 60
     config.root_directory = File.expand_path("../", config.root_directory)
     config.working_directory = "#{checkout_name}-dev"
+    if ENV['ARUBA_LOG_LEVEL']
+        config.log_level = ENV['ARUBA_LOG_LEVEL'].to_sym
+    end
 end
 
 def save_state_as_git_tag(tag_name, path)
