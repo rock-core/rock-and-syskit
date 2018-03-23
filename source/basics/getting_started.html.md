@@ -102,21 +102,21 @@ In the bundles, scenes are saved in `scenes/SCENE_NAME/SCENE_NAME.world`, e.g.
 ~~~xml
 <?xml version="1.0"?>
 <sdf version="1.6">
-  <world name="empty_world">
-    <model name="ur10_fixed">
+    <world name="empty_world">
+        <model name="ur10_fixed">
+            <include>
+                <name>ur10</name>
+                <uri>model://ur10</uri>
+            </include>
+            <joint name="attached_to_ground" type="fixed">
+                <parent>world</parent>
+                <child>ur10::base</child>
+            </joint>
+        </model>
         <include>
-          <name>ur10</name>
-          <uri>model://ur10</uri>
+            <uri>model://ground_plane</uri>
         </include>
-        <joint name="attached_to_ground" type="fixed">
-          <parent>world</parent>
-          <child>ur10::base</child>
-        </joint>
-    </model>
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
-  </world>
+    </world>
 </sdf>
 ~~~
 
@@ -171,12 +171,12 @@ newly-created `config/robots/gazebo.rb` configuration file to add:
 
 ~~~ruby
 Robot.init do
-  require 'rock_gazebo/syskit'
-  Conf.syskit.transformer_enabled = true
+    require 'rock_gazebo/syskit'
+    Conf.syskit.transformer_enabled = true
 end
 
 Robot.requires do
-  Syskit.conf.use_gazebo_world('empty_world')
+    Syskit.conf.use_gazebo_world('empty_world')
 end
 ~~~
 

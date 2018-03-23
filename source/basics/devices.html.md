@@ -55,7 +55,7 @@ By convention, one usually creates a per-robot `Base` profile that
 contains the robot definition.  Let's do that now.
 
 ~~~
-$ syskit gen profile -rgazebo base
+$ syskit gen profile gazebo/base
       create  models/profiles/gazebo
       create  models/profiles/gazebo/base.rb
       create  test/profiles/gazebo
@@ -71,19 +71,20 @@ within the `Compositions::Gazebo` namespace.
 
 Now, here's the catch: we will actually not really learn to define devices, since
 the mapping from the simulation model to devices is done automatically from the
-robot model. One only has to declare the robot model in the `Base` profile:
+robot model. One only has to declare the robot model in the `Base` profile we
+just created:
 
 ~~~ruby
 module SyskitBasics
-  module Profiles
-    module Gazebo
-      profile 'Base' do
-        use_gazebo_model 'model://ur10',
-          prefix_device_with_name: true
-        use_sdf_world
-      end
+    module Profiles
+        module Gazebo
+            profile 'Base' do
+                use_gazebo_model 'model://ur10',
+                    prefix_device_with_name: true
+                use_sdf_world
+            end
+        end
     end
-  end
 end
 ~~~
 
@@ -109,7 +110,7 @@ for really low-level stuff like devices. Let's create an `ArmControl` profile to
 integrate the arm control stuff.
 
 ~~~
-syskit gen profile -rgazebo ArmControl
+syskit gen profile gazebo/arm_control
 ~~~
 
 We need to require the `Base` profile and `ArmCartesianControlWdls` composition
@@ -129,18 +130,18 @@ require 'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'
 require 'syskit_basics/models/compositions/joint_position_constant_control'
 
 module SyskitBasics
-  module Profiles
-    module Gazebo
-      profile 'ArmControl' do
-        define 'arm_cartesian_constant_control',
-          Compositions::ArmCartesianConstantControlWdls.
-            use(Base.ur10_dev)
-        define 'arm_joint_position_constant_control',
-          Compositions::JointPositionConstantControl.
-            use(Base.ur10_dev)
-      end
+    module Profiles
+        module Gazebo
+            profile 'ArmControl' do
+                define 'arm_cartesian_constant_control',
+                    Compositions::ArmCartesianConstantControlWdls.
+                        use(Base.ur10_dev)
+                define 'arm_joint_position_constant_control',
+                    Compositions::JointPositionConstantControl.
+                        use(Base.ur10_dev)
+            end
+        end
     end
-  end
 end
 ~~~
 
@@ -160,29 +161,29 @@ require 'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'
 require 'syskit_basics/models/compositions/joint_position_constant_control'
 
 module SyskitBasics
-  module Profiles
-    module Gazebo
-      UR10_SAFE_POSITION = Hash[
-        'ur10::shoulder_pan'  => 0,
-        'ur10::shoulder_lift' => -Math::PI/2,
-        'ur10::elbow'         => Math::PI/2,
-        'ur10::wrist_1'       => 0,
-        'ur10::wrist_2'       => 0,
-        'ur10::wrist_3'       => 0]
+    module Profiles
+        module Gazebo
+            UR10_SAFE_POSITION = Hash[
+                'ur10::shoulder_pan'  => 0,
+                'ur10::shoulder_lift' => -Math::PI/2,
+                'ur10::elbow'         => Math::PI/2,
+                'ur10::wrist_1'       => 0,
+                'ur10::wrist_2'       => 0,
+                'ur10::wrist_3'       => 0]
 
-      profile 'ArmControl' do
-        define 'arm_cartesian_constant_control',
-          Compositions::ArmCartesianConstantControlWdls.
-            use(Base.ur10_dev)
-        define 'arm_joint_position_constant_control',
-          Compositions::JointPositionConstantControl.
-            use(Base.ur10_dev)
-        define 'arm_safe_position',
-          arm_joint_position_constant_control_def.
-            with_arguments(setpoint: UR10_SAFE_POSITION)
-      end
+            profile 'ArmControl' do
+                define 'arm_cartesian_constant_control',
+                    Compositions::ArmCartesianConstantControlWdls.
+                        use(Base.ur10_dev)
+                define 'arm_joint_position_constant_control',
+                    Compositions::JointPositionConstantControl.
+                        use(Base.ur10_dev)
+                define 'arm_safe_position',
+                    arm_joint_position_constant_control_def.
+                        with_arguments(setpoint: UR10_SAFE_POSITION)
+            end
+        end
     end
-  end
 end
 ~~~
 {: .dependency_injection}

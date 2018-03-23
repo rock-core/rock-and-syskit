@@ -6,7 +6,7 @@ Feature: 03. Compositions
         And I modify the file "autoproj/manifest" with:
         """
            - rock.gazebo
-        +   - control/orogen/cart_ctrl_wdls
+        +  - control/orogen/cart_ctrl_wdls
         """
 
         And within the workspace, I successfully run the following script for up to 3600 seconds:
@@ -37,38 +37,38 @@ Feature: 03. Compositions
         using_task_library 'cart_ctrl_wdls'
 
         module SyskitBasics
-          module Compositions
-            class ArmCartesianControlWdls < Syskit::Composition
-              add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
-              add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
-              add CommonModels::Devices::Gazebo::Model, as: 'arm'
+            module Compositions
+                class ArmCartesianControlWdls < Syskit::Composition
+                    add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+                    add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
+                    add CommonModels::Devices::Gazebo::Model, as: 'arm'
+                end
             end
-          end
         end
         """
         Then the file "models/compositions/arm_cartesian_control_wdls.rb" is valid for Syskit
 
         When I modify the file "models/compositions/arm_cartesian_control_wdls.rb" with:
         """
-              add CommonModels::Devices::Gazebo::Model, as: 'arm'
+                    add CommonModels::Devices::Gazebo::Model, as: 'arm'
         +
-        +      position2twist_child.ctrl_out_port.
-        +        connect_to twist2joint_velocity_child.desired_twist_port
-        +      twist2joint_velocity_child.solver_output_port.
-        +        connect_to arm_child.joints_cmd_port
+        +           position2twist_child.ctrl_out_port.
+        +               connect_to twist2joint_velocity_child.desired_twist_port
+        +           twist2joint_velocity_child.solver_output_port.
+        +               connect_to arm_child.joints_cmd_port
         """
         Then the file "models/compositions/arm_cartesian_control_wdls.rb" is valid for Syskit
 
         When I modify the file "models/compositions/arm_cartesian_control_wdls.rb" with:
         """
-              add CommonModels::Devices::Gazebo::Model, as: 'arm'
+                    add CommonModels::Devices::Gazebo::Model, as: 'arm'
 
-              position2twist_child.ctrl_out_port.
-                connect_to twist2joint_velocity_child.desired_twist_port
-              twist2joint_velocity_child.solver_output_port.
-                connect_to arm_child.joints_cmd_port
-        +      arm_child.joints_status_port.
-        +        connect_to twist2joint_velocity_child.joint_status_port
+                    position2twist_child.ctrl_out_port.
+                        connect_to twist2joint_velocity_child.desired_twist_port
+                    twist2joint_velocity_child.solver_output_port.
+                        connect_to arm_child.joints_cmd_port
+        +           arm_child.joints_status_port.
+        +               connect_to twist2joint_velocity_child.joint_status_port
         """
         Then the file "models/compositions/arm_cartesian_control_wdls.rb" is valid for Syskit
 
@@ -76,7 +76,7 @@ Feature: 03. Compositions
         """
            - rock.gazebo
            - control/orogen/cart_ctrl_wdls
-        +   - control/orogen/robot_frames
+        +  - control/orogen/robot_frames
         """
         And within the workspace, I successfully run the following script for up to 3600 seconds:
         """
@@ -92,34 +92,34 @@ Feature: 03. Compositions
         using_task_library 'robot_frames'
 
         module SyskitBasics
-          module Compositions
-            class ArmCartesianControlWdls < Syskit::Composition
-              add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
-              add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
-              add CommonModels::Devices::Gazebo::Model, as: 'arm'
-              add OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose'
+            module Compositions
+                class ArmCartesianControlWdls < Syskit::Composition
+                    add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+                    add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
+                    add CommonModels::Devices::Gazebo::Model, as: 'arm'
+                    add OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose'
 
-              position2twist_child.ctrl_out_port.
-                connect_to twist2joint_velocity_child.desired_twist_port
-              twist2joint_velocity_child.solver_output_port.
-                connect_to arm_child.joints_cmd_port
-              arm_child.joints_status_port.
-                connect_to twist2joint_velocity_child.joint_status_port
-              arm_child.joints_status_port.
-                connect_to joint2pose_child.joints_samples_port
-              joint2pose_child.tip_pose_port.
-                connect_to position2twist_child.cartesian_status_port
+                    position2twist_child.ctrl_out_port.
+                        connect_to twist2joint_velocity_child.desired_twist_port
+                    twist2joint_velocity_child.solver_output_port.
+                        connect_to arm_child.joints_cmd_port
+                    arm_child.joints_status_port.
+                        connect_to twist2joint_velocity_child.joint_status_port
+                    arm_child.joints_status_port.
+                        connect_to joint2pose_child.joints_samples_port
+                    joint2pose_child.tip_pose_port.
+                        connect_to position2twist_child.cartesian_status_port
+                end
             end
-          end
         end
         """
         Then the file "models/compositions/arm_cartesian_control_wdls.rb" is valid for Syskit
 
         When I modify the file "models/compositions/arm_cartesian_control_wdls.rb" with:
         """
-              joint2pose_child.tip_pose_port.
-                connect_to position2twist_child.cartesian_status_port
-        +      export position2twist_child.command_port
+                    joint2pose_child.tip_pose_port.
+                        connect_to position2twist_child.cartesian_status_port
+        +           export position2twist_child.command_port
         """
         Then the file "models/compositions/arm_cartesian_control_wdls.rb" is valid for Syskit
 

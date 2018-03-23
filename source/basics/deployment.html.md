@@ -46,14 +46,14 @@ in the robot's config file with:
 
 ~~~ruby
 Robot.requires do
-  Syskit.conf.use_gazebo_world('empty_world')
+    Syskit.conf.use_gazebo_world('empty_world')
 
-  require 'syskit_basics/models/profiles/gazebo/arm_control'
-  Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.CartCtrl => 'arm_pos2twist'
-  Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.WDLSSolver => 'arm_twist2joint'
-  Syskit.conf.use_deployment OroGen.robot_frames.SingleChainPublisher => 'arm_chain_publisher'
-  Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator => 'arm_constant_setpoint'
-  Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::JointPositionConstantGenerator => 'joint_position_setpoint'
+    require 'syskit_basics/models/profiles/gazebo/arm_control'
+    Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.CartCtrl => 'arm_pos2twist'
+    Syskit.conf.use_deployment OroGen.cart_ctrl_wdls.WDLSSolver => 'arm_twist2joint'
+    Syskit.conf.use_deployment OroGen.robot_frames.SingleChainPublisher => 'arm_chain_publisher'
+    Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator => 'arm_constant_setpoint'
+    Syskit.conf.use_ruby_tasks SyskitBasics::Compositions::JointPositionConstantGenerator => 'joint_position_setpoint'
 end
 ~~~
 
@@ -191,15 +191,15 @@ In `models/compositions/arm_cartesian_constant_control_wdls.rb`
 
 ~~~ruby
 class ArmCartesianConstantControlWdls < Syskit::Composition
-  # The robot model that is to be used
-  #
-  # This must be the enclosing profile object that has the use_sdf_model call
-  #
-  # @return [Profile]
-  argument :robot
-  ...
-  add(ArmCartesianControlWdls, as: 'control').
-    with_arguments(robot: from(:parent_task).robot)
+    # The robot model that is to be used
+    #
+    # This must be the enclosing profile object that has the use_sdf_model call
+    #
+    # @return [Profile]
+    argument :robot
+    ...
+    add(ArmCartesianControlWdls, as: 'control').
+        with_arguments(robot: from(:parent_task).robot)
 end
 ~~~
 
@@ -207,17 +207,17 @@ and in `models/compositions/arm_cartesian_control_wdls.rb`
 
 ~~~ruby
 class ArmCartesianControlWdls < Syskit::Composition
-  # The robot model that is to be used
-  #
-  # This must be the enclosing profile object that has the use_sdf_model call
-  #
-  # @return [Profile]
-  argument :robot
-  ...
-  add(OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity').
-    with_arguments(robot: from(:parent_task).robot)
-  add(OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose').
-    with_arguments(robot: from(:parent_task).robot)
+    # The robot model that is to be used
+    #
+    # This must be the enclosing profile object that has the use_sdf_model call
+    #
+    # @return [Profile]
+    argument :robot
+    ...
+    add(OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity').
+        with_arguments(robot: from(:parent_task).robot)
+    add(OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose').
+        with_arguments(robot: from(:parent_task).robot)
 end
 ~~~
 
@@ -226,9 +226,9 @@ the relevant robot in the profile directly:
 
 ~~~ruby
 define 'arm_cartesian_constant_control',
-  Compositions::ArmCartesianConstantControlWdls.
-    use(Base.ur10_dev).
-    with_arguments(robot: Base)
+    Compositions::ArmCartesianConstantControlWdls.
+        use(Base.ur10_dev).
+        with_arguments(robot: Base)
 ~~~
 
 We need to modify the oroGen component models to use the robot argument.
@@ -270,28 +270,28 @@ the `WDLSSolver` task. Let's add the `robot` argument, and tune the
 the task's properties.
 
 ~~~ruby
-Syskit.extend_model OroGen.cart_ctrl_wdls.WDLSSolver
-  argument :robot
-  def configure
-    super # call super as described in the template
+Syskit.extend_model OroGen.cart_ctrl_wdls.WDLSSolver do
+    argument :robot
+    def configure
+        super # call super as described in the template
 
-    properties.robot_model = robot.sdf_model.make_root.to_xml_string
-    properties.robot_model_format = :ROBOT_MODEL_SDF
-  end
+        properties.robot_model = robot.sdf_model.make_root.to_xml_string
+        properties.robot_model_format = :ROBOT_MODEL_SDF
+    end
 end
 ~~~
 
 and in `models/orogen/robot_frames.rb`:
 
 ~~~ruby
-Syskit.extend_model OroGen.robot_frames.SingleChainPublisher
-  argument :robot
-  def configure
-    super # call super as described in the template
+Syskit.extend_model OroGen.robot_frames.SingleChainPublisher do
+    argument :robot
+    def configure
+        super # call super as described in the template
 
-    properties.robot_model = robot.sdf_model.make_root.to_xml_string
-    properties.robot_model_format = :ROBOT_MODEL_SDF
-  end
+        properties.robot_model = robot.sdf_model.make_root.to_xml_string
+        properties.robot_model_format = :ROBOT_MODEL_SDF
+    end
 end
 ~~~
 
@@ -315,8 +315,8 @@ Let's modify the `actions` block in `config/robots/gazebo.rb` to have:
 
 ~~~ruby
 Robot.actions do
-  use_profile SyskitBasics::Profiles::Gazebo::Base
-  use_profile SyskitBasics::Profiles::Gazebo::ArmControl
+    use_profile SyskitBasics::Profiles::Gazebo::Base
+    use_profile SyskitBasics::Profiles::Gazebo::ArmControl
 end
 ~~~
 

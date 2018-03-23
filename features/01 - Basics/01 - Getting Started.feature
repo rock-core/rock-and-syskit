@@ -35,21 +35,21 @@ Feature: 02. Getting Started
         """
         <?xml version="1.0"?>
         <sdf version="1.6">
-          <world name="empty_world">
-            <model name="ur10_fixed">
+            <world name="empty_world">
+                <model name="ur10_fixed">
+                    <include>
+                        <name>ur10</name>
+                        <uri>model://ur10</uri>
+                    </include>
+                    <joint name="attached_to_ground" type="fixed">
+                        <parent>world</parent>
+                        <child>ur10::base</child>
+                    </joint>
+                </model>
                 <include>
-                  <name>ur10</name>
-                  <uri>model://ur10</uri>
+                    <uri>model://ground_plane</uri>
                 </include>
-                <joint name="attached_to_ground" type="fixed">
-                  <parent>world</parent>
-                  <child>ur10::base</child>
-                </joint>
-            </model>
-            <include>
-              <uri>model://ground_plane</uri>
-            </include>
-          </world>
+            </world>
         </sdf>
         """
 

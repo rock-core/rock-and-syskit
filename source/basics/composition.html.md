@@ -92,9 +92,9 @@ package, add it in the `layout` section of `autoproj/manifest`:
 
 ~~~yaml
 layout:
-  - rock.core
-  - rock.gazebo
-  - control/orogen/cart_ctrl_wdls
+- rock.core
+- rock.gazebo
+- control/orogen/cart_ctrl_wdls
 ~~~
 
 Then, run the following to checkout missing packages but avoid updating the existing ones:
@@ -179,13 +179,13 @@ require 'common_models/models/devices/gazebo/model'
 using_task_library 'cart_ctrl_wdls'
 
 module SyskitBasics
-  module Compositions
-    class ArmCartesianControlWdls < Syskit::Composition
-      add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
-      add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
-      add CommonModels::Devices::Gazebo::Model, as: 'arm'
+    module Compositions
+        class ArmCartesianControlWdls < Syskit::Composition
+            add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+            add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
+            add CommonModels::Devices::Gazebo::Model, as: 'arm'
+        end
     end
-  end
 end
 ~~~
 
@@ -209,14 +209,14 @@ command to the actual arm command input:
 
 ~~~ruby
 class ArmCartesianControlWdls < Syskit::Composition
-  add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
-  add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
-  add CommonModels::Devices::Gazebo::Model, as: 'arm'
+    add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+    add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
+    add CommonModels::Devices::Gazebo::Model, as: 'arm'
 
-  position2twist_child.ctrl_out_port.
-    connect_to twist2joint_velocity_child.desired_twist_port
-  twist2joint_velocity_child.solver_output_port.
-    connect_to arm_child.joints_cmd_port
+    position2twist_child.ctrl_out_port.
+        connect_to twist2joint_velocity_child.desired_twist_port
+    twist2joint_velocity_child.solver_output_port.
+        connect_to arm_child.joints_cmd_port
 end
 ~~~
 
@@ -230,7 +230,7 @@ to something. `joint_status` is the direct joint feedback from the arm:
 
 ~~~ruby
 arm_child.joints_status_port.
-  connect_to twist2joint_velocity_child.joint_status_port
+    connect_to twist2joint_velocity_child.joint_status_port
 ~~~
 
 However, the cartesian position feedback is not directly provided by the Gazebo
@@ -248,25 +248,25 @@ using_task_library 'cart_ctrl_wdls'
 using_task_library 'robot_frames'
 
 module SyskitBasics
-  module Compositions
-    class ArmCartesianControlWdls < Syskit::Composition
-      add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
-      add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
-      add CommonModels::Devices::Gazebo::Model, as: 'arm'
-      add OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose'
+    module Compositions
+        class ArmCartesianControlWdls < Syskit::Composition
+            add OroGen.cart_ctrl_wdls.WDLSSolver, as: 'twist2joint_velocity'
+            add OroGen.cart_ctrl_wdls.CartCtrl, as: 'position2twist'
+            add CommonModels::Devices::Gazebo::Model, as: 'arm'
+            add OroGen.robot_frames.SingleChainPublisher, as: 'joint2pose'
 
-      position2twist_child.ctrl_out_port.
-        connect_to twist2joint_velocity_child.desired_twist_port
-      twist2joint_velocity_child.solver_output_port.
-        connect_to arm_child.joints_cmd_port
-      arm_child.joints_status_port.
-        connect_to twist2joint_velocity_child.joint_status_port
-      arm_child.joints_status_port.
-        connect_to joint2pose_child.joints_samples_port
-      joint2pose_child.tip_pose_port.
-        connect_to position2twist_child.cartesian_status_port
+            position2twist_child.ctrl_out_port.
+                connect_to twist2joint_velocity_child.desired_twist_port
+            twist2joint_velocity_child.solver_output_port.
+                connect_to arm_child.joints_cmd_port
+            arm_child.joints_status_port.
+                connect_to twist2joint_velocity_child.joint_status_port
+            arm_child.joints_status_port.
+                connect_to joint2pose_child.joints_samples_port
+            joint2pose_child.tip_pose_port.
+                connect_to position2twist_child.cartesian_status_port
+        end
     end
-  end
 end
 ~~~
 
