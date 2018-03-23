@@ -1,4 +1,4 @@
-Feature: 02. Getting Started
+Feature: 01. Getting Started
     @disable-bundler
     @no-clobber
     Scenario: 01. Creating the bundle

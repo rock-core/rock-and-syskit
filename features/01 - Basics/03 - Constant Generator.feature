@@ -1,4 +1,4 @@
-Feature: 04. Constant Generator
+Feature: 03. Constant Generator
     @disable-bundler
     @no-clobber
     Scenario: 01. The Cartesian Command Generator

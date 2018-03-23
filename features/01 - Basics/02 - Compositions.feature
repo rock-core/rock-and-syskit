@@ -1,4 +1,4 @@
-Feature: 03. Compositions
+Feature: 02. Compositions
     @disable-bundler
     @no-clobber
     Scenario: 01. Installing the necessary packages
