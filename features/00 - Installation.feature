@@ -12,12 +12,11 @@ Feature: 01. Installation
         cd dev
         """
         When I cd to "dev"
-        And I run the following script:
+        And I successfully run the following script:
         """bash
         wget http://rock-robotics.org/autoproj_bootstrap
         """
-        Then the following files should exist:
-            | autoproj_bootstrap |
+        Then the file "autoproj_bootstrap" should exist
 
         When I run the following script interactively:
         """bash
