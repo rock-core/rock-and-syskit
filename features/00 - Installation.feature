@@ -4,7 +4,7 @@ Feature: 01. Installation
         # High timeout, we're building and installing stuff
         Given the aruba exit timeout is 3600 seconds
         # High timeout because of variability due to network access
-        Given the default answer timeout is 3600 seconds
+        Given the default answer timeout is 120 seconds
 
         When I run the following script:
         """bash
