@@ -1,5 +1,4 @@
 Feature: 01. Installation
-    @announce
     @disable-bundler
     Scenario: 01. Bootstrapping
         # High timeout, we're building and installing stuff
