@@ -44,23 +44,23 @@ argument :robot
 #   verified
 # @raise [ArgumentError] if the link is not in the model
 def verify_link_in_model(model, link_name)
-  if !model.each_link.any? { |link| link.full_name == link_name }
-    raise ArgumentError, "link name '#{link_name}' is not a link of the robot model. Existing links: #{model.each_link.map(&:full_name).sort.join(", ")}"
-  end
+    if !model.each_link.any? { |link| link.full_name == link_name }
+        raise ArgumentError, "link name '#{link_name}' is not a link of the robot model. Existing links: #{model.each_link.map(&:full_name).sort.join(", ")}"
+    end
 end
 
 def configure
-  super
+    super
 
-  # Extract the model into its own SDF document
-  as_root = robot.sdf_model.make_root
-  # And get the new model
-  model = as_root.each_model.first
-  verify_link_in_model(model, properties.root)
-  verify_link_in_model(model, properties.tip)
+    # Extract the model into its own SDF document
+    as_root = robot.sdf_model.make_root
+    # And get the new model
+    model = as_root.each_model.first
+    verify_link_in_model(model, properties.root)
+    verify_link_in_model(model, properties.tip)
 
-  properties.robot_model = as_root.to_xml_string
-  properties.robot_model_format = :ROBOT_MODEL_SDF
+    properties.robot_model = as_root.to_xml_string
+    properties.robot_model_format = :ROBOT_MODEL_SDF
 end
 ~~~
 
@@ -86,9 +86,9 @@ In this case, one would create a `lib/syskit_basics/sdf_helpers.rb` file with a 
 # @param [String] link_name the name of the link
 # @raise [ArgumentError] if the link is not in the model
 def self.verify_link_in_model(sdf_model, link_name)
-  if !sdf_model.each_link.any? { |link| link.name == link_name }
-    raise ArgumentError, "link name '#{link_name}' is not a link of the robot model. Existing links: #{sdf_model.each_link.map(&:name).sort.join(", ")}"
-  end
+    if !sdf_model.each_link.any? { |link| link.name == link_name }
+        raise ArgumentError, "link name '#{link_name}' is not a link of the robot model. Existing links: #{sdf_model.each_link.map(&:name).sort.join(", ")}"
+    end
 end
 ~~~
 
@@ -101,64 +101,71 @@ created a test template. Let's modify it to test the setup for `WDLSSolver`.
 The modifications for `SingleChainPublisher` will be left to the reader :P
 
 ~~~ruby
-describe WDLSSolver do
-  attr_reader :profile
+describe cart_ctrl_wdls.WDLSSolver do
+    attr_reader :profile
 
-  before do
-    # Create a mock that has a robot model
-    xml = <<-EOSDF
-      <model name='test'>
-        <link name="root_test" />
-        <link name="tip_test" />
-      </model>
-      EOSDF
-    # We don't really need a full profile object, only an object
-    # that provides a Model object from a '#sdf_model' attribute
-    #
-    # Let's fake one using flexmock. Flexmock is loaded as part
-    # Of Syskit's test harness
-    #
-    # https://github.com/doudou/flexmock
-    @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
-  end
-
-  it "sets the robot model from its 'robot' argument" do
-    # Create a fake test configuration with valid root and tip
-    syskit_stub_conf WDLSSolver, 'default',
-      data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
-    task = syskit_stub_deploy_and_configure(
-      WDLSSolver.with_arguments(robot: profile))
-    assert_equal "<sdf>#{profile.sdf_model.to_xml_string}</sdf>",
-      task.properties.robot_model
-  end
-
-  it "raises if the root link does not exist" do
-    syskit_stub_conf WDLSSolver, 'default',
-      data: { 'root' => 'invalid', 'tip' => 'test::tip_test' }
-    e = assert_raises(ArgumentError) do
-      syskit_stub_deploy_and_configure(
-        WDLSSolver.with_arguments(robot: profile))
+    before do
+        # Create a mock that has a robot model
+        xml = <<-EOSDF
+        <model name='test'>
+            <link name="root_test" />
+            <link name="tip_test" />
+        </model>
+        EOSDF
+        # We don't really need a full profile object, only an object
+        # that provides a Model object from a '#sdf_model' attribute
+        #
+        # Let's fake one using flexmock. Flexmock is loaded as part
+        # Of Syskit's test harness
+        #
+        # https://github.com/doudou/flexmock
+        @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
     end
-    assert_equal "link name 'invalid' is not a link of the robot model. Existing links: test::root_test, test::tip_test",
-      e.message
-  end
 
-  it "raises if the tip link does not exist" do
-    syskit_stub_conf WDLSSolver, 'default',
-      data: { 'root' => 'test::root_test', 'tip' => 'invalid' }
-    e = assert_raises(ArgumentError) do
-      syskit_stub_deploy_and_configure(
-        WDLSSolver.with_arguments(robot: profile))
+    it "sets the robot model from its 'robot' argument" do
+        # Create a fake test configuration with valid root and tip
+        syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+            data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
+        task = syskit_stub_deploy_and_configure(
+            OroGen.cart_ctrl_wdls.WDLSSolver.
+                with_arguments(robot: profile))
+        assert_equal "<sdf>#{profile.sdf_model.to_xml_string}</sdf>",
+            task.properties.robot_model
     end
-    assert_equal "link name 'invalid' is not a link of the robot model. Existing links: test::root_test, test::tip_test",
-      e.message
-  end
+
+    it "raises if the root link does not exist" do
+        syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+            data: { 'root' => 'invalid', 'tip' => 'test::tip_test' }
+        e = assert_raises(ArgumentError) do
+            syskit_stub_deploy_and_configure(
+                OroGen.cart_ctrl_wdls.WDLSSolver.
+                    with_arguments(robot: profile))
+        end
+        assert_equal "link name 'invalid' is not a link of the robot model. "\
+            "Existing links: test::root_test, test::tip_test",
+            e.message
+    end
+
+    it "raises if the tip link does not exist" do
+        syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+            data: { 'root' => 'test::root_test', 'tip' => 'invalid' }
+        e = assert_raises(ArgumentError) do
+            syskit_stub_deploy_and_configure(
+                OroGen.cart_ctrl_wdls.WDLSSolver.
+                    with_arguments(robot: profile))
+        end
+        assert_equal "link name 'invalid' is not a link of the robot model. "\
+            "Existing links: test::root_test, test::tip_test",
+            e.message
+    end
 end
 ~~~
 
-And run the tests either [on the command line](constant_generator.html#run_test_command_line) or [with the IDE](constant_generator.html#run_test_ide).
+And run the tests either [on the command line](constant_generator.html#run_test_command_line)
+or [with the IDE](constant_generator.html#run_test_ide).
 
-The tests for `WDLSSolver` we just wrote should pass. However, we get an error for `AdaptiveWDLSSolver`:
+The tests for `WDLSSolver` we just wrote should pass. However, we get an
+error for `AdaptiveWDLSSolver`:
 
 ~~~
   1) Error:
@@ -181,8 +188,8 @@ OroGen::CartCtrlWdls::AdaptiveWDLSSolver:0x5e5bbb8
     /home/doudou/dev/vanilla/rock-website/bundles/syskit_basics/test/orogen/test_cart_ctrl_wdls.rb:55:in `block (2 levels) in <module:CartCtrlWdls>'
 ~~~
 
-With the `missing_arguments:` line [we've already seen](constant_generator.html#missing_arguments).
-
+With the `missing_arguments:` line
+[we have already seen](constant_generator.html#missing_arguments).
 Looking at `AdaptiveWDLSSolver`, we can see that it is subclassing `WDLSSolver`:
 
 ![AdaptiveWDLSSolver subclassed from WDLSSolver](media/adaptive_wdlssolver_subclassed_from.png){: .fullwidth}
@@ -217,18 +224,18 @@ model. Let's do it in the test's `before` block:
 
 ~~~ruby
 before do
-  # Create a mock that has a robot model
-  xml = <<-EOSDF
-    <model name='test'>
-      <link name="root_test" />
-      <link name="tip_test" />
-    </model>
-  EOSDF
-  @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
-  syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
-    data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
-  syskit_stub_conf OroGen.robot_frames.SingleChainPublisher, 'default',
-    data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
+    # Create a mock that has a robot model
+    xml = <<-EOSDF
+        <model name='test'>
+        <link name="root_test" />
+        <link name="tip_test" />
+        </model>
+    EOSDF
+    @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
+    syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+        data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
+    syskit_stub_conf OroGen.robot_frames.SingleChainPublisher, 'default',
+        data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
 end
 ~~~
 
@@ -236,7 +243,7 @@ and modify the test to pass the robot model
 
 ~~~ruby
 cmp_task = syskit_stub_deploy_configure_and_start(
-  ArmCartesianControlWdls.with_arguments(robot: @profile))
+    ArmCartesianControlWdls.with_arguments(robot: @profile))
 ~~~
 
 Do the same modification for the `ArmCartesianConstantControlWdls` composition and now
