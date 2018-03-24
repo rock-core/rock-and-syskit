@@ -2,7 +2,7 @@ Then(/^the file "([^"]+)" is valid for Syskit$/) do |path|
     step("within the workspace, I successfully run the following script:", "syskit check . '#{path}'")
 end
 
-Then(/^the file "([^"]+)" is valid for Syskit in configuration "([^"]+)$/) do |path, conf_name|
+Then(/^the file "([^"]+)" is valid for Syskit in configuration "([^"]+)"$/) do |path, conf_name|
     step("within the workspace, I successfully run the following script:", "syskit check -r #{conf_name} . '#{path}'")
 end
 

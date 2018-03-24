@@ -27,7 +27,7 @@ end
 
 After do |scenario|
     if scenario.passed?
-        tag_name = "#{scenario.feature.name} - #{scenario.name}".gsub(/\s/, '_')
+        tag_name = "#{scenario.feature.name} - #{scenario.name}".gsub(/[^\w]+/, '_')
         bundle_path = File.join(aruba.config.root_directory, aruba.config.working_directory, "dev", "bundles", "syskit_basics")
         if File.directory?(bundle_path)
             save_state_as_git_tag(tag_name, bundle_path)
