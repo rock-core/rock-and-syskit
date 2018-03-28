@@ -1,1 +1,2 @@
-default: --fail-fast
+default: --fail-fast --tags '@no-clobber'
+bootstrap: --tags "@bootstrap"

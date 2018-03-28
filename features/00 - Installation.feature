@@ -1,5 +1,6 @@
 @disable-bundler
 Feature: 00. Installation
+    @bootstrap
     Scenario: 01. Bootstrapping
         # High timeout, we're building and installing stuff
         Given the aruba exit timeout is 3600 seconds
