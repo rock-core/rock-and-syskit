@@ -1,6 +1,6 @@
+@disable-bundler
+@no-clobber
 Feature: 02. Compositions
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Installing the necessary packages
         Given I cd to "dev"
         And I modify the file "autoproj/manifest" with:
@@ -15,8 +15,6 @@ Feature: 02. Compositions
         amake --all
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 02. Using the installed component
         Given I cd to "dev/bundles/syskit_basics"
         And within the workspace, I successfully run the following script:

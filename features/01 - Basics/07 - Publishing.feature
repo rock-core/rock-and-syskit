@@ -1,8 +1,8 @@
+@disable-bundler
+@no-clobber
 Feature: 07. Publishing
     As a new Rock/Syskit user, I intend to learn how to integrate a new package.
 
-    @disable-bundler
-    @no-clobber
     @clobber-git
     @clobber-new_package_set
     Scenario: 01. Push the bundle
@@ -29,8 +29,6 @@ Feature: 07. Publishing
         """
         Then I push "master" to "bundles-syskit_basics"
 
-    @disable-bundler
-    @no-clobber
     Scenario: 02. Creating the new build configuration
         Given a git repository "rock.rock_and_syskit-buildconf"
         And I cd to "dev/autoproj"
@@ -49,8 +47,6 @@ Feature: 07. Publishing
         And I stop the command started last
         Then the exit status should be 0
 
-    @disable-bundler
-    @no-clobber
     Scenario: 03. Creating the new package set
         Given a git repository "rock.rock_and_syskit-package_set"
         And a directory named "new_package_set"
@@ -67,8 +63,6 @@ Feature: 07. Publishing
         """
         And I push "master" to "rock.rock_and_syskit-package_set"
 
-    @disable-bundler
-    @no-clobber
     Scenario: 04. Adding the package set to the build
         Given I cd to "dev"
         When I modify the file "autoproj/manifest" with:
@@ -85,8 +79,6 @@ Feature: 07. Publishing
         aup --config
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 05. Defining the package
         Given I cd to "dev/autoproj/remotes/rock.rock_and_syskit"
         And I append to "packages.autobuild" with:
@@ -106,8 +98,6 @@ Feature: 07. Publishing
         aup -n syskit_basics
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 06. Removing the control packages
         Given I cd to "dev"
         When I modify the file "autoproj/manifest" with:

@@ -1,6 +1,6 @@
+@disable-bundler
+@no-clobber
 Feature: 03. Constant Generator
-    @disable-bundler
-    @no-clobber
     Scenario: 01. The Cartesian Command Generator
         Given I cd to "dev/bundles/syskit_basics"
         And within the workspace, I successfully run the following script:
@@ -58,8 +58,6 @@ Feature: 03. Constant Generator
         """
         Then the file "models/compositions/arm_cartesian_constant_command_generator.rb" is valid for Syskit
 
-    @disable-bundler
-    @no-clobber
     Scenario: 02. Testing
         Given I cd to "dev/bundles/syskit_basics"
 
@@ -160,8 +158,6 @@ Feature: 03. Constant Generator
         syskit test -rgazebo test/compositions/test_arm_cartesian_constant_command_generator.rb
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 03. Creating the ArmCartesianConstantControlWdls Composition
         Given I cd to "dev/bundles/syskit_basics"
         And within the workspace, I successfully run the following script:
@@ -218,8 +214,6 @@ Feature: 03. Constant Generator
         syskit test -r gazebo test/compositions/test_arm_cartesian_constant_control_wdls.rb
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 04. The Joint Position Constant Generator
         Given I cd to "dev/bundles/syskit_basics"
         And within the workspace, I successfully run the following script:

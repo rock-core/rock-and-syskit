@@ -1,9 +1,9 @@
+@disable-bundler
+@no-clobber
 Feature: 06. Validation
     Background:
         Given I cd to "dev/bundles/syskit_basics"
 
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Validating Configuration Consistency
         When I modify the file "models/orogen/cart_ctrl_wdls.rb" with:
             """
