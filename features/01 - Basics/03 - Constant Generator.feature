@@ -74,7 +74,7 @@ Feature: 03. Constant Generator
             end
         end
         """
-        Then the syskit test file "test/compositions/test_arm_cartesian_constant_command_generator.rb" passes
+        Then the Syskit test file "test/compositions/test_arm_cartesian_constant_command_generator.rb" passes
 
         When I modify the file "test/compositions/test_arm_cartesian_constant_command_generator.rb" with:
         """
