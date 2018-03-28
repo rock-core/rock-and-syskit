@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+rock_and_syskit_base_dir = File.expand_path("..", __dir__)
+aruba_dirname = "#{File.basename(rock_and_syskit_base_dir)}-dev"
+aruba_base_dir = File.expand_path(File.join("..", aruba_dirname), rock_and_syskit_base_dir)
+
+return unless File.directory?(aruba_base_dir)
+
+require_relative './support/save_state'
+
+raise "no feature file given" unless (feature_file = ARGV[0])
+
+feature_name, scenario_name = find_expected_scenario(feature_file, scenario: ARGV[1])
+puts "resetting before #{feature_name} - #{scenario_name}"
+restore_state_before_scenario(feature_name, scenario_name, aruba_base_dir)
