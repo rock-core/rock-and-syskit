@@ -18,9 +18,10 @@ either [the Rock bootstrap](../basics/installation.html) or a project's main
 build configuration.
 
 After having bootstrapped, the "source" build configuration is checked out in
-the `autoproj/` folder at the root of the workspace. Push it to a repository
-you would have created to hold your own project's build configuration. You can
-then change Autoproj's configuration to track it instead of the Rock build with
+the `autoproj/` folder at the root of the workspace. Commit the folder's current
+state, push it to a repository you would have created to hold your own
+project's build configuration. You can then change Autoproj's configuration
+to track it instead of the Rock build with
 
 ~~~
 autoproj switch-config git URL
@@ -49,12 +50,23 @@ just `company` for the organization one. For example purposes, the rest of this
 page will use `company.project` as the package set name.
 
 Assuming you're using git and github, create a new repository on github,
-following the `company.project-package_set` pattern. Create an empty directory
-and do (replacing URL by your repository's URL):
+following the `company.project-package_set` pattern.
+
+In the context of the [Basics section](../basics/publishing.html), a good
+name for the package set would be `rock.rock_and_syskit` (i.e. `rock`
+organization, the `rock_and_syskit` project). The buildconf would be saved
+in a repository named `rock.rock_and_syskit-buildconf` and the package set
+in `rock.rock_and_syskit-package_set`.
+
+To create a minimal package set, create an empty directory (the name does not
+matter) and do (replacing the name by your actual package set name and the
+URL by your repository's URL):
 
 ~~~
 git init
 echo "name: company.project" > source.yml
+echo "version_control:" >> source.yml
+echo "overrides:" >> source.yml
 touch packages.autobuild packages.osdeps init.rb overrides.rb
 git add .
 git commit -m "Initial commit"
@@ -87,6 +99,23 @@ name in the `layout` section:
 ~~~yaml
 layout:
 - company.project
+~~~
+
+E.g. for the Basics tutorial, assuming it is stored on the `rock-core` organization,
+the whole manifest would look like:
+
+~~~yaml
+package_sets:
+   - github: rock-core/package_set
+   - github: rock-core/rock-package_set
+   - github: rock-tutorials/tutorials-package_set
+   - github: rock-gazebo/package_set
+   - github: rock-core/rock.rock_and_syskit-package_set
+
+layout:
+   - rock.core
+   - rock.gazebo
+   - rock.rock_and_syskit
 ~~~
 
 There are other import possibilities, listed in the [adding new

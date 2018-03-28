@@ -348,5 +348,10 @@ is to give you a feeling for Syskit's runtime workflow. Detailed explanations wi
 <iframe width="853" height="480" src="https://www.youtube.com/embed/JrgS23xEK9g?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-**Next**: Before we move on to the Syskit runtime aspects, you may pass through an extension of the configuration code that [validates its consistency](validation.html). This is a more advanced topic, so you may also go straight to [the recap](recap.html) and go back to it at a later time.
+
+**Next**: Before we move on to the Syskit runtime aspects, you may pass
+*through an extension of the configuration code that [validates its
+*consistency](validation.html). This is a more advanced topic, so you may also
+*go straight to [publishing the package](publishing.html) and go back to it at
+*a later time.
 {: .next-page}
