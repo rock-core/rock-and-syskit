@@ -153,8 +153,13 @@ Let's do so in our newly created
 `models/compositions/arm_cartesian_control_wdls.rb`. Then, run
 
 ~~~
-syskit ide -rgazebo models/compositions/arm_cartesian_control_wdls.rb
+syskit ide -r gazebo models/compositions/arm_cartesian_control_wdls.rb
 ~~~
+
+The `-r` option above instructs `syskit ide` to load the configuration file
+`config/robots/gazebo.rb` that we
+[previously created](getting_started.html#syskit_r_option)
+{: .callout .callout-info}
 
 ![Name mapping between oroGen and Syskit](media/syskit_name_mapping.png){: .fullwidth}
 
