@@ -47,3 +47,5 @@ RubyGems in a workspace. This will be [covered as well](os_dependencies.html).
 Finally, we will go through the more general subject of [designing and managing
 a build configuration](managing.html)
 
+Let's talk first about [conventions](conventions.html)
+{: .next-page}
