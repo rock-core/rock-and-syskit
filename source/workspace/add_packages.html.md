@@ -10,7 +10,7 @@ sort_info: 30
 - TOC
 {:toc}
 
-  
+
 As we already mentioned [in the introduction](index.html), within Rock, none of
 the packages should actually rely on Autoproj, Rock's build system. C++ Rock
 packages for instance rely on common build systems such as CMake or autotools
@@ -78,7 +78,7 @@ are being integrated in Rock, the file should be saved in the package set under
 
 <package>
   <description brief="one line of text">
-    long description goes here, 
+    long description goes here,
     <em>XHTML is allowed</em>
   </description>
   <author>Alice/alice@somewhere.bar</author>
@@ -240,7 +240,7 @@ package_name:
 ~~~
 
 The package set that defines a package must have at least one matching entry in
-the `version_control` section of its `source.yml` file. 
+the `version_control` section of its `source.yml` file.
 
 ~~~yaml
 version_control:
@@ -439,7 +439,45 @@ package_name:
     - $AUTOPROJ_SOURCE_DIR/blablabla-02.patch
 ~~~
 
+### How to create a patch
+
+If you are locally modifying a `git`-based package, you can simply run `git diff`,
+redirecting it to the final patch place, e.g.
+
+~~~
+git diff > $AUTOPROJ_CURRENT_ROOT/remotes/my.set/my-package_add_pkgconfig.patch
+~~~
+
+The generated patch will need the patch level of 1 as described above.
+
+If you are locally modifying a package based on an archive, use `diff -ru`:
+
+1.  move the modified package into a `.new` folder:
+
+    ~~~
+    cd some/
+    mv package package.new
+    ~~~
+
+2.  Checkout the fresh package with `aup -n my/package`
+
+3.  Generate the diff
+
+    ~~~
+    cd some
+    diff -r -u package package.new > \
+        $AUTOPROJ_CURRENT_ROOT/remotes/my.set/my-package_add_pkgconfig.patch
+    ~~~
+
+4.  Add the patch to the package set, using a patch level of 1 as well,
+    and verify the result
+
+    ~~~
+    aup -n my/package
+    acd my/package
+    diff -r -u . ../package.new
+    ~~~
+
 **Next**: let's get into [using packages from the underlying
 OS or from language-specific handlers](os_dependencies.html)
 {: .next-page}
-
