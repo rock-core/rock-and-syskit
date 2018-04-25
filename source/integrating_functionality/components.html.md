@@ -83,6 +83,15 @@ do code generation and `make` to build from within the package's build
 directory (which is usually located in `build/`). This is usually the best way
 to integrate an orogen package in an IDE.
 
+## C++ Standard {#cxx_standard}
+
+The C++ standard used to interpret the data type files and to build the component's C++
+code is the latest standard that its dependencies require. There is currently no
+way to explicitely tell orogen to use a different standard. For instance, if
+your oroGen project uses a library that sets C++11 using [the Rock CMake
+macros](cpp_libraries.html#cxx_libraries), the oroGen project will use C++11
+too.
+
 ## Runtime Workflow
 
 "Developing" a component in C++ within Rock is to write a C++ class that
