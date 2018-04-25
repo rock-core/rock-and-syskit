@@ -20,9 +20,14 @@ components can be made framework-independent (i.e. Syskit independent). It is
 somehow weaker in the Ruby case though, as in the end most of the data
 processing is done in C++ in a Rock system.
 
-Generally speaking, **do not do too many things within the Syskit process**.
-Syskit is in charge of coordinating the system's components, and having long
-computations within the Syskit process will increase Syskit's reaction times.
+For code meant to be executed within Syskit, generally speaking, **do not do
+too many things within the Syskit process**. Syskit is in charge of
+coordinating the system's components, and having long computations within the
+Syskit process will increase Syskit's reaction times.
+
+## Creating and Adding Packages to the Workspace
+
+This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
 
 ## Conventions
 

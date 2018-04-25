@@ -51,6 +51,10 @@ to generate package scaffolds for you:
 - `rock-create-orogen` for [an oroGen component](../integrating_functionality/components.html)
 - `rock-create-bundle` for [a bundle](../basics/getting_started.html)
 
+While the other generation scripts create ready-to-use packages, the workflow
+of the `rock-create-orogen` tool is a bit different. It is covered
+[in the Integrating Functionality chapter](../integrating_functionality/components.html)
+
 If you are integrating a package that already exists, it should be easy enough
 provided that the package uses widespread build systems and follows common
 conventions (such as having a separate source and build folder, and having an

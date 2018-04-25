@@ -29,10 +29,13 @@ From this page on, the rest of this section will deal with the integration of
 the functionality from C++ libraries into Rock components by means of orogen.
 But let's first talk about how to create an orogen package.
 
-## Creating an new oroGen package {#create}
+## Creating and Adding Packages to the Workspace
 
-Packages are created with the `rock-create-orogen` tool. Let's assume we want
-to create a `planning/orogen/sbpl` package, the workflow would be to:
+This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
+
+The workflow of the component scaffolding tool `rock-create-orogen` is a bit
+different, though, so let's go through its workflow. Let's assume we want to
+create a `planning/orogen/sbpl` package, the workflow would be to:
 
 ~~~
 acd

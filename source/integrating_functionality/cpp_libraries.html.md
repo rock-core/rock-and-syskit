@@ -25,6 +25,10 @@ The only constraint when the aim is to create a library that will be integrated
 in a Rock component is to provide a pkg-config file for it. This is how orogen
 resolves its dependencies.
 
+## Creating and Adding Packages to the Workspace
+
+This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
+
 ## Integrating 3rd-party library
 
 Rock packages - even those using the Rock CMake macros - are **not** dependent
