@@ -180,6 +180,12 @@ Robot.requires do
 end
 ~~~
 
+Most Syskit commands accepts take a `-r` option followed by a name. This tells Syskit
+which configuration file should be loaded within `config/robots/` *and only this*.
+For instance, starting Syskit with the Gazebo configuration about is done with
+`syskit run -rgazebo`.
+{: .callout .callout-info #syskit_r_option}
+
 **Next**: now that we have a minimal scene and a working Gazebo installation, [let's do
 something with it](composition.html)
 {: .next-page}
@@ -214,4 +220,3 @@ Gazebo process. Given that this data is only output if the components are runnin
 `rock-gazebo-viz` starts them automatically. Use `--no-start` to avoid this.
 </div>
 </div>
-

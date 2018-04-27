@@ -71,6 +71,12 @@ run is not neeeded.
 Once this is done, [add the package to your build
 configuration](../workspace/add_packages.html#orogen)
 
+## C++ Standard {#cxx_standard}
+
+The C++ standard used by orogen is the latest standard required by its dependencies.
+There is currently no way to tell orogen itself to use a given standard. One must
+specify the standard [in the library packages that define the types](../integrating_functionality/cpp_libraries.html#cxx_standard).
+
 ## Type Declarations {#type_declarations}
 
 Not all C++ types can be used by Rock's type system. To be usable as-is, a type must:
@@ -294,4 +300,3 @@ in the first place.
 **Next** Now that you know all about defining data types, let's get to understand how
 they are seen [from within Ruby](types_in_ruby.html)
 {: .next-page}
-

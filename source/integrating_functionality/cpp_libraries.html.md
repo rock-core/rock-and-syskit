@@ -25,6 +25,10 @@ The only constraint when the aim is to create a library that will be integrated
 in a Rock component is to provide a pkg-config file for it. This is how orogen
 resolves its dependencies.
 
+## Creating and Adding Packages to the Workspace
+
+This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
+
 ## Integrating 3rd-party library
 
 Rock packages - even those using the Rock CMake macros - are **not** dependent
@@ -40,7 +44,8 @@ When doing so, try to follow these guidelines:
   this change [as a patch](../workspace/add_packages.html#patch) into your build
   configuration. Also, try to get this patch in the package's mainline, it will
   make things easier down the line.
-- provide [a package manifest](../workspace/add_packages.html#manifest_xml) in the package set.
+- provide [a package manifest](../workspace/add_packages.html#manifest_xml) in the
+  package set.
 
 ## Creating a Package
 
@@ -64,6 +69,27 @@ rock-create-lib imu_advanced_navigation_anpp
 This library creates a dummy class and a dummy executable that uses this class.
 It is great at providing you with the example CMake code for both library and
 tests.
+
+## Picking the C++ Standard {#cxx_standard}
+
+The Rock CMake macros use CMake's own mechanism to pick the C++ standard that should
+be used to build the code. The template still picks the system's local default. If you
+want to choose one explicitely, use (here for C++11)
+
+~~~
+set(CMAKE_CXX_STANDARD 11)
+~~~
+
+This lets CMake use *at least* C++11 - some other dependencies might want a later
+standard. If you want to have *exactly* C++11, add the following line
+
+~~~
+set(CMAKE_CXX_STANDARD_REQUIRED 11)
+~~~
+
+The choice of the C++ standard is automatically
+[propagated to oroGen projects](components.html#cxx_standard) when developing components
+based on the C++11 library.
 
 ## Conventions for library design
 
@@ -126,10 +152,10 @@ use it.
 
 When using the Rock CMake Macros, integration of the base logger is fairly
 easy.  All you need to do is adding _base-logging to your list of package config
-dependencies and include the header _base/logging/Logging.hpp_ where logging is needed. 
+dependencies and include the header _base/logging/Logging.hpp_ where logging is needed.
 
 ~~~
-rock_library(test_library 
+rock_library(test_library
          DEPS_PKGCONFIG base-logging
          ...)
 ~~~
@@ -149,7 +175,7 @@ stream-style.
 ...
 // printf-style logging
 std::string information("test-logging happening here");
-LOG_DEBUG("I provide you the following debug information: %s", 
+LOG_DEBUG("I provide you the following debug information: %s",
     information.c_str());
 LOG_INFO(...);
 LOG_WARN(...);
@@ -188,7 +214,7 @@ and logging format.
   the logging Macros, to avoid clashes with other libraries, i.e.
   BASE_LOG_DEBUG(...)
 
-**At runtime**, the following environment variables can be used to control the behaviour of the logger: 
+**At runtime**, the following environment variables can be used to control the behaviour of the logger:
 
 * **BASE_LOG_LEVEL** Set to one of DEBUG, INFO, WARN, ERROR or FATAL to define
   the maximum logging level, e.g. export BASE_LOG_LEVEL="DEBUG"
@@ -200,22 +226,22 @@ and logging format.
 The DEFAULT format contains no linebreaks (here only due to fit the narrow presentation):
 
 ~~~ sh
-[20120120-11:58:00:577] [FATAL] - test_logger::A fatal error 
+[20120120-11:58:00:577] [FATAL] - test_logger::A fatal error
 occurred (/tmp/test_logger/src/Main.cpp:10 - int main(int, char**))
 ~~~
-    
+
 The SHORT format reduces information to the log priority and the message:
 
 ~~~ sh
 [FATAL] - test_logger::A fatal error occurred
 ~~~
-    
+
 The MULTILINE format split each individual log message across a minimum of three lines:
 
 ~~~ sh
 [20120120-11:58:59:976] in int main(int, char**)
         /tmp/test_logger/src/Main.cpp:10
-        [FATAL] - test_logger::A fatal error occurred 
+        [FATAL] - test_logger::A fatal error occurred
 ~~~
 
 
