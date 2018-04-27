@@ -20,6 +20,10 @@ software
 - packages are also [added during development](composition.html#add_package),
   when the functionality is required
 
+You will ultimately [create your own build configuration and package
+sets](publishing.html) to share the state of your workspace with your
+coworkers.
+
 ### Bundles
 
 [Bundles](getting_started.html) are the package within which we create Syskit models and code. It is the _place of integration_.

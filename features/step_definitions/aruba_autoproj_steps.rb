@@ -20,7 +20,7 @@ Then(/^within the workspace, I successfully run the following script for up to (
     step "I successfully run the following script for up to #{timeout} seconds:", make_workspace_script(script)
 end
 
-Then(/^within the workspace, I successfully run the following script:$/) do |script|
+Then("within the workspace, I successfully run the following script:") do |script|
     step "I successfully run the following script:", make_workspace_script(script)
 end
 

@@ -1,3 +1,4 @@
+require_relative './save_state'
 require 'aruba/cucumber'
 Aruba.configure do |config|
     checkout_name = File.basename(config.root_directory)
@@ -10,27 +11,31 @@ Aruba.configure do |config|
     end
 end
 
-def save_state_as_git_tag(tag_name, path)
-    git_dir = File.join(path, ".git")
-    if !File.directory?(git_dir)
-        if !system("git init", chdir: path, out: :close)
-            raise "Failed to create the git repository in #{path}"
-        end
-    end
-    if !system("git add .", chdir: path, out: :close) || !system("git commit --allow-empty -m '#{tag_name}'", chdir: path, out: :close)
-        raise "Failed to commit the current state"
-    end
-    if !system("git tag -f '#{tag_name}'", chdir: path, out: :close)
-        raise "Failed to create the git repository in #{git_dir}"
-    end
+Before('@clobber-git') do |scenario|
+    FileUtils.rm_rf File.join(
+        aruba.config.root_directory, aruba.config.working_directory, "git")
+    FileUtils.rm_rf File.join(
+        aruba.config.root_directory, aruba.config.working_directory, "dev",
+            '.autoproj', 'remotes',
+            "git__home_doudou_dev_rock_and_syskit_dev_dev____"\
+            "git_rock_rock_and_syskit_package_set_git")
+end
+
+Before('@clobber-new_package_set') do |scenario|
+    FileUtils.rm_rf File.join(
+        aruba.config.root_directory, aruba.config.working_directory, "new_package_set")
 end
 
 After do |scenario|
-    if scenario.passed?
-        tag_name = "#{scenario.feature.name} - #{scenario.name}".gsub(/[^\w]+/, '_')
-        bundle_path = File.join(aruba.config.root_directory, aruba.config.working_directory, "dev", "bundles", "syskit_basics")
-        if File.directory?(bundle_path)
-            save_state_as_git_tag(tag_name, bundle_path)
+    autoproj_config_dir = File.join(
+        aruba.config.root_directory, aruba.config.working_directory, "dev", '.autoproj')
+    if File.directory?(autoproj_config_dir)
+        File.open(File.join(autoproj_config_dir, '.gitignore'), 'w') do |io|
+            io.puts "remotes/"
         end
+    end
+
+    if scenario.passed?
+        save_state_after_scenario(scenario.feature.name, scenario.name)
     end
 end

@@ -1,9 +1,9 @@
+@disable-bundler
+@no-clobber
 Feature: 05. Deployment
     Background:
         Given I cd to "dev/bundles/syskit_basics"
 
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Component Deployment
         When I modify the file "config/robots/gazebo.rb" with:
         """
@@ -23,8 +23,6 @@ Feature: 05. Deployment
         """
         Then the "gazebo" configuration is valid for Syskit
 
-    @disable-bundler
-    @no-clobber
     Scenario: 02. Static configuration of oroGen components
         When within the workspace, I successfully run the following script:
         """
@@ -73,8 +71,6 @@ Feature: 05. Deployment
         """
         Then the "gazebo" configuration is valid for Syskit
 
-    @disable-bundler
-    @no-clobber
     Scenario: 03. Dynamic and system-wide configuration
         When I modify the file "models/compositions/arm_cartesian_constant_control_wdls.rb" with:
         """
@@ -156,8 +152,6 @@ Feature: 05. Deployment
         """
         Then the "gazebo" configuration is valid for Syskit
 
-    @disable-bundler
-    @no-clobber
     Scenario: 04. Building the system's action interface
         When I modify the file "config/robots/gazebo.rb" with:
         """

@@ -1,9 +1,9 @@
+@disable-bundler
+@no-clobber
 Feature: 06. Validation
     Background:
         Given I cd to "dev/bundles/syskit_basics"
 
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Validating Configuration Consistency
         When I modify the file "models/orogen/cart_ctrl_wdls.rb" with:
             """
@@ -118,3 +118,49 @@ Feature: 06. Validation
         """
         Then the Syskit test file "test/orogen/test_cart_ctrl_wdls.rb" passes in configuration "gazebo"
         Then the Syskit tests fail in configuration "gazebo"
+
+        When I modify the file "test/compositions/test_arm_cartesian_control_wdls.rb" with:
+        """
+                describe ArmCartesianControlWdls do
+        +           before do
+        +               # Create a mock that has a robot model
+        +               xml = <<-EOSDF
+        +                   <model name='test'>
+        +                   <link name="root_test" />
+        +                   <link name="tip_test" />
+        +                   </model>
+        +               EOSDF
+        +               @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
+        +               syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+        +                   data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
+        +               syskit_stub_conf OroGen.robot_frames.SingleChainPublisher, 'default',
+        +                   data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
+        +           end
+        -               cmp_task = syskit_stub_deploy_configure_and_start(ArmCartesianControlWdls)
+        +               cmp_task = syskit_stub_deploy_configure_and_start(
+        +                   ArmCartesianControlWdls.with_arguments(robot: @profile))
+        """
+        And I modify the file "test/compositions/test_arm_cartesian_constant_control_wdls.rb" with:
+        """
+                describe ArmCartesianConstantControlWdls do
+        +           before do
+        +               # Create a mock that has a robot model
+        +               xml = <<-EOSDF
+        +                   <model name='test'>
+        +                   <link name="root_test" />
+        +                   <link name="tip_test" />
+        +                   </model>
+        +               EOSDF
+        +               @profile = flexmock(sdf_model: SDF::Model.from_xml_string(xml))
+        +               syskit_stub_conf OroGen.cart_ctrl_wdls.WDLSSolver, 'default',
+        +                   data: { 'root' => 'test::root_test', 'tip' => 'test::tip_test' }
+        +               syskit_stub_conf OroGen.robot_frames.SingleChainPublisher, 'default',
+        +                   data: { 'chain' => Hash['root_link' => 'test::root_test', 'tip_link' => 'test::tip_test'] }
+        +           end
+        -               cmp = syskit_stub_deploy_configure_and_start(
+        -                   ArmCartesianConstantControlWdls.with_arguments(setpoint: setpoint))
+        +               cmp_task = syskit_stub_deploy_configure_and_start(
+        +                   ArmCartesianConstantControlWdls.with_arguments(
+        +                       setpoint: setpoint, robot: @profile))
+        """
+        Then the "gazebo" configuration is valid for Syskit

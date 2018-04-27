@@ -1,6 +1,6 @@
+@disable-bundler
+@no-clobber
 Feature: 01. Getting Started
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Creating the bundle
         Given I cd to "dev"
         And within the workspace, I successfully run the following script:
@@ -27,8 +27,6 @@ Feature: 01. Getting Started
         When I stop the command started last
         Then the exit status should be 0
 
-    @disable-bundler
-    @no-clobber
     Scenario: 02. Setting up the scene
         Given I cd to "dev/bundles/syskit_basics"
         And a file named "scenes/empty_world/empty_world.world" with:
@@ -58,8 +56,6 @@ Feature: 01. Getting Started
         rock-gazebo --download-only empty_world
         """
 
-    @disable-bundler
-    @no-clobber
     Scenario: 03. Preparing the gazebo Syskit configuration
         Given I cd to "dev/bundles/syskit_basics"
         Then I successfully run the following script:

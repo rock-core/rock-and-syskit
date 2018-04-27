@@ -1,6 +1,6 @@
+@disable-bundler
+@no-clobber
 Feature: 04. Profiles and Devices
-    @disable-bundler
-    @no-clobber
     Scenario: 01. Defining Devices for the Gazebo System
         Given I cd to "dev/bundles/syskit_basics"
         When within the workspace, I successfully run the following script:
