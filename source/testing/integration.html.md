@@ -17,7 +17,7 @@ actually act as outsiders: they run everything through Syskit's remote
 interface, the way you would control it through the IDE or a GUI. These tests
 are based on [Cucumber](https://cucumber.io/). This documentation assumes
 that you've at least read the introductory Cucumber material, especially [the
-description of the guerkin language](https://cucumber.io/docs/reference).
+description of the guerkin language](https://docs.cucumber.io/gherkin/).
 
 This page will instead focus on the Syskit-specific parts of using cucumber.
 
