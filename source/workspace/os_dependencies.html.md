@@ -372,6 +372,70 @@ control/visp:
     - libvisp-core3.0-dev
 ~~~
 
+## osrepos files
+
+In addition to installing OS packages, Autoproj may also automatically setup os-specific
+package repositories. In order to do that, you will have to create a YAML file with the
+.osrepos extension either in a package set or in the main configuration. Similarly to an
+.osdeps file, the .osrepos should have the format:
+
+~~~yaml
+- distribution:
+  - version:
+    … repository definition …
+~~~
+
+Just like with OS packages, Autoproj will automatically detect your operating system
+and only setup the relevant repositories. Currently, the only supported system is ubuntu/debian.
+
+### Apt repository definition
+
+The format of an Apt repository definition is as follows:
+
+~~~yaml
+- ubuntu:
+  - xenial:
+    - type: repo
+      repo: 'deb http://packages.ros.org/ros/ubuntu xenial main'
+    - type: repo
+      repo: 'deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main'
+    - type: key
+      keyserver: 'hkp://ha.pool.sks-keyservers.net:80'
+      id: 421C365BD9FF1F717815A3895523BAEEB01FA116
+    - type: key
+      url: 'http://packages.osrfoundation.org/gazebo.key'
+      id: D2486D2DD83DB69272AFE98867170598AF249743
+~~~
+
+As you can see from the snippet above, Autoproj is capable of adding both the repository
+itself and the required keys. If you want to use the same entry for different OS releases you
+may use the `default` keyword or a comma-separated list of release names/versions:
+
+~~~yaml
+- ubuntu:
+  - xenial,'14.04',saucy:
+    - type: repo
+      repo: 'deb http://packages.microsoft.com/repos/vscode stable main'
+  - default
+    - type: repo
+      repo: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+~~~
+
+By default, Autoproj will add new entries to `/etc/apt/sources.list.d/autoproj.list`. This
+may be changed with the addition of a `file` option in the entry. So, to have Autoproj add
+new definitions to a `/etc/apt/sources.list.d/package_set.list` file:
+
+~~~yaml
+- ubuntu:
+  - xenial:
+    - type: repo
+      repo: 'deb http://packages.ros.org/ros/ubuntu xenial main'
+      file: package_set.list
+~~~
+
+Existing entries will be left unchanged in the files they are currently defined in and
+commented out entries will be uncommented in the files they are currently defined in.
+
 **Next**: now that you have a deeper understanding of what are packages and how they
 are integrated in an autoproj build [let's discuss how to organize the overall build
 configuration itself](managing.html)
