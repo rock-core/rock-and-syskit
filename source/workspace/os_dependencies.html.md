@@ -416,7 +416,7 @@ may use the `default` keyword or a comma-separated list of release names/version
   - xenial,'14.04',saucy:
     - type: repo
       repo: 'deb http://packages.microsoft.com/repos/vscode stable main'
-  - default
+  - default:
     - type: repo
       repo: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
 ~~~
