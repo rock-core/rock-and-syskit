@@ -220,11 +220,13 @@ The Gemfile and the bundler binstubs are installed in [the workspace's
 prefix](../basics/day_to_day.html#layout) under `gems/`. `gems/bin/` is
 automatically added to the PATH.
 
-It supports explicit version constraints, that is:
+The package manager supports explicit version constraints within the osdeps
+files, using [RubyGems version constraints](https://guides.rubygems.org/patterns/#declaring-dependencies).
+Only one constraint can be specified. For instance:
 
 ~~~
 package_name:
-  gem: package_name~>2.0
+  gem: "package_name~>2.0"
 ~~~
 
 Because Bundler sets up the environment so that it is completely isolated from
@@ -232,6 +234,10 @@ the other workspace's, gems that are not part of the osdeps system - installed
 for instance for debugging purposes -- need to be added in a separate
 [Gemfile](http://bundler.io/v1.15/man/gemfile.5.html), in `autoproj/Gemfile`.
 You **must** run `autoproj osdeps` after changing this file.
+
+Unlike the osdeps files, `autoproj/Gemfile` follows [Bundler's Gemfile
+syntax](https://bundler.io/gemfile.html). You do not need to add the `source
+"https://rubygems.org"` command, which is already set by Autoproj.
 
 `autoproj/Gemfile` is usually not checked in the version control system - if
 you need a permanent dependency installed, define an osdep for it and depend on
