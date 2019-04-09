@@ -264,23 +264,51 @@ overrides:
     type: ...
 ~~~
 
-Additional overrides may be specified in files in the `autoproj/overrides.d/`
-folder. The YAML files in this folder do not specify sections:
+Finally, additional overrides may be specified in files in the
+`autoproj/overrides.d/` folder. The YAML files in this folder do not specify
+sections, only a list of packages:
 
 ~~~yaml
 - package_name:
   type: ...
 ~~~
 
-Once all matching entries are found, Autoproj resolves the final configuration by:
+Once all matching entries are found, Autoproj resolves the final configuration by
+"overlaying" the found entries, starting with the package set that defines the package,
+and finishing with `autoproj/overrides.d`.
+
+When overlaying definitions:
 
 - if the `type` field is not specified, updating existing settings
 - if the `type` field is set, clearing existing settings and using the new ones.
 
-At any time, matching entries as well as the resolved version control
-configuration for a package can be displayed with `autoproj show`.
+For instance, the following two entries:
 
-For instance, `autoproj show tools/roby` in the rock-gazebo build configuration
+~~~yaml
+version_control:
+- tools/syskit:
+  github: rock-core/tools-syskit
+  branch: master
+~~~
+
+and (in `autoproj/overrides.d/50-syskit.yml`)
+
+~~~yaml
+- tools/syskit:
+  branch: some_other_branch
+~~~
+
+Will be equivalent to
+
+~~~yaml
+- tools/syskit:
+  github: rock-core/tools-syskit
+  branch: some_other_branch
+~~~
+
+At any time, matching entries as well as the resolved version control
+configuration for a package can be displayed with `autoproj show`. For
+instance, `autoproj show tools/roby` in the rock-gazebo build configuration
 as of today gives:
 
 ~~~
