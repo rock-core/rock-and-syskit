@@ -351,6 +351,16 @@ package_name:
   … rest of options same as git …
 ~~~
 
+Note that Autoproj supports referring to the `refs/pull/*` references GitHub
+sets up for the pull requests. One can therefore point to a pull request with:
+
+~~~yaml
+package_name:
+    github: rock-core/tools-syskit
+    remote_branch: refs/pull/52/head
+    local_branch: pr-52
+~~~
+
 ### Git LFS
 
 Autoproj may automatically handle Git repositories that also use
