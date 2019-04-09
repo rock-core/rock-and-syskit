@@ -54,8 +54,11 @@ need to know at a certain point in time.
 ## Building Systems
 
 3. [Workspace and Packages](workspace/index.html)
-3. [The Type System](type_system/index.html)
-4. [Integrating Functionality](integrating_functionality/index.html)
+4. [Libraries](libraries/index.html), or how to integrate functionality in C++ and Ruby
+   with no dependency on the Rock framework itself.
+6. [Components](components/index.html), or how to use the functionality developed
+   in libraries in a Rock-based component layer, including a description of
+   Rock's type system.
 5. Working with SDF
 6. [Designing Component Networks](component_networks/index.html)
 7. Advanced Component Deployment

@@ -13,7 +13,7 @@ sort_info: 50
   structure](task_structure.html).
 - Syskit has assumptions about how components should be implemented. We'll
   recollect those when we get to [how to implement
-  components](../integrating_functionality/components.html)
+  components](../components/index.html)
 - Components are configured and started "when possible" by [the
   scheduler](event_loop.html#scheduling)
 - Components are transparently [reconfigured](event_loop.html#reconfiguration)

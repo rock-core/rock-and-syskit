@@ -96,7 +96,7 @@ defines it.
 
 Modifiers on the children have to be added to the return value of the `add`
 statement. The
-[`with_conf`](../integrating_functionality/runtime.html) statement
+[`with_conf`](../components/runtime.html) statement
 for components for instance would be added like this:
 
 ~~~ ruby
@@ -223,7 +223,7 @@ module SyskitBasics
 end
 ~~~
 
-A component's configuration, specified with the `with_conf` specifier, is really only 
+A component's configuration, specified with the `with_conf` specifier, is really only
 syntactic sugar on top of the `with_arguments` call. One can therefore pass configuration
 from parent to child: `add(...).with_arguments(conf: from(:parent_task).conf)`.
 {: .note}

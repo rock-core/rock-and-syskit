@@ -27,29 +27,9 @@ resolves its dependencies.
 
 ## Creating and Adding Packages to the Workspace
 
-This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
+This is covered in details in the [Workspace and Packages section](../workspace/add_packages.html)
 
-## Integrating 3rd-party library
-
-Rock packages - even those using the Rock CMake macros - are **not** dependent
-on autoproj. Autoproj is an external helper tool, but in no way does it interact
-with the package's build process. It is therefore perfectly feasible to build and
-use 3rd party libraries in a Rock system.
-
-When doing so, try to follow these guidelines:
-
-- do not change the package unless strictly necessary. The one exception for
-  which there is currently no good solution is to provide a pkg-config file for
-  orogen integration. If that is needed, you will probably want to integrate
-  this change [as a patch](../workspace/add_packages.html#patch) into your build
-  configuration. Also, try to get this patch in the package's mainline, it will
-  make things easier down the line.
-- provide [a package manifest](../workspace/add_packages.html#manifest_xml) in the
-  package set.
-
-## Creating a Package
-
-You need to first pick a category and a name [the workspace
+**Executive Summary**: You need to first pick a category and a name [the workspace
 conventions](../workspace/conventions.html) for information about how to name
 your library package.
 
@@ -70,6 +50,44 @@ This library creates a dummy class and a dummy executable that uses this class.
 It is great at providing you with the example CMake code for both library and
 tests.
 
+When using VSCode, the package will not be picked up by the [`vscode-rock`
+extension](../workspace/vscode.html) until it is part of the main manifest.
+Adding the package path to the layout section of `autoproj/manifest` is
+enough at this stage. You will however have to [define the
+package](../workspace/add_packages.html) in the autobuild and `source.yml`
+files before you push the updated manifest to your team members. For instance,
+when creating `drivers/imu-myahrs` one would do
+
+~~~
+rock-create-lib drivers/imu-myahrs
+~~~
+
+and then add
+
+~~~yaml
+layout:
+  - ...
+  - drivers/imu-myahrs
+~~~
+
+## Integrating 3rd-party library
+
+Rock packages - even those using the Rock CMake macros - are **not** dependent
+on autoproj. Autoproj is an external helper tool, but in no way does it interact
+with the package's build process. It is therefore perfectly feasible to build and
+use 3rd party libraries in a Rock system.
+
+When doing so, try to follow these guidelines:
+
+- do not change the package unless strictly necessary. The one exception for
+  which there is currently no good solution is to provide a pkg-config file for
+  orogen integration. If that is needed, you will probably want to integrate
+  this change [as a patch](../workspace/add_packages.html#patch) into your build
+  configuration. Also, try to get this patch in the package's mainline, it will
+  make things easier down the line.
+- provide [a package manifest](../workspace/add_packages.html#manifest_xml) in the
+  package set.
+
 ## Picking the C++ Standard {#cxx_standard}
 
 The Rock CMake macros use CMake's own mechanism to pick the C++ standard that should
@@ -88,8 +106,54 @@ set(CMAKE_CXX_STANDARD_REQUIRED 11)
 ~~~
 
 The choice of the C++ standard is automatically
-[propagated to oroGen projects](components.html#cxx_standard) when developing components
-based on the C++11 library.
+[propagated to oroGen projects](../components/index.html#cxx_standard) when developing components
+based on a C++ library.
+
+## Package Dependencies
+
+It is common for packages to depend on other packages. All Rock-generated C++
+packages for instance depend on `base/cmake`, which defines the
+[Rock CMake helper macros](#rock-cmake-macros). Most of them also depend on
+`base/types`, which define the common Rock datatypes.
+
+Every time you want to add a new dependency to a C++ package, you need to
+do **two things**:
+1. update (the package's `manifest.xml`)[../workspace/add_packages.html#manifest_xml]
+   to declare the new dependency.
+2. update `src/CMakeLists.txt` to add the dependency to the package's targets.
+
+In the latter case, there are more than one modality for dependency resolution.
+This is the beautiful world of C++ build systems after all.
+
+If the other package defines a `pkg-config` file, add the name of its `.pc`
+file to a `DEPS_PKGCONFIG` section, for instance
+
+~~~
+rock_library(mylib
+    DEPS_PKGCONFIG myahrs)
+~~~
+
+All Rock-generated packages define a pkg-config file using the package's basename
+(i.e. `drivers/imu-myahrs` will have a `imu-myahrs` pkg-config file)
+
+If the other package installs CMake dependency file, use the DEPS_CMAKE section
+
+~~~
+rock_library(mylib
+    DEPS_CMAKE cmakepkgname)
+~~~
+
+The name in `DEPS_CMAKE` is also dependent on the naming scheme of the other package.
+Look for `*-config.cmake` or `Find*.cmake` in the package's prefix. The `*` is the
+name you need to put in the `rock_library`, e.g. `FindGDAL.cmake` will be used by
+`DEPS_CMAKE GDAL`.
+
+Finally, if you create more than one target (library/executable) within your package,
+you can define inter-dependencies
+
+When using `DEPS_CMAKE` and `DEPS_PKGCONFIG`, you ensure that the dependencies
+are saved in the generated pkg-config file (and therefore made available to
+packages that would also depend on your package).
 
 ## Conventions for library design
 
@@ -102,18 +166,37 @@ There's a small number of conventions that Rock libraries follow:
   has its own file, with named like the class (i.e. the `Driver` class is in
   `src/Driver.hpp` and `src/Driver.cpp`)
 - **File Structure** source and header files _tests excluded_ are saved in
-  `src/`. Tests are in `test/`.
+  `src/`. Tests are in `test/`. When applicable, split unit tests following
+  the same structure than in `src/`, e.g. create `test/test_Spline.cpp` to
+  test the `Spline` class implemented in `src/Spline.(hpp|cpp)`
 
 If the ultimate goal of a data type is to be used as an interface type on a
-Rock component, you must have first read and understood the [limits this entails system](../type_system)
+Rock component, you must take this into account when designing the type.
+Read first [the documentation on type definitions for components](../components/defining_types.html).
 
 ## Tests
 
-This is 2017 (or later). Testing is now an integral part of modern development
-process, and Rock provides support to integrate unit testing in the development
-workflow.
+Testing is now an integral part of modern development process, and Rock
+provides support to integrate unit testing in the development workflow.
 
-All libraries that have a `test/` folder will be assumed to have a test suite.
+The default library template creates a test suite that uses boost test. There
+is also the possibility to use GTest and GMock, the Google-maintained C++
+testing libraries. To do so, modify the package's `manifest.xml` to add
+`<test_depend "gtest" />`, replace [`rock_testsuite`](#rock_testsuite)
+in `test/CMakeLists.txt` by [`rock_gtest`](#rock_gtest), and finally
+replace the content of `test/suite.cpp` with the following:
+
+~~~cpp
+// Do NOT add anything to this file
+#include <gtest/gtest.h>
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
+~~~
+
+All C++ libraries that have a `test/` folder will be assumed to have a test suite.
 However, testing is disabled by default - since building all the tests from all
 the workspace's packages would be fairly expensive. One needs to enable a package
 tests to build them:
@@ -134,7 +217,40 @@ Autoproj can also run them with `autoproj test [package]`, but will redirect
 the test's output to a log file (that can be visualized later with
 [alog](../basics/day_to_day.html#alog).
 
-## The Rock CMake macros
+## Debugging in VSCode
+
+When within a C++ package, the `rock - Add launch config` command will help
+you with selecting the binary you want to run. It discovers binaries within
+the package's build directory and proposes them to add to the new
+configuration. The equivalent functionality is available through the "Add Entry"
+button when editing an existing `launch.json` file.
+
+**NOTE** due to a bug in VSCode, newly created `launch.json` files are
+sometimes not taken into account. If this is the case, you have to reload
+VSCode with the `Reload Window` command.
+
+Click on the image below for a demo video:
+
+[![Demo workflow fo C++ packages](https://img.youtube.com/vi/1bJx2UYKf1c/0.jpg)](https://www.youtube.com/watch?v=1bJx2UYKf1c)
+
+The generated C++ launch configurations are [standard cppdbg launch
+configurations](https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md).
+To ease integration within an autoproj workspace, the extension provides the
+possibility to use expansions to query information about the autoproj
+environment. These expansions can be used in any field within the debug
+configuration.
+
+- `${rock:srcDir}` expands to the package's source directory
+- `${rock:buildDir}` expands to the package's build directory. You usually
+  will need this to resolve programs or files that are not installed by the
+  package, such as test programs.
+- `${rock:prefixDir}` expands to the package's prefix (install) directory. You
+  will need this to resolve path to files installed by the package.
+- `${rock:which:cmd}` expands to the full path to the command `cmd` within
+   the autoproj workspace's PATH. Use this to resolve programs that are
+   installed by the packages.
+
+## The Rock CMake macros {#rock-cmake-macros}
 
 To ease the use of CMake within a Rock system - i.e. in packages that follow
 Rock conventions, Rock provides CMake macros that are somewhat easier to use.
@@ -142,6 +258,12 @@ The following describes them. The macros can be found in
 `base/cmake/modules/Rock.cmake` in a rock installation. There are also specific
 support for other tools within the Rock system (such as
 [vizkit3d](todo_link_to_vizkit3d)), but these will be introduced at another point.
+
+**Note** the Rock CMake macros are only dependent on files present in the
+CMake distribution, and with pkg-config. These are all standard tools, and as such
+using the Rock CMake macros in a package adds only the (very minimal)
+dependency on the `base/cmake` package itself. It will need nothing else
+within Rock, and definitely nothing from Autoproj itself.
 
 ## Using Rock's text logger
 
@@ -343,7 +465,7 @@ get added to the library and the corresponding header file is passed to moc.
 **NOINSTALL**: by default, the library gets installed on 'make install'. If this
 argument is given, this is turned off
 
-### Boost Test Suite Targets (`rock_testsuite`)
+### Boost Test Suite Targets (`rock_testsuite`) {#rock_testsuite}
 
 ~~~
 rock_testsuite(name
@@ -381,7 +503,7 @@ are listed, these headers should be processed by moc, with the resulting
 implementation files are built into the library. If they are source files, they
 get added to the library and the corresponding header file is passed to moc.
 
-### GTest Test Suite Targets (`rock_testsuite`)
+### GTest Test Suite Targets (`rock_gtest`) {#rock_gtest}
 
 ~~~
 rock_gtest(name

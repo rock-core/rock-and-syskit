@@ -46,19 +46,51 @@ The first step in creating a package is [to pick a name](conventions.html#naming
 If you create a package from scratch, Rock provides a set of command-line tools
 to generate package scaffolds for you:
 
-- `rock-create-lib` for a [C++ library](../integrating_functionality/cpp_libraries.html)
-- `rock-create-rubylib` for [Ruby libraries](../integrating_functionality/ruby_libraries.html)
-- `rock-create-orogen` for [an oroGen component](../integrating_functionality/components.html)
+- `rock-create-lib` for a [C++ library](../libraries/cpp_libraries.html)
+- `rock-create-rubylib` for [Ruby libraries](../libraries/ruby_libraries.html)
+- `rock-create-orogen` for [an oroGen component](../components/index.html)
 - `rock-create-bundle` for [a bundle](../basics/getting_started.html)
+
+Each tool follows the same workflow: run the tool with the package path, and
+answer the tool's questions, e.g.:
+
+~~~
+rock-create-lib drivers/imu-myahrs
+~~~
 
 While the other generation scripts create ready-to-use packages, the workflow
 of the `rock-create-orogen` tool is a bit different. It is covered
-[in the Integrating Functionality chapter](../integrating_functionality/components.html)
+[in the Components chapter](../components/index.html)
 
 If you are integrating a package that already exists, it should be easy enough
 provided that the package uses widespread build systems and follows common
 conventions (such as having a separate source and build folder, and having an
 install step).
+
+## Adding the package to the workspace
+
+To **share** the package with your teammates, you **must** define the package type
+and VCS information, as detailed in the following of this page.
+
+However, when one starts developing on a new package, this is an unncessary step
+if the package uses a common build system (all rock-generate package templates
+do). Only add the package path to the `layout` section of `autoproj/manifest`
+For instance, when creating `drivers/imu-myahrs` one would do
+
+~~~
+rock-create-lib drivers/imu-myahrs
+~~~
+
+and then add
+
+~~~yaml
+layout:
+  - ...
+  - drivers/imu-myahrs
+~~~
+
+You will however have to define the package in the autobuild and `source.yml`
+files before you push the updated manifest to your team members
 
 ## Package Description and Dependencies {#manifest_xml}
 

@@ -36,7 +36,7 @@ the dataflow in the `ArmCartesianControlWdls` composition, we find:
 
 The type name is `/base/samples/RigidBodyState`. Types like this one are
 defined when implementing components, which is something we will see
-[later](../type_system). You can have an overview of the
+[later](../components/defining_types.html). You can have an overview of the
 types already available in your Rock workspace by looking at the `Types` section
 in the IDE's model browser. Clicking on a port will lead you to this port's
 type page. Right-clicking on any page allows to go to previous pages.
@@ -123,7 +123,7 @@ end
 **Note**: the position and orientation here are assumed to be respectively a
 vector (of type Eigen::Vector3) and a quaternion (of type Eigen::Quaternion).
 The underlying type system [is a subject for another
-part](../type_system). For now, just accept it.
+part](../components/defining_types.html). For now, just accept it.
 {: .callout .callout-info}
 
 This kind of "high-level argument shadowing low-level
@@ -341,8 +341,8 @@ SyskitBasics::Compositions::ArmCartesianConstantControlWdls#test_0001_starts:
 
 cannot find an ordering to configure 1 tasks
 SyskitBasics::Compositions::ArmCartesianConstantCommandGenerator:0x2714010
-  owners: 
-  arguments: 
+  owners:
+  arguments:
     orocos_name: "stub3",
     period: 0.1,
     conf: ["default"]
@@ -414,7 +414,7 @@ There's another control mode that we need. In order to either hold a position,
 or go into a safe position, one needs a joint position constant generator and
 the corresponding composition.
 
-The creation of this generator is left to the reader. 
+The creation of this generator is left to the reader.
 
 <div class="callout callout-info">
 **Tip**: a good representation for the setpoint would be a

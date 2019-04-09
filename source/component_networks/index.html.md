@@ -51,7 +51,7 @@ exposed to the coordination layer.
 
 In this chapter, we will start by detailing and expanding what we have already
 seen in the [basics](../basics) chapter. We are assuming that you have read the
-[Runtime section](../integrating_functionality/runtime.html) of the
+[Runtime section](../components/runtime.html) of the
 Integrating Functionality chapter, so we're going to jump straight at
 [compositions](composition.html) and [profiles](profiles.html). We will then go
 into the mechanisms that allow to build [reusable
