@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Types in Ruby
-sort_info: 20
+sort_info: 60
 ---
 
 # Types in Ruby
@@ -133,7 +133,7 @@ Time using the given block. Note that the Ruby type is optional in this case
 **Where to define these ?** One-shot conversions can be defined straight into
 your system (ruby script or Syskit app). For conversions that are too widespread
 for that, consider installing a `typelib_plugin.rb` file under a folder that is resolved
-by `RUBYLIB` (e.g. `mylib/typelib_plugin.rb`), most likely [a Ruby package](../integrating_functionality/ruby_libraries.html). 
+by `RUBYLIB` (e.g. `mylib/typelib_plugin.rb`), most likely [a Ruby package](../libraries/ruby_libraries.html).
 
 The inverse conversion may also be provided
 
@@ -192,7 +192,7 @@ your system (ruby script or Syskit app). For conversions that are too widespread
 for that, consider installing a `typelib_plugin.rb` file under a folder that is resolved
 by `RUBYLIB` (e.g. `mylib/typelib_plugin.rb`). This would either be a plain Ruby package
 or a file installed by a C++ package within the Ruby search path. Both methods are
-described in more details in the [Creating Functionality](../integrating_functionality/ruby_libraries.html) section.
+described in more details in the [Creating Functionality](../libraries/ruby_libraries.html) section.
 
 **Next** that's all about the type system. Go back to [the documentation
 overview](../index.html#how_to_read) for more.

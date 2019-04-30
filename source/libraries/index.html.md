@@ -2,8 +2,8 @@
 layout: documentation
 title: Introduction
 sort_info: 0
-directory_title: Integrating Functionality
-directory_sort_info: 40
+directory_title: Libraries
+directory_sort_info: 35
 ---
 
 # Integrating Functionality
@@ -45,11 +45,11 @@ libraries to ease their integration in a Rock system. The next pages of this
 section will first deal with [C++ libraries](cpp_libraries.html) and then [Ruby
 libraries](ruby_libraries.html).
 
-The rest will then deal with the no small matter of integrating this
-functionality in a Rock system.
-If you feel so inclined, Rock provides a C++ library template. This template
-solves some of the common problems with setting up a C++ library (basic build
-system, ...) and obviously integrate as-is with the rest of a Rock system.
+The [next section](../components/index.html) will then deal with the no small
+matter of integrating this functionality in a Rock system. If you feel so
+inclined, Rock provides a C++ library template. This template solves some of
+the common problems with setting up a C++ library (basic build system, ...)
+and obviously integrate as-is with the rest of a Rock system.
 
 **Next**: let's talk about the development of [C++ libraries](cpp_libraries.html)
 {: .next-page}

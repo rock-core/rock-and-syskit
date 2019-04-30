@@ -37,7 +37,7 @@ by replacing sub-parts of the network.  This what the `use` statement we
 
 Defining a data service entails giving it a name, which represents what the
 data service represents, and providing it with a dataflow interface (input and
-output ports). 
+output ports).
 
 Data services are defined using a `data_service_type` statement in a class or module
 context. The data service name must be in `CamelCase`, and the new data service
@@ -54,7 +54,7 @@ end
 ~~~
 
 The types used in the data service must be imported first by adding the
-relevant [`import_types_from` statement at toplevel](../type_system/types_in_ruby.html#import_types_from)
+relevant [`import_types_from` statement at toplevel](../components/types_in_ruby.html#import_types_from)
 {: .important}
 
 __Naming Convention__ data services are by convention defined in the `AppName::Services`
@@ -503,13 +503,13 @@ But as the generated tests say, keep all three. This ensures that if you remove 
 During the basics, we've seen that one must define
 [deployments](../basics/deployment.html#use_deployment) to be able to run the
 network. We also discussed have seen in more details how deployments are
-created [within oroGen projects](../integrating_functionality/deployment.html).
+created [within oroGen projects](../components/deployment.html).
 
 Defining deployments within a robot's configuration `requires` block is often
 the only thing you need to do. The only case where you will need more is when
 more than one deployment exists of a certain component. In this case, you will
 need to create [multiple deployments of the same task
-model](../integrating_functionality/runtime.html), and Syskit will
+model](../components/runtime.html), and Syskit will
 require you to specify which deployment the networks should use with the
 `prefer_deployed_tasks` specification. The specification either takes a string
 - in which case it must match the deployment name exactly - or a regular
