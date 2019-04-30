@@ -228,8 +228,41 @@ syntactic sugar on top of the `with_arguments` call. One can therefore pass conf
 from parent to child: `add(...).with_arguments(conf: from(:parent_task).conf)`.
 {: .note}
 
+### Handling Single-short Ports {#single-shot-ports}
+
+Rock's defaults are tuned for components that continuously generate and
+process data. Some components, for instance task or motion planning
+components, are sometimes implemented as one short. That is, the component
+will rarely generate a sample.
+
+The problem with the integration of such components is that one would need
+to ensure that port-to-port connections are established, and that receiving
+components are ready to read the data [^1], before letting the source generate
+the data. It would be a lot of synchronization burden.
+
+Instead, one tells the framework to remember the last written sample, and
+push this sample through new connections once they are established. To use
+this method, one must declare that the last written value on a port should
+be kept. Change the output port definition to read
+
+~~~ ruby
+output_port('trajectory', '/base/Trajectory')
+    .keep_last_written_value(true)
+~~~
+
+Then, in the composition's `connect_to` statements, add `init: true`. An
+`init: true` connection without the `keep_last_written_value` will have no
+effect, and will currently do so silently.
+
+~~~ ruby
+planner_child.trajectory_port
+    .connect_to controller_child.trajectory_port, init: true
+~~~
+
 This is all the basics about compositions. We will come back to it once we talk
 about [reusing networks](reusable_networks.html). But first, the next subject is
 [Profiles](profiles.html)
 {: .next-page}
 
+[^1]: This is because components clear their connections on start
+      [More...](../components/writing_the_hooks.html#port-clear-on-start)

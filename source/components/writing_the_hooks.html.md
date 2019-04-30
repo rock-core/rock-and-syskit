@@ -90,8 +90,9 @@ already-read sample was read (`RTT::OldData`). Let's now look at the common
 port-reading patterns.
 
 All input ports are cleared on `startHook`, i.e. just after `startHook`, the
-status will often be `NoData`. This is done so that the component does not read
+status will very likely be `NoData`. This is done so that the component does not read
 stale data from its last execution.
+{: #port-clear-on-start}
 
 Input ports can be used in the C++ code in two ways, which one you want to use
 depends on what you actually want to do.
