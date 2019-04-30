@@ -264,23 +264,51 @@ overrides:
     type: ...
 ~~~
 
-Additional overrides may be specified in files in the `autoproj/overrides.d/`
-folder. The YAML files in this folder do not specify sections:
+Finally, additional overrides may be specified in files in the
+`autoproj/overrides.d/` folder. The YAML files in this folder do not specify
+sections, only a list of packages:
 
 ~~~yaml
 - package_name:
   type: ...
 ~~~
 
-Once all matching entries are found, Autoproj resolves the final configuration by:
+Once all matching entries are found, Autoproj resolves the final configuration by
+"overlaying" the found entries, starting with the package set that defines the package,
+and finishing with `autoproj/overrides.d`.
+
+When overlaying definitions:
 
 - if the `type` field is not specified, updating existing settings
 - if the `type` field is set, clearing existing settings and using the new ones.
 
-At any time, matching entries as well as the resolved version control
-configuration for a package can be displayed with `autoproj show`.
+For instance, the following two entries:
 
-For instance, `autoproj show tools/roby` in the rock-gazebo build configuration
+~~~yaml
+version_control:
+- tools/syskit:
+  github: rock-core/tools-syskit
+  branch: master
+~~~
+
+and (in `autoproj/overrides.d/50-syskit.yml`)
+
+~~~yaml
+- tools/syskit:
+  branch: some_other_branch
+~~~
+
+Will be equivalent to
+
+~~~yaml
+- tools/syskit:
+  github: rock-core/tools-syskit
+  branch: some_other_branch
+~~~
+
+At any time, matching entries as well as the resolved version control
+configuration for a package can be displayed with `autoproj show`. For
+instance, `autoproj show tools/roby` in the rock-gazebo build configuration
 as of today gives:
 
 ~~~
@@ -349,6 +377,61 @@ URL is using https (usually faster).
 package_name:
   github: rock-core/buildconf
   … rest of options same as git …
+~~~
+
+Note that Autoproj supports referring to the `refs/pull/*` references GitHub
+sets up for the pull requests. One can therefore point to a pull request with:
+
+~~~yaml
+package_name:
+    github: rock-core/tools-syskit
+    remote_branch: refs/pull/52/head
+    local_branch: pr-52
+~~~
+
+### Git LFS
+
+Autoproj may automatically handle Git repositories that also use
+[git-lfs](https://git-lfs.github.com/). You only need to add the following
+line to your package set's `init.rb` file:
+
+~~~ ruby
+require 'autobuild/import/git-lfs'
+~~~
+
+Autoproj will automatically checkout the LFS files if it detects that LFS is
+enabled on a git repository. Note that because of Autoproj's use of the
+`autobuild` remote, `git lfs` does not work from the command line - a known
+limitation of git-lfs itself. You need to use `aup` (with e.g. `aup -n` to
+update only a single package) to handle the LFS bits.
+
+Common LFS configurations can be added to the source entry, or augmented
+in `autoproj/overrides.d/` using the following options:
+
+- `lfs` allows to disable autoproj's LFS handling for this package
+- `lfs_exclude` is a list of patterns of LFS-managed files that should not be
+  checked out. Use this to avoid checking out huge files that are usually not
+  used.
+- `lfs_include` is a list of patterns of LFS-managed files that should
+  checked out, to possibly override files excluded by more encompassing
+  patterns in `lfs_exclude`
+
+For instance, in a package set's `source.yml`:
+
+~~~ yaml
+package_name:
+  type: git
+  url: repository_url_or_path
+  lfs_exclude: # avoid checking out the blender files by default
+  - *.blend
+~~~
+
+Or, to avoid checking out any LFS file locally because *you* don't need them,
+create `autoproj/overrides.d/50-no-lfs.yml`:
+
+~~~ yaml
+package_name:
+    lfs: false
 ~~~
 
 ### Tar archives
