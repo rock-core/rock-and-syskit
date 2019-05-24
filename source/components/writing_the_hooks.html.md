@@ -98,7 +98,7 @@ Input ports can be used in the C++ code in two ways, which one you want to use
 depends on what you actually want to do.
 
 * if you want to read all new samples that are on the input (since an input port
-  can be connected to multiple output ports)
+  can be connected to multiple output ports) {: #port-read-while}
 
   ~~~ cpp
   // my_type is the declared type of the port
@@ -162,7 +162,7 @@ struct PortConfiguration
    std::string port_name;
    base::Time period;
 };
-~~~ 
+~~~
 
 To hold the list of created ports, the task would need an attribute
 

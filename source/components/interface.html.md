@@ -72,8 +72,8 @@ declared `dynamic`:
 
 ~~~ ruby
 # What this property is about
-property('name', 'configuration_type').
-  dynamic
+property('name', 'configuration_type')
+    .dynamic
 ~~~
 
 **Don't make everything dynamic**. Use dynamic properties only for things that
@@ -97,7 +97,7 @@ For more complex types, the initialization should be done in the task's construc
 
 ~~~ cpp
 Task::Task(...) {
-  _initial_position.set(Eigen::Vector3.Zero)
+    _initial_position.set(Eigen::Vector3.Zero);
 }
 ~~~
 
@@ -108,24 +108,24 @@ functionality through remote method calls. They are defined with:
 
 ~~~ ruby
 # Documentation of the operation
-operation('commandName').
-    argument('arg0', '/arg/type').
-    argument('arg1', '/example/other_arg')
+operation('commandName')
+    .argument('arg0', '/arg/type')
+    .argument('arg1', '/example/other_arg')
 ~~~
 
 Additionally, a return type can be added with
 
 ~~~ ruby
 # Documentation of the operation
-operation('operationName').
-    returns('int').
-    argument('arg0', '/arg/type').
-    argument('arg1', '/example/other_arg')
+operation('operationName')
+    .returns('int')
+    .argument('arg0', '/arg/type')
+    .argument('arg1', '/example/other_arg')
 ~~~
 
-Note the dot at the end of all but the last line. This dot is important and, if
-omitted, will lead to syntax errors. If no return type is provided, the
-operation returns nothing.
+Note the dot at the beginning of all the additional operation definition
+statements. This dot is important and, if omitted, will lead to syntax
+errors. If no return type is provided, the operation returns nothing.
 
 **When to use an operation ?** Well, don't. Mostly. Operations should very
 rarely be used, as they create hard synchronization between components. The one
@@ -146,7 +146,7 @@ unknown".
 The following for instance declares, in the Rock
 [canbus::Task](https://github.com/rock-drivers/drivers-orogen-canbus), that
 ports with arbitrary names might be added to the task interface, and that these
-ports will have the /canbus/Message type. 
+ports will have the /canbus/Message type.
 
 ~~~ ruby
 dynamic_output_port /.*/, "/canbus/Message"
@@ -158,7 +158,7 @@ the job of the component implementer to handle their creation and destruction.
 This is details [later in this section](writing_the_hooks.html#dynamic_ports)
 
 Syskit expects dynamic ports to be created at configuration time and removed at
-cleanup time. 
+cleanup time.
 
 ## Inheritance {#inheritance}
 
