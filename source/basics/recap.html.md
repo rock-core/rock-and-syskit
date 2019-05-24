@@ -36,9 +36,9 @@ bundle per class of system, and creates at least one configuration for
 simulation and one for the live system. Syskit tools take a `-rROBOT_NAME`
 argument to specify which configuration should be loaded.
 
-It is possible to reuse models from another bundle by updating `Roby.app.search_path`
+It is possible to reuse models from another bundle by using `Roby.app.register_app`
 either globally in `config/init.rb` or per-robot in the `Robot.init` block of the robot
-configuration file.
+configuration file. [Example](getting_started.html)
 
 Within bundles:
 

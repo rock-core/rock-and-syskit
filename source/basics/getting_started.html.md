@@ -60,14 +60,6 @@ default[INFO]: waiting for remote app to terminate
 default[INFO]: closed communication
 ~~~
 
-Finally, in order to be compatible with the rock-specific bundle structure, one needs
-to add the `bundles/` folder to Ruby's `$LOAD_PATH`. Add the following at the
-end of `config/init.rb`:
-
-~~~
-$LOAD_PATH.unshift File.expand_path('../../', __dir__)
-~~~
-
 ## Robot and Scene description using SDF
 
 The [Scene Description Format](http://sdformat.org) is a XML format defined by the
@@ -171,6 +163,7 @@ newly-created `config/robots/gazebo.rb` configuration file to add:
 
 ~~~ruby
 Robot.init do
+    Roby.app.register_app '../common_models'
     require 'rock_gazebo/syskit'
     Conf.syskit.transformer_enabled = true
 end
