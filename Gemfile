@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 
 # Middleman Gems
-gem 'middleman', '>= 4.0.0'
+gem 'middleman', '~> 4.3'
 gem 'sass'
 gem 'bootstrap-sass'
-gem 'susy', "~>1.0.1"
+gem 'susy', "~>2.2"
 # Gem necessary to use execjs, hence necessary to run 'bundle exec middleman'
 gem 'mini_racer'
 gem 'middleman-navtree', git: 'https://github.com/doudou/middleman-navtree'
