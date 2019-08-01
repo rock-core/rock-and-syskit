@@ -181,20 +181,28 @@ provides support to integrate unit testing in the development workflow.
 
 The default library template creates a test suite that uses boost test. There
 is also the possibility to use GTest and GMock, the Google-maintained C++
-testing libraries. To do so, modify the package's `manifest.xml` to add
-`<test_depend "gtest" />`, replace [`rock_testsuite`](#rock_testsuite)
-in `test/CMakeLists.txt` by [`rock_gtest`](#rock_gtest), and finally
-replace the content of `test/suite.cpp` with the following:
+testing libraries.
 
-~~~cpp
-// Do NOT add anything to this file
-#include <gtest/gtest.h>
+To use GTest,
 
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-~~~
+1. modify the package's `manifest.xml` to add
+
+   ~~~xml
+   <test_depend "google-test" />
+   ~~~
+
+2. replace [`rock_testsuite`](#rock_testsuite) in `test/CMakeLists.txt` by [`rock_gtest`](#rock_gtest),
+3. and replace the content of `test/suite.cpp` with the following:
+
+   ~~~cpp
+   // Do NOT add anything to this file
+   #include <gtest/gtest.h>
+   
+   int main(int argc, char **argv) {
+     ::testing::InitGoogleTest(&argc, argv);
+     return RUN_ALL_TESTS();
+   }
+   ~~~
 
 All C++ libraries that have a `test/` folder will be assumed to have a test suite.
 However, testing is disabled by default - since building all the tests from all
@@ -215,7 +223,7 @@ file](../workspace/add_packages.html#manifest_xml).
 Once the tests are built, run them manually if you want to see their results.
 Autoproj can also run them with `autoproj test [package]`, but will redirect
 the test's output to a log file (that can be visualized later with
-[alog](../basics/day_to_day.html#alog).
+[alog](../basics/day_to_day.html#alog)).
 
 ## Debugging in VSCode
 
