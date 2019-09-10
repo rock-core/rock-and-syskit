@@ -188,7 +188,7 @@ To use GTest,
 1. modify the package's `manifest.xml` to add
 
    ~~~xml
-   <test_depend "google-test" />
+   <test_depend package="google-test" />
    ~~~
 
 2. replace [`rock_testsuite`](#rock_testsuite) in `test/CMakeLists.txt` by [`rock_gtest`](#rock_gtest),
