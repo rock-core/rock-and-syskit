@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Device Drivers
+title: Device Drivers with iodrivers_base
 sort_info: 10
 ---
 
@@ -9,8 +9,9 @@ sort_info: 10
 From the perspective of this howto, a device driver really is a piece of
 software that interacts with another piece of software through OS-provided
 I/O, that could be low-level protocols (serial) or higher-level ones
-(network). This _howto_ will explain what Rock and Syskit provide you to
-integrate this type of I/O.
+(network). This _howto_ will explain what Rock provides you to integrate this
+type of I/O at the library and component level. See the [network design page on
+devices and busses for the Syskit integration of these devices](../component_networks/devices_and_busses.html)
 
 We also will provide design guidelines on how to interact with the special
 case of interacting with actual devices, that is the sensors and actuators

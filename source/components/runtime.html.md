@@ -166,12 +166,12 @@ models loaded by the configuration can also be used as-is in the file.
 
 If you have an IDE opened, it will connect to this app and give you its status.
 
-## Component Extension File
+## Component Extension File {#extension_file}
 
 To handle a Syskit app's configuration needs, one often has to create a
 component extension file. This file is part of the app, and allows to extend
 the component model, built from the oroGen file, with Syskit-specific things, such
-as task arguments and auto-configuration based on the SDF world or 
+as task arguments and auto-configuration based on the SDF world or
 
 The component extension files are in the `models/orogen/` folder, named as the
 oroGen project, for instance `models/orogen/imu_advanced_navigation_anpp.rb`. They are generated
