@@ -71,9 +71,6 @@ system. Generic [transformation handling](transformations.html) is a critical
 tool to build components that are (mostly) system-independent, promoting
 reuse.
 
-We will then conclude on some [words of advice](best_practices.html) about
-modelling component networks in Syskit.
-
 Let's now get into the first item of business, the [compositions](composition.html)
 {: .next-page}
 
