@@ -51,7 +51,8 @@ It is great at providing you with the example CMake code for both library and
 tests.
 
 When using VSCode, the package will not be picked up by the [`vscode-rock`
-extension](../workspace/vscode.html) until it is part of the main manifest.
+extension](https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock)
+until it is part of the main manifest.
 Adding the package path to the layout section of `autoproj/manifest` is
 enough at this stage. You will however have to [define the
 package](../workspace/add_packages.html) in the autobuild and `source.yml`
@@ -188,7 +189,7 @@ To use GTest,
 1. modify the package's `manifest.xml` to add
 
    ~~~xml
-   <test_depend "google-test" />
+   <test_depend package="google-test" />
    ~~~
 
 2. replace [`rock_testsuite`](#rock_testsuite) in `test/CMakeLists.txt` by [`rock_gtest`](#rock_gtest),
@@ -197,7 +198,7 @@ To use GTest,
    ~~~cpp
    // Do NOT add anything to this file
    #include <gtest/gtest.h>
-   
+
    int main(int argc, char **argv) {
      ::testing::InitGoogleTest(&argc, argv);
      return RUN_ALL_TESTS();
@@ -263,9 +264,7 @@ configuration.
 To ease the use of CMake within a Rock system - i.e. in packages that follow
 Rock conventions, Rock provides CMake macros that are somewhat easier to use.
 The following describes them. The macros can be found in
-`base/cmake/modules/Rock.cmake` in a rock installation. There are also specific
-support for other tools within the Rock system (such as
-[vizkit3d](todo_link_to_vizkit3d)), but these will be introduced at another point.
+`base/cmake/modules/Rock.cmake` in a rock installation.
 
 **Note** the Rock CMake macros are only dependent on files present in the
 CMake distribution, and with pkg-config. These are all standard tools, and as such

@@ -33,7 +33,7 @@ by replacing sub-parts of the network.  This what the `use` statement we
 [saw](profiles.html#dependency_injection) in
 [passing](../basics/devices.html#profile_define)
 
-## Data Services Definition
+## Data Services Definition {#data_services}
 
 Defining a data service entails giving it a name, which represents what the
 data service represents, and providing it with a dataflow interface (input and
@@ -169,7 +169,7 @@ Subclass two orogen components only if they share a significant amount of
 code.
 {: .important}
 
-## Relationships between Data Services
+## Relationships between Data Services {#data_service_relationships}
 
 Data types sometimes are semantically complex, that is combine more than one
 data into a single sample. The canonical example is a pose, which provides both
@@ -295,7 +295,7 @@ class GazeboCartesianControlWdls < ArmCartesianControlWdls
 end
 ~~~
 
-## Dependency Injection
+## Dependency Injection {#injection}
 
 Data services are obviously abstract in nature. One cannot run a network that
 contains a data service, we therefore need a mechanism to transform composition
@@ -565,7 +565,7 @@ and
 ~~~ ruby
 profile 'RightArmControl' do
   use_profile ArmControl,
-    'arm' => Base.left_arm_dev
+    'arm' => Base.right_arm_dev
 
   each_definition do |definition|
     define definition.name, definition.

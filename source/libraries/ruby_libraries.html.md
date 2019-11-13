@@ -39,7 +39,8 @@ use [`bundle gem`](https://bundler.io/v1.15/guides/creating_gem.html) and add
 Rock's [`manifest.xml`](../workspace/add_packages.html) to it.
 
 When using VSCode, the package will not be picked up by the [`vscode-rock`
-extension](../workspace/vscode.html) until it is part of the main manifest.
+extension](https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock)
+until it is part of the main manifest.
 Adding the package path to the layout section of `autoproj/manifest` is
 enough at this stage. You will however have to [define the
 package](../workspace/add_packages.html) in the autobuild and `source.yml`
@@ -48,7 +49,7 @@ when creating `tools/timeseries` one would do
 
 ~~~
 bundle gem tools/timeseries
-<add tools/timeseries/manifest.xml>
+<create tools/timeseries/manifest.xml>
 ~~~
 
 and then add
@@ -56,7 +57,7 @@ and then add
 ~~~yaml
 layout:
   - ...
-  - drivers/imu-myahrs
+  - tools/timeseries
 ~~~
 
 `autoproj` runs `rake` within the package during the build, which means that
