@@ -123,8 +123,7 @@ associate them with a device _driver_ to be able to actually _use_ the device
 at runtime. **One or more device driver must be available at the point of
 definition of the device** - for instance by loading them first with `using_task_library`.
 
-A device driver is a component which has a `driver_for` declaration in its
-[extension file](../components/runtime.html). For instance, assuming a
+A device driver is a component which has a `driver_for` declaration in its [extension file](../components/runtime.html). For instance, assuming a
 `gps_ublox::F9Task` driver, able to handle our F9 model, we would generate
 the extension file with:
 
@@ -163,6 +162,50 @@ end
 
 Note that the driver component must of course [be deployed in the app's robot
 config](../components/runtime.html)
+
+Before attempting to run your newly defined devices, run the profile's test file
+to check that they have been properly deployed. The test file is in `test/profiles`,
+matching the profile's name. For instance `models/profiles/live/base.rb`'s test
+file is in `test/profiles/live/test_base.rb`.
+
+### Defining multiple devices of the same type
+
+The definition of multiple devices of the same type is directly related to
+the [deployment](reusable_networks.html#deployments) of profile definitions. One must
+indeed
+
+1. define multiple deployments with appropriate names (usually one picks the same
+   name for the deployment than for the device itself)
+2. use the `prefer_deployed_tasks` mechanism to assign a deployment to a device.
+3. choose different configurations for the different device instances
+
+For instance:
+
+~~~ ruby
+device(Devices::Camera::GigE, as: 'forward_camera')
+  .prefer_deployed_tasks(/forward/)
+  .with_conf('default', 'forward')
+device(Devices::Camera::GigE, as: 'aft_camera')
+  .prefer_deployed_tasks(/aft/)
+  .with_conf('default', 'aft')
+~~~
+
+Update the relevant device driver's [configuration
+file](../components/runtime.html#config_files) with the separate named sections:
+
+~~~
+--- name:default
+<common parameters>
+--- name:forward
+ip: 10.40.50.50
+--- name:aft 
+ip: 10.40.50.51
+~~~
+
+Running the profile's test file, as described just above this section, is
+even more critical in this use-case as it is easy to forget a deployment
+or fail to properly remove the ambiguities between the deployments and the
+devices.
 
 ## Communication Busses
 
