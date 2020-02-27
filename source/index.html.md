@@ -26,12 +26,13 @@ the basics and principles of a Rock-Syskit system can be followed with basic
 programming knowledge.
 
 <div class="alert alert-warning" role="alert">
-As of today (June 2017), not all the software used in this guide has reached
-Rock mainline repositories. For this reason, one needs to start using the
-buildconf repository on GitHub
+If you are already familiar with Rock, note that this guide uses the buildconf
+repository on GitHub
 [`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
 the default one at
-[`rock-core/buildconf`](https://github.com/rock-core/buildconf). The [installation guide](basics/installation.html) already reflects this.
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf) to pull
+gazebo-specific packages and configuration. The
+[installation guide](basics/installation.html) already reflects this.
 </div>
 
 ## How to read this documentation {#how_to_read}

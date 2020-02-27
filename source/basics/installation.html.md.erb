@@ -7,34 +7,20 @@ sort_info: 5
 # Rock Installation
 {:.no_toc}
 
-<div class="alert alert-warning" role="alert" id="not_mainline">
-As of today (June 2017), not all the software used in this guide has reached
-Rock mainline repositories. For this reason, one needs to start using the
-buildconf repository on GitHub's
+<div class="alert alert-warning" role="alert">
+If you are already familiar with Rock, note that this guide uses the buildconf
+repository on GitHub
 [`rock-gazebo/buildconf`](https://github.com/rock-gazebo/buildconf) instead of
 the default one at
-[`rock-core/buildconf`](https://github.com/rock-core/buildconf). This
-installation guide already reflects this. This configuration automatically
-selects the 'master' flavor as described in this section
+[`rock-core/buildconf`](https://github.com/rock-core/buildconf) to pull
+gazebo-specific packages and configuration. The
+[installation guide](basics/installation.html) already reflects this.
 </div>
 
 - TOC
 {:toc}
 
-## Rock Versions and Flavors
-
-A system can base itself on different "flavors" of Rock. One can basically
-choose one out of three:
-
-- **the latest release** version of the Rock Core software. Once released, it
-  will not change, but may see subsequent point releases that would only differ
-  by (important) bugfixes. The only way a release-based install will get modifications
-  is if the developer changes the base release.
-- **the stable flavor** is the last release plus bugfixes. Unlike the releases,
-  updating a 'stable' system will always land you on the latest release, and
-  in-between releases will get patched with bugfixes. This **does** include being
-  updated automatically to new major releases.
-- **the master flavor** is the development branch, and may break.
+## Supported Operating Systems
 
 Rock's primary platform is Ubuntu. The only guarantee made by the Rock team is
 that Rock's current release and master branches work on the current Ubuntu LTS
@@ -52,9 +38,11 @@ cause problems. Windows has seen some preliminary usage.
 
 The code that is needed to follow this guide is not yet part of a core release.
 
- 1. [Install Gazebo 8](http://gazebosim.org).
+ 1. [Install Gazebo](http://gazebosim.org). We support Gazebo 7 or later. The version shipped
+    With Ubuntu 18.04 LTS is our primary version.  
 
- 1. Install Ruby and verify that the version matches (must be 2.1 or later, we recommend 2.3.x)
+ 1. Install Ruby and verify that the version matches (2.4 or later, we recommend 2.5 as shipped
+    with Ubuntu 18.04)
 
     ~~~
     sudo apt-get install ruby ruby-dev wget build-essential
@@ -73,7 +61,7 @@ The code that is needed to follow this guide is not yet part of a core release.
  3. Download autoproj's bootstrap script
 
     ~~~
-    wget http://rock-robotics.org/autoproj_bootstrap
+    wget https://raw.githubusercontent.com/rock-core/autoproj/master/bin/autoproj_bootstrap
     ~~~
 
  4. Bootstrap your installation. This installs autoproj and checks out
