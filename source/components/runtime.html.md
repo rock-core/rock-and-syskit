@@ -22,7 +22,8 @@ Syskit.conf.use_deployment OroGen.model.Task => 'task_name'
 ~~~
 
 Which deploys a task called `task_name` using the component's [default
-deployment](deployment.html#default). Explicit deployments can be used as-is
+deployment](deployment.html#default). [Explicit
+deployments](deployment.html#explicit-deployments) can be used as-is
 
 ~~~ ruby
 Syskit.conf.use_deployment 'test'
@@ -158,11 +159,12 @@ which you can then run with
 syskit run test.rb
 ~~~
 
-You can put anything in the `add_mission_task` that you would put in a
-profile's `define` statement. I.e. you may define a composition in the file and
-run it, reuse definition from your app's profiles, … If you provide a robot
-configuration with `-r`, the app's `requires` block is executed first, so all
-models loaded by the configuration can also be used as-is in the file.
+You can put anything in the `add_mission_task` that you would put [in a
+profile's `define` statement](../component_networks/profiles.html). I.e. you may
+define a composition in the file and run it, reuse definition from your app's
+profiles, … If you provide a robot configuration with `-r`, the app's `requires`
+block is executed first, so all models loaded by the configuration can also be
+used as-is in the file.
 
 If you have an IDE opened, it will connect to this app and give you its status.
 
