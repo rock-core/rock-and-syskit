@@ -190,6 +190,31 @@ Autoproj.config.get 'CONFIGURATION_OPTION_NAME'
 Within the version control information, it is expanded using the
 `$CONFIGURATION_OPTION_NAME` syntax.
 
+## Optional Features {#optional_features}
+
+Packages sometimes have optional features. Some of them are dependent on
+dependencies being available (think: parts of opencv being built only if library
+X, Y and Z are present), some of them are dependent on a runtime being present
+(e.g. language bindings).
+
+In most cases (ideally, in **all** cases), the packages should have ways to
+control whether these features should be enabled or disabled. They often
+fallback on auto-detection if the flags aren't set, but they have ways to bypass
+the autodetection. Autodetection can often also be overriden by passing the
+appropriate information. For instance, [CMake C++
+packages](../libraries/cpp_libraries.html) are controlled through the setting of
+[CMake variables](add_packages.html#cmake).
+
+**Do not rely on these autodetection mechanism**. They are fragile, and only
+make sure that different developers end up with different results, based on
+whether the dependencies/libraries/environment variables are set differently by
+pure chance.
+
+Instead, figure out what **your build** wants and make sure the package settings
+are updated accordingly. See for instance (../libraries/cpp_libraries.html#optional_features).
+The source of the information you pass to the package may be a configuration
+option or the information from another package built by Autoproj.
+
 That's all for the Workspace documentation. Go back to the [documentation main
 index](../index.html#how_to_read) for more topics.
 {: .next-page}

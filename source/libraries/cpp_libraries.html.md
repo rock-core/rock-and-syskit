@@ -175,6 +175,22 @@ If the ultimate goal of a data type is to be used as an interface type on a
 Rock component, you must take this into account when designing the type.
 Read first [the documentation on type definitions for components](../components/defining_types.html).
 
+## Optional Features
+
+First rule of optional features is to keep optional features to a minimum.
+Unless you are creating something of the size of OpenCV, they are not worth the
+complexity.
+
+The second rule of optional features is to avoid enabling or disabling them
+based on auto-detection mechanism. These mechanisms are fragile, and will end up
+being disabled for unknown reasons on a machine where they were expected to be
+enabled, and vice-versa. Simply control their availability through a [CMake
+option](https://cmake.org/cmake/help/v3.0/command/option.html) and fail if the
+feature is enabled but its dependencies are not present.
+
+See also [this page](../workspace/managing.html#optional_features) for a more
+general discusssion on the subject.
+
 ## Tests
 
 Testing is now an integral part of modern development process, and Rock
