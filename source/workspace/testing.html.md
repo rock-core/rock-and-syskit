@@ -144,25 +144,28 @@ list <PACKAGE_NAME>`.
 The next step is to ensure that tests are available if they are enabled. The
 goal here is to avoid unnecessary work when tests are not needed.
 
-The first step is to add test-only dependencies using the `test_depend` tag in
-the package's `manifest.xml`. This ensures that these dependencies will be
-ignored if the tests are not enabled:
+To do so,
 
-~~~ xml
-<test_depend name="some/package" />
-~~~
+1. add test-only dependencies using the `test_depend` tag in
+   the package's `manifest.xml`. This ensures that these dependencies will be
+   ignored if the tests are not enabled:
+   {: #test_dependency}
 
-The second step is to control whether tests are built (when applicable) within
-the autobuild files. For instance, `rock.core` controls whether
-`ROCK_TEST_ENABLED` is set with
+   ~~~ xml
+   <test_depend name="some/package" />
+   ~~~
 
-~~~ ruby
-cmake_package 'some/package' do |pkg|
-    pkg.post_import do
-        pkg.define 'ROCK_TEST_ENABLED', pkg.test_utility.enabled?
-    end
-end
-~~~
+2. control whether tests are built (when applicable) within
+   the autobuild files. For instance, `rock.core` controls whether
+   `ROCK_TEST_ENABLED` is set with
+
+   ~~~ ruby
+   cmake_package 'some/package' do |pkg|
+       pkg.post_import do
+           pkg.define 'ROCK_TEST_ENABLED', pkg.test_utility.enabled?
+       end
+   end
+   ~~~
 
 `#enabled?` will return false if the tests are not _available_ through the
 settin of `#source_dir` or `#no_results`. This means that you need to check for
