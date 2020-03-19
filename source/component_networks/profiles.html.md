@@ -39,10 +39,10 @@ end
 ~~~
 
 __Naming Convention__ Profiles are by convention defined under the `AppName::Profiles`
-namespace (e.g. `CommonModels::Profiles` for the `common_models` bundle). 
+namespace (e.g. `CommonModels::Profiles` for the `common_models` bundle).
 They are saved in `models/profiles/`. The file
 names should be the snake_case version of the profile name (e.g.
-`models/profiles/profile_name.rb` for the profile defined above). 
+`models/profiles/profile_name.rb` for the profile defined above).
 
 __Generation__ Template for a profile, following Syskit's naming and filesystem
 conventions, can be created with
@@ -59,7 +59,9 @@ syskit gen profile rovers/localization
 
 ## Registering Networks on Profiles
 
-A component network when registered on a profile is called a __definition__ and is created with the `define` statement. From the [basics](../basics/devices.html):
+A component network when registered on a profile is called a __definition__
+and is created with the `define` statement. From the
+[basics](../basics/devices.html):
 
 ~~~ ruby
 module SyskitBasics
@@ -91,8 +93,9 @@ An example that combines both can be found in the
 ~~~ ruby
 define 'arm_joint_position_constant_control',
   Compositions::JointPositionConstantControl
-define 'arm_safe_position', arm_joint_position_constant_control_def.
-  with_arguments(setpoint: UR10_SAFE_POSITION)
+define 'arm_safe_position',
+       arm_joint_position_constant_control_def
+       .with_arguments(setpoint: UR10_SAFE_POSITION)
 ~~~
 
 We will also talk more about compositions in the [next
@@ -109,8 +112,9 @@ To set the configuration and/or arguments of a toplevel model before defining
 it, pass the `with_conf` (resp. `with_arguments`) call to the model, as:
 
 ~~~ ruby
-define 'arm_safe_position', arm_joint_position_constant_control_def.
-  with_arguments(setpoint: UR10_SAFE_POSITION)
+define 'arm_safe_position',
+       arm_joint_position_constant_control_def
+       .with_arguments(setpoint: UR10_SAFE_POSITION)
 ~~~
 
 In addition, it is possible to change the configuration/arguments of a child of
@@ -138,7 +142,7 @@ configurations will be known at the composition's design time.
 {: .note}
 
 __`use` vs composition argument forwarding__ This mechanism
-also looks very much like the argument forwarding. 
+also looks very much like the argument forwarding.
 Use argument forwarding when the argument makes sense on the composition. In
 the basics section, it *really makes sense* that a constant control composition
 has a `setpoint` argument, and that is therefore how it has been implemented.

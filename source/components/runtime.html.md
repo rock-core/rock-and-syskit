@@ -68,7 +68,7 @@ using_task_library 'imu_advanced_navigation_anpp'
 
 The components are then available using the `OroGen.` syntax, e.g. `OroGen.imu_advanced_navigation_anpp.Task`.
 
-## Configuration Files
+## Configuration Files {#config_files}
 
 Configuration files are YAML files that contain values for a component's
 properties. A component's available configurations is to be saved in
@@ -128,8 +128,8 @@ profile](../basics/devices.html), a non-default configuration can be selected
 with the `with_conf` call, e.g.
 
 ~~~ ruby
-OroGen.imu_advanced_navigation_anpp.Task.
-  with_conf('default', 'high_dynamics')
+OroGen.imu_advanced_navigation_anpp.Task
+      .with_conf('default', 'high_dynamics')
 ~~~
 
 The configurations are overlaid one on top of each other, from left to right.
