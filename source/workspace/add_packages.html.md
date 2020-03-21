@@ -181,8 +181,8 @@ page](managing.html#optional_features) for a more in-depth discussion.
 
 For instance, if you want some Python bindings to be built, resolve the Python
 interpreter once and for all for your whole workspace and pass the path to the
-interpreter explicitely (the `rock.core` package has [explicit support for this
-mechanism for Python](https://github.com/rock-core/package_set/blob/master/rock/python.rb)
+interpreter explicitely. The `rock.core` package has [explicit support for this
+mechanism for Python](https://github.com/rock-core/package_set/blob/master/rock/python.rb).
 
 ~~~ ruby
 cmake_package 'some/package' do |pkg|
@@ -196,12 +196,18 @@ end
 ~~~
 
 Autoproj being Ruby-based, the Ruby interpreter you should be using is available
-within the Autoproj configuration. The `BINDINGS_RUBY` variable is the variable
-defined by Rock's `base/cmake` macros.
+within the Autoproj configuration. Rock's CMake macros control the build of Ruby
+bindings (present in `bindings/ruby` within the package) with the
+`BINDINGS_RUBY` variable. However, due to the heavily ruby-based nature of the
+toolchain, Rock currently does not have an overarching configuration flag to
+globally disable all Ruby bindings, so you would need to create one for your
+specific needs.
 
 ~~~ ruby
 cmake_package 'some/package' do |pkg|
-    pkg.define 'BINDINGS_RUBY', <some configuration flag>
+    # Assuming that you use the `mypackage_ruby_bindings' flag to
+    # control the bindings, control them with (enabled by default)
+    # pkg.define 'BINDINGS_RUBY', Autoproj.config.get('mypackage_ruby_bindings', true)
     pkg.define 'RUBY_EXECUTABLE', Autoproj.config.ruby_executable
 end
 ~~~
