@@ -292,6 +292,8 @@ syskit orogen-test test/task_test.rb --workdir bundle -- "-n=/FILTER/"
 where FILTER is a regular expression that should match the name of the test(s)
 you want to run.
 
+## Using a Debugger or Valgrind
+
 If you need to run the task under valgrind, pass the corresponding option to the
 `deployed_as` statement:
 
