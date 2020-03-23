@@ -286,7 +286,7 @@ with
 
 ~~~
 acd -b .
-syskit orogen-test test/task_test.rb --workdir bundle -- "-n=/FILTER/"
+syskit orogen-test `alocate .`/test/task_test.rb --workdir bundle -- "-n=/FILTER/"
 ~~~
 
 where FILTER is a regular expression that should match the name of the test(s)
