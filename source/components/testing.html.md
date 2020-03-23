@@ -305,9 +305,21 @@ Alternatively, you can start the component process manually within your debugger
 of choice (e.g. using [rock.vscode's oroGen
 launcher](https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock)
 and tell the test to attach to it by replacing `deployed_as` with
-`deployed_as_unmanaged`:
+`deployed_as_unmanaged`.
+
+Start the component first before you run the test, or the tests might time out
+while waiting for the component to be started. This works best with the
+`-n=/FILTER/` option described above.
 
 ~~~ ruby
 syskit_deploy(OroGen.project_name.Task.deployed_as_unmanaged('test'))
+~~~
+
+In both cases, the standard default timeout used by the `expect_execution`
+statements will probably not be enough. Change it globally to something like one
+minute in the topmost `before` block with
+
+~~~ ruby
+self.expect_execution_default_timeout = 60
 ~~~
 
