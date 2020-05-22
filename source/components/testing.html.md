@@ -113,7 +113,7 @@ be broken down into two parts:
 1. an action
 2. an expected reaction
 
-The pattern is 
+The pattern is
 
 ~~~ ruby
 expect_execution { ACTIONS }
@@ -245,6 +245,58 @@ expect_execution { ACTIONS }
     end
 ~~~
 
+### Testing failures while the component is running
+
+At runtime, that is __after__ the component started until __after__ it
+stopped, failures (exceptions) map to Syskit events. Assert that the expected
+event is emitted:
+
+~~~ ruby
+expect_execution { ACTION }
+    .to { emit task.some_exception_event }
+~~~
+
+### Testing configuration or start failures
+
+While the component is not running, failure handling does not use the task's
+events (events cannot be emitted while the task is not running). You have
+to instead use the exception handling mechanisms. In both cases, the predicate
+to look for is `fail_to_start`. However, the way to "trigger" the configuration
+or start differ (there is currently no way to direct the test harness to configure
+a component)
+
+For configuration:
+
+~~~ ruby
+expect_execution.scheduler(true).to { fail_to_start task }
+~~~
+
+and for start:
+
+~~~ ruby
+expect_execution { task.start! }.to { fail_to_start task }
+~~~
+
+### Testing component input and output during start and stop transitions
+
+If you want to test what happens _during_ a configuration, start or stop
+transition, you need to call `join_all_waiting_for(false)` on the value
+returned by `expect_execution`. This is needed only for expectations during
+which the task will not "have finished" to configure, start (or stop), e.g.:
+
+For example:
+
+~~~ ruby
+sample = expect_execution { task.start! }
+    .join_all_waiting_work(false)
+    .to { have_one_new_sample task.out_port }
+expect_execution { syskit_write task.in_port, data }
+    .join_all_waiting_work(false)
+    .to { have_one_new_sample task.out_port }
+expect_execution { syskit_write task.in_port, data }
+    .to { emit task.start_event }
+~~~
+
 ## Using test components
 
 For some generic base component implementations, it can be beneficial to create
@@ -322,4 +374,3 @@ minute in the topmost `before` block with
 ~~~ ruby
 self.expect_execution_default_timeout = 60
 ~~~
-
