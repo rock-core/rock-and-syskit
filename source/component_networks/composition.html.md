@@ -198,7 +198,7 @@ subject is [Profiles](profiles.html)
 
 ## Common Patterns
 
-### Forwarding Arguments from Composition to Children
+### Forwarding Arguments from Composition to Children {#argument_from_parent_task}
 
 This is the pattern we have seen and used in the
 [basics section](../basics/constant_generator.html#composition_forward_argument).  The
