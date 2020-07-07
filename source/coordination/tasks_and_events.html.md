@@ -287,6 +287,9 @@ However, accessing the ports is different:
   One therefore does not need a separate reader/writer (we have direct access
   to the ports themselves), and would write to an output and read from an input:
 
+Within a `Syskit::RubyTaskContext`, the component's ports are accessed through the
+task's `#orocos_task` property. They support the common port API (`#connected?`,
+`#read` and `#read_new` for input ports, `#connected?`, `#write` for output ports).
 For instance:
 
 ~~~ ruby
@@ -297,8 +300,8 @@ class MyTask < Syskit::RubyTaskContext
   output_port "out", "/base/Time"
 
   poll do
-    while (in_time = in_port.read_new)
-      out_port.write(in_time + 2)
+    while (in_time = orocos_task.in.read_new)
+      orocos_task.out.write(in_time + 1)
     end
   end
 end
