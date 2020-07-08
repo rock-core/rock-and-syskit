@@ -145,7 +145,9 @@ that listen to certain conditions to emit its events.
 Calling `poll` with a block, within a task's class definition, defines a
 block that will be executed at each execution cycle (usually 100ms). The
 block is evaluated in the context of the task instance (i.e. `self` is the
-task instance)
+task instance). There can be only one poll block at each level of the class
+hierarchy, and you must call `super()` to call the implementation from the
+superclass.
 
 For instance, a task that would emit stop after a configurable amount of time
 could be written:
@@ -164,6 +166,8 @@ class TimeoutTask < Roby::Task
   end
 
   poll do
+    super()
+
     stop_event.emit if Time.now > @deadline
   end
 end
@@ -209,6 +213,8 @@ using the `data_writer` declaration:
 data_writer controller_child.cmd_port, as: 'command'
 
 poll do
+  super()
+
   cmd = generate_command
   command_writer.write(cmd)
 end
@@ -230,6 +236,8 @@ data_writer planning_child.problem_port, as: 'problem'
 data_reader planning_child.plan_port, as: 'plan'
 
 poll do
+  super()
+
   if problem_writer.ready? && !@problem_written
     problem_writer.write(problem)
     @problem_written = true
@@ -300,6 +308,8 @@ class MyTask < Syskit::RubyTaskContext
   output_port "out", "/base/Time"
 
   poll do
+    super()
+
     while (in_time = orocos_task.in.read_new)
       orocos_task.out.write(in_time + 1)
     end
