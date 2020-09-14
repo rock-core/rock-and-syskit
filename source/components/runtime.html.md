@@ -26,15 +26,15 @@ deployment](deployment.html#default). [Explicit
 deployments](deployment.html#explicit-deployments) can be used as-is
 
 ~~~ ruby
-Syskit.conf.use_deployment 'test'
+Syskit.conf.use_deployment OroGen::Deployments.test
 ~~~
 
 However, this way, only one of the `test` deployment can be started at a given
 time. To start multiple ones, one must prefix the task's names:
 
 ~~~ ruby
-Syskit.conf.use_deployment 'test' => 'left:'
-Syskit.conf.use_deployment 'test' => 'right:'
+Syskit.conf.use_deployment OroGen::Deployments.test => "left:"
+Syskit.conf.use_deployment OroGen::Deployments.test => "right:"
 ~~~
 
 This prefixes the task names with resp. `left:` and `right:`. For instance, if
