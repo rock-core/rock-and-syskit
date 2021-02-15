@@ -63,16 +63,38 @@ Properties are defined with
 
 ~~~ ruby
 # What this property is about
-property 'name', 'configuration_type'
+property "name", "configuration_type"
 ~~~
 
-Plain properties must be read by the component only before it is started. If
+Plain properties **must** be read by the component only before it is started. If
 one needs to be able to change the value at runtime, the property must be
-declared `dynamic`:
+declared `dynamic` (see next section)
+
+Properties using simple types (booleans, ints, enums, …) can have a default
+value specified directly in the orogen file:
+
+~~~ ruby
+# If true, the image is halved
+property "downscale_2x", "/bool", false
+~~~
+
+For more complex types, the initialization should be done in the task's constructors, e.g.
+
+~~~ cpp
+Task::Task(...) {
+    _initial_position.set(Eigen::Vector3.Zero);
+}
+~~~
+
+### Dynamic Properties
+
+Plain properties can't be changed at runtime. They must be set before the
+component is configured. To be allowed to change a property at runtime,
+declare it as dynamic in the orogen file:
 
 ~~~ ruby
 # What this property is about
-property('name', 'configuration_type')
+property("name", "configuration_type")
     .dynamic
 ~~~
 
@@ -85,21 +107,47 @@ parameter, which is only injected in a numerical equation - that is something
 that won't require any internal reinitialization.
 {: .important}
 
-Properties using simple types (booleans, ints, enums, …) can have a default
-value specified directly in the orogen file:
+By default, a dynamic property will simply be updated in a thread-safe way,
+so that the component's runtime hooks (e.g. `updateHook`) can read it safely.
+This is fine for simple properties, whose value can be read and applied at each
+execution cycle.
 
-~~~ ruby
-# If true, the image is halved
-property 'downscale_2x', '/bool', false
-~~~
-
-For more complex types, the initialization should be done in the task's constructors, e.g.
+For more complex changes, that e.g. require the reconfiguration of the underlying
+library (or of the underlying device), it is possible to redefine an automatically
+generated virtual method which will be called on update. The method is always named
+`set${property_name_with_first_letter_uppercase}`. As always with orogen, in doubt,
+just have a look into the `templates/tasks/` folder (once code generation ran after
+the addition of the `dynamic` attribute). The task template will contain a default
+implementation of this method, for instance:
 
 ~~~ cpp
-Task::Task(...) {
-    _initial_position.set(Eigen::Vector3.Zero);
+bool PIDTask::setSettings(::std::vector<ActuatorSettings> const & value)
+{
+    return (motor_controller::PIDTaskBase::setSettings(value));
 }
 ~~~
+
+This default method just calls the default implementation, which will actually update
+the value of the property (here `_settings`) and return true to indicate the update
+was accepted.
+
+When reimplementing this method, make sure that:
+
+- it returns true if the change was accepted, and that the property object was
+  updated accordingly (just call the base method for that)
+- it returns false if the new value is not acceptable
+- it is error-safe, that is the underlying code should continue to behave
+  as-if the value was not changed if an error occurs and the method returns
+  false
+
+**This last point** (error-safety) is in itself a good reason to avoid dynamic
+properties. Error safety can be rather hard to get right. You've been warned.
+{: .important}
+
+The `set` callbacks are **not** automatically called in `configureHook`, only
+when the component is running. If you want to call them, for instance because
+they do some validatio on the values, you may call the `updateDynamicProperties()`
+method which will, and return true if all setters have returned true, or false otherwise.
 
 ### Operations
 
