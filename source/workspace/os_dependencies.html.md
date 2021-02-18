@@ -11,16 +11,21 @@ sort_info: 40
 {:toc}
 
 
-While the main purpose of Autoproj is to build packages from source, it would
-be silly to not rely on prebuilt packages offered by the underlying operating
-system. Autoproj does it by integrating with other package managers. One may
-also automatically fall back to source-based packages on platforms where the
-prebuilt package is either not suitable (e.g. too old or too new), or not
-available.
+While the main purpose of Autoproj is to build packages from source, there is
+an obvious need to be able to rely on prebuilt packages offered by the
+underlying operating system and by other package managers. Autoproj
+integrates well with those. One may also automatically fall back to
+source-based packages on platforms where the prebuilt package is either not
+suitable (e.g. too old or too new), or not available.
 
 The main purpose of the osdeps system is to provide a mapping from a package
-name (which is arbitrary) to a set of packages that should be installed by
-external means. We will see examples of this in follow-up sections.
+name (which is arbitrary, specific to the Autoproj workspace) to the name of
+the package(s) that should be installed using the external package manager. We
+will see examples of this in follow-up sections.
+
+Packages defined within the osdep system can be used as dependencies for source
+packages, by adding them with `<depend name="" />` in the package's
+[manifest.xml](add_packages.html#manifest_xml).
 
 There are mainly two types of "os dependencies" (a.k.a. osdeps) in autoproj.
 First is the package system offered by the platform itself (e.g. APT on Ubuntu).
@@ -29,12 +34,14 @@ such as RubyGems for Ruby.
 
 ## osdeps files
 
-OS dependencies ("osdeps") are listed in a YAML file with the `.osdeps`
-extension. One usually creates a single `packages.osdeps` file in new package
-sets for this purpose. `.osdeps` files can also be added in the main build
-configuration.
+OS dependencies ("osdeps") definition files are YAML files saved either in the
+[package sets](setup.html#package-sets) -- usually present in the
+`autoproj/remotes/` folder of your workspace -- or in the
+[main build configuration](setup.html), that is in the `autoproj/` folder
+itself. We recommend to create an empty `packages.osdeps` file in all new
+package sets for this purpose.
 
-The general format of the YAML file is that of:
+The general format of an osdep definition file is that of:
 
 ~~~yaml
 package_name:
