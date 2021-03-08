@@ -95,19 +95,22 @@ files before you push the updated manifest to your team members
 ## Package Description and Dependencies {#manifest_xml}
 
 For documentation reason, the packages are expected to provide metadata such as
-a description of its purpose, the author(s), license, … Additionally, it is
-common for packages to depend on each other, meaning that a package needs
-another package to be there first, for it to build and/or run successfully. The
-dependency may be another package declared in autoproj or a package provided by
-the underlying operating system through [the osdep system we will see
-later](os_dependencies.html).
+a description of its purpose, the author(s), license, …
+
+Additionally, it is common for packages to depend on each other, meaning that a
+package needs another package to be there first, for it to build and/or run
+successfully. Autoproj supports having dependencies between source packages
+under its control, as well as with packages from other package managers (i.e.
+the underlying operating system or language-specific managers such as RubyGems
+or PIP). You will see how these packages are defined later in [the OS Dependencies
+section](os_dependencies.html).
 
 All this information is stored in a XML file whose format follows. If the
 package has been created for Rock specifically, it is saved as `manifest.xml`
 file directly at the root of the package. For packages that already exist but
 are being integrated in Rock, the file should be saved in the package set under
 `manifests/package/name.xml` (e.g. `simulation/gazebo`'s manifest is saved in
-`manifests/simulation/gazebo.xml`).  {:
+`manifests/simulation/gazebo.xml`).
 
 ~~~xml
 <?xml version="1.0"?>
@@ -136,7 +139,6 @@ are being integrated in Rock, the file should be saved in the package set under
 The `<test_depend …>` tag is used for dependencies that are specific to [the
 package's test suite](../basics/day_to_day.html#test). The `<depend_optional
 …>` allows to [avoid building some dependencies within some builds](managing.html).
-
 
 ## Declaring a package {#autobuild}
 
