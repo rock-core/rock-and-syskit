@@ -43,7 +43,7 @@ The `update_properties` hook was introduced. This hook is called between point 2
 and 3 above, and must restrict itself to updating properties. Most importantly:
 it must be idempotent.
 
-## New/old behavior: control and migration
+## Migration and backward compatibility
 
 The new behavior is used when:
 
@@ -65,7 +65,18 @@ The new behavior is used when:
   ```
 
 The best way to migrate component models is by editing the `models/orogen/`
-files and defining a correct `update_properties` method.
+files and defining a correct `update_properties` method. Explicitly call this
+method in the `configure` method, before the call to `super`, if you want the
+model to remain compatible with a Syskit version that does not know about
+`update_properties`, for instance:
+
+~~~ ruby
+def configure
+    # Compatibility with older Syskit versions
+    update_properties unless model.respond_to?(:use_update_properties?)
+    super
+end
+~~~
 
 A warning is issued at configuration time if:
 - `Roby.app.syskit_task_context_uses_update_properties` is false
