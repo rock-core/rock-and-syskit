@@ -190,15 +190,64 @@ Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
 end
 ~~~
 
-The most common extension point is the `configure` method, in which the task model
-can extract information out of the Syskit app to validate and/or auto-configure
-the component. Properties within Syskit are accessed with the `properties` accessor, e.g.
+This extension blocks allows to define [coordination
+primitives](../coordination/tasks_and_events.html) on the task model - such as
+poll blocks or additional events - to coordinate it amongst the rest of the
+system.
+
+In addition, Syskit defines two extension points that hook into the component's
+configuration. Of two points, `update_properties` and `configure`:
+
+- `update_properties` is executed in **all** cases before a component is started.
+  The goal is to write the component properties so that Syskit can decide whether
+  or not the component should be reconfigured through an expensive
+  `cleanup`/`configure` cycle. This method **must be idempotent**, that is calling
+  it more than once should not change its result.
+- `configure` is only executed after Syskit determined that the component must
+  be reconfigured, after the component has been cleaned up.
+
+In `update_properties`, the Ruby code can access configuration information from
+the Syskit app, task arguments or dynamic service information to write the
+component properties. Properties within Syskit are accessed with the
+`properties` accessor, e.g.
+
+~~~ ruby
+Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
+  argument :port, default: 12000
+  def update_properties
+    super # fill configuration from the configuration files
+
+    properties.port = port
+    properties.timeout = 100
+  end
+end
+~~~
+
+Note that Syskit decides whether the component must be reconfigured only by
+looking at the value of the properties after the `update_properties` call. If
+it must be reconfigured for other reasons, call `#needs_reconfiguration!`, e.g.
+
+
+~~~ ruby
+Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
+  argument :port, default: 12000
+  def update_properties
+    super # fill configuration from the configuration files
+
+    needs_reconfiguration! if some_other_criteria
+  end
+end
+~~~
+
+The `configure` hook is more rarely used. It should be used only if some
+configuration of the component is done in a non-idempotent way.
 
 ~~~ ruby
 Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
   def configure
-    super # fill configuration from the configuration files
-    properties.timeout = 100
+    super
+
+    # Call component operations to finish configuration
   end
 end
 ~~~
