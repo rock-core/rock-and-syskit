@@ -32,10 +32,8 @@ possible. This section will base its examples on the [Basics tutorial](../basics
 * **Component unit tests** Since libraries are expected to be unit tested
   already, the component unit tests are meant to verify the dynamic behavior,
   as encoded in the component: configuration, detection of error cases, ...
-  In addition, however, the component unit test can easily tap into
-  log files generated in simulation or at runtime, and can therefore be
-  also used as an integration test of sorts - feeding data to components
-  and verifying their results.
+  Testing components is already described in the
+  [component section](https://www.rock-robotics.org/rock-and-syskit/components/testing.html)
 * **Syskit unit tests** Syskit's coordination often require writing code
   that is evaluated at runtime. This code must be tested, and that is one
   role of the Syskit unit tests. Their other role is to provide a way
