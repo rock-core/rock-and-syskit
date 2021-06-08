@@ -280,7 +280,7 @@ expect_execution { task.start! }.to { fail_to_start task }
 ### Testing component input and output during start and stop transitions
 
 If you want to test what happens _during_ a configuration, start or stop
-transition, you need to call `join_all_waiting_for(false)` on the value
+transition, you need to call `join_all_waiting_work(false)` on the value
 returned by `expect_execution`. This is needed only for expectations during
 which the task will not "have finished" to configure, start (or stop), e.g.:
 
@@ -296,6 +296,59 @@ expect_execution { syskit_write task.in_port, data }
 expect_execution { syskit_write task.in_port, data }
     .to { emit task.start_event }
 ~~~
+
+If, instead, a single `expect_execution` is sufficient to test a whole start, you
+would omit `join_all_waiting_work`
+
+~~~ ruby
+sample = expect_execution { task.start! }
+    .to { have_one_new_sample task.out_port }
+~~~
+
+In the first example, we expected a write from the component itself in the first
+`expect_execution`. We therefore know for sure that the component is in its
+`startHook` during the second `expect_execution`.
+
+When that's not the case, we can't simply call `syskit_write` first. This is
+because the `startHook` [clears all inputs ports](writing_the_hooks.html#ports).
+We have to ensure that the write happens after the clear was done. If there is
+no way to synchronize (such as the own component's write above), you will have
+to repeatedly write a sample until the component reads it. For this, the
+`expect_execution` harness offers `poll`.
+
+Moreover, in this instance, you can't use `syskit_write`. `syskit_write` creates
+a new port writer each time it is called, and since we will be doing so
+repeatedly it could create a lot of writers (which can cause problems). Instead,
+we create the writer outside the `expect_execution` and use it inside.
+
+~~~ ruby
+# Prepare the sample you want to send
+writer = syskit_create_writer task.in_port
+expect_execution { task.start! }
+    # only needed if the component won't be started at the end of this expectation
+    .join_all_waiting_work(false)
+    .poll { writer.write sample }
+    .to { ... }
+~~~
+
+In case it is not the `startHook`, but the `configureHook` that is being tested,
+you will need to start the component's deployment before you can create the writer:
+
+~~~ ruby
+# Prepare the sample you want to send
+syskit_start_execution_agents(task)
+writer = syskit_create_writer task.in_port
+expect_execution
+    .scheduler(true)
+    # only needed if the component won't be configured at the end of this expectation
+    .join_all_waiting_work(false)
+    .poll { writer.write sample }
+    .to { ... }
+~~~
+
+Note that this "send repeatedly" mecanism mimics the reality: if a component
+does not have a mean of explicit synchronization, the input messages it expects
+would have to be sent repeatedly until it reads one.
 
 ## Using test components
 
