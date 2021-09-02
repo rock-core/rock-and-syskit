@@ -271,6 +271,44 @@ ruby_package "package_name" do |pkg|
 end
 ~~~
 
+If the ruby package has a `test/` subfolder, Autoproj will configure the test
+utility for this package, assuming that the tests are executed with `rake test`
+and reports are saved in `${srcdir}/.test-results`. This behavior can be
+disabled by setting `pkg.rake_test_task` to nil, and the rake target can be set to
+something else than `test` if needed.
+
+If you want to enable the tests even though there is no `test` folder, set
+`pkg.test_utility.source_dir` explicitly to the folder that will contain the
+test reports and call pkg.with_tests
+
+~~~ ruby
+ruby_package "something" do |pkg|
+    pkg.test_utility.source_dir = File.join(pkg.srcdir, ".test-results")
+    pkg.with_tests
+end
+~~~
+
+Alternatively, if there are no tests, set `no_results` to true
+
+~~~ ruby
+ruby_package "something" do |pkg|
+    pkg.test_utility.no_results = true
+    pkg.with_tests
+end
+~~~
+
+If you want to override the complete process, that is run a different command than
+`rake`, set both `source_dir` and define the test task:
+
+~~~ ruby
+ruby_package "something" do |pkg|
+    pkg.test_utility.source_dir = File.join(pkg.srcdir, ".test-output")
+    pkg.test_utility.task do
+        # Commands that will run the tests
+    end
+end
+~~~
+
 ### oroGen packages {#orogen}
 
 ~~~ ruby
