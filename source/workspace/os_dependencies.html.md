@@ -257,6 +257,8 @@ This package manager allows to install Python packages using pip. The packages
 are installed in the workspace's prefix under `pip/`. `pip/bin/` is
 automatically added to the PATH.
 
+
+
 ## Interactions Between Source and OSDep Packages {#source_osdep_interactions}
 
 The most common source/osdep package interaction is that any source package can
