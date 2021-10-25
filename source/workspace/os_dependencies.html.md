@@ -227,13 +227,40 @@ The Gemfile and the bundler binstubs are installed in [the workspace's
 prefix](../basics/day_to_day.html#layout) under `gems/`. `gems/bin/` is
 automatically added to the PATH.
 
-The package manager supports explicit version constraints within the osdeps
-files, using [RubyGems version constraints](https://guides.rubygems.org/patterns/#declaring-dependencies).
-Only one constraint can be specified. For instance:
+If you simply want to install the latest version of a gem, add it under the `gem`
+key:
 
 ~~~
 package_name:
-  gem: "package_name~>2.0"
+  gem: "package_name"
+~~~
+
+The package manager supports passing the same arguments that are available to
+the `gem` statement in Bundler's Gemfile. To use those, pass a map to the `gem` keyword
+using the `name` key for the gem name and, optionally, the `version` key for
+a [RubyGems version constraint](https://guides.rubygems.org/patterns/#declaring-dependencies).
+
+~~~
+package_name:
+  gem:
+    name: "package_name"
+    version: "~>2.0"
+~~~
+
+For instance, to use the gem version from git when under ubuntu 20.04 or later, and a
+particular version of the gem under ubuntu 18.04:
+
+~~~
+package_name:
+  ubuntu:
+    "18.04":
+      gem:
+        name: "package_name"
+        version: "~> 2.0"
+    "default":
+      gem:
+        name: "package_name"
+        git: "https://github.com/someorg/package_name"
 ~~~
 
 Because Bundler sets up the environment so that it is completely isolated from
