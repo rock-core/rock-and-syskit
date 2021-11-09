@@ -44,7 +44,7 @@ activity being the only way it could be deployed.
 In some cases, it is beneficial to deploy components differently than the
 default. This is done by defining explicit deployments.
 
-## Explicit Deployments
+## Explicit Deployments {#explicit}
 
 Deployment blocks declare one binary, that is a set of components along with
 their activities that are grouped into a single process.

@@ -3,7 +3,7 @@ layout: documentation
 title: Introduction
 sort_info: 0
 directory_title: Error Handling
-directory_sort_info: 60
+directory_sort_info: 56
 ---
 
 # Error Handling
