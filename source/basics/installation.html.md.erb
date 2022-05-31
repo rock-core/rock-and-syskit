@@ -45,12 +45,12 @@ ruby --version
 ~~~
 
 Unfortunately, on **Ubuntu 20.04**, the version of Ruby that Ubuntu ships has grave
-bugs that cause some of our tooling to randomly crash. Install ruby 2.7 instead from
+bugs that cause some of our tooling to randomly crash. Install ruby with version >= 2.7.4 instead from
 the BrighBox PPA:
 
 ~~~
 sudo add-apt-repository ppa:brightbox/ruby-ng
-sudo apt-get install ruby ruby-dev wget build-essential
+sudo apt-get install ruby2.7 ruby-dev wget build-essential
 ruby --version
 ~~~
 
