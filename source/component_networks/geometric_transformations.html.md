@@ -1,10 +1,10 @@
 ---
 layout: documentation
-title: Transformations
+title: Geometric Transformations
 sort_info: 40
 ---
 
-# Geometric Relations
+# Geometric Transformations
 {:.no_toc}
 
 - TOC
@@ -200,7 +200,7 @@ else
 
 The first argument to `.get` controls what is the expected time of the queried
 transform. It is needed only if the transformer is expected to generate an
-_interpolated transform_ by setting the third argument to `true`. 
+_interpolated transform_ by setting the third argument to `true`.
 
 When the third argument is `false`, the transformer computes the kinematic
 chain using the transforms whose timestamp is just before the given `time`. If
@@ -364,7 +364,7 @@ end
 In the special case of the `RigidBodyState`-generating data sources, one needs
 to declare the frames so that they match the `framename_frame` properties, thus
 allowing Syskit to properly configure the component once the frames have been
-computed. A GPS component that has 
+computed. A GPS component that has
 
 ~~~ ruby
 # The frame of the world, e.g. the UTM origin
@@ -476,7 +476,7 @@ Otherwise, set it explicitly [in the profile](#use_frames_in_profiles).
 This error is expected when inspecting a composition within the IDE. If it
 happens during a composition or task context test, one needs to explicitely
 provide dummy frames in the stub calls:
-  
+
 ~~~ruby
 model = OrientationEstimator.
     use_frames('map' => 'w', 'world' => 'w', 'imu' => 'body', 'body' => 'body').
@@ -562,7 +562,7 @@ profile "Base" do
   robot do
     device Rock::Devices::PTU, as: 'ptu'
   end
-                                                                                                                                                                                                    
+
   transformer do
     dynamic_transform ptu_dev,
       'shiny::ptu_base' => 'shiny::ptu_moving'
@@ -591,7 +591,7 @@ Robot.requires do
 end
 ~~~
 
-the actual world can be overriden 
+the actual world can be overriden
 
 ## Caveats
 
