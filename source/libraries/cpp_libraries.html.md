@@ -107,7 +107,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED 11)
 ~~~
 
 The choice of the C++ standard is automatically
-[propagated to oroGen projects](../components/index.html#cxx_standard) when developing components
+[propagated to oroGen projects](../components/create_and_update.html#cxx_standard) when developing components
 based on a C++ library.
 
 ## Package Dependencies

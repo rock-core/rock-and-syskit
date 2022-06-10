@@ -49,7 +49,7 @@ the corresponding `<depend name="..." />` line to the oroGen package's
 [`manifest.xml`](../workspace/add_packages.html#manifest_xml).
 {: .important}
 
-## From other oroGen packages (type definition, export and reuse)
+## From other oroGen packages (type definition, export and reuse) {#from_orogen}
 
 A given type can be imported at the same time by more than one oroGen
 package. The Rock component implementation supports this. However, this is
@@ -100,9 +100,9 @@ by adding an `typekit.export_types` stanza to the orogen file:
 typekit.export_types "/some/other/type"
 ~~~
 
-The following description of [opaque
-types](#opaques) and [type import packages](#type-packages) can be passed on a first reading. You can skip it to go
-straight to [how component interfaces are defined](interface.html).
+The following description of [opaque types](#opaques) and [type import
+packages](#type-packages) can be passed on a first reading. You can skip it to
+go straight to [how component interfaces are defined](interface.html).
 {: .next-page}
 
 ## Opaque Types {#opaques}
