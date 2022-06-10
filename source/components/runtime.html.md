@@ -23,7 +23,7 @@ Syskit.conf.use_deployment OroGen.model.Task => 'task_name'
 
 Which deploys a task called `task_name` using the component's [default
 deployment](deployment.html#default). [Explicit
-deployments](deployment.html#explicit-deployments) can be used as-is
+deployments](deployment.html#explicit) can be used as-is
 
 ~~~ ruby
 Syskit.conf.use_deployment OroGen::Deployments.test
