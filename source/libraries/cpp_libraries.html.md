@@ -107,7 +107,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED 11)
 ~~~
 
 The choice of the C++ standard is automatically
-[propagated to oroGen projects](../components/index.html#cxx_standard) when developing components
+[propagated to oroGen projects](../components/create_and_update.html#cxx_standard) when developing components
 based on a C++ library.
 
 ## Package Dependencies
@@ -119,6 +119,7 @@ packages for instance depend on `base/cmake`, which defines the
 
 Every time you want to add a new dependency to a C++ package, you need to
 do **two things**:
+
 1. update (the package's `manifest.xml`)[../workspace/add_packages.html#manifest_xml]
    to declare the new dependency.
 2. update `src/CMakeLists.txt` to add the dependency to the package's targets.
@@ -155,6 +156,64 @@ you can define inter-dependencies
 When using `DEPS_CMAKE` and `DEPS_PKGCONFIG`, you ensure that the dependencies
 are saved in the generated pkg-config file (and therefore made available to
 packages that would also depend on your package).
+
+## Working around Unconventional 3rd Party Packages {#unconventional_dependencies}
+
+CMake has become de-facto standard in the C++ community as a build system, and
+pkg-config is common (even if not universal) in the open source community.
+However, there are still regular cases where there is support for neither means
+to resolve a dependency.
+
+Our recommendation in that case is to use autoproj to generate a pkg-config file
+for said package on install. Writing a pkg-config file *for a given use case* is
+relatively straightforward.
+
+1. The hard part is to identity whether the library needs specific compiler and
+linker flags. If it does, you also need to identify whether these flags will always
+be present in your workspace's configuration.
+
+If they do (a common occurence), go to step 2.
+
+Otherwise, the best way is to actually patch the package to make it generate a
+pkg-config file for itself. How exactly you should do that is really beyond the
+point of this documentation. It will heavily depend on the build system used by
+the package.
+
+2. Create a ERB template for the package's pkg-config file, and save it in the
+package set. The file should be named `PACKAGE_BASENAME.pc.erb`, where PACKAGE_BASENAME
+will be the name used by other package to refer to the dependency. For instance,
+[libdatachannel](https://github.com/paullouisageneau/libdatachannel)'s would be called
+`libdatachannel.pc.erb`. A good starting point for this file is:
+
+```
+includedir=<%= pkg.prefix %>/include
+libdir=<%= pkg.prefix %>/lib
+
+Name: <name_of_package>
+Description: <description_of_package>
+Version: <version_of_package>
+Cflags: -I${includedir}
+Libs: -L${libdir} -l<libname>
+```
+
+3. Install the pkg-config file on package install. Modify the autobuild code that
+defines the package to add something along the lines of:
+
+```
+cmake_package "tools/libdatachannel" do |pkg|
+  pkg.post_install do
+    template = ERB.new(File.read(File.join(__dir__, "libdatachannel.pc.erb")))
+    pkgconfig = template.result(binding)
+    pkgconfig_dir = File.join(pkg.prefix, "lib", "pkgconfig")
+    FileUtils.mkdir_p pkgconfig_dir
+    File.write(File.join(pkgconfig_dir, "libdatachannel.pc"), pkgconfig)
+  end
+end
+```
+
+3. Run `amake --force PACKAGE` to install the new file
+4. Verify it is OK by re-sourcing the `env.sh` environment and running
+`pkg-config --cflags PACKAGE` and `pkg-config --libs PACKAGE`
 
 ## Conventions for library design
 

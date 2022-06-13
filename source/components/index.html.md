@@ -86,35 +86,6 @@ they can [be used within oroGen packages](importing_types.html), and how
 they are [mapped into the Ruby layers](types_in_ruby.html) to ease their use
 on the tooling side.
 
-## Creating and Adding Packages to the Workspace
-
-This is covered in the [Workspace and Packages section](../workspace/add_packages.html)
-
-The workflow of the component scaffolding tool `rock-create-orogen` is a bit
-different, though, so let's go through its workflow. Let's assume we want to
-create a `planning/orogen/sbpl` package, the workflow would be to:
-
-~~~
-acd
-cd planning/orogen/
-rock-create-orogen sbpl
-cd sbpl
-# Edit sbpl.orogen
-rock-create-orogen
-# Fix potential mistakes and re-run rock-create-orogen until there are no errors
-# …
-~~~
-
-**What does `rock-create-orogen` do ?** `orogen` does "private" code generation
-in a `.orogen` subfolder of the package, and creates a `templates/` folder.
-`rock-create-orogen` ensures that the initial repository commit does not
-contain any of these. If you don't want to use `git`, or if you're confident
-that you know which files and folder to commit and which to leave out, the second
-run is not neeeded.
-{: .note}
-
-Once this is done, [add the package to your build configuration](../workspace/add_packages.html#orogen)
-
 ## Development Workflow
 
 Developing a component involves doing mainly three things:
@@ -141,15 +112,6 @@ a CMake package.
 The best way to build an oroGen package is to use
 [`amake`](../basics/day_to_day.html). It takes care of code generation and
 building the generated CMake package.
-
-## C++ Standard {#cxx_standard}
-
-The C++ standard used to interpret the data type files and to build the component's C++
-code is the latest standard that its dependencies require. There is currently no
-way to explicitely tell orogen to use a different standard. For instance, if
-your oroGen project uses a library that sets C++11 using [the Rock CMake
-macros](../libraries/cpp_libraries.html#cxx_standard), the oroGen project will use C++11
-too.
 
 ## Runtime Workflow
 
