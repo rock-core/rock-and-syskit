@@ -231,8 +231,8 @@ cmake_package 'custom/pkg_with_linting' do |pkg|
     pkg.define "ROCK_CLANG_TIDY_OPTIONS", "any-option-one-wishes-to-add"
 end
 ~~~
-By default, this checks will only output any linting errors. If one wants `clang-tidy` to
-fix any errors it encountered, one can do so by adding the proper argument as an option.
+By default, this checks will only output the linting errors. If one wants `clang-tidy` to
+actually fix the errors it encountered, one can do so by adding the proper argument as an option.
 Like `clang-format`, this command will run for all the C++ files in the `src/` and `test/`
 folders. Prefer refer to the
 [clang-tidy documentation](https://clang.llvm.org/extra/clang-tidy/index.html) for more
