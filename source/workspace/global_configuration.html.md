@@ -1,4 +1,4 @@
----
+
 layout: documentation
 title: Global Configuration
 sort_info: 45
@@ -197,3 +197,43 @@ end
 `activate_python_path` above will return `nil` if the user disabled Python support.
 Either guard for it (if possible for the package)), or raise an error if Python
 is required for said package.
+
+
+## Clang-format support
+
+To enforce a standard C++ coding style, one can enable `clang-format` as a test target.
+This can be done by extending a package definition in the `*.autobuild` file as follows:
+~~~ ruby
+cmake_package 'custom/pkg_with_style_enforced' do |pkg|
+    pkg.define "ROCK_STYLING_CHECK_ENABLED", true
+    pkg.define "ROCK_CLANG_FORMAT_EXECUTABLE", "path-to-clang-format-executable"
+    pkg.define "ROCK_CLANG_FORMAT_CONFIG_PATH", "path-to-clang-format-config-file"
+    pkg.define "ROCK_CLANG_FORMAT_OPTIONS", "any-option-one-wishes-to-add"
+end
+~~~
+Keep in mind that this check is non-intrusive, meaning that it will only report what
+is not conforming to the defined standard as warnings (by default) and won't actively
+change any code. The command will run for all the C++ files in the `src/` and `test/`
+folders. Please refer to the
+[clang-format documentation](https://clang.llvm.org/docs/ClangFormat.html) for more
+information.
+
+## Clang-tidy support
+If one wishes to have some coverage against well known bugs and not-so-well designed code,
+it's possible to add `clang-tidy` checks as a test target. Similarly to
+`clang-format` support, one should extend a package definition in the `*.autobuild` file
+as follows:
+~~~ ruby
+cmake_package 'custom/pkg_with_linting' do |pkg|
+    pkg.define "ROCK_LINTING_CHECK_ENABLED", true
+    pkg.define "ROCK_CLANG_TIDY_EXECUTABLE", "path-to-clang-tidy-executable"
+    pkg.define "ROCK_CLANG_TIDY_CONFIG_PATH", "path-to-clang-tidy-config-file"
+    pkg.define "ROCK_CLANG_TIDY_OPTIONS", "any-option-one-wishes-to-add"
+end
+~~~
+By default, this checks will only output any linting errors. If one wants `clang-tidy` to
+fix any errors it encountered, one can do so by adding the proper argument as an option.
+Like `clang-format`, this command will run for all the C++ files in the `src/` and `test/`
+folders. Prefer refer to the
+[clang-tidy documentation](https://clang.llvm.org/extra/clang-tidy/index.html) for more
+information.
