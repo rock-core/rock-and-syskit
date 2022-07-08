@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Middleman Gems
-gem 'middleman', '~> 4.3'
+gem 'middleman', '~> 4.4'
 gem 'sass'
 gem 'bootstrap-sass'
 gem 'susy', "~>2.2"
