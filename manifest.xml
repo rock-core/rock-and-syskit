@@ -1,0 +1,9 @@
+<package>
+  <description brief="The 'Rock & Syskit' documentation site">
+
+  </description>
+  <author>Sylvain Joyeux/sylvain.joyeux@tidewise.io</author>
+  <license>CC-BY-SA</license>
+
+  <depend package="nodejs" />
+</package>
