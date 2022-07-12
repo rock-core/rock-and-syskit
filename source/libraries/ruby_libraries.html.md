@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Ruby Library Packages
-sort_info: 15
+sort_info: 30
 ---
 
 # Ruby Library Packages

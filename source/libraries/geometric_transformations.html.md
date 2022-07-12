@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Ruby Library Packages
+title: Geometric Transformations in C++ Libraries
 sort_info: 20
 ---
 
