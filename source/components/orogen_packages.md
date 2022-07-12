@@ -1,10 +1,10 @@
 ---
 layout: documentation
-title: Creating & Updating an oroGen Package
+title: oroGen Packages
 sort_info: 3
 ---
 
-# Components
+# Managing an oroGen package
 {:.no_toc}
 
 - TOC
@@ -91,13 +91,7 @@ another oroGen package.
 
 ## Dependencies for type definitions
 
-It is mandatory that this type of dependency defines a pkg-config file. All Rock
-packages do, but 3rd party libraries may not. If they do not, you will have to
-follow [this step-by-step](../libraries/cpp_libraries.html#unconventional_dependencies) to
-work around these.
-
-Once the new pkg-config file is installed, you can refer to it with
-`using_library` as described [here](./importing_types.html)
+This is covered in the ["Importing types" page](importing_types.html)
 
 ## Dependencies to libraries that are used in the public interface
 
