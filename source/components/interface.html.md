@@ -203,10 +203,10 @@ dynamic_output_port /.*/, "/canbus/Message"
 oroGen currently provides no support for dynamic ports at the C++ level.
 `dynamic_output_port` and `dynamic_input_port` are purely declarative, it is
 the job of the component implementer to handle their creation and destruction.
-This is details [later in this section](writing_the_hooks.html#dynamic_ports)
+This is details [later](writing_the_hooks.html#dynamic_ports)
 
 Syskit expects dynamic ports to be created at configuration time and removed at
-cleanup time.
+cleanup time. Dynamic ports are modelled in Syskit using [dynamic services](../component_networks/dynamic_services.html)
 
 ## Inheritance {#inheritance}
 

@@ -261,8 +261,8 @@ rather tedious in C++.
 
 Generally speaking, restrict yourself to simple functionality. Anything more
 complex than the constant generator should really be implemented as a
-standalone component
-{: .warning}
+standalone oroGen component
+{: .important}
 
 These tasks are subclasses of
 [`Syskit::RubyTaskContext`](https://www.rubydoc.info/github/rock-core/tools-syskit/Syskit/RubyTaskContext).
