@@ -66,11 +66,7 @@ the algorithm will be used - this target is meant to be. The LIDAR frame could
 be "lidar".
 
 But what is *really* important is to properly define the meaning and orientation
-of each frame of reference, and document it
-
-- in the algorithm's class or namespace documentation if these frames are used as part
-  of the algorithm's public interface
-- within methods/functions that define them for intermediate frames
+of each frame of reference, with:
 
 * its name
 * on which rigid body it is fixed
@@ -79,6 +75,12 @@ of each frame of reference, and document it
 Regarding the last point: even though the "X-forward and Z-up" convention
 guideline already constrains choices, there are quite a few things for which
 "forward" and "up" are not obvious choices (example: a propeller)
+
+That documentation may be included:
+
+- in the algorithm's class or namespace documentation if these frames are used as part
+  of the algorithm's public interface
+- within methods/functions that define them for intermediate frames
 
 ## Conventions
 
@@ -93,6 +95,7 @@ in another's frame B (A and B being of course properly documented) you write:
 For instance, `lidar2vessel_pose` or `target2ref_ori`
 
 With the following quantity keywords (as well as accepted short version):
+
 - pose,
 - orientation (ori),
 - position (pos),
@@ -136,6 +139,7 @@ highly context dependent (which body are we talking about ?) and `world` is
 usually "any common fixed reference frame".
 
 Common frame names:
+
 - `sensor` for the reference frame of the sensor being processed (if the
   algorithm only handles one)
 - `ref` for the a common fixed reference frame
