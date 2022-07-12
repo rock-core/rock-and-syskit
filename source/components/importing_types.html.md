@@ -42,11 +42,18 @@ import_types_from "hokuyo/Statistics.hpp"
 (i.e. `hokuyo` for `drivers/hokuyo`).
 {: .note}
 
+<div>
 **Important** The `using_library "library_name"` stanza
 implicitly create a dependency between the oroGen package you're working on
 and the library package. This dependency **must** be made explicit by adding
 the corresponding `<depend name="..." />` line to the oroGen package's
 [`manifest.xml`](../workspace/add_packages.html#manifest_xml).
+
+It is mandatory that this type of dependency defines a pkg-config file. All Rock
+packages do, but 3rd party libraries may not. If they do not, you will have to
+follow [this step-by-step](../libraries/cpp_libraries.html#unconventional_dependencies) to
+work around these.
+</div>
 {: .important}
 
 ## From other oroGen packages (type definition, export and reuse) {#from_orogen}
