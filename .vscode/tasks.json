@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "(docs/rock-and-syskit) middleman server",
+            "command": "${workspaceFolder}/../../.autoproj/bin/autoproj",
+            "type": "shell",
+            "args": ["exec", "middleman"],
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
