@@ -82,7 +82,7 @@ reuse it in different simulation scenes.
 For the purpose of this part of the documentation, we'll use Gazebo's UR10 arm
 model as our robot. We however need to integrate it in another model so that
 its base is fixed (using [this
-method](http://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)).
+method](https://answers.gazebosim.org/question/5065/how-to-attach-arm-to-a-static-base-using-sdf/)).
 
 Usually, the first scene one creates is an empty one, which later will give us
 an environment in which to test basic functionality, without having to care

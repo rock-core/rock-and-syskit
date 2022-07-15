@@ -129,8 +129,7 @@ when the component state change has reached the Syskit process.
 
 Because Syskit's runtime is essentially
 [an event loop](../runtime_overview/event_loop.html), the commmand **must not**
-block. Commanding an asynchronous external process is an advanced subject,
-[covered by this page in the cookbook](../cookbook/async.html).
+block.
 
 ## Task-level Code
 

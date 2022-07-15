@@ -603,7 +603,4 @@ keep it under control.
 Syskit acts as a type and test system. Its aim is to make refactoring as easy
 as it can be. Don't over-think your designs in advance. Rather, be too specific
 and refactor as necessary.
-
-Now that we know how networks are built and exposed in a Syskit system, let's
-see how Syskit [merges them together](network_merge.html)
 {: .next-page}
