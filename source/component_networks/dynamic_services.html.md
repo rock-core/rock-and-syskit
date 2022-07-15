@@ -42,7 +42,7 @@ then defines the required service (a device driver is a type of data service, an
 therefore valid)
 
 Later, the component updates the `exported_links` property accordingly within its own
-`#update_properties` method.
+[`#update_properties`](../components/runtime.html#extension_file) method.
 
 ## Declaring a dynamic service
 
@@ -95,17 +95,20 @@ end
 ## Component Configuration
 
 The configuration that matches the instanciated dynamic services must be generated
-Within the `#update_properties` method. One calls `#each_required_dynamic_service`
+within the `#update_properties` method within the [component extension
+file](../components/runtime.html). One calls `#each_required_dynamic_service`
 and update the configuration accordingly.
 
 ~~~ ruby
-def update_properties
-    super
+Syskit.extend_model Orogen.project.Task do
+    def update_properties
+        super
 
-    properties.exported_objects = each_required_dynamic_service.map do |srv|
-        # Options pass during instanciation are available as
-        # `srv.model.dynamic_service_options`
-        { name: srv.name }
+        properties.exported_objects = each_required_dynamic_service.map do |srv|
+            # Options pass during instanciation are available as
+            # `srv.model.dynamic_service_options`
+            { name: srv.name }
+        end
     end
 end
 ~~~
