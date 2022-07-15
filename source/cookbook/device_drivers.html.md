@@ -5,6 +5,10 @@ sort_info: 10
 ---
 
 # Device Drivers
+{:.no_toc}
+
+- TOC
+{:toc}
 
 From the perspective of this howto, a device driver really is a piece of
 software that interacts with another piece of software through OS-provided

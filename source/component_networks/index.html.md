@@ -58,18 +58,9 @@ into the mechanisms that allow to build [reusable
 models](reusable_networks.html), a.k.a.  how to make most of the models
 robot-independent, to then fine-tune the models for each system.
 
-The next step will be to detail Syskit's [network merge
-algorithm](network_merge.html), which is how Syskit combines networks in a
-system to form a single runnable network. Most of the time, this is transparent
-to the system designer _except_ when networks that can't be merged are deployed
-together. The goal will be to give you the tools to understand these errors.
-
 The rest of the chapter will details more advanced aspects of the design of the
-component network(s). [Connection policies](connection_policies.html) and
-[transports](transports.html) are important tuning knobs within a Rock/Syskit
-system. Generic [transformation handling](transformations.html) is a critical
-tool to build components that are (mostly) system-independent, promoting
-reuse.
+component network(s). For now, you can find more about the system handling of
+[geometric transformations](./geometric_transformations.html)
 
 Let's now get into the first item of business, the [compositions](composition.html)
 {: .next-page}

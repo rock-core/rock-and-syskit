@@ -47,11 +47,16 @@ helpers do
     end
 end
 
-require 'html-proofer'
+require "html-proofer"
 
-after_build do |builder|
+after_build do |_builder|
     begin
-        HTMLProofer.check_directory(config[:build_dir], { assume_extension: true }).run
+        HTMLProofer.check_directory(
+            config[:build_dir],
+            { assume_extension: true,
+              ignore_urls: [/rubydoc|gazebosim/],
+              url_ignore: [/rubydoc|gazebosim/] }
+        ).run
     rescue RuntimeError => e
         puts e
     end
