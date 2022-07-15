@@ -165,10 +165,10 @@ The following statements are available in the `stream_aligner` block:
   runtime by setting a generated property called `${port_name}_period` (e.g.
   `lidar_samples_period` for the `lidar_samples` stream)
 
-### Usage in C++
+### Usage in C++ {#cpp}
 
 For each stream declared with `align_port`, a C++ callback method, of the form
-“void stream_nameCallback(timestamp, sample)” is generated. For instance, for
+`void stream_nameCallback(timestamp, sample)` is generated. For instance, for
 the `lidar_samples` port above:
 
 ~~~ cpp
@@ -184,3 +184,20 @@ Because these callbacks are in the "user" part of the code, oroGen cannot update
 them automatically. If you add or remove streams after the first code
 generation, you must update the files in `tasks/` yourself, using if needed the
 templates generated in `templates/tasks/`
+
+Ports that are processed by the stream aligner **MUST NOT** be read "manually"
+by accessing the port. Use the callbacks to access new samples
+{: .alert .alert-danger}
+
+<div>
+When using the stream aligner, it is critical that the call to the parent's class
+`updateHook` is done first within `updateHook`. This is indeed where the stream aligner
+processing happens
+
+~~~ cpp
+void Task::updateHook() {
+    TaskBase::updateHook(); // call this first
+}
+~~~
+</div>
+{: .alert .alert-danger}

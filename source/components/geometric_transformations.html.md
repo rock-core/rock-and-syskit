@@ -178,6 +178,11 @@ void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::Vi
 
 ### Transformer in the C++ Code
 
+Being, under the hood, a stream aligner, [the rules](./stream_aligner.html#cpp)
+related to usage of ports and `updateHook` implementation apply to the
+transformer as well
+{: .alert .alert-danger}
+
 Within the C++, the transform object is available through a generated
 `_features2command` object which can be queried through its `.get` method.
 
