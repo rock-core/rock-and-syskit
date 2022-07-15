@@ -17,7 +17,7 @@ to handle geometric transformations within C++ libraries. The [third
 part](../component_networks/geometric_transformations.html) dealt with system-level
 concerns.
 
-This part deals discusses how it is handled at the component level.
+This part presents how it is handled at the component level.
 </div>
 {: .note}
 
@@ -165,27 +165,21 @@ transformer do
 end
 ~~~
 
+In that case, a callback will be generated, much like with the [stream
+aligner](./stream_aligner.html).  The difference is in the name: while the
+stream aligner callbacks are named `${port_name}Callback`, the transformer ones
+are named `${port_name}TransformerCallback`. In doubt, always look at the fresh
+templates in the orogen's `templates/` folder.
+
+~~~ cpp
+void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::VisualFeatures& features) {
+}
+~~~
+
 ### Transformer in the C++ Code
 
 Within the C++, the transform object is available through a generated
 `_features2command` object which can be queried through its `.get` method.
-`get` expects a time. One usually uses the first callback argument as the query time.
-If called within the `updateHook`, use `base::Time::now()`
-
-~~~ cpp
-void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::VisualFeatures& features) {
-  base::samples::RigidBodyState features2command;
-  if (!_features2command.get(ts, features2command, true))
-  {
-      // no transform available yet, do nothing
-      return;
-  }
-
-  // Do the processing
-}
-~~~
-
-### Controlling Interpolation
 
 The first argument to `.get` controls what is the expected time of the queried
 transform. It is needed only if the transformer is expected to generate an
@@ -201,7 +195,41 @@ Note that this functionality will only work reliably inside the transformer
 callbacks, since it ensures that the given time is ordered in time. The
 transformer does not keep a full history of everything it receives, and is
 therefore very likely to fail to interpolate or even return a transform if
-called outside the stream alignment callbacks.
+called outside the stream alignment callback.
+
+**Example**: accessing a transformation within a transformer callback
+
+~~~ cpp
+void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::VisualFeatures& features) {
+  base::samples::RigidBodyState features2command;
+  if (!_features2command.get(ts, features2command, true))
+  {
+      // no transform available yet, do nothing
+      return;
+  }
+
+  // Do the processing
+}
+~~~
+
+**Example**: accessing a transformation in the updateHook
+
+~~~ cpp
+void Task::updateHook() {
+    // VERY IMPORTANT. Must be first, ports are read here by the stream aligner
+    TaskBase::updateHook();
+
+    base::samples::RigidBodyState features2command;
+    // Thirst argument MUST be false
+    if (!_features2command.get(base::Time::now(), features2command, false))
+    {
+        // no transform available yet, do nothing
+        return;
+    }
+
+    // Do the processing
+}
+~~~
 
 ## Limitations and Guidelines
 
