@@ -1,4 +1,4 @@
-
+---
 layout: documentation
 title: Global Configuration
 sort_info: 45
