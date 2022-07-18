@@ -171,9 +171,10 @@ If you have an IDE opened, it will connect to this app and give you its status.
 ## Component Extension File {#extension_file}
 
 To handle a Syskit app's configuration needs, one often has to create a
-component extension file. This file is part of the app, and allows to extend
-the component model, built from the oroGen file, with Syskit-specific things, such
-as task arguments and auto-configuration based on the SDF world or
+component extension file. This file's objective is to provide the "glue" necessary
+between the orogen description of the component's interface and either Syskit
+modelling needs (e.g. [data services](../component_networks/reusable_networks.html) or
+[devices](../component_networks/devices_and_busses.html)) or runtime needs.
 
 The component extension files are in the `models/orogen/` folder, named as the
 oroGen project, for instance `models/orogen/imu_advanced_navigation_anpp.rb`. They are generated
@@ -214,6 +215,7 @@ component properties. Properties within Syskit are accessed with the
 ~~~ ruby
 Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do
   argument :port, default: 12000
+
   def update_properties
     super # fill configuration from the configuration files
 
@@ -226,7 +228,6 @@ end
 Note that Syskit decides whether the component must be reconfigured only by
 looking at the value of the properties after the `update_properties` call. If
 it must be reconfigured for other reasons, call `#needs_reconfiguration!`, e.g.
-
 
 ~~~ ruby
 Syskit.extend_model OroGen.imu_advanced_navigation_anpp.Task do

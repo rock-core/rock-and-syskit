@@ -122,6 +122,6 @@ instance, `/base/samples/RigidBodyState` is actually stored as
 `/base/samples/RigidBodyState_m` in the log files. If a call to `find-streams`
 does not return any result, check a single dataset to find out whether you
 are referring to the right type.
-{: .warning}
+{: .important}
 
 See `syskit ds help find-streams` for more details.

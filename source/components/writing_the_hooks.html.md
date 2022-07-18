@@ -149,8 +149,9 @@ if (_out.connected())
 ## Dynamic Ports {#dynamic_ports}
 
 Components that have a dynamic port mechanism must create these ports in
-`configureHook`. They will usually do so based on information on their
-properties.
+`configureHook`. They will usually do so based on their configuration (i.e. values
+set on their properties). In addition, for the purpose of Syskit integration, these
+components need to declare that they have [dynamic ports](./interface.html#dynamic_ports)
 
 For the purpose of example, let's assume that we're implementing a time source,
 and need different ports to be at different periods. A valid configuration type
