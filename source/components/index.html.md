@@ -20,14 +20,28 @@ is the declaration in C++ of the component interfaces.
 
 From a package point of view, components are defined in an orogen package. The
 orogen packages are all placed in the `/orogen/` subdirectory of one of the
-[package categories](../workspace/conventions.html). This page will not dwell
-on how to create an orogen package. [Check this page out](./orogen_packages.html)
-for more details on the subject.
+[package categories](../workspace/conventions.html). Additionally, an oroGen
+package and a library can share the same basename (e.g.  `drivers/hokuyo` and
+`drivers/orogen/hokuyo`). This is even a recommended behavior when an orogen
+package is mainly tied to a certain library.
 
-**Important** an oroGen package and a library can share the same basename (e.g.
-`drivers/hokuyo` and `drivers/orogen/hokuyo`). This is even a recommended
-behavior when an orogen package is mainly tied to a certain library.
-{: .note}
+Follows, for instance, some packages from one of my workspaces:
+
+~~~
+base/types
+base/orogen/types
+drivers/iodrivers_base
+drivers/orogen/iodrivers_base
+control/motor_controller
+gui/vizkit3d_world
+gui/orogen/vizkit3d_world
+simulation/rock_gazebo
+simulation/orogen/rock_gazebo
+simulation/orogen/underwater_camera_simulation # work on top of gui/orogen/vizkit3d_world
+~~~
+
+This page will not dwell on how to create an orogen package. [Check this page
+out](./orogen_packages.html) for more details on the subject.
 
 Within oroGen packages, the components are named _Task Contexts_. This is
 historically the name chosen by the developers of the Orocos RTT toolkit, the
