@@ -10,43 +10,18 @@ sort_info: 40
 - TOC
 {:toc}
 
-One of the most common tasks in a robotic systems is to represent the
-relationship between a robot body (or one of its parts) and the world. E.g. a
-gripper and an object being gripped, an AUV and the ground (to avoid bumping
-into it), ... These relations are usually estimated through complex processing
-chains. The object-gripper relation is built by sensing the object in one or
-multiple sensors (LIDAR, camera, ...) which are attached on the robot. Each of
-these sensors provide information about the pose of the object _in the sensor
-frame_. A.k.a. the sensor-object transform.
+<div>
+This is a page in a 3-part series.The [first
+part](../libraries/geometric_transformations.html) presented the issue, and how
+to handle geometric transformations within C++ libraries. The [second
+part](../components/geometric_transformations.html) then discussed how it is
+handled at the component level.
 
-However, the task (in our example, gripping the object), requires the
-object-gripper transform. For instance, the pose of the object in the gripper
-frame. Obtaining it requires static data (the shape of the robot's kinematic
-chains) and dynamic data (the joint positions that would allow to resolve the
-kinematic chains).
-
-From the point of view of the component design, it is important to consider
-these aspects both on the input side and on the output side. The former is
-asking the question: do I need to do transformations between the frames of my
-inputs, and if yes, which extra transforms do I need ? The latter asks the
-question: what will my output be used for, in which frame should it be expressed
-?
-
-From a system design point of view, one can quickly realize that the choice of
-frames and how the components are connected are related. The role of Syskit
-there is to keep the ability to combine networks and of changing the network
-shapes with minimal work, while ensuring a network-wide consistency w.r.t. the
-choice of frames.
-
-To keep components generic, a component's code only have to deal with _logical
-frames_, i.e. it defines a set of frames that are relevant for the computation
-it does. These frames are mapped at runtime by Syskit to system-wide names that
-represent the frames on the robot and/or in its environment.
-
-<div class="panel panel-default" markdown="1">
-  <div class="panel panel-heading" markdown="0">
-    <h4>Setup</h4>
-  </div>
+This last part deals with system-level concerns of consistency (that readers and
+writers are expecting data in the same frame(s)) and configuration of Rock's
+transformer.
+</div>
+{: .note}
 
 <div class="panel panel-body">
 Geometry support requires that you have `drivers/orogen/transformer`
@@ -61,165 +36,6 @@ end
 in the robot configuration file (either `config/robots/default.rb`
 or a robot-specific configuration)
 </div>
-</div>
-
-## Geometry in components
-
-Rock's `base::samples::RigidBodyState` (RBS) type represents the state (pose and
-velocity) of a rigid body expressed in a certain reference frame. The body's
-own frame is the RBS `sourceFrame` field. The reference frame is the RBS
-`targetFrame`. Because the RBS must embed frame names, the
-component-level/system-level frame abstraction described above leaks when a
-component outputs a RBS. In effect, the component _must know_ the global frame
-names as it is responsible for filling its
-`sourceFrame` and `targetFrame` field.
-{:#rbs}
-{:.alert .alert-info}
-
-We'll now present the role of frames and transforms in data source components,
-i.e. components that generate new data samples, and data processing components,
-that is components that transform data samples using frames and frame
-transforms.
-
-### In data sources {#data_sources}
-
-Data sources (e.g. devices) usually do not deal directly with transformations.
-However, certain data sources, such as for instance a GPS or an IMU, produce
-an estimate of transformations themselves. In Rock, the data type that
-represents these transformations (`base::samples::RigidBodyState`) embeds the
-name of the transformation's source and target frame and the component must
-therefore allow to set these frames.
-
-The convention - on which the Syskit system setup relies - is to name these
-properties `${framename}_frame`. For instance, for a GPS's UTM output one could
-pick:
-
-~~~ ruby
-# The frame of the world, e.g. the UTM origin
-property 'utm_frame', '/std/string'
-# The frame of the gps device
-property 'gps_frame', '/std/string'
-~~~
-
-which would then be written before writing the sample on the output (see [the
-note about RigidBodyState](#rbs))
-
-~~~ c++
-gps_pose.sourceFrame = _gps_frame.get();
-gps_pose.targetFrame = _utm_frame.get();
-~~~
-
-### In data processing components
-
-A common role of frames and transforms in data processing components is to
-allow to represent multiple inputs within the same reference frame. Indeed,
-while the inputs may be expressed in different frames, to combine them one
-needs to transform them into a common frame. In Rock, the transformer oroGen
-plugin helps with this process. To use it one, needs first to depend on the
-`drivers/orogen/transfomer` package by adding the following line to the
-package's `manifest.xml`.
-
-~~~ xml
-<depend package="drivers/orogen/transformer" />
-~~~
-
-Then, one needs to wonder which transformations are required by the processing.
-Frame names that are appropriate _within the component's context_ must be
-chosen, and declared in the oroGen's transformer block. Since a transformer is
-also a stream aligner, the block must also contain a `max_latency` declaration.
-
-~~~ ruby
-task_context "Task" do
-    needs_configuration
-    ...
-    transformer do
-        transform 'from', 'to'
-        max_latency 0.1
-    end
-end
-~~~
-
-For instance, a visual servoing component that takes visual features as input
-and provides a command within the vehicle's body frame would have the need for
-the `features` to `command` transform. A common - but unfortunate - choice
-would be to use `body` for the command reference frame, which (wrongly) assumes
-that the command reference will always be the body frame. It would be declared
-with
-
-~~~ ruby
-task_context "Task" do
-    needs_configuration
-    ...
-    transformer do
-        transform 'features', 'command'
-        max_latency 0.1
-    end
-end
-~~~
-
-As already noted, the transformer is a stream aligner. It's common to process
-the component's input streams aligned with the transformations, which is done by
-adding the input streams to the transformer:
-
-~~~ ruby
-transformer do
-  align_port "detected_features", 0.1
-  tranform "features", "command"
-  max_latency 0.1
-end
-~~~
-
-Just as with the stream aligner, this generates callbacks for the declared input
-streams.  Within these callbacks, the transformation objects can be queried. The
-query time should be the stream aligner time (the first argument to the
-callback).
-
-~~~ cpp
-void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::VisualFeatures& features) {
-  base::samples::RigidBodyState features2command;
-  if (!_features2command.get(ts, features2command, true))
-  {
-      // no transform available yet, do nothing
-      return;
-  }
-
-  // Do the processing
-}
-~~~
-
-Within the C++, the transform object is available through a generated
-`_features2command` object which can be queried through its `.get` method.
-
-~~~ cpp
-base::samples::RigidBodyState rbs;
-if (!_features2command.get(time, rbs, true))
-    // transform not available
-else
-    // transform available
-~~~
-
-The first argument to `.get` controls what is the expected time of the queried
-transform. It is needed only if the transformer is expected to generate an
-_interpolated transform_ by setting the third argument to `true`.
-
-When the third argument is `false`, the transformer computes the kinematic
-chain using the transforms whose timestamp is just before the given `time`. If
-it is `true`, it interpolates the transformation from the transforms it
-received with a timestamp just before the passed timestamp, with the transforms
-it received with a timestamp just after.
-
-Note that this functionality will only work reliably inside the transformer
-callbacks, since it ensures that the given time is ordered in time.  The
-transformer does not keep a full history of everything it receives, and is
-therefore very likely to fail to interpolate or even return a transform if
-called outside the stream alignment callbacks.
-
-It is somewhat tempting to use the transformer to manage all transformations
-within a system. **Don't**. The transformer is really meant to handle variations
-in the robotic system itself (placement of sensors and actuators). For
-environment-robot transformations (pose and velocity of the robot, ...), stick
-to having separate input ports.
-{:.alert .alert-danger}
 
 ## System-wide frame consistency
 
@@ -230,10 +46,28 @@ should be configured with is related to what it is connected to. There's a
 relationship between the shape of the component network (port-to-port
 connections) and the configuration of frames.
 
-In the visual servoing example above, the `features` frame should be the one of
-the feature data stream, which will itself be one of the camera frames (either
-optical or geometrical). If the chain starts using a different camera, the
-visual servoing component's `features` frame also needs to be changed.
+Let's consider the visual servoing example outlined in
+[the component part](../components/geometric_transformations.html): a visual
+servoing component takes visual features as input and provides a command within
+a command frame on the vehicle body. The component's transformer was configured with
+
+~~~ ruby
+task_context "Task" do
+    needs_configuration
+    ...
+    transformer do
+        align_port "detected_features"
+        transform 'features', 'command'
+        max_latency 0.1
+    end
+end
+~~~
+
+In this example, there is obviously the need for the `features` frame to be the
+reference frame from the `detected_features` input port. Which means for
+instance that it is either a camera frame, or the output reference frame of some
+intermediate detection component. If the chain starts using a different camera,
+the visual servoing component's `features` frame also needs to be changed.
 Breaking the consistency of the frames in the system usually leads to
 hard-to-find bugs.
 
@@ -275,7 +109,7 @@ uwv_kalman_filters`, and then edit the generated
 in which we'll add the required information:
 
 ~~~ruby
-class OroGen::UwvKalmanFilters::VelocityProvider
+Syskit.extend_model OroGen.uwv_kalman_filters.VelocityProvider do
     transformer do
     end
 end
@@ -344,7 +178,8 @@ The final model looks like this:
 As a design driver, one should minimize the amount of components that need to
 know about frames and frame transforms. For instance, an image preprocessing
 stage does not need to know about the frame of its image. Most devices do not
-either, [only the ones that have `RigidBodyState` outputs do](#data_sources).
+either. Really, only components that generate RigidBodyState samples meant as input for
+the transformer do need to know about global frames.
 
 However, in order to enable propagation in the network, one still needs to
 add the same kind of annotations than with the transformer-enabled components.
@@ -354,34 +189,16 @@ declared within the Syskit extension file as well.
 
 For instance, a hypothetical image preprocessing component would have
 
-~~~ruby
-transformer do
-  associate_ports_to_frame 'image_in', 'image_out',
-    'image'
-end
-~~~
-
-In the special case of the `RigidBodyState`-generating data sources, one needs
-to declare the frames so that they match the `framename_frame` properties, thus
-allowing Syskit to properly configure the component once the frames have been
-computed. A GPS component that has
-
 ~~~ ruby
-# The frame of the world, e.g. the UTM origin
-property 'utm_frame', '/std/string'
-# The frame of the gps device
-property 'gps_frame', '/std/string'
-# The GPS output position
-output_port 'position_samples', '/base/samples/RigidBodyState'
-~~~
-
-would be annotated with
-
-~~~ruby
 transformer do
-  associate_ports_to_transform 'position_samples', 'gps' => 'utm'
+    configurable_frame "image"
+    associate_ports_to_frame "image_in", "image_out", "image"
 end
 ~~~
+
+Note that if your component has a `${frame_name}_frame` property, it will be
+filled by Syskit at runtime, regardless of whether the component uses the
+transformer or not.
 
 ### Annotating Devices
 
@@ -393,16 +210,16 @@ Devices that provide a data stream that is not itself a transformation are
 attached to a frame with the `.frame` declaration
 
 ~~~ruby
-device(Rock::Devices::Camera::Firewire, as: 'left_camera').
-  frame('robot::camera_left')
+device(CommonModels::Devices::Camera::Firewire, as: 'left_camera')
+    .frame('robot::camera_left')
 ~~~
 
 Devices that actually provide a transformation get it with the
 `.frame_transform` declaration.
 
 ~~~ruby
-device(Rock::Devices::GPS::Generic, as: 'gps').
-  frame_transform('robot::gps' => 'nwu')
+device(CommonModels::Devices::GPS::Generic, as: 'gps')
+    .frame_transform('robot::gps' => 'nwu')
 ~~~
 
 Once the device is attached to a driver, the frame assignment is propagated to
@@ -435,7 +252,7 @@ profiles. When this happens, one gets the following message while running the
 tests:
 
 ~~~
-could not find a frame for body in OroGen::UwvKalmanFilters::VelocityProvider
+could not find a frame for body in OroGen.uwv_kalman_filters.VelocityProvider
 ~~~
 
 This can be inspected in e.g. the profile page in the Syskit IDE (see the red
@@ -448,11 +265,11 @@ To fix this, one must explicitly set the body frame in the profile with the
 composition applies to its children).
 
 ~~~ruby
-define 'velocity_provider_filter', Compositions::VelocityEstimation.
-  use_frames('body' => 'auv')
+define('velocity_provider_filter', Compositions::VelocityEstimation)
+    .use_frames("ref" => "auv")
 ~~~
 
-Where 'body' is the component-local name and 'auv' the actual global frame name.
+Where "body" is the component-local name and "auv" the actual global frame name.
 
 ### Frame-related errors
 
@@ -525,17 +342,13 @@ The canonical way to describe all of a system's frames is to provide a SDF file
 that describes the vehicle, and another SDF file that represents its
 environment.
 
-It is recommended to create the overall vehicle SDF model and visuals in a
-separate repository under the `robots/` category (e.g. `robots/shiny`).  The
-model itself must be installed under `share/sdf` (e.g. `share/sdf/shiny`) to be
-found automatically by Syskit.
-
-Then, a `use_gazebo_model` stanza can be added in a profile to import the SDF
-information into the transformer:
+Then, a `use_sdf_model` stanza can be added in a profile to import the SDF
+information into the transformer for live systems, and `use_gazebo_model` for
+systems in simulation that use Gazebo.
 
 ~~~ruby
 profile "Base" do
-  use_gazebo_model "model://shiny"
+    use_sdf_model "model://shiny"
 end
 ~~~
 
@@ -557,15 +370,15 @@ These components are declared as dynamic producers in the profile's
 
 ~~~ruby
 profile "Base" do
-  use_gazebo_model 'model://shiny'
+  use_sdf_model "model://shiny"
 
   robot do
-    device Rock::Devices::PTU, as: 'ptu'
+    device CommonModels::Devices::PTU, as: 'ptu'
   end
 
   transformer do
     dynamic_transform ptu_dev,
-      'shiny::ptu_base' => 'shiny::ptu_moving'
+      "shiny::ptu_base" => "shiny::ptu_moving"
   end
 end
 ~~~
@@ -582,18 +395,24 @@ profile "Base" do
 end
 ~~~
 
-The corresponding world must be loaded within the `requires` block of the robot
+The default world must be loaded within the `requires` block of the robot
 configuration file:
 
 ~~~ruby
 Robot.requires do
-  Syskit.conf.use_sdf_world 'empty_world'
+  Syskit.conf.use_sdf_world 'empty'
 end
 ~~~
 
-the actual world can be overriden
+the actual world can be overriden at startup time by setting the `sdf.world_path`
+variable, using the `--set` argument to `syskit ide` or `syskit run`, e.g.:
 
-## Caveats
+~~~
+# Will load the 'logistics' scene instead of `empty'
+syskit ide --set sdf.world_path=logistics
+~~~
+
+## Caveats {#caveats}
 
 While the use of the geometry annotations in Syskit is only paid at deployment
 time, there's a dark side to the use of the transformer. Its usage may be paid
@@ -615,7 +434,7 @@ frequency. The lowest producer in the system will drive the latency of all
 transformer-based components that require it.
 {:.alert .alert-danger}
 
-## System Design Guidelines
+## System Design Guidelines {#guidelines}
 
 **Component development**
 

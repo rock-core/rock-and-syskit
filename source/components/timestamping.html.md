@@ -26,7 +26,9 @@ components need to be designed so as to handle the issue raising with data, orig
 from the world and being processed in an asynchronous way _but in realtime_.
 
 This has a lot of ramifications. We will deal with in this page with the one that has
-the most impact on writing libraries and components for the robotics world: _timestamping_.
+the most impact on writing libraries and components for the robotics world:
+_timestamping_.  A related issue, the one of time-ordered data processing, will
+be dealt with [in our presentation of the stream aligner](stream_aligner.html).
 
 ## Timestamping
 
@@ -306,5 +308,5 @@ while (_hardware_timestamps.read(hw_time) == RTT::NewData)
 
 That's all on the topic of timestamping. Let's move on to
 [deployment](deployment.html), to find out how the components classes we're
-writing are actually executed 
+writing are actually executed
 {: .next-page}

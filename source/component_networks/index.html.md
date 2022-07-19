@@ -60,7 +60,9 @@ robot-independent, to then fine-tune the models for each system.
 
 The rest of the chapter will details more advanced aspects of the design of the
 component network(s). For now, you can find more about the system handling of
-[geometric transformations](./geometric_transformations.html)
+[geometric transformations](./geometric_transformations.html), a critical
+tool to build components that are (mostly) system-independent, promoting
+reuse.
 
 Let's now get into the first item of business, the [compositions](composition.html)
 {: .next-page}
