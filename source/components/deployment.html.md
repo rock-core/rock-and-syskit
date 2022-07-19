@@ -304,9 +304,9 @@ non-realtime and with the lowest priority possible. Changing it is done with
 the following statements:
 
 ~~~ ruby
-  task('TaskName', 'orogen_project::TaskClass').
-    realtime.
-    priority(<priority value>)
+  task('TaskName', 'orogen_project::TaskClass')
+    .realtime
+    .priority(<priority value>)
 ~~~
 
 Where the priority value is a number between 1 (lowest) and 99 (highest).
@@ -319,8 +319,8 @@ a chain of method calls, and require the dots.
 The second case is called a sequential activity and is declared with:
 
 ~~~ ruby
-  task('TaskName', 'orogen_project::TaskClass').
-    sequential
+  task('TaskName', 'orogen_project::TaskClass')
+    .sequential
 ~~~
 
 **Next** this is mostly all. [The next page](runtime.html) describes

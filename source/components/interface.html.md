@@ -48,6 +48,7 @@ Documentation for an interface element should be written as a comment directly
 on top of the declaration.
 
 ### Ports
+
 Ports are defined with
 
 ~~~ ruby
