@@ -1,4 +1,4 @@
-
+---
 layout: documentation
 title: Global Configuration
 sort_info: 45
@@ -203,6 +203,7 @@ is required for said package.
 
 To enforce a standard C++ coding style, one can enable `clang-format` as a test target.
 This can be done by extending a package definition in the `*.autobuild` file as follows:
+
 ~~~ ruby
 cmake_package 'custom/pkg_with_style_enforced' do |pkg|
     pkg.define "ROCK_STYLING_CHECK_ENABLED", true
@@ -211,6 +212,7 @@ cmake_package 'custom/pkg_with_style_enforced' do |pkg|
     pkg.define "ROCK_CLANG_FORMAT_OPTIONS", "any-option-one-wishes-to-add"
 end
 ~~~
+
 Keep in mind that this check is non-intrusive, meaning that it will only report what
 is not conforming to the defined standard as warnings (by default) and won't actively
 change any code. The command will run for all the C++ files in the `src/` and `test/`
@@ -219,10 +221,12 @@ folders. Please refer to the
 information.
 
 ## Clang-tidy support
+
 If one wishes to have some coverage against well known bugs and not-so-well designed code,
 it's possible to add `clang-tidy` checks as a test target. Similarly to
 `clang-format` support, one should extend a package definition in the `*.autobuild` file
 as follows:
+
 ~~~ ruby
 cmake_package 'custom/pkg_with_linting' do |pkg|
     pkg.define "ROCK_LINTING_CHECK_ENABLED", true
@@ -231,6 +235,7 @@ cmake_package 'custom/pkg_with_linting' do |pkg|
     pkg.define "ROCK_CLANG_TIDY_OPTIONS", "any-option-one-wishes-to-add"
 end
 ~~~
+
 By default, this checks will only output the linting errors. If one wants `clang-tidy` to
 actually fix the errors it encountered, one can do so by adding the proper argument as an option.
 Like `clang-format`, this command will run for all the C++ files in the `src/` and `test/`
