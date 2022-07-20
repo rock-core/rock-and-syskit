@@ -19,6 +19,12 @@ activate :navtree do |options|
     options.ext_whitelist = [] # If you add extensions (like '.md') to this array, it builds a whitelist of filetypes for inclusion in the navtree.
     options.directory_indexes << 'index.html.md' << 'index.html.md.erb'
 end
+activate :deploy do |deploy|
+    deploy.deploy_method = :git
+    deploy.remote = "git@github.com:rock-core/rock-and-syskit.git"
+    deploy.branch = "gh-pages"
+    deploy.build_before = true
+end
 
 # Per-page layout changes:
 #
