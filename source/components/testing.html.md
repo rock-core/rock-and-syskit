@@ -168,13 +168,22 @@ expect_execution { syskit_write mytask.in_port, sample1, sample2, sample3 }.to {
 ~~~
 
 Finally, if your test needs to write more than a few tens of samples to a single
-port, you must create the writer explicitly, like this:
+port, in multiple `expect_execution` calls, you must create the writer
+explicitly, like this:
 
 ~~~ ruby
 writer = syskit_create_writer task.in_port, type: :buffer, size: 20
 1000.times do
-   expect_execution { syskit_write writer, sample }
+   expect_execution { syskit_write writer, sample }.to { ... }
 end
+~~~
+
+This applies only if the writes are spread across multiple `syskit_write` calls.
+If it is to be in a single `expect_execution`, just pass them all to a single
+`syskit_write` call as well:
+
+~~~ ruby
+expect_execution { syskit_write mytask.in_port, *([sample] * 1000) }.to { ... }
 ~~~
 
 The second type of action is to start or stop the component. This is done by
