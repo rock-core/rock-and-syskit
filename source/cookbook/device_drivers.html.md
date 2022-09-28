@@ -152,7 +152,7 @@ Let's expand on our hypothetical Ublox M8. If we assume that we have written a
 file with:
 
 ~~~shell
-syskit gen orogen gps_ublox::M8Task
+syskit gen orogen gps_ublox
 ~~~
 
 And edit the created `models/orogen/gps_ublox.rb` file to add:
