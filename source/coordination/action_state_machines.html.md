@@ -320,3 +320,52 @@ root_task
 The `action_state_machine` block behaves the same than in "toplevel" state
 machines, but has access to instance methods and action method arguments
 directly.
+
+## Testing
+
+State machines defined at toplevel are evaluated at loading time, and the presence
+of actions and events is validated at loading time as well.
+
+Therefore, there are only mainly two points that are needed to test in relation
+with action state machines:
+
+- captures
+- dynamically generated state machines
+
+### Captures
+
+In the action interface's test suite, create the state machine's task instance
+and then use `run_state_machine_capture` to execute the capture:
+
+~~~ ruby
+task = run_planners my_action(x: 5, y: 10)
+result = run_state_machine_capture task, "capture_name", context: [42]
+~~~
+
+In the rare occasion that the capture would need some more information from the
+event, pass a full `Roby::Event` as the `event` argument instead of `context`
+
+### Dynamically Created State Machines
+
+To test that a state machine was properly generated, create the toplevel task and
+then use the `validate_state_machine` helper to get into a context that allows
+you to "play" with the machine's state tasks:
+
+~~~ ruby
+it "transitions to 'coarse' once the pose is acquired" do
+    interface = MyInterface.new
+    root_task = interface.some_action
+    validate_state_machine root_task do
+        next_task = assert_transitions_to(:state_name) do |current_task|
+            # Act on 'current_task' using the normal test primitives, e.g.
+            # syskit_configure_and_start, expect_execution, ...
+        end
+    end
+end
+~~~
+
+Do not get into the trap of testing the states themselves, the "test space" will
+get very big very quickly. The point of these tests is to check the state
+machine's own structure. Test each state's implementation in separate unit tests.
+{: .warning}
+
