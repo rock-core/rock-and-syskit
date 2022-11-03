@@ -215,8 +215,9 @@ In action state machines, the event's context can be captured and transformed in
 another state's argument with the `capture` statement:
 
 ~~~ ruby
-c = capture(my_state.success_event) do |context|
-   ... convert `context` into something usable as an argument ...
+c = capture(my_state.success_event) do |event|
+    data = event.context.first # 'context' is an array
+    ... convert `data` into something usable as an argument ...
 end
 state some_action(target: c)
 ~~~
@@ -300,6 +301,7 @@ define "acquire_global_pose",
        CommonModels::Compositions.Acquire(Services::Pose)
        .use("data_source" => global_pose_def)
 ~~~
+
 
 ## Dynamic State Machine Creation
 
