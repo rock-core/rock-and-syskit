@@ -64,7 +64,7 @@ we would do
 
 ~~~ ruby
 action_state_machine "docking" do
-    coarse = state(docking_coarse_approach_def)
+    coarse = state docking_coarse_approach_def
 end
 ~~~
 
@@ -81,7 +81,7 @@ start state:
 action_state_machine "docking" do
     coarse = state docking_coarse_approach_def
     station = state station_keep_def
-    final = statedocking_final_approach_def
+    final = state docking_final_approach_def
 
     start(coarse)
 end
@@ -127,21 +127,28 @@ action_state_machine "docking" do
 end
 ~~~
 
-However, `visual_localization_def` should be running the localization, but won't be
-providing us with the events we need for our synchronization. It is common to build
-a library of tiny steps for this. In this case, we would create a
-`validate_visual_localization` action that would run the action and emit success. We
-can then use the success event for our purposes
+However, `visual_localization_def` should be running the localization, but won't
+be providing us with the events we need for our synchronization. It is common to
+build a library of tiny steps for this. In this case, we would create a
+`validate_visual_localization` action that would run the action and emit success
+once the visual location has a hit. We can then use the success event for our
+purposes
 
 ~~~ ruby
 action_state_machine "docking" do
     coarse = state docking_coarse_approach_def
     station = state station_keep_def
+    # States can be made of any action, not only of profile definitions.
+    # Here `validate_visual_localization` is built on top of the
+    # visual_localizations_def (see paragraph above)
     validate = state validate_visual_localization
     station.depends_on(validate)
     final = state docking_final_approach_def
 
     start coarse
+    # Since reached_position_event is an event of a state, you do not need
+    # to specify the state, i.e. the following is equivalent to
+    # transition coarse, coarse.reached_position_event, station
     transition coarse.reached_position_event, station
     transition station, validate.success_event, final
 end
@@ -151,7 +158,7 @@ Because of how Syskit handles transitions, the visual localization network will
 remain unchanged between the station and final states.
 {: .note}
 
-Finally, we would build the final_approach action to emit `success` when docked,
+Finally, we would build the final_approach_def action to emit `success` when docked,
 which would become the success criteria for the state machine itself:
 
 ~~~ ruby
