@@ -249,6 +249,87 @@ poll do
 end
 ~~~
 
+## Bubbling events up - handling events in parent tasks
+
+When one builds a synthetic action, one has to choose what is the toplevel task
+that will represent that action. In profile definitions, it it the composition itself.
+In the [action methods](./action_methods.html) and
+[action state machines](./action_state_machines.html) that we will see momentarily,
+it is an instance of the toplevel task of the action.
+
+For the purpose of coordinating that action with others - for instance within action
+state machines, one would want to define events on the toplevel tasks. This section
+will show you how this can be done, and how you can "bubble up" events from low-level
+tasks to handle this toplevel task.
+
+A typical use-case for accessing a task's children is the composition: the
+elements of a composition - which were added with the `add` statement in the
+composition definition - are represented as children of the composition and are
+accessible using the `${child_name}_child` accessor. This is what is displayed
+in the composition's visualization, for instance:
+
+![Hierarchy example](hierarchy.png)
+
+### Custom event definitions
+
+Define new events using the `event` statement in the composition class:
+
+~~~ ruby
+class MyComposition < Syskit::Composition
+    event :myevent
+
+    poll do
+        myevent_event.emit if lifetime > 2
+    end
+end
+~~~
+
+### Data Readers and Writers
+
+As we have just seen, one can use a combination of data readers, data writers
+and poll() block to "translate" information from the children's data streams into
+events.
+
+### Event Forwarding
+
+A child's event may be _forwarded_ to a parent's event. This means that whenever
+the child event is emitted, the parent's event will be.
+
+For instance, let's have a hypothetical trajectory follower component that emits
+a `trajectory_end` event when it reaches the end, but continues running to
+maintain position. For the purpose of action coordination, we would want the
+composition(s) that integrate it to define the same event, and to emit this event
+each time the trajectory follower component does.
+
+This is done by adding a forwarding between the two events in the composition's
+class-level `instanciate` method:
+
+~~~ ruby
+module Compositions
+    class TrajectoryFollowing < Syskit::Compositions
+        add OroGen.trajectory_follower.Task, as: "controller"
+
+        event :trajectory_end
+        def self.instanciate(*, **)
+            composition_task = super
+            composition_task.controller_child.trajectory_end_event.forward_to \
+                composition_task.trajectory_end_event
+            composition_task
+        end
+    end
+end
+~~~
+
+Note that adding forwards this way is not limited to events from a parent/child.
+It can be done between totally unrelated events. It can also be used between
+events of the same task. In this latter case, it is used to _categorize_ the
+events. The forwarded-to event is indeed a superset of the forward source.
+
+For instance, the standard _success_ and _failed_ events are both forwarded to
+_stop_. _stop_ is a superset of both events since it will be emitted in all the
+cases where _success_ and _failed_ are, but may be emitted in other cases as
+well.
+
 ## Creating Functionality with Syskit Tasks
 
 In addition to writing code in either pure ruby tasks or in compositions and
