@@ -365,10 +365,17 @@ it "transitions to 'coarse' once the pose is acquired" do
     interface = MyInterface.new
     root_task = interface.some_action
     validate_state_machine root_task do
-        next_task = assert_transitions_to(:state_name) do |current_task|
+        # The start sate is available as `current_state_task`. It is ready to
+        # start, but is unstarted. If you need to read/write ports, you will
+        # have to call syskit_configure_and_start(current_state_task)
+        next_task = assert_transitions_to_state(:state_name) do |current_task|
             # Act on 'current_task' using the normal test primitives, e.g.
             # syskit_configure_and_start, expect_execution, ...
         end
+        
+        # next_task here is the new state's toplevel task. It is ready to start,
+        # but is unstarted. Call syskit_configure_and_start for a Syskit task,
+        # or execute { next_task.start! } for a plain Roby task.
     end
 end
 ~~~
