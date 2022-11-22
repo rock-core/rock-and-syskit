@@ -238,6 +238,9 @@ describe("action that docks")
     .required_arg(:target, "the target point as { x:, y:, z: } object")
 action_state_machine "docking" do
     acquire_pose = state acquire_pose_def
+    # the state must have been passed to `start` or as a state
+    # in `transition` before it can be used in `capture`
+    start(acquire_pose)
     from = capture(acquire_pose.success_event) do |pose|
         p = pose.position
         { x: p.x, y: p.y, z: p.z }
@@ -249,7 +252,6 @@ action_state_machine "docking" do
     station.depends_on(validate)
     final = state docking_final_approach_def
 
-    start(acquire_pose)
     transition acquire_pose.success_event, coarse
     transition coarse.reached_target_event, station
     transition station, validate.success_event, final
