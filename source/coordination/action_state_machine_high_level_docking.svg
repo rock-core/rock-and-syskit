@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="170.57326mm"
+   height="47.563042mm"
+   viewBox="0 0 170.57326 47.563042"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (0f2f062aeb, 2022-09-21, custom)"
+   sodipodi:docname="action_state_machine_high_level_docking.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.5518659"
+     inkscape:cx="348.6126"
+     inkscape:cy="9.6657837"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="TriangleStart"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="TriangleStart"
+       markerWidth="5.3244081"
+       markerHeight="6.155385"
+       viewBox="0 0 5.3244081 6.1553851"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-6.6750777,-13.251472)">
+    <rect
+       style="opacity:0.527405;fill:#2a3cf6;fill-opacity:0.454902;stroke:#2a3cf6;stroke-width:1;stroke-opacity:0.455437;stop-color:#000000"
+       id="rect234"
+       width="28.925308"
+       height="14.878322"
+       x="9.7424908"
+       y="23.328621"
+       rx="2.7814331"
+       ry="2.7814331" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="14.312218"
+       y="29.25263"
+       id="text398"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.312218"
+         y="29.25263"
+         id="tspan400">Coarse</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.312218"
+         y="34.544292"
+         id="tspan404">Approach</tspan></text>
+    <rect
+       style="opacity:0.527405;fill:#2a3cf6;fill-opacity:0.454902;stroke:#2a3cf6;stroke-width:1;stroke-opacity:0.455437;stop-color:#000000"
+       id="rect234-3"
+       width="30.449785"
+       height="14.724647"
+       x="68.294716"
+       y="23.490677"
+       rx="2.7814331"
+       ry="2.7814331" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="75.068451"
+       y="29.375055"
+       id="text398-6"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="75.068451"
+         y="29.375055"
+         id="tspan404-5">Station</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="75.068451"
+         y="34.666718"
+         id="tspan511">Keeping</tspan></text>
+    <rect
+       style="opacity:0.527405;fill:#2a3cf6;fill-opacity:0.454902;stroke:#2a3cf6;stroke-width:0.999999;stroke-opacity:0.455437;stop-color:#000000"
+       id="rect234-3-9"
+       width="24.941864"
+       height="11.970729"
+       x="146.86017"
+       y="24.867636"
+       rx="2.7814331"
+       ry="2.7814331" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="150.72801"
+       y="32.020885"
+       id="text398-6-1"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="150.72801"
+         y="32.020885"
+         id="tspan625">Docking</tspan></text>
+    <rect
+       style="opacity:0.527405;fill:#2a3cf6;fill-opacity:0.454902;stroke:#2a3cf6;stroke-width:1;stroke-opacity:0.455437;stop-color:#000000"
+       id="rect234-3-3"
+       width="30.454647"
+       height="14.878322"
+       x="68.292282"
+       y="42.047825"
+       rx="2.7814331"
+       ry="2.7814331" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="70.955009"
+       y="48.703125"
+       id="text398-6-5"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="70.955009"
+         y="48.703125"
+         id="tspan511-2">Precise</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="70.955009"
+         y="53.994789"
+         id="tspan568">Localization</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleStart)"
+       d="m 101.7368,30.853 h 41.99394"
+       id="path692" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="106.00476"
+       y="29.785366"
+       id="text1467"><tspan
+         sodipodi:role="line"
+         id="tspan1465"
+         style="stroke-width:0.264583"
+         x="106.00476"
+         y="29.785366">Precise</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="106.00476"
+         y="35.077026"
+         id="tspan1469">Localization OK</tspan></text>
+    <path
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;marker-end:url(#TriangleStart);stop-color:#000000;stop-opacity:1"
+       d="M 40.766663,31.235382 H 66.860308"
+       id="path1523" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="43.073059"
+       y="29.284502"
+       id="text1574"><tspan
+         sodipodi:role="line"
+         id="tspan1572"
+         style="stroke-width:0.264583"
+         x="43.073059"
+         y="29.284502">In Position</tspan></text>
+    <rect
+       style="font-variation-settings:normal;opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.793749;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+       id="rect1667"
+       width="34.81126"
+       height="25.171534"
+       x="6.8073692"
+       y="18.689228"
+       rx="2.7814329"
+       ry="2.7814329" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="18.314632"
+       y="16.393396"
+       id="text1679"><tspan
+         sodipodi:role="line"
+         id="tspan1677"
+         style="stroke-width:0.264583"
+         x="18.314632"
+         y="16.393396">State 1</tspan></text>
+    <rect
+       style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.79375;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       id="rect1667-6"
+       width="34.81126"
+       height="41.17234"
+       x="65.879601"
+       y="19.509882"
+       rx="2.7814329"
+       ry="2.7814329" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="77.386864"
+       y="17.214048"
+       id="text1679-0"><tspan
+         sodipodi:role="line"
+         id="tspan1677-6"
+         style="stroke-width:0.264583"
+         x="77.386864"
+         y="17.214048">State 2</tspan></text>
+    <rect
+       style="font-variation-settings:normal;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.793749;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       id="rect1667-6-2"
+       width="34.81126"
+       height="21.060429"
+       x="142.30478"
+       y="20.441008"
+       rx="2.7814329"
+       ry="2.7814329" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="153.81204"
+       y="18.145174"
+       id="text1679-0-6"><tspan
+         sodipodi:role="line"
+         id="tspan1677-6-1"
+         style="stroke-width:0.264583"
+         x="153.81204"
+         y="18.145174">State 3</tspan></text>
+  </g>
+</svg>

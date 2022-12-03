@@ -95,25 +95,24 @@ the one task that is registered as a mission in the plan.
 
 Within action interfaces, actions are only _definitions_ of what the system can do.
 To run them, one needs to instanciate them and add them to Syskit's plan.
-
 Manually, one can use the Syskit IDE or the syskit shell to start an action.
 Programatically, they can be added in two ways:
 
-Either using the `Robot` global interface, using the `Robot.action_name!(arg:
-...)` syntax. For instance, the following would look for a `go_to` action on
-the main interface and activate it
+- using the `Robot` global interface with the `Robot.action_name!(arg: ...)`
+  syntax. For instance, the following would look for a `go_to` action on the main
+  interface and activate it
 
-~~~ ruby
-Robot.go_to!(x: 10, y: 20)
-~~~
+  ~~~ ruby
+  Robot.go_to!(x: 10, y: 20)
+  ~~~
 
-Or by adding the action to the plan manually, for instance:
+- by adding the action to the plan manually, for instance:
 
-~~~ ruby
-Roby.plan.add_mission_task(
-    MyApp::Actions::Navigation.go_to(x: 10, y: 20)
-)
-~~~
+  ~~~ ruby
+  Roby.plan.add_mission_task(
+      MyApp::Actions::Navigation.go_to(x: 10, y: 20)
+  )
+  ~~~
 
 ## What happens when actions are instanciated
 
@@ -137,6 +136,7 @@ action-represented-in-an-abstract-way task) by the actual tasks that can be exec
 Which will then be scheduled (again) by Syskit's scheduler.
 
 This representation has two advantages:
+
 1. it allows to explicitely order the plan generation (the planning step) using Syskit's
    [event scheduling primitives](event_scheduling.html)
 2. it allows to do resolve all the planning tasks of a certain kind globally, as it is
@@ -144,6 +144,24 @@ This representation has two advantages:
    that should be running in the whole system (network_generation.html)
 
 ## What happens when missions are dropped
+
+Dropping a mission is telling Syskit that the mission is not anymore an
+objective of the system. Syskit will terminate anything that is not in use by
+other missions, but leave the rest of the system alone.
+
+## "Restarting"
+
+In the Syskit IDE, "restarting" a job is dropping it and creating a new one
+_at the same time_. When dealing with stateless actions (i.e. all profile
+definitions), this essentially does nothing:
+
+- _dropping_ the current mission is marking it as "not needed"
+- _creating_ the same mission with the same arguments will make syskit deploy it
+  and generate a network that is exactly like the currently running one
+- since the current network and the old ones are identical, Syskit will just keep
+  the current system.
+
+To actually restart the current component(s), you need to drop and then start.
 
 ## Refining and reusing existing actions
 

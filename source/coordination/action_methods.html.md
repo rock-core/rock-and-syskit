@@ -13,7 +13,7 @@ sort_info: 30
 So far, we know of one way to create actions, by importing a whole profile in
 an action interface using the `use_profile` statement. This is rather static:
 the only parametrization is by passing arguments to the toplevel composition
-of the network, which may trickle down to lower levels through
+of the network, which may trickle down to lower levels.
 
 This section will present a second way, which allows to actually run code to
 "implement" the action. It essentially runs a method on the action interface,
@@ -22,7 +22,7 @@ whose job is to create a small "plan" later executed by Syskit.
 This section will go through the general syntax for such actions, and will
 list a few use-cases for such actions.
 
-## Definition
+## Definition {#definition}
 
 Action methods are methods that are defined on an action interface. To "export"
 them as actions, one must do a declaration before the method definition using
