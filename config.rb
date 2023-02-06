@@ -63,7 +63,8 @@ after_build do |_builder|
               ignore_urls: [/rubydoc|gazebosim/],
               url_ignore: [/rubydoc|gazebosim/] }
         ).run
-    rescue RuntimeError => e
+    rescue SystemExit => e
+        # HTMLProofer calls exit on failure (!)
         puts e
     end
 end
