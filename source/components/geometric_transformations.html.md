@@ -202,11 +202,16 @@ transformer does not keep a full history of everything it receives, and is
 therefore very likely to fail to interpolate or even return a transform if
 called outside the stream alignment callback.
 
+While the type to represent poses on the component interfaces is
+`base::samples::RigidBodyState`, the working type is usually `Eigen::Affine3d`.
+The transformer's `get` method accept returning that data right away. When
+reading ports, you can get an `Affine3d` from a `RigidBodyState` with `getTransform()`
+
 **Example**: accessing a transformation within a transformer callback
 
 ~~~ cpp
 void Task::detected_featuresTransformerCallback(const base::Time &ts, const ::VisualFeatures& features) {
-  base::samples::RigidBodyState features2command;
+  Eigen::Affine3d features2command;
   if (!_features2command.get(ts, features2command, true))
   {
       // no transform available yet, do nothing
@@ -224,8 +229,8 @@ void Task::updateHook() {
     // VERY IMPORTANT. Must be first, ports are read here by the stream aligner
     TaskBase::updateHook();
 
-    base::samples::RigidBodyState features2command;
-    // Thirst argument MUST be false
+    Eigen::Affine3d features2command;
+    // Thirsd argument MUST be false as we are not within a TransformerCallback
     if (!_features2command.get(base::Time::now(), features2command, false))
     {
         // no transform available yet, do nothing
@@ -233,6 +238,38 @@ void Task::updateHook() {
     }
 
     // Do the processing
+}
+~~~
+
+**Example**: processing a "plain" rigidbodystate output to combine it with a transform
+
+~~~ cpp
+void Task::updateHook() {
+    // VERY IMPORTANT. Must be first, ports are read here by the stream aligner
+    TaskBase::updateHook();
+
+    Eigen::Affine3d features2command;
+    // Thirsd argument MUST be false as we are not within a TransformerCallback
+    if (!_features2command.get(base::Time::now(), features2command, false))
+    {
+        // no transform available yet, do nothing
+        return;
+    }
+
+    // We usually suffix the RigidBodyState with _rbs to keep the 'clean' name for the
+    // Affine3d variable
+    base::samples::RigidBodyState target2features_rbs;
+    if (_target2features_pose.read(target2features_rbs) != RTT::NewData) {
+        return;
+    }
+    Eigen::Affine3d target2features = target2features_rbs.getTransform();
+    Eigen::Affine3d target2command = features2command * target2features;
+
+    base::samples::RigidBodyState target2command_rbs;
+    target2command_rbs.setTransform(target2command);
+    // IMPORTANT: figure out the best timestamp
+    target2command_rbs.time = target2features_rbs.time;
+    _target2command_pose.write(target2command_rbs);
 }
 ~~~
 
