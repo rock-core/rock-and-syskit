@@ -243,7 +243,7 @@ a [RubyGems version constraint](https://guides.rubygems.org/patterns/#declaring-
 ~~~
 package_name:
   gem:
-    name: "package_name"
+  - name: "package_name"
     version: "~>2.0"
 ~~~
 
@@ -255,11 +255,11 @@ package_name:
   ubuntu:
     "18.04":
       gem:
-        name: "package_name"
+      - name: "package_name"
         version: "~> 2.0"
     "default":
       gem:
-        name: "package_name"
+      - name: "package_name"
         git: "https://github.com/someorg/package_name"
 ~~~
 
