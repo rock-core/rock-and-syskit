@@ -28,7 +28,7 @@ pieces.
 
 For the HTTP API itself, we will use [Grape](https://github.com/ruby-grape/grape),
 which provides a declarative way to create a HTTP API. Roby provides an integration
-with the thin web server, which allows to serve
+of Grape with the thin web server to get the Grape API available.
 
 Usually, the main Grape class will be created in `lib/syskit_basics/rest/api.rb`. Roby task
 that manages the HTTP server is called `Tasks::REST` and the corresponding action
