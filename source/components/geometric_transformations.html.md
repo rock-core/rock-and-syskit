@@ -278,3 +278,10 @@ void Task::updateHook() {
 See the [caveats](../component_networks/geometric_transformations.html#caveats) and
 the [guidelines](../component_networks/geometric_transformations.html#guidelines) from
 the system part.
+
+As you can see, the transformer uses the `Eigen` library frequently. Unfortunately, it has
+some pitfalls that are important to keep in mind. One of the most common is how Eigen
+operations interact with the C++ `auto` keyword, spoiler alert it isn't how one would
+expect. Refer to the [Eigen Common Pitfalls
+page](https://eigen.tuxfamily.org/dox/TopicPitfalls.html) for more details.
+{:.alert .alert-danger}
