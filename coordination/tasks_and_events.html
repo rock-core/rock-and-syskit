@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="coordination coordination_tasks_and_events">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Coordination</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="generalities.html">Generalities</a></li><li class='child active'><a href="tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="action_methods.html">Action Methods</a></li><li class='child'><a href="action_state_machines.html">Action State Machines</a></li><li class='child'><a href="component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="tasks-and-events">Tasks and Events</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#concepts" id="markdown-toc-concepts">Concepts</a></li>
+  <li><a href="#creating-tasks" id="markdown-toc-creating-tasks">Creating Tasks</a></li>
+  <li><a href="#task-level-code" id="markdown-toc-task-level-code">Task-level Code</a>    <ul>
+      <li><a href="#the-poll-block" id="markdown-toc-the-poll-block">The poll block</a></li>
+      <li><a href="#data-readers" id="markdown-toc-data-readers">Data readers</a></li>
+      <li><a href="#data-writers" id="markdown-toc-data-writers">Data writers</a></li>
+    </ul>
+  </li>
+  <li><a href="#bubbling-events-up---handling-events-in-parent-tasks" id="markdown-toc-bubbling-events-up---handling-events-in-parent-tasks">Bubbling events up - handling events in parent tasks</a>    <ul>
+      <li><a href="#custom-event-definitions" id="markdown-toc-custom-event-definitions">Custom event definitions</a></li>
+      <li><a href="#data-readers-and-writers" id="markdown-toc-data-readers-and-writers">Data Readers and Writers</a></li>
+      <li><a href="#event-forwarding" id="markdown-toc-event-forwarding">Event Forwarding</a></li>
+    </ul>
+  </li>
+  <li><a href="#creating-functionality-with-syskit-tasks" id="markdown-toc-creating-functionality-with-syskit-tasks">Creating Functionality with Syskit Tasks</a></li>
+</ul>
+
+<p>In <a href="../runtime_overview/task_structure.html">the runtime overview</a> as well as in
+this section's <a href="generalities.html">generalities</a>, we have briefly brushed the
+subject of <strong>tasks and events</strong>. This section will (finally) detail these two
+concepts. The goal of this section is to provide you with tools you can use to create
+tasks that generate events relevant for system coordination. We will in particular:</p>
+
+<ul>
+  <li>explain the role of events and tasks within a Syskit system.</li>
+  <li>detail primitives that allow tasks to synthetize events that will be
+relevant to coordinate the system, for instance by listening to data streams
+generated by components.</li>
+  <li>show how to create "pure" tasks - by opposition to components -
+and how they are relevant to building more complex Syskit systems.</li>
+  <li>also, how "active" tasks can be created, that actually implement
+functionality in the system, and where this is a good idea vs. implementing
+a full blown component. We will see how to implement "ruby components" in
+this section, such as the <a href="../basics/constant_generator.html">ConstantGenerator</a>
+from the basics tutorial.</li>
+</ul>
+
+<h2 id="concepts">Concepts</h2>
+
+<p>Profiles (for component networks) and actions (for other functionality)
+are the high-level tools with which you present what the system can do.
+In particular, the component network subsystem hides a lot of complexity,
+letting you work with models of the component networks you want to run.</p>
+
+<p>Unfortunately, actual runtime is more complicated than that. To handle runtime,
+Syskit internally manages everything that it has under its control in a different
+data structure, called a <strong>plan</strong>.</p>
+
+<p>One dimension within this plan aims at organizing the <em>processes</em> that are being
+executed within the system. Each process is represented by a <strong>task</strong> object,
+and task object(s) are linked together through the
+<a href="../runtime_overview/task_structure.html">task structure</a>.
+This provides syskit with a hierarchical view of the processes: how each process
+is related to the other process(es), and in particular to the system's
+<a href="generalities.html#missions">missions</a>.</p>
+
+<p>The other dimension within this plan is temporal: the ability to track when "things"
+happen, but also the ability to control the system by "ordering" it to make
+something happen. This dimension is represented by <em>events</em>. Events are part of the
+tasks (in a way, they are "managed" or "implemented" by the tasks).</p>
+
+<p>On the one hand, events are <em>emitted</em> to tell the system that the task
+achieved something. All tasks have for instance a "start" event which is
+emitted when the task has finished starting, or a "stop" event which is
+emitted when it has finished stopping. Coordination models in Syskit are
+essentially reacting to these emissions, an if-then subsystem that uses these
+event emissions as "triggers". Defining and emitting new events is therefore
+one of the most common tasks when coordinating behaviors.</p>
+
+<p>On the other hand, <strong>some</strong> events can also be commanded. These events are
+said to be controlable. For instance, the system can order most tasks to
+start ("start" is controlable), but while a lot of tasks can be interrupted
+("stop" is controlable), it cannot be made to succeed with almost certainty
+("success" is thus not controlable, it is instead said to be contingent).</p>
+
+<p>One important job of the task hierarchy is to provide meaning to a collection
+of tasks. The plan should allow to reflect <strong>why</strong> things are being executed.
+For instance, a robot's trajectory follower could be here for a simple
+point-to-point transit, but also could be used to execute a surveying
+pattern. Differenciating between the two feels unimportant for nominal
+execution - things get executed and succeed and everything is fine. It gets
+however important for error handling and monitoring. A good rule of thumb is
+that one should be able to recognize the action(s) that are being executed
+just by looking at the task structure. This will be the subject of a
+<a href="creating_abstractions.html">later section</a></p>
+
+<h2 id="creating-tasks">Creating Tasks</h2>
+
+<p>Plain task models are created with <code>syskit gen task</code>. They are subclasses of
+<a href="https://www.rubydoc.info/github/rock-core/tools-roby/Roby/Task"><code>Roby::Task</code></a>,
+are defined in the <code>App::Tasks</code> module and are saved within the <code>models/tasks</code> folder.</p>
+
+<div class="highlight"><pre class="highlight shell"><code>syskit gen task task_name
+</code></pre></div>
+<p>The default template adds a <a href=""><code>terminates</code></a> statement. This indicates that the
+task can be interrupted without further action, which is a common thing for
+plain tasks. Conversely, for instance, the task class that manages Rock
+components - <a href="https://www.rubydoc.info/github/rock-core/tools-syskit/Syskit/TaskContext"><code>Syskit::TaskContext</code></a> - will attempt to stop the component when
+its stop command is called, and will wait for the component to be stopped
+before its stop event is emitted. We cover how components are integrated at runtime
+<a href="component_networks.html">later in this chapter</a></p>
+
+<p><code>Roby::Task</code> and all its subclasses have five events:
+- <code>start</code> which is always controlable
+- <code>stop</code>, <code>success</code> and <code>failed</code> which are contingent
+- <code>internal_error</code> which is contingent</p>
+
+<p>The emission of <code>success</code> and <code>failed</code> trigger the emission of <code>stop</code>.</p>
+
+<p>Additional contingent events (events that can only be emitted) are defined with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">event</span> <span class="ss">:event_name</span>
+</code></pre></div>
+<p>Additional controlable events (events that can be commanded) are defined with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">event</span> <span class="ss">:event_name</span> <span class="k">do</span> <span class="o">|*|</span>
+    <span class="c1"># Code that will eventually emit the event</span>
+    <span class="c1"># Emit the event with ${event_name}_event.emit</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The events themselves are instances of <a href="https://www.rubydoc.info/github/rock-core/tools-roby/Roby/EventGenerator"><code>Roby::EventGenerator</code></a>. They can be
+accessed with <code>${event_name}_event</code> accessors. For instance, one emits the
+stop event with <code>stop_event.emit</code>, checks whether it has ever been emitted
+with</p>
+
+<p>Note that an event command does not have to emit the event. It is expected to
+ensure that the event will be emitted <em>eventually</em>. <code>Syskit::TaskContext</code> for
+instance calls the component's <code>start</code> operation but will emit the event only
+when the component state change has reached the Syskit process.</p>
+
+<p>Because Syskit's runtime is essentially
+<a href="../runtime_overview/event_loop.html">an event loop</a>, the commmand <strong>must not</strong>
+block.</p>
+
+<h2 id="task-level-code">Task-level Code</h2>
+
+<p>One objective of this chapter is to teach you</p>
+
+<p>Right now we have seen how to define a task, and how to populate it with events
+(beyond the default ones), let's see the different ways we can implement tasks
+that listen to certain conditions to emit its events.</p>
+
+<h3 id="the-poll-block">The poll block</h3>
+
+<p>Calling <code>poll</code> with a block, within a task's class definition, defines a
+block that will be executed at each execution cycle (usually 100ms). The
+block is evaluated in the context of the task instance (i.e. <code>self</code> is the
+task instance). There can be only one poll block at each level of the class
+hierarchy, and you must call <code>super()</code> to call the implementation from the
+superclass.</p>
+
+<p>For instance, a task that would emit stop after a configurable amount of time
+could be written:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">TimeoutTask</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Task</span>
+  <span class="n">terminates</span>
+
+  <span class="n">argument</span> <span class="ss">:timeout</span>
+
+  <span class="n">event</span> <span class="ss">:start</span> <span class="k">do</span>
+    <span class="c1"># NOTE: Roby::Task#lifetime already gives the amount of</span>
+    <span class="c1"># time executed. This is done this way for illustrative reasons</span>
+    <span class="vi">@deadline</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">+</span> <span class="n">timeout</span>
+    <span class="n">start_event</span><span class="p">.</span><span class="nf">emit</span>
+  <span class="k">end</span>
+
+  <span class="n">poll</span> <span class="k">do</span>
+    <span class="k">super</span><span class="p">()</span>
+
+    <span class="n">stop_event</span><span class="p">.</span><span class="nf">emit</span> <span class="k">if</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">&gt;</span> <span class="vi">@deadline</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="data-readers">Data readers</h3>
+
+<p>When within Syskit, one common use-case for events is to listen for a given
+condition in one of the component's data streams. This is usually done at a
+composition level, in order to keep the component itself as generic as
+possible.</p>
+
+<p>Accessors that will allow the task to read an output port can be created
+with the <code>data_reader</code> declarator at the class level. The argument is a port,
+which - when in a composition - can be a child's port. When the child is a
+data service, the actual port will be resolved transparently. For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">data_reader</span> <span class="n">position_child</span><span class="p">.</span><span class="nf">position_samples_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'system_pose'</span>
+<span class="n">data_reader</span> <span class="n">status_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'filter_status'</span>
+</code></pre></div>
+<p>Within the task, in e.g. the poll block we have just seen, a reader can
+be accessed with the <code>_reader</code> suffix appended to the reader name, e.g.:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">if</span> <span class="p">(</span><span class="n">sample</span> <span class="o">=</span> <span class="n">system_pose_reader</span><span class="p">.</span><span class="nf">read_new</span><span class="p">)</span>
+<span class="k">elsif</span> <span class="p">(</span><span class="n">sample</span> <span class="o">=</span> <span class="n">filter_status_reader</span><span class="p">.</span><span class="nf">read</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="data-writers">Data writers</h3>
+
+<p>Sometimes, passing arguments to lower level tasks through the
+<a href="../component_networks/composition.html#argument_from_parent_task"><code>from(:parent_task)</code> mechanism</a> is simply not enough. A common occurence is to
+have to convert a task argument into data sample(s) that are written to one of
+the component's ports. This is done using data writers.</p>
+
+<p>Port writers are created in a way that's very close to the data readers, but
+using the <code>data_writer</code> declaration:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">data_writer</span> <span class="n">controller_child</span><span class="p">.</span><span class="nf">cmd_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'command'</span>
+
+<span class="n">poll</span> <span class="k">do</span>
+  <span class="k">super</span><span class="p">()</span>
+
+  <span class="n">cmd</span> <span class="o">=</span> <span class="n">generate_command</span>
+  <span class="n">command_writer</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>One has to be <strong>extremely</strong> careful when writing "only once" to ports. It is
+obviously necessary to make sure that the remote end is ready to read the sample,
+which requires to:</p>
+
+<ul>
+  <li>make sure the task is running</li>
+  <li>make sure the data writers is ready to send</li>
+</ul>
+
+<p>Both tests are provided with the <code>#ready?</code> method. When writing periodically,
+this can be safely ignored. When writing only once, make sure the writer is
+ready before you write.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">data_writer</span> <span class="n">planning_child</span><span class="p">.</span><span class="nf">problem_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'problem'</span>
+<span class="n">data_reader</span> <span class="n">planning_child</span><span class="p">.</span><span class="nf">plan_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'plan'</span>
+
+<span class="n">poll</span> <span class="k">do</span>
+  <span class="k">super</span><span class="p">()</span>
+
+  <span class="k">if</span> <span class="n">problem_writer</span><span class="p">.</span><span class="nf">ready?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="vi">@problem_written</span>
+    <span class="n">problem_writer</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
+    <span class="vi">@problem_written</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">plan</span> <span class="o">=</span> <span class="n">plan_reader</span><span class="p">.</span><span class="nf">read_new</span><span class="p">)</span>
+    <span class="c1"># Do something with the plan</span>
+    <span class="n">success_event</span><span class="p">.</span><span class="nf">emit</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="bubbling-events-up---handling-events-in-parent-tasks">Bubbling events up - handling events in parent tasks</h2>
+
+<p>When one builds a synthetic action, one has to choose what is the toplevel task
+that will represent that action. In profile definitions, it it the composition itself.
+In the <a href="action_methods.html">action methods</a> and
+<a href="action_state_machines.html">action state machines</a> that we will see momentarily,
+it is an instance of the toplevel task of the action.</p>
+
+<p>For the purpose of coordinating that action with others - for instance within action
+state machines, one would want to define events on the toplevel tasks. This section
+will show you how this can be done, and how you can "bubble up" events from low-level
+tasks to handle this toplevel task.</p>
+
+<p>A typical use-case for accessing a task's children is the composition: the
+elements of a composition - which were added with the <code>add</code> statement in the
+composition definition - are represented as children of the composition and are
+accessible using the <code>${child_name}_child</code> accessor. This is what is displayed
+in the composition's visualization, for instance:</p>
+
+<p><img src="hierarchy.png" alt="Hierarchy example" /></p>
+
+<h3 id="custom-event-definitions">Custom event definitions</h3>
+
+<p>Define new events using the <code>event</code> statement in the composition class:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyComposition</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+    <span class="n">event</span> <span class="ss">:myevent</span>
+
+    <span class="n">poll</span> <span class="k">do</span>
+        <span class="n">myevent_event</span><span class="p">.</span><span class="nf">emit</span> <span class="k">if</span> <span class="n">lifetime</span> <span class="o">&gt;</span> <span class="mi">2</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="data-readers-and-writers">Data Readers and Writers</h3>
+
+<p>As we have just seen, one can use a combination of data readers, data writers
+and poll() block to "translate" information from the children's data streams into
+events.</p>
+
+<h3 id="event-forwarding">Event Forwarding</h3>
+
+<p>A child's event may be <em>forwarded</em> to a parent's event. This means that whenever
+the child event is emitted, the parent's event will be.</p>
+
+<p>For instance, let's have a hypothetical trajectory follower component that emits
+a <code>trajectory_end</code> event when it reaches the end, but continues running to
+maintain position. For the purpose of action coordination, we would want the
+composition(s) that integrate it to define the same event, and to emit this event
+each time the trajectory follower component does.</p>
+
+<p>This is done by adding a forwarding between the two events in the composition's
+class-level <code>instanciate</code> method:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Compositions</span>
+    <span class="k">class</span> <span class="nc">TrajectoryFollowing</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Compositions</span>
+        <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">trajectory_follower</span><span class="o">.</span><span class="no">Task</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"controller"</span>
+
+        <span class="n">event</span> <span class="ss">:trajectory_end</span>
+        <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">instanciate</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="o">**</span><span class="p">)</span>
+            <span class="n">composition_task</span> <span class="o">=</span> <span class="k">super</span>
+            <span class="n">composition_task</span><span class="p">.</span><span class="nf">controller_child</span><span class="p">.</span><span class="nf">trajectory_end_event</span><span class="p">.</span><span class="nf">forward_to</span> <span class="p">\</span>
+                <span class="n">composition_task</span><span class="p">.</span><span class="nf">trajectory_end_event</span>
+            <span class="n">composition_task</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Note that adding forwards this way is not limited to events from a parent/child.
+It can be done between totally unrelated events. It can also be used between
+events of the same task. In this latter case, it is used to <em>categorize</em> the
+events. The forwarded-to event is indeed a superset of the forward source.</p>
+
+<p>For instance, the standard <em>success</em> and <em>failed</em> events are both forwarded to
+<em>stop</em>. <em>stop</em> is a superset of both events since it will be emitted in all the
+cases where <em>success</em> and <em>failed</em> are, but may be emitted in other cases as
+well.</p>
+
+<h2 id="creating-functionality-with-syskit-tasks">Creating Functionality with Syskit Tasks</h2>
+
+<p>In addition to writing code in either pure ruby tasks or in compositions and
+task contexts, Syskit allows you to create full functionality using Syskit
+tasks. One can for instance do simple calculations, or dynamically create
+simple components such as the
+<a href="../basics/constant_generator.html"><code>ConstantGenerator</code></a>, which would be
+rather tedious in C++.</p>
+
+<p class="important">Generally speaking, restrict yourself to simple functionality. Anything more
+complex than the constant generator should really be implemented as a
+standalone oroGen component</p>
+
+<p>These tasks are subclasses of
+<a href="https://www.rubydoc.info/github/rock-core/tools-syskit/Syskit/RubyTaskContext"><code>Syskit::RubyTaskContext</code></a>.
+They are created with <code>syskit gen ruby-task</code> and live within the
+<code>Syskit::Compositions</code> namespace and <code>models/compositions/</code> folder:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">syskit</span> <span class="n">gen</span> <span class="n">ruby</span><span class="o">-</span><span class="n">task</span> <span class="n">my_task</span>
+<span class="c1"># Created MyApp::Compositions::MyTask in models/compositions/my_task.rb</span>
+</code></pre></div>
+<p>Within the ruby task context definition, input and output ports can be created:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_types_from</span> <span class="s2">"base"</span>
+
+<span class="k">class</span> <span class="nc">MyTask</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">RubyTaskContext</span>
+  <span class="n">input_port</span> <span class="s2">"in"</span><span class="p">,</span> <span class="s2">"/base/Time"</span>
+  <span class="n">output_port</span> <span class="s2">"out"</span><span class="p">,</span> <span class="s2">"/base/Time"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>A ruby task thus created can be used the same way than any normal component.
+However, accessing the ports is different:</p>
+
+<ul>
+  <li>when accessing a port of a remote component, you access the ports from the outside.
+This is why one uses a data writer to connect to an input (and writes to the input),
+and a data reader to connect to an output (and read from it)</li>
+  <li>when accessing a port of a ruby task, the ports are accessed from the inside.
+One therefore does not need a separate reader/writer (we have direct access
+to the ports themselves), and would write to an output and read from an input:</li>
+</ul>
+
+<p>Within a <code>Syskit::RubyTaskContext</code>, the component's ports are accessed through the
+task's <code>#orocos_task</code> property. They support the common port API (<code>#connected?</code>,
+<code>#read</code> and <code>#read_new</code> for input ports, <code>#connected?</code>, <code>#write</code> for output ports).
+For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_types_from</span> <span class="s2">"base"</span>
+
+<span class="k">class</span> <span class="nc">MyTask</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">RubyTaskContext</span>
+  <span class="n">input_port</span> <span class="s2">"in"</span><span class="p">,</span> <span class="s2">"/base/Time"</span>
+  <span class="n">output_port</span> <span class="s2">"out"</span><span class="p">,</span> <span class="s2">"/base/Time"</span>
+
+  <span class="n">poll</span> <span class="k">do</span>
+    <span class="k">super</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">in_time</span> <span class="o">=</span> <span class="n">orocos_task</span><span class="p">.</span><span class="nf">in</span><span class="p">.</span><span class="nf">read_new</span><span class="p">)</span>
+      <span class="n">orocos_task</span><span class="p">.</span><span class="nf">out</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">in_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

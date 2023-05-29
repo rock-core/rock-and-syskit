@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="basics basics_recap">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent active'><span class='parent-label'><a href="./">Basics</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="installation.html">Installation</a></li><li class='child'><a href="day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="getting_started.html">Getting Started</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="constant_generator.html">Constant Generator</a></li><li class='child'><a href="devices.html">Profiles and Devices</a></li><li class='child'><a href="deployment.html">Deployment</a></li><li class='child'><a href="publishing.html">Publishing</a></li><li class='child'><a href="validation.html">Configuration Consistency</a></li><li class='child active'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 id="recap">Recap</h1>
+
+<p>Let's recap what we've seen in this Basics section.</p>
+
+<h3 id="workspace">Workspace</h3>
+
+<p>Autoproj is Rock's tool to manage (install and update) packages. "Packages" are the unit
+of integration of the Rock software. The role of a workspace build
+configuration is to ensure repeatability in the installation of a system's
+software</p>
+
+<ul>
+  <li><a href="installation.html">the initial bootstrap</a> installs a predefined set of
+packages as defined by a given build configuration</li>
+  <li>packages are also <a href="composition.html#add_package">added during development</a>,
+when the functionality is required</li>
+</ul>
+
+<p>You will ultimately <a href="publishing.html">create your own build configuration and package
+sets</a> to share the state of your workspace with your
+coworkers.</p>
+
+<h3 id="bundles">Bundles</h3>
+
+<p><a href="getting_started.html">Bundles</a> are the package within which we create Syskit models and code. It is the <em>place of integration</em>.</p>
+
+<p>From Syskit's point of view, a bundle has a toplevel namespace under which the rest of the app is defined. It is by default the CamelCased version of the bundle's folder name (<code>syskit_basics</code> becomes <code>SyskitBasics</code>).</p>
+
+<p>A given bundle may contain multiple Syskit app configurations. The entry point
+for each configuration is a file in <code>config/orogen/</code>. One usually creates one
+bundle per class of system, and creates at least one configuration for
+simulation and one for the live system. Syskit tools take a <code>-rROBOT_NAME</code>
+argument to specify which configuration should be loaded.</p>
+
+<p>It is possible to reuse models from another bundle by using <code>Roby.app.register_app</code>
+either globally in <code>config/init.rb</code> or per-robot in the <code>Robot.init</code> block of the robot
+configuration file. <a href="getting_started.html">Example</a></p>
+
+<p>Within bundles:</p>
+
+<ul>
+  <li>separate SDF models are saved within <code>models/sdf/</code></li>
+  <li>SDF scenes are saved within <code>scenes/#{scene_name}/#{scene_name}.world</code></li>
+  <li><a href="#compositions">compositions</a> are in <code>models/compositions/</code></li>
+  <li><a href="#ruby_tasks">ruby tasks</a> are in <code>models/compositions/</code></li>
+  <li><a href="#orogen">orogen extension files</a> are in <code>models/orogen/</code></li>
+  <li><a href="#profiles">profiles</a> are in <code>models/profiles/</code></li>
+  <li><a href="#orogen_config">orogen configuration files</a> are in <code>config/orogen/</code>.
+Configuration-specific files (e.g. in <code>config/orogen/gazebo/</code>) take precedence.</li>
+  <li>within the Syskit model folders (<code>compositions/</code> and <code>profiles/</code>), the convention
+is to have subfolders for models that are specific to a given robot configuration
+(e.g. <code>profiles/gazebo/</code> for models that are specific to the <code>gazebo</code> configuration).
+The generators enforce this when given the <code>-rROBOT_NAME</code> option.</li>
+  <li>the folder structure in <code>models/</code> maps one-to-one to the folder structure in <code>test/</code></li>
+</ul>
+
+<h3 id="compositions">Components and Compositions</h3>
+
+<p>Components are the basic construction block in a Syskit system.
+<a href="composition.html">Compositions</a> are used to turn single components into
+more complex functional units, by binding the components together.</p>
+
+<ul>
+  <li>
+    <p>a composition template is created using</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen NameOfComposition
+</code></pre></div>  </li>
+  <li>
+    <p>an element within a composition is declared with <code>add</code>, a component model
+(which can be another composition) and a name:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">MyComposition</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+  <span class="n">add</span> <span class="no">AnotherComponentModel</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'generator'</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+  <li>
+    <p>within the composition model, a composition child is accessed using the
+child's name and the <code>_child</code> suffix. Ports are accessed with the port name and
+the <code>_port</code> suffix. This is how connections are made:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">source_child</span><span class="p">.</span><span class="nf">out_port</span><span class="p">.</span><span class="nf">connect_to</span> <span class="n">sink_child</span><span class="p">.</span><span class="nf">in_port</span>
+</code></pre></div>  </li>
+  <li>
+    <p>a composition can have ports, which are exports of its children ports. This works
+for both input and output ports. The exported port name is the same as the child's
+port name, but this can be overriden</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">export</span> <span class="n">source_child</span><span class="p">.</span><span class="nf">out_port</span>
+<span class="n">export</span> <span class="n">another_source_child</span><span class="p">.</span><span class="nf">out_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'another'</span>
+</code></pre></div>  </li>
+</ul>
+
+<h3 id="orogen">oroGen components</h3>
+
+<p>oroGen is Rock's way to package C++ functionality into ready-to-use components with
+a standardized interface. These components are imported in Syskit's with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">using_task_library</span> <span class="s2">"name_of_orogen_project"</span>
+</code></pre></div>
+<p>The other role of oroGen is to define types whose instances can be transferred
+between components. If one only wants to use a type defined by an oroGen
+project, but without using the associated components, one does</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_types_from</span> <span class="s2">"name_of_orogen_project"</span>
+</code></pre></div>
+<p>The corresponding types are accessible under the <code>Types</code> object, e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Types</span><span class="p">.</span><span class="nf">base</span><span class="p">.</span><span class="nf">samples</span><span class="o">.</span><span class="no">RigidBodyState</span>
+</code></pre></div>
+<p>On import, Syskit builds a component model that represents the oroGen
+component. This model is accessible as <code>OroGen.project_name.TaskName</code>. It can
+also be extended to reflect needs in the Syskit app, for instance
+configuration, using <a href="deployment.html#orogen_extension_files">extension files</a>.</p>
+
+<p id="orogen_config">oroGen components provide a configuration interface as a set of properties.
+These properties are filled using YAML configuration files stored in
+<code>config/orogen/</code>, and may also be written in the <code>configure</code> method of the
+component's class, in the extension file.</p>
+
+<p>A configuration file for a component class is generated with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen orogenconf name_of_orogen_project::NameOfModelClass
+</code></pre></div>
+<h3 id="ruby_tasks">Ruby Tasks</h3>
+
+<p>In a system, one often needs to do some small tasks that are either too small
+to warrant a full-fledged C++ component, or are so tied with the system integration
+that having a C++/Ruby boundary makes understanding hard. For these, Syskit
+allows to implement tasks in Ruby that are integrated within the Syskit
+execution but provide input and output ports to integrate with the rest of the
+components.</p>
+
+<p class="callout callout-warning">Because of the single-threaded nature of Syskit's execution engine, one must
+<strong>not</strong> use ruby tasks to perform a lot of work. This would freeze Syskit.
+Stick to simple tasks, and implement oroGen components for more complex ones.</p>
+
+<p>A canonical example for such a task is <a href="constant_generator.html">the <code>common_models</code> bundle's <code>ConstantGenerator</code></a>.</p>
+
+<p class="callout callout-warning">Whenever runtime code is present in tasks, as it often is in ruby tasks,
+<strong>write tests</strong>.</p>
+
+<p>A new Ruby task and associated test scaffold is generated with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen ruby_task class_name
+</code></pre></div>
+<h3 id="profiles">Profiles</h3>
+
+<p>Profiles are the models that contain functional networks. It is common to have
+compositions made of <em>abstract</em> models, that is components that are not really
+components - such as <a href="devices.html">device models</a>. These abstract components
+can be replaced by actual components within the profiles with the <code>use</code> call.
+Moreover, profiles allow to specify arguments to compositions in the process
+of definition.</p>
+
+<p class="callout callout-warning">The model name given to <code>define</code> in a profile is made out of a <a href="https://martinfowler.com/bliki/FluentInterface.html">demeter
+chain</a>. In Ruby, one can
+easily break the chain with a newline after each method call. Don't forget the
+dots !</p>
+
+<ul>
+  <li>
+    <p>arguments are set with <code>with_arguments</code></p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">CompositionModel</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">arg_name: </span><span class="n">arg_value</span><span class="p">)</span>
+</code></pre></div>  </li>
+  <li><code>CompositionModel.use('child_name' =&gt; model)</code> replaces <code>CompositionModel</code>'s
+<code>child_name</code> child with the given model. <code>model</code> can itself be refined by <code>use</code>
+and <code>with_arguments</code>.</li>
+  <li><code>CompositionModel.use(model)</code> replaces any <code>CompositionModel</code>
+child whose model is compatible with <code>model</code> by <code>model</code>.</li>
+  <li>
+    <p>a definition or device can itself be used as <code>model</code> or <code>CompositionModel</code> in
+all these calls, possibly from another profile:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s1">'first'</span><span class="p">,</span> <span class="no">CompositionModel</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="n">first_test_dev</span><span class="p">)</span>
+<span class="n">define</span> <span class="s1">'second'</span><span class="p">,</span> <span class="n">first_dev</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="no">AnotherProfile</span><span class="p">.</span><span class="nf">second_test_dev</span><span class="p">)</span>
+<span class="n">define</span> <span class="s1">'third'</span><span class="p">,</span> <span class="no">AnotherProfile</span><span class="p">.</span><span class="nf">first_dev</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="n">second_test_dev</span><span class="p">)</span>
+</code></pre></div>  </li>
+</ul>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Apart from the <a href="#orogen_config">orogen configuration files</a>, components can have arguments.
+The choice between a configuration file or a component argument is a matter of system design,
+but there are some guidelines.</p>
+
+<p><strong>Use task arguments when</strong></p>
+
+<ul>
+  <li>consistency between different components is necessary, as for instance the robot model</li>
+  <li>a value is to be provided at runtime, as for instance a target pose</li>
+</ul>
+
+<p><strong>Use configuration files when</strong></p>
+
+<ul>
+  <li>the values are static (set once and seldom changed)</li>
+</ul>
+
+<p>Arguments can be forwarded from a composition to its children using the following pattern:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">C</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+  <span class="n">argument</span> <span class="ss">:robot</span>
+  <span class="n">add</span><span class="p">(</span><span class="no">ChildModel</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'generator'</span><span class="p">).</span>
+    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="deployments-actions">Deployments, Actions</h3>
+
+<p>Before they are used, components need to be deployed, that is associated with a
+process and a name. This is done in the <code>requires</code> block of the robot
+configuration file with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">ComponentModel</span> <span class="o">=&gt;</span> <span class="s1">'component_name'</span>
+</code></pre></div>
+<p>Actions are the basic block of interaction between a Syskit app and the outside
+world.  Moreover, the Main action interface, defined by the <code>actions</code> block in
+the robot configuration file is the interface that is being exposed through the
+standard channels (IDE, shell).</p>
+
+<p>Definitions from a profile <a href="deployment.html#main">are exported on the Main interface</a>.</p>
+
+<p class="next-page"><strong>Next</strong>: We've only had a glimpse on the Syskit runtime workflow. <a href="../runtime_overview/">Let's dig deeper</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

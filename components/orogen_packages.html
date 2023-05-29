@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_orogen_packages">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child'><a href="./">Writing Components</a></li><li class='child active'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="managing-an-orogen-package">Managing an oroGen package</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#creating-and-adding-a-new-orogen-package-to-the-workspace" id="markdown-toc-creating-and-adding-a-new-orogen-package-to-the-workspace">Creating and Adding a new oroGen Package to the Workspace</a></li>
+  <li><a href="#updating-an-orogen-package" id="markdown-toc-updating-an-orogen-package">Updating an oroGen package</a></li>
+  <li><a href="#cxx_standard" id="markdown-toc-cxx_standard">C++ Standard</a></li>
+  <li><a href="#dealing-with-dependencies" id="markdown-toc-dealing-with-dependencies">Dealing with Dependencies</a></li>
+  <li><a href="#dependencies-between-orogen-packages" id="markdown-toc-dependencies-between-orogen-packages">Dependencies between oroGen packages</a></li>
+  <li><a href="#dependencies-for-type-definitions" id="markdown-toc-dependencies-for-type-definitions">Dependencies for type definitions</a></li>
+  <li><a href="#dependencies-to-libraries-that-are-used-in-the-public-interface" id="markdown-toc-dependencies-to-libraries-that-are-used-in-the-public-interface">Dependencies to libraries that are used in the public interface</a></li>
+  <li><a href="#dependencies-to-libraries-that-are-not-used-in-the-public-interface" id="markdown-toc-dependencies-to-libraries-that-are-not-used-in-the-public-interface">Dependencies to libraries that are not used in the public interface</a></li>
+</ul>
+
+<h2 id="creating-and-adding-a-new-orogen-package-to-the-workspace">Creating and Adding a new oroGen Package to the Workspace</h2>
+
+<p>This is covered in the <a href="../workspace/add_packages.html">Workspace and Packages section</a></p>
+
+<p>The workflow of the component scaffolding tool <code>rock-create-orogen</code> is a bit
+different, though, so let's go through its workflow. Let's assume we want to
+create a <code>planning/orogen/sbpl</code> package, the workflow would be to:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>acd
+cd planning/orogen/
+rock-create-orogen sbpl
+cd sbpl
+# Edit sbpl.orogen
+rock-create-orogen
+# Fix potential mistakes and re-run rock-create-orogen until there are no errors
+# …
+</code></pre></div>
+<p class="note"><strong>What does <code>rock-create-orogen</code> do ?</strong> <code>orogen</code> does "private" code generation
+in a <code>.orogen</code> subfolder of the package, and creates a <code>templates/</code> folder.
+<code>rock-create-orogen</code> ensures that the initial repository commit does not
+contain any of these. If you don't want to use <code>git</code>, or if you're confident
+that you know which files and folder to commit and which to leave out, the second
+run is not neeeded.</p>
+
+<p>Once this is done, <a href="../workspace/add_packages.html#orogen">add the package to your build configuration</a></p>
+
+<h2 id="updating-an-orogen-package">Updating an oroGen package</h2>
+
+<p>Whenever you modify the orogen specification, just run the build once for that
+package. It will update existing C++ definitions transparently, allowing the
+code completion to update as well (if you use one)</p>
+
+<p>Some changes in the orogen specification require manual changes to the C++ code,
+but they are rare (and will be documented in the relevant sections). In this case, orogen always create a "clean" version of the C++ code in the <code>templates/</code>
+folder, giving you a template of the signature(s) you need to add or update.</p>
+
+<p class="note"><strong>Behind the scenes</strong> the C++ definitions for the component interface are separated in a base class. This base class is saved in the hidden <code>.orogen/</code> folder. This is how the orogen code generation can update it without interfering
+with your code.</p>
+
+<h2 id="cxx_standard">C++ Standard</h2>
+
+<p>The C++ standard used to interpret the data type files and to build the component's C++
+code is the latest standard that its dependencies require. There is currently no
+way to explicitely tell orogen to use a different standard. For instance, if
+your oroGen project uses a library that sets C++11 using <a href="../libraries/cpp_libraries.html#cxx_standard">the Rock CMake
+macros</a>, the oroGen project will use C++11
+too.</p>
+
+<h2 id="dealing-with-dependencies">Dealing with Dependencies</h2>
+
+<p>There really are three types of dependencies to oroGen packages, which have
+different types of requirements. In all these cases, you <strong>must</strong> remember to
+add the dependency's package in the orogen package's <a href="../workspace/add_packages.html#manifest_xml"><code>manifest.xml</code></a>.</p>
+
+<ol>
+  <li>
+    <p>dependencies between orogen packages. They are required to refer to existing
+task contexts and types.</p>
+  </li>
+  <li>
+    <p>dependencies to libraries that are required during code generation. This is
+only the dependencies that are needed to define types used on the component's
+interfaces (see <a href="importing_types.html">this section</a>).</p>
+  </li>
+  <li>
+    <p>dependencies that are required for the implementation of the component's code
+and are present in the component's public interface (that is, its .hpp file)</p>
+  </li>
+  <li>
+    <p>dependencies that are required for the implementation of the component's code
+itself, but are not part of its public interface.</p>
+  </li>
+</ol>
+
+<h2 id="dependencies-between-orogen-packages">Dependencies between oroGen packages</h2>
+
+<p>These dependencies are used to either <a href="importing_types.html#from_orogen">re-use
+types</a> from another oroGen package, or
+<a href="interface.html#inheritance">refer to other task contexts</a> implemented in
+another oroGen package.</p>
+
+<h2 id="dependencies-for-type-definitions">Dependencies for type definitions</h2>
+
+<p>This is covered in the <a href="importing_types.html">"Importing types" page</a></p>
+
+<h2 id="dependencies-to-libraries-that-are-used-in-the-public-interface">Dependencies to libraries that are used in the public interface</h2>
+
+<p>It is mandatory that this type of dependency defines a pkg-config file. All Rock
+packages do, but 3rd party libraries may not. If they do not, you will have to
+follow <a href="../libraries/cpp_libraries.html#unconventional_dependencies">this step-by-step</a> to
+work around these.</p>
+
+<p>Once the new pkg-config file is installed, you can refer to it with
+<code>using_library</code> as described <a href="importing_types.html">here</a>. If the project does
+not use this library to import types, you may provide <code>typekit: false</code> to reduce
+linking and startup times: <code>using_library 'pkg', typekit: false</code></p>
+
+<h2 id="dependencies-to-libraries-that-are-not-used-in-the-public-interface">Dependencies to libraries that are not used in the public interface</h2>
+
+<p>The simplest way to integrate these libraries, if they do provide a pkg-config file,
+is to use <code>using_library</code> (see point above).</p>
+
+<p>Now, since these libraries are not needed by orogen itself, nor do they need to be
+exported to the orogen package's own pkg-config file, it is possible to manually
+handle the dependency in the package's CMake code (in <code>tasks/CMakeLists.txt</code>), thus
+avoiding the need to manually create a pkg-config file if there is none.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

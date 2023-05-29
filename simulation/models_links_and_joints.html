@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="simulation simulation_models_links_and_joints">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Simulation with Gazebo</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="plugins.html">Plugins</a></li><li class='child'><a href="transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="models-links-joints-and-sensors">Models, Links, Joints and Sensors</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#models" id="markdown-toc-models">Models</a></li>
+  <li><a href="#reusing-gazebo-related-devices-across-profiles" id="markdown-toc-reusing-gazebo-related-devices-across-profiles">Reusing Gazebo-related devices across profiles</a></li>
+  <li><a href="#links" id="markdown-toc-links">Accessing Links</a></li>
+  <li><a href="#accessing-joints" id="markdown-toc-accessing-joints">Accessing Joints</a></li>
+  <li><a href="#recursive-models" id="markdown-toc-recursive-models">Recursive Models</a></li>
+  <li><a href="#sensors" id="markdown-toc-sensors">Using Sensors</a></li>
+</ul>
+
+<p>In this section, we will learn how models defined in a Gazebo SDF world are made
+accessible within the Syskit system. We will limit ourselves to the supported built-in
+elements of a model: links, joints and sensors. The <a href="plugins.html">next section</a> will
+cover plugins.</p>
+
+<h2 id="models">Models</h2>
+
+<p>The gist of things is to "dedicate" a Syskit profile to be the interface for a given
+model in Gazebo, the same way that we usually "dedicate" a profile for a given robot
+system. This profile, usually called <code>Base</code> will contain a <code>use_gazebo_model</code> stanza.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyBundle</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s2">"Base"</span> <span class="k">do</span>
+                <span class="c1"># prefix_device_with_name is a backward compatibility thing.</span>
+                <span class="c1"># Just pass true.</span>
+                <span class="n">use_gazebo_model</span> <span class="s2">"model://ModelName"</span><span class="p">,</span> <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This stanza will define a number of devices for <a href="#links">links</a>, <a href="#sensors">sensors</a> and <a href="plugins.html">plugins</a>
+These devices are named after the full gazebo name, with gazebo's <code>::</code> separator replaced by <code>_</code> and
+resp. <code>_link</code>, <code>_sensor</code> and <code>_plugin</code> suffixes.</p>
+
+<p>For instance, in</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;model name="wet_paint"&gt;
+    &lt;link name="camera" /&gt;
+&lt;/model&gt;
+</code></pre></div>
+<p>the device that represents the model will be named <code>wet_paint</code> and the one for
+the link <code>wet_paint_camera_link</code>, respectively accessible via <code>Base.wet_paint_dev</code> and
+<code>Base.wet_paint_camera_link_dev</code>. See <a href="../basics/devices.html">our tutorial</a> for
+a live example.</p>
+
+<p>The stanza exposes a device per link. This device, of type
+<a href="https://github.com/rock-core/bundles-common_models/blob/master/models/devices/gazebo/link.rb">CommonModels::Devices::Gazebo::Link</a>
+exposes the whole link state (pose, velocity and acceleration), and allows to
+apply efforts to it through its <code>Wrench</code> input port.</p>
+
+<p>When the model is root in the world, i.e. is not child of another model, a
+device of type
+<a href="https://github.com/rock-core/bundles-common_models/blob/master/models/devices/gazebo/root_model.rb">CommonModels::Devices::Gazebo::RootModel</a>
+will also be created. This device exposes the model's pose and allows to change it.
+It is useful mainly to place a model in a certain pose without having to control it through
+forces. However, if you do not want to lose composability of your models, do not use this feature.</p>
+
+<p class="alert alert-info"><strong>Note</strong>: an ill-documented behavior of Gazebo is that a model pose is the pose of
+its canonical link, which in general is the first link of the model</p>
+
+<h2 id="reusing-gazebo-related-devices-across-profiles">Reusing Gazebo-related devices across profiles</h2>
+
+<p>One must never have two <code>use_gazebo_model</code> stanzas with the same model in two different
+profiles that are used on the same system. The recommended way to deal with the need
+to share gazebo-related devices across profiles is to have a <code>Base</code> profile that does
+the <code>use_gazebo_model</code>, and then refer to these devices explicitly, as e.g.
+<code>Base.wet_paint_camera_dev</code></p>
+
+<h2 id="links">Accessing Links</h2>
+
+<p>Instead of using the pre-defined link devices, we recommend that you define
+devices for the links you need through the <code>sdf_export_link</code> stanza. This stanza
+creates a
+<a href="https://github.com/rock-core/bundles-common_models/blob/master/models/devices/gazebo/link.rb">CommonModels::Devices::Gazebo::Link</a>
+device that allows to read the status of the link, as well as apply an effort (a
+wrench) on it.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyBundle</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s2">"Base"</span> <span class="k">do</span>
+                <span class="c1"># prefix_device_with_name is a backward compatibility thing.</span>
+                <span class="c1"># Just pass true.</span>
+                <span class="n">use_gazebo_model</span> <span class="s2">"model://model_name"</span><span class="p">,</span> <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+
+                <span class="n">sdf_export_link</span><span class="p">(</span>
+                    <span class="n">model_name_dev</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"some2other"</span><span class="p">,</span>
+                    <span class="ss">from_frame: </span><span class="s2">"model_name::some"</span><span class="p">,</span>
+                    <span class="ss">to_frame: </span><span class="s2">"model_name::other"</span>
+                <span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The <code>as</code> argument declares the device name (which in this case will therefore be
+accessed with <code>Base.some2other_dev</code>). <code>from_frame</code> defines the name of the link
+whose pose the device's pose output will publish, and <code>to_frame</code> the name of the
+reference link (i.e. w.r.t. the <code>from_frame</code> link's pose will be calculated).
+The <code>to_frame</code> is considered fixed in these calculations (i.e. we do not compute
+relative velocities). The <code>world</code> frame represents the frame attached to the origin
+of the Gazebo world.</p>
+
+<p>We recommend following <a href="../libraries/geometric_transformations.html">these conventions</a>
+to name the exported link, that is always <code>${from_frame}2${to_frame}</code>. Note that the
+world frame is always available via <code>world</code>.</p>
+
+<p>For instance, assuming we have a vehicle's model named <code>customvehicle</code> and that this
+vehicle has a camera attached to a tilt unit. The SDF could be:</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"custom_vehicle"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"cog"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"camera"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"camera2cog"</span> <span class="na">type=</span><span class="s">"revolute"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;parent&gt;</span>cog<span class="nt">&lt;/parent&gt;</span>
+        <span class="nt">&lt;child&gt;</span>camera<span class="nt">&lt;/child&gt;</span>
+    <span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/model&gt;</span>
+</code></pre></div>
+<p>Within the simulation, one could get access to the <code>camera2cog</code> transform through
+the <code>camera2cog_dev</code> device declared by:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">CustomVehicle</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="k">module</span> <span class="nn">Base</span>
+                <span class="n">use_gazebo_model</span> <span class="s2">"model://custom_vehicle"</span><span class="p">,</span> <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+
+                <span class="n">sdf_export_link</span><span class="p">(</span>
+                    <span class="n">custom_vehicle_dev</span><span class="p">,</span>
+                    <span class="ss">as: </span><span class="s2">"camera2cog"</span><span class="p">,</span> <span class="ss">from_frame: </span><span class="s2">"custom_vehicle::camera"</span><span class="p">,</span>
+                    <span class="ss">to_frame: </span><span class="s2">"custom_vehicle::cog"</span>
+                <span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="accessing-joints">Accessing Joints</h2>
+
+<p>Subset of the joints can be exported as single devices via the
+<code>sdf_export_joint</code> stanza.  This defines an interface of type
+<code>CommonModels::Services::JointsControlledSystem</code>, through which you can control
+the joints and read its status. For instance, assuming our custom vehicle has a pan-tilt
+unit for the camera, with separate pan and tilt joints, the following declaration will
+create a <code>Base.camera_ptu_dev</code> device that will have one input and one output
+of type <code>base::samples::Joints</code>, in which the elements will be first the tilt and then
+the pan joint.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">CustomVehicle</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="k">module</span> <span class="nn">Base</span>
+                <span class="n">use_gazebo_model</span> <span class="s2">"model://custom_vehicle"</span><span class="p">,</span> <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+
+                <span class="n">sdf_export_joint</span><span class="p">(</span>
+                    <span class="n">custom_vehicle_dev</span><span class="p">,</span>
+                    <span class="ss">as: </span><span class="s2">"camera_ptu"</span><span class="p">,</span>
+                    <span class="ss">ignore_joint_names: </span><span class="kp">true</span><span class="p">,</span>
+                    <span class="ss">joint_names: </span><span class="p">[</span>
+                        <span class="s2">"custom_vehicle::camera_tilt_joint"</span><span class="p">,</span>
+                        <span class="s2">"custom_vehicle::camera_pan_joint"</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The <code>ignore_joint_names</code> instructs the component to assume that the order of the joints
+on input is the declared order, and not care about the joint names. We recommend working
+this way.</p>
+
+<p>Gazebo supports setting a joint's effort, position and velocity. The input joints
+must have exactly one of these fields set. If more than one is set, the model task will
+go into the <code>INVALID_JOINT_COMMAND</code> exception.</p>
+
+<h2 id="recursive-models">Recursive Models</h2>
+
+<p>As long as you</p>
+
+<ul>
+  <li>use the model device only to read its position,</li>
+  <li>use <code>sdf_export_link</code> and <code>sdf_export_joint</code>,</li>
+  <li>use <code>ignore_joint_names: true</code> in <code>sdf_export_joint</code></li>
+</ul>
+
+<p>Then the gazebo-syskit integration gracefully handles having the model used in a
+profile as a submodel of another in the world that is being actually loaded.
+This allows for instance to define profiles that control complex parts of a
+system (e.g. a manipulator), test them separately and then combine them in a
+single system.</p>
+
+<div class="alert alert-info">
+  <p><strong>How is this different from Gazebo ?</strong> While <a href="http://sdformat.org">sdformat</a> allows to have a <code>&lt;model&gt;</code> inside another, as well
+as include a model inside another, what it does is lexically "flatten" the SDF to
+have a single model. That is, all joints and links from submodels are placed in their
+parent model, only adding the submodel name as prefix. It means that link and joint
+names change when you combine your models.</p>
+
+  <p>For instance, from the perspective of Gazebo</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"base"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"left_arm"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"base"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/model&gt;</span>
+  <span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"right_arm"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"base"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/model&gt;</span>
+<span class="nt">&lt;/model&gt;</span>
+</code></pre></div>
+  <p>is actually managed as:</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"base"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"left_arm::base"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">name=</span><span class="s">"left_arm::right_arm"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/model&gt;</span>
+</code></pre></div>
+</div>
+
+<h2 id="sensors">Using Sensors</h2>
+
+<p>Apart from links and models, the <a href="models_links_and_joints.html"><code>use_gazebo_model</code></a>
+stanza will create devices to expose devices that are present in the sdformat model.
+The Syskit support for Gazebo handles only a subset of the sensors available in Gazebo.
+All sensor-related components are declared in the
+<a href="https://github.com/rock-gazebo/simulation-orogen-rock_gazebo"><code>simulation/orogen/rock_gazebo</code></a>
+package.</p>
+
+<ul>
+  <li><code>ray</code> are exposed as <code>rock_gazebo::LaserScanTask</code></li>
+  <li><code>imu</code> are exposed as <code>rock_gazebo::ImuTask</code></li>
+  <li><code>gps</code> are exposed as <code>rock_gazebo::GPSTask</code></li>
+  <li><code>camera</code> are exposed as <code>rock_gazebo::CameraTask</code></li>
+</ul>
+
+<p>The devices are named after the sensor's full name, with the <code>_sensor</code> suffix, e.g.
+a <code>camera</code> camera in the <code>wet_paint</code> model would be <code>wet_paint_camera_sensor_dev</code>.
+In doubt, just open the syskit IDE and check the profile.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

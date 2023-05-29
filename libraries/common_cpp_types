@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="/images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="libraries libraries_common_cpp_types">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="./">Libraries</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="add_packages.html">Add packages</a></li><li class='child'><a href="cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="common-c-types">Common C++ Types</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#basetime" id="markdown-toc-basetime">base::Time</a></li>
+  <li><a href="#baseangle" id="markdown-toc-baseangle">base::Angle</a></li>
+  <li><a href="#basesamplesjoints" id="markdown-toc-basesamplesjoints">base::samples::Joints</a></li>
+  <li><a href="#basesamplesrigidbodystate" id="markdown-toc-basesamplesrigidbodystate">base::samples::RigidBodyState</a></li>
+  <li><a href="#basesamplesimusensors" id="markdown-toc-basesamplesimusensors">base::samples::IMUSensors</a></li>
+  <li><a href="#basesamplesframeframe" id="markdown-toc-basesamplesframeframe">base::samples::frame::Frame</a></li>
+</ul>
+
+<p>Let's discover some of the C++ types that are in most common use within Rock systems.
+These are all defines in <code>base/types</code> (shocker !). There are other generically useful
+types there, just <a href="https://github.com/rock-core/base-types">have a look</a></p>
+
+<h2 id="basetime">base::Time</h2>
+
+<h2 id="baseangle">base::Angle</h2>
+
+<h2 id="basesamplesjoints">base::samples::Joints</h2>
+
+<h2 id="basesamplesrigidbodystate">base::samples::RigidBodyState</h2>
+
+<h2 id="basesamplesimusensors">base::samples::IMUSensors</h2>
+
+<h2 id="basesamplesframeframe">base::samples::frame::Frame</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

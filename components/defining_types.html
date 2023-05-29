@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_defining_types">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child'><a href="./">Writing Components</a></li><li class='child'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child active'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="defining-types">Defining Types</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#cxx_standard" id="markdown-toc-cxx_standard">C++ Standard</a></li>
+  <li><a href="#type_declarations" id="markdown-toc-type_declarations">Type Declarations</a></li>
+  <li><a href="#naming_scheme" id="markdown-toc-naming_scheme">Type Names</a></li>
+  <li><a href="#templates" id="markdown-toc-templates">Handling of C++ templates</a></li>
+</ul>
+
+<p>Types are first defined in C++. However, not all C++ types can be used. There
+are limitations to which types are acceptable, and ways to work around these
+limitations. This page will detail this.</p>
+
+<p>They are then injected in Rock's type system through Rock's code generation
+tool, <code>orogen</code>. The <a href="importing_types.html">next section</a> deals with this topic.</p>
+
+<h2 id="cxx_standard">C++ Standard</h2>
+
+<p>The C++ standard used by orogen is the latest standard required by its dependencies.
+There is currently no way to tell orogen itself to use a given standard. One must
+specify the standard <a href="../libraries/cpp_libraries.html#cxx_standard">in the library packages that define the types</a>.</p>
+
+<h2 id="type_declarations">Type Declarations</h2>
+
+<p>Not all C++ types can be used by Rock's type system. To be usable as-is, a type must:</p>
+
+<ul>
+  <li>be default constructible and copyable (i.e. have a constructor that have no
+arguments and can be copied).</li>
+  <li>have no private fields</li>
+  <li>have only public ancestors, that fit the definition of "acceptable type".</li>
+  <li>not use pointers.</li>
+</ul>
+
+<p>In addition, Rock does support <code>std::string</code> and <code>std::vector</code> standard
+classes, so you can use them freely. Moreover, for types that can't be directly
+managed by oroGen, the mechanism of <a href="importing_types#opaques">opaque types</a> allows to
+integrate them in the Rock workflow anyways. Opaque types must however
+still be copyable.</p>
+
+<p>Example: defining a Time class</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">namespace</span> <span class="n">base</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="nc">Time</span>
+  <span class="p">{</span>
+    <span class="kt">uint64_t</span> <span class="n">microseconds</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">Time</span> <span class="n">fromMilliseconds</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">ms</span><span class="p">);</span>
+    <span class="n">Time</span> <span class="k">operator</span> <span class="o">+</span><span class="p">(</span><span class="n">Time</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="naming_scheme">Type Names</h2>
+
+<p>The Rock type system does not use the same naming scheme than C++ for types.
+Parts of a type are separated by a forward slash <code>/</code>. A well-formed type name
+is always absolute (always starts with /).</p>
+
+<p>For instance, Rock's <code>base::Time</code> is <code>/base/Time</code> within the type system.</p>
+
+<p>Containers derived from <code>/std/vector</code> do use the <code>&lt;&gt;</code> markers: <code>/std/vector&lt;/base/Time&gt;</code></p>
+
+<h2 id="templates">Handling of C++ templates</h2>
+
+<p>Templates are not directly understood by oroGen. However, explicit
+instantiations of them can be used.</p>
+
+<p>Unfortunately, typedef'ing the type that you need is not enough. You have to
+use the instantiated template directly in a structure. To work around this, you
+can define a structure whose name contains the <code>orogen_workaround</code> string to
+get the template instantiated, and then define the typedefs that you will
+actually use in your typekits and oroGen task interfaces.</p>
+
+<p>For instance, with</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Scalar</span><span class="p">,</span> <span class="kt">int</span> <span class="n">DIM</span><span class="p">&gt;</span>
+<span class="k">struct</span> <span class="nc">Vector</span> <span class="p">{</span>
+  <span class="n">Scalar</span> <span class="n">values</span><span class="p">[</span><span class="n">DIM</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">__orogen_workaround</span> <span class="p">{</span>
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span> <span class="n">vector3</span><span class="p">;</span>
+  <span class="n">Vector</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span> <span class="n">vector4</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>One can use Vector&lt;3&gt; in its orogen interface, and in other structures.
+The <code>__orogen_workaround</code> structure itself will be ignored by oroGen to avoid
+polluting the type system.</p>
+
+<p class="next-page"><strong>Next</strong> Now that you know all about defining data types, let's get to understand how
+they are seen <a href="types_in_ruby.html">from within Ruby</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

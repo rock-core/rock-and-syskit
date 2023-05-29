@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="testing testing_integration">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Testing and Debugging</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="component.html">Component Tests</a></li><li class='child active'><a href="integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="integration-tests">Integration Tests</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#setting-up-a-syskit-app-to-use-integration-tests" id="markdown-toc-setting-up-a-syskit-app-to-use-integration-tests">Setting up a Syskit app to use integration tests</a></li>
+  <li><a href="#starting-the-scene-and-the-app" id="markdown-toc-starting-the-scene-and-the-app">Starting the scene and the app</a></li>
+  <li><a href="#givenwhenthen-with-syskit-apps" id="markdown-toc-givenwhenthen-with-syskit-apps">Given/When/Then with Syskit apps</a></li>
+  <li><a href="#existing-steps" id="markdown-toc-existing-steps">Existing Steps</a></li>
+  <li><a href="#specifying_arguments" id="markdown-toc-specifying_arguments">Specifying Arguments</a></li>
+  <li><a href="#specifying_quantities" id="markdown-toc-specifying_quantities">Specifying Quantities</a></li>
+  <li><a href="#defining-your-own-steps" id="markdown-toc-defining-your-own-steps">Defining your own Steps</a></li>
+</ul>
+
+<p>The last level of tests that a Rock/Syskit system supports is the one of
+integration or acceptance tests. In a nutshell, these tests see your system
+as a blackbox, run actions and verify the result of these actions. They
+actually act as outsiders: they run everything through Syskit's remote
+interface, the way you would control it through the IDE or a GUI. These tests
+are based on <a href="https://cucumber.io/">Cucumber</a>. This documentation assumes
+that you've at least read the introductory Cucumber material, especially <a href="https://docs.cucumber.io/gherkin/">the
+description of the guerkin language</a>.</p>
+
+<p>This page will instead focus on the Syskit-specific parts of using cucumber.</p>
+
+<p>Generally speaking, each cucumber feature when interacting with a Syskit system
+follows this pattern:</p>
+
+<ul>
+  <li>start a Gazebo scene</li>
+  <li>start the Syskit app</li>
+  <li>start action(s)</li>
+  <li>run a predicate that verifies the action's result</li>
+  <li>start more action(s)</li>
+  <li>run more predicates that verifies the action's result</li>
+  <li>end</li>
+</ul>
+
+<p>The <em>predicates</em> described above are themselves actions, which are supposed to
+finish successfully if the predicate passes, and fail otherwise.</p>
+
+<p>Let's go through the items step-by-step. We will take use the Syskit basics
+tutorial as a basis for our examples.</p>
+
+<h2 id="setting-up-a-syskit-app-to-use-integration-tests">Setting up a Syskit app to use integration tests</h2>
+
+<p>In order to use Cucumber to run test features, one needs to depend on <a href="https://github.com/rock-core/bundles-cucumber">the
+cucumber bundle</a>. Just add the
+following in your bundle's <code>manifest.xml</code>, and then run <code>aup</code>.</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;depend_optional</span> <span class="na">name=</span><span class="s">"bundles/cucumber"</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p class="note">Add this dependency as optional, as it will allow you to exclude it from the
+build in production systems</p>
+
+<p>You must have also followed the modifications to <code>config/init.rb</code> listed in
+<a href="../basics/getting_started.html">the basics section</a>,</p>
+
+<p>Finally, create the initial scaffold.</p>
+
+<ol>
+  <li>
+    <p>run <code>cucumber --init</code> in your bundle</p>
+  </li>
+  <li>
+    <p>edit <code>features/support/env.rb</code> and add the Roby, RockGazebo and this
+bundle's own World modules to the Cucumber world.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'cucumber/rock_world'</span>
+<span class="no">Cucumber</span><span class="o">::</span><span class="no">RockWorld</span><span class="p">.</span><span class="nf">setup</span>
+<span class="no">World</span><span class="p">(</span>
+    <span class="no">Roby</span><span class="o">::</span><span class="no">App</span><span class="o">::</span><span class="no">Cucumber</span><span class="o">::</span><span class="no">World</span><span class="p">,</span>
+    <span class="no">RockGazebo</span><span class="o">::</span><span class="no">Syskit</span><span class="o">::</span><span class="no">Cucumber</span><span class="o">::</span><span class="no">World</span><span class="p">,</span>
+    <span class="no">Cucumber</span><span class="o">::</span><span class="no">RockWorld</span><span class="p">)</span>
+</code></pre></div>  </li>
+  <li>
+    <p>create an action that refines the <code>Cucumber</code> action interface provided by
+<code>bundles/cucumber</code>. The refinement is meant to provide the robot-under test
+to the underlying compositions
+See <code>bundles/cucumber/models/actions/cucumber.rb</code> for the interface
+definition. The action interface is usually called <code>Actions::Cucumber</code> as
+well. In the <code>syskit_basics</code> bundle we created during the
+<a href="../basics/">Basics</a> tutorials, one would do</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen action cucumber
+</code></pre></div>
+    <p>and edit <code>models/actions/cucumber.rb</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'cucumber/models/actions/cucumber'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/base'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">Cucumber</span> <span class="o">&lt;</span> <span class="no">Cucumber</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Cucumber</span>
+            <span class="k">def</span> <span class="nf">cucumber_robot_model</span>
+                <span class="c1"># NOTE the device must be the root model, i.e. cannot use ur10_dev</span>
+                <span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_fixed_dev</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+  <li>
+    <p>create a robot configuration and load this new profile in it. This robot
+configuration will usually "derive" from the gazebo configuration by
+adding the following line at the top of the robot's configuration file.
+This robot is commonly called <code>cucumber</code>.</p>
+
+    <p>Create the new configuration with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen robot cucumber
+</code></pre></div>
+    <p>And add the following line at the top of <code>config/robots/cucumber.rb</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require_relative</span> <span class="s1">'./gazebo'</span>
+</code></pre></div>
+    <p>The robot should obviously add the <code>Cucumber</code> action interface to its main actions, with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">requires</span> <span class="k">do</span>
+    <span class="nb">require</span> <span class="s1">'syskit_basics/models/actions/cucumber'</span>
+<span class="k">end</span>
+<span class="no">Robot</span><span class="p">.</span><span class="nf">actions</span> <span class="k">do</span>
+    <span class="n">use_library</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Cucumber</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+</ol>
+
+<h2 id="starting-the-scene-and-the-app">Starting the scene and the app</h2>
+
+<p>The app and the scene (Gazebo) are both started with a <code>Given</code> step of the
+form</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Given </span>the _robot name_ robot starting at _pose_ in _scene name_
+</code></pre></div>
+<p>The <em>robot name</em> is the name of the robot configuration in the Syskit app.
+The <em>pose</em> stanza defines where the robot-under-test should be placed in the
+scene at the beginning of the test (see below for how poses are specified).
+The <em>scene name</em> is the name of the scene in <code>scenes/</code>. Underscores in the
+robot or scene names can be replaced by spaces, and <code>the</code> can be added in
+front of the scene name</p>
+
+<p>For instance, in our <code>syskit_basics</code> bundle, with the <code>cucumber</code> robot we just started,
+this could be:</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Given </span>the cucumber robot starting at origin in the empty world
+</code></pre></div>
+<p>If your Syskit app needs more arguments (as passed with the <code>--set</code> option on
+the command line), these can be given with a <strong>with key=value, key=value and
+key=value</strong> syntax. For instance</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Given </span>the cucumber robot starting at origin in the empty world with never_fail=true
+</code></pre></div>
+<p>Let's create now a file with the <code>.feature</code> extension within <code>features/</code>,
+that contains this <code>Given</code> line. This file will allow us to test that the setup
+is functioning as expected.</p>
+
+<p>For instance, <code>features/01. Test Setup.feature</code> with:</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Checking the Syskit/Cucumber Test Setup
+    <span class="kn">Scenario</span><span class="p">:</span> Starting a simulation and a Syskit app under Cucumber
+        <span class="nf">Given </span>the cucumber robot starting at origin in the empty world
+        <span class="nf">Then </span>the pose reaches z=0m with a tolerance of 0.1m within 30s
+</code></pre></div>
+<p>Which you would run with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>cucumber "features/01. Test Setup.feature"
+</code></pre></div>
+<h2 id="givenwhenthen-with-syskit-apps">Given/When/Then with Syskit apps</h2>
+
+<p>The Given/When/Then loop, when testing a Syskit app is based on placing the robot
+somewhere, and then using Syskit's <em>actions</em> to (1) do something and (2) verify the
+action result. The Syskit-specific Cucumber steps are only there to integrate this
+within a Cucumber feature file.</p>
+
+<p>The Cucumber bundle provide actions and steps that allow to check the
+system's position. The underlying infrastructure can be used to create new
+steps, more adapted to your application.</p>
+
+<p>More specifically, in a Cucumber scenario, one will have:
+- <code>When</code> steps that start one or more <strong>application actions</strong>, that is the actions
+  of the application-under test.
+- <code>Then</code> steps that start zero or more <strong>monitoring actions</strong>. These actions are started
+  in the background, and should emit their <em>failed</em> event when the predicate their
+  represent fails.
+- <code>Then</code> steps that runs a <strong>predicate</strong> action, which will emit <em>success</em> if the
+  test passes, and <em>failed</em> if not.</p>
+
+<p>The application, monitoring and predicate actions of consecutive <code>When</code> and
+<code>Then</code> statements are batched together and started when the first predicate
+action is encountered. Application actions are then kept until the next <code>When it runs ...</code>
+step, while monitoring actions are dropped at the end of the predicate:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>Given the cucumber robot ...
+When it runs actionA # starts actionA
+Then the pose is maintained at ... # starts a maintain_pose monitor
+And after 10s # waits 10 seconds, starts the pending actions
+# At this point, the maintain_pose monitor is stopped
+# actionA is still active
+Then it is failed within 20s
+# actionA is still active
+When it runs actionB
+# actionA will be dropped in the next batch
+# actionB will be used to replace it
+Then after 20s # this transitions from actionA to actionB and waits 20s
+</code></pre></div>
+<p>In addition, a set of <code>Given</code> steps can be given before the app startup to initialize
+it with a set of actions.</p>
+
+<p>For instance, let's test the <a href="../basics/devices.html"><code>syskit_basics</code></a> cartesian movement:</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> cartesian movement
+    <span class="kn">Scenario</span><span class="p">:</span> moving the tip of the arm to a given target
+        <span class="c"># Start safe_robot_position_def on app startup</span>
+        <span class="nf">Given </span>the safe robot position definition running
+        <span class="c"># Start the app and the simulation</span>
+        <span class="nf">And </span>the cucumber robot starting at origin in the empty world
+        <span class="c"># When I start an application action with arguments</span>
+        <span class="nf">When </span>it runs the move arm to pose action with position={x=0.5, y=0 and z=0.5} and orientation={yaw=0, pitch=0 and roll=0}
+        <span class="c"># Then I expect this step to match</span>
+        <span class="err">Then the link ur10</span><span class="p">::</span><span class="err">wrist_3</span> <span class="err">reaches</span> <span class="err">x=0.5m,</span> <span class="err">y=0m,</span> <span class="err">z=0.5m</span> <span class="err">with</span> <span class="nf">a </span>tolerance of 0.01m within 20s
+</code></pre></div>
+<p><strong>Note</strong>: the <code>When</code> step above do not match what is in our tutorial
+application. The Cucumber interface only allows passing simple arguments to
+the actions. We will therefore have to create a simple action in the Cucumber
+interface that translates this simple representation into the underlying
+action's real arguments.</p>
+
+<p>Let's import the Gazebo <code>ArmControl</code> profile first</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="err">'</span><span class="n">syskit_basics</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">profiles</span><span class="o">/</span><span class="n">gazebo</span><span class="o">/</span><span class="n">arm_control</span>
+</code></pre></div>
+<p>and define this helper action</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s1">'moves the tip of the arm to a given pose'</span><span class="p">).</span>
+    <span class="nf">required_arg</span><span class="p">(</span><span class="ss">:position</span><span class="p">,</span> <span class="s1">'the position as a Hash with x, y and z keys'</span><span class="p">).</span>
+    <span class="nf">required_arg</span><span class="p">(</span><span class="ss">:orientation</span><span class="p">,</span> <span class="s1">'the orientation as a Hash with yaw, pitch and roll keys'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">move_arm_to_pose</span><span class="p">(</span><span class="ss">position: </span><span class="no">Hash</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">orientation: </span><span class="no">Hash</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+    <span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">ArmControl</span><span class="p">.</span><span class="nf">arm_cartesian_constant_control_def</span><span class="p">(</span>
+        <span class="ss">position: </span><span class="no">Eigen</span><span class="o">::</span><span class="no">Vector3</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">*</span><span class="n">position</span><span class="p">.</span><span class="nf">values_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="ss">orientation: </span><span class="no">Eigen</span><span class="o">::</span><span class="no">Quaternion</span><span class="p">.</span><span class="nf">from_euler</span><span class="p">(</span>
+            <span class="no">Eigen</span><span class="o">::</span><span class="no">Vector3</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">*</span><span class="n">orientation</span><span class="p">.</span><span class="nf">values_at</span><span class="p">(</span><span class="ss">:yaw</span><span class="p">,</span> <span class="ss">:pitch</span><span class="p">,</span> <span class="ss">:roll</span><span class="p">))))</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="existing-steps">Existing Steps</h2>
+
+<p>The steps are defined in the Cucumber bundle, under <a href="https://github.com/rock-core/bundles-cucumber/blob/master/lib/cucumber/rock_steps.rb"><code>lib/cucumber/rock_steps.rb</code></a>. 
+The rest of this page will try to explain how these work. It will then detail
+how can create your own.</p>
+
+<p>All names (scene, robot, actions, events, …) can be written replacing the
+underscore by a space, to make the steps more natural. For instance, the
+<code>empty_world</code> scene can be referred to by <code>empty world</code></p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Given </span>the $action action running
+<span class="nf">Given </span>the $action action running with arg0=$arg0, arg1=$arg1 and arg2=$arg2
+<span class="nf">Given </span>the $definition definition running
+<span class="nf">Given </span>the $definition definition running with $arguments
+</code></pre></div>
+<p>Specify a set of actions and definitions that will be started in the next
+<code>Given</code> statement that starts an app. Best is to use the <code>And</code> keyword to
+chain them, and also to use <code>And</code> to start the app afterwards. The <code>with</code>
+versions can be used to pass arguments (see the <a href="#specifying_arguments">Specifying
+Arguments</a> section below)</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Given </span>the $robot_name starting at $pose in $scene
+<span class="nf">Given </span>the $robot_name starting at $pose in $scene with $arguments
+</code></pre></div>
+<p>Starts the rock-gazebo and Syskit apps on the given scene and robot
+configuration. How <code>$pose</code> can be specified is detailed later. Previous
+<code>Given the $action action running</code> and <code>Given the $definition definition running</code>
+steps are started immediately. The <code>with</code> version can be used to pass
+arguments (see the <a href="#specifying_arguments">Specifying Arguments</a> section
+below)</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">When </span>it runs the $action action
+<span class="nf">When </span>it runs the $action action with $arguments
+<span class="nf">When </span>it runs the $definition definition
+<span class="nf">When </span>it runs the $definition definition with $arguments
+</code></pre></div>
+<p>Start an action or definition. The <code>with</code> version can be used to pass
+arguments (see the <a href="#specifying_arguments">Specifying Arguments</a> section
+below). The <code>definition</code> version appends <code>_def</code> to the definition name,
+for clarity of the step. I.e. instead of writing
+<code>When it runs the arm safe joint position def action</code>, one writes
+<code>When it runs the arm safe joint position definition</code></p>
+
+<p>Multiple actions can be started by chaining them with <code>And</code>.</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Then </span>the pose is maintained at $pose with a tolerance of $tolerance
+<span class="nf">Then </span>the pose is maintained during $time at $pose with a tolerance of $tolerance
+</code></pre></div>
+<p>Verify that the pose is within a given tolerance of a target pose. In the
+first form, without the time specification, it starts a monitor that runs in
+the background until the next step finishes. In the seconf form, with the
+time, it verifies that the constraint is met during the given time. See
+<a href="#specifying_quantities">this section</a> for details on how <code>$pose</code> and <code>$tolerance</code>
+should be written.</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Then </span>after $time
+</code></pre></div>
+<p>Wait a given time before executing the next step. It executes the current
+batch (start new application actions and drops obsolete ones, runs monitor
+actions). See <a href="#specifying_quantities">this section</a> for details on how
+<code>$pose</code> and <code>$tolerance</code> should be written.</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Then </span>the pose reaches $pose with a tolerance of $tolerance within $time
+</code></pre></div>
+<p>Verifies that the robot reaches the given pose with tolerance in less than a given
+time. See <a href="#specifying_quantities">this section</a> for details on how <code>$pose</code>, <code>$tolerance</code>
+and <code>$time</code> should be written.</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Then </span>it stays there for $time
+</code></pre></div>
+<p>Verifies that robot stays at the pose last specified by the
+<code>Then the pose reaches ...</code> step for a given amount of time.</p>
+
+<div class="highlight"><pre class="highlight gherkin"><code><span class="nf">Then </span>it has $event within $time
+<span class="nf">Then </span>it is $event within $time
+</code></pre></div>
+<p>Verifies that the job last started with <code>When it runs ...</code> emits the given
+event within a certain amount of time. The choice between the two versions is
+meant to help having a clearer step (i.e. one would use <code>it has reached target</code>
+but <code>it is aborted</code>).</p>
+
+<h2 id="specifying_arguments">Specifying Arguments</h2>
+
+<p>Arguments are always specified using the form <code>arg0=val0, arg1=val1 and arg2=val2</code>.
+The value can either be a plain string, a number, or a hash of
+the form <code>{key0=val0, key1=val1 and key2=val2}</code>. <a href="#specifying_quantities">Units can also be specified</a></p>
+
+<h2 id="specifying_quantities">Specifying Quantities</h2>
+
+<p>The default Cucumber steps will recognize units for certain type of quantities: length,
+angles and time. Moreover, it provides a specific syntax to specify constraints
+on positions, orientations or poses. Units are used within the built-in steps to verify
+that the quantities are matching what the step expects (e.g. no angles for lengths).</p>
+
+<p><strong>Lengths</strong> have a <code>m</code> suffix (for "meter"), e.g. <code>10m</code> or <code>0.01m</code></p>
+
+<p><strong>Angles</strong> have a <code>deg</code> suffix (for "degrees"). Angles are internally converted to
+radians before being passed to the underlying action.</p>
+
+<p><strong>Times</strong> have either a <code>h</code>, <code>min</code> or <code>s</code> suffix (for "hours", "minutes" and
+*"seconds"). Fraction of a time are specified for the chosen unit (e.g. <code>1.5h</code> is one
+and a half hour, not one hour and five minutes). They can't be combined: the
+system won't recognize <code>1h5min</code>. They are internally converted to seconds, as a <code>Float</code>.</p>
+
+<p><strong>Positions</strong> are specified by providing <code>x</code>, <code>y</code> and <code>z</code> as lengths (<code>m</code>) using the
+argument syntax, e.g. <code>x=10m, y=20m and z=0.2m</code>.</p>
+
+<p><strong>Orientations</strong> are specified as Euler angles <code>yaw</code>, <code>pitch</code> and <code>roll</code> as angles (<code>deg</code>)
+using the argument syntax, e.g. <code>yaw=10deg, pitch=-5deg and roll=0deg</code>.</p>
+
+<p><strong>Poses</strong> are simply a position and an orientation specified together, that is e.g.
+<code>x=10m, y=20m, z=0.2m, yaw=10deg, pitch=-5deg and roll=0deg</code>.</p>
+
+<p><strong>Position, Orientation and Pose Constraints</strong> Constraints are specified as the target
+quantity followed by <code>within a tolerance of $tolerance</code>, where <code>$tolerance</code> is specified
+the same way. Constraints can be partial. For instance:
+<code>x=10m and y=20m within a tolerance of x=0.1m and y=0.02m</code></p>
+
+<p>Variable names can be omitted in <code>$tolerance</code>, in which case they are assumed
+to follow the same order than the target quantity:
+<code>x=10m and y=20m within a tolerance of 0.1m and 0.02m</code></p>
+
+<p>Finally, one can give a single value if all the values in the target are of the same
+dimension: <code>x=10m and y=20m within a tolerance of 0.1m</code></p>
+
+<h2 id="defining-your-own-steps">Defining your own Steps</h2>
+
+<p>The first step to create your own steps is to follow the standard Cucumber workflow:
+create a <code>.rb</code> file in <code>features/step_definitions</code> and add <code>Given</code>, <code>When</code>, …
+definitions.</p>
+
+<p>If you would like to use the argument or quantity parsing used by
+the default steps, they are available on the <a href="http://www.rubydoc.info/github/rock-core/tools-roby/Roby/App/CucumberHelpers">Roby::App::CucumberHelpers</a> module.</p>
+
+<p>The job management API is defined on <a href="http://www.rubydoc.info/github/rock-core/tools-roby/Roby/App/Cucumber/Controller">Roby::App::Cucumber::Controller</a>. You
+want in particular to have a look at the <code>#start_job</code> and <code>#start_monitoring_job</code> methods.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

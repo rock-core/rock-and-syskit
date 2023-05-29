@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_testing">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child'><a href="./">Writing Components</a></li><li class='child'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child active'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="testing">Testing</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#test-file-scaffold" id="markdown-toc-test-file-scaffold">Test file scaffold</a></li>
+  <li><a href="#deploying-a-component" id="markdown-toc-deploying-a-component">Deploying a component</a></li>
+  <li><a href="#providing-configuration-parameters" id="markdown-toc-providing-configuration-parameters">Providing configuration parameters</a></li>
+  <li><a href="#testing-the-component-behavior" id="markdown-toc-testing-the-component-behavior">Testing the component behavior</a>    <ul>
+      <li><a href="#actions" id="markdown-toc-actions">Actions</a></li>
+      <li><a href="#expectations" id="markdown-toc-expectations">Expectations</a></li>
+      <li><a href="#testing-failures-while-the-component-is-running" id="markdown-toc-testing-failures-while-the-component-is-running">Testing failures while the component is running</a></li>
+      <li><a href="#testing-configuration-or-start-failures" id="markdown-toc-testing-configuration-or-start-failures">Testing configuration or start failures</a></li>
+      <li><a href="#testing-component-input-and-output-during-start-and-stop-transitions" id="markdown-toc-testing-component-input-and-output-during-start-and-stop-transitions">Testing component input and output during start and stop transitions</a></li>
+    </ul>
+  </li>
+  <li><a href="#using-test-components" id="markdown-toc-using-test-components">Using test components</a></li>
+  <li><a href="#running-the-tests" id="markdown-toc-running-the-tests">Running the tests</a></li>
+  <li><a href="#using-a-debugger-or-valgrind" id="markdown-toc-using-a-debugger-or-valgrind">Using a Debugger or Valgrind</a></li>
+</ul>
+
+<p>Syskit has built-in support to allow creating unit test suites for Rock
+components, including integration in the <a href="../workspace/testing.html">CMake/Autoproj testing
+workflows</a>. Note that by following the <a href="../libraries/">recommended
+library/component split</a>, the component tests are meant
+to be verifying the component's logic (error handling, input validation,
+configuration), not the actual data processing that is meant to already have
+been tested in the library's unit tests.</p>
+
+<p>Tests are Ruby files in the orogen package's <code>test/</code> folder. Create the folder and add
+the following to the toplevel <code>CMakeLists.txt</code>:</p>
+
+<div class="highlight"><pre class="highlight cmake"><code><span class="nb">if</span> <span class="p">(</span>ROCK_TEST_ENABLED<span class="p">)</span>
+    <span class="nb">enable_testing</span><span class="p">()</span>
+    <span class="nb">find_package</span><span class="p">(</span>Syskit REQUIRED<span class="p">)</span>
+    <span class="nf">syskit_orogen_tests</span><span class="p">(</span>test<span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+<p>and <code>tools/syskit</code> as a <a href="../workspace/testing.html#test_dependency">test
+dependency</a> in the package's
+<code>manifest.xml</code>:</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;test_depend</span> <span class="na">name=</span><span class="s">"tools/syskit"</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p>With these two changes, enabling the tests will add a <code>make test</code> target that
+runs any file ending in <code>_test.rb</code> within the <code>test/</code> folder.</p>
+
+<h2 id="test-file-scaffold">Test file scaffold</h2>
+
+<p>The convention is to create one file per task model, converting the task's
+CamelCase into a file's convention snake_case, e.g. the common <code>Task</code> becomes
+<code>task_test.rb</code>. <code>SlaveTask</code> would be <code>slave_task_test.rb</code>.</p>
+
+<p>The test file template is:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># frozen_string_literal: true</span>
+
+<span class="n">using_task_library</span> <span class="s1">'project_name'</span>
+
+<span class="n">describe</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span> <span class="k">do</span>
+    <span class="n">run_live</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="deploying-a-component">Deploying a component</h2>
+
+<p>The test harness provides discrete steps to change the component step:</p>
+
+<ul>
+  <li><em>deployment</em> to add component to the system</li>
+  <li><em>start execution agents</em> to start the underlying process but do nothing to the
+component itself</li>
+  <li><em>configure</em> to configure the component</li>
+  <li><em>start</em> to start the component</li>
+</ul>
+
+<p>Each step can be combined. For instance, to get a running component, do</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">syskit_deploy_configure_and_start</span><span class="p">(</span>
+    <span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'task_name'</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The other possibilities are <code>syskit_deploy</code>, <code>syskit_deploy_and_configure</code> and
+the single <code>syskit_configure</code> and <code>syskit_start</code>.</p>
+
+<p>Only steps that start with <code>syskit_deploy</code> requires a model specification. The
+other require a task instance, as returned by <code>syskit_deploy</code>. For instance, the
+deploy/configure/start cycle can be broken down as:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">syskit_deploy</span><span class="p">(</span>
+    <span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'task_name'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">syskit_configure</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">syskit_start</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="providing-configuration-parameters">Providing configuration parameters</h2>
+
+<p>To provide configuration parameters, set them between the deploy and configure
+steps through the <a href="runtime.html#extension_file"><code>#properties</code> interface</a> that is
+also used in the component's <code>#configure</code> method.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">syskit_deploy</span><span class="p">(</span>
+    <span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'task_name'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">task</span><span class="p">.</span><span class="nf">properties</span><span class="p">.</span><span class="nf">can_id</span> <span class="o">=</span> <span class="mh">0x42</span>
+<span class="n">syskit_configure</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="testing-the-component-behavior">Testing the component behavior</h2>
+
+<p>Due to a component's essentially asynchronous behavior, behavior tests need to
+be broken down into two parts:</p>
+
+<ol>
+  <li>an action</li>
+  <li>an expected reaction</li>
+</ol>
+
+<p>The pattern is</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="no">EXPECTATIONS</span> <span class="p">}</span>
+</code></pre></div>
+<p>Multiple actions and multiple expectations can be provided, in which case they
+are all executed and verified simultaneously.</p>
+
+<p>The actions listed below <strong>must</strong> be executed within an <code>expect_execution</code>
+block. If an action needs to be done without any associated expectation, use the
+<code>execute</code> shortcut:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">execute</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+</code></pre></div>
+<p>Conversely, one sometimes want to verify some component behavior that is not
+related to a particular action (e.g. a periodic output). This is done by
+omitting the action block:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span><span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="no">EXPECTATIONS</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="actions">Actions</h3>
+
+<p>The most common action is to write a sample on a component's input port. This is
+done with <code>syskit_write</code>. Assuming the task under test has an <code>in</code> port, for
+example:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">syskit_deploy_configure_and_start</span><span class="p">(</span>
+    <span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'task'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="no">Types</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">SomeDataType</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">sample</span><span class="p">.</span><span class="nf">value</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">sample</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="no">EXPECTATIONS</span> <span class="p">}</span>
+</code></pre></div>
+<p>If you need to queue more than one sample in a single test, pass them all to
+a single <code>syskit_write</code> call. Calling <code>syskit_write</code> with the same port more
+than once in a single <code>expect_execution</code> does not guarantee the order in which
+the samples will be received.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">sample1</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">sample2</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">sample3</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">mytask</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">sample1</span><span class="p">,</span> <span class="n">sample2</span><span class="p">,</span> <span class="n">sample3</span> <span class="p">}.</span><span class="nf">to</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></div>
+<p>Finally, if your test needs to write more than a few tens of samples to a single
+port, in multiple <code>expect_execution</code> calls, you must create the writer
+explicitly, like this:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">writer</span> <span class="o">=</span> <span class="n">syskit_create_writer</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="ss">type: :buffer</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">20</span>
+<span class="mi">1000</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
+   <span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">writer</span><span class="p">,</span> <span class="n">sample</span> <span class="p">}.</span><span class="nf">to</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This applies only if the writes are spread across multiple <code>syskit_write</code> calls.
+If it is to be in a single <code>expect_execution</code>, just pass them all to a single
+<code>syskit_write</code> call as well:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">mytask</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="o">*</span><span class="p">([</span><span class="n">sample</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">}.</span><span class="nf">to</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></div>
+<p>The second type of action is to start or stop the component. This is done by
+emitting the start and stop events with <code>start!</code> and <code>stop!</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="no">EXPECTATIONS</span> <span class="p">}</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">stop!</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="no">EXPECTATIONS</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="expectations">Expectations</h3>
+
+<p>The two most common expectations are</p>
+
+<ol>
+  <li>checking samples (or lack of) read from output port(s)</li>
+  <li>checking that the component transitions to different state(s).</li>
+</ol>
+
+<p>(1) is done with either <code>have_one_new_sample</code> or <code>have_no_new_sample</code></p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">sample</span> <span class="o">=</span> <span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+<span class="c1"># Now check the value of sample</span>
+<span class="n">assert_equal</span> <span class="mi">20</span><span class="p">,</span> <span class="n">sample</span><span class="p">.</span><span class="nf">value</span>
+
+<span class="c1"># Checks that no samples arrives on the `out` port for at least 0.5s</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_no_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span><span class="p">,</span> <span class="ss">at_least_during: </span><span class="mf">0.5</span> <span class="p">}</span>
+</code></pre></div>
+<p>(2) is done by checking that the component emits the events corresponding
+to the states. For instance, to check that the component transitions to an
+exception due to an invalid input, one would write</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">invalid_sample</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">exception_event</span> <span class="p">}</span>
+</code></pre></div>
+<p>Multiple expectations can be verified at the same time. The test will finish
+only when all of them are verified, or if any of them is known to be impossible.
+For instance, one could check that the <code>out1</code> port has a sample, <code>out2</code> does
+not and the component transition to the active state with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="k">do</span>
+        <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out1_port</span>
+        <span class="n">have_no_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out2_port</span>
+        <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">active_event</span>
+    <span class="k">end</span>
+</code></pre></div>
+<p>The value returned by the whole expectation is the last value of the block. In
+the previous case, you would need to forward the return value of
+<code>have_one_new_sample</code> to get access to it after the call:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="k">do</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out1_port</span>
+        <span class="n">have_no_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out2_port</span>
+        <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">active_event</span>
+        <span class="n">sample</span>
+    <span class="k">end</span>
+</code></pre></div>
+<p>Or, since the expectations are tested <em>simultaneously</em>, just reorder them in the
+block to make sure <code>have_one_new_sample</code> is last:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="k">do</span>
+        <span class="n">have_no_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out2_port</span>
+        <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">active_event</span>
+        <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out1_port</span>
+    <span class="k">end</span>
+</code></pre></div>
+<p>The last value may be an array, for instance to return multiple samples:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTIONS</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="k">do</span>
+        <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">active_event</span>
+        <span class="p">[</span><span class="n">have_one_new_sample</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">out1_port</span><span class="p">),</span>
+         <span class="n">have_one_new_sample</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">out2_port</span><span class="p">)]</span>
+    <span class="k">end</span>
+</code></pre></div>
+<h3 id="testing-failures-while-the-component-is-running">Testing failures while the component is running</h3>
+
+<p>At runtime, that is <strong>after</strong> the component started until <strong>after</strong> it
+stopped, failures (exceptions) map to Syskit events. Assert that the expected
+event is emitted:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTION</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">some_exception_event</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="testing-configuration-or-start-failures">Testing configuration or start failures</h3>
+
+<p>While the component is not running, failure handling does not use the task's
+events (events cannot be emitted while the task is not running). You have
+to instead use the exception handling mechanisms. In both cases, the predicate
+to look for is <code>fail_to_start</code>. However, the way to "trigger" the configuration
+or start differ (there is currently no way to direct the test harness to configure
+a component)</p>
+
+<p>For configuration:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span><span class="p">.</span><span class="nf">scheduler</span><span class="p">(</span><span class="kp">true</span><span class="p">).</span><span class="nf">to</span> <span class="p">{</span> <span class="n">fail_to_start</span> <span class="n">task</span> <span class="p">}</span>
+</code></pre></div>
+<p>and for start:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">fail_to_start</span> <span class="n">task</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="testing-component-input-and-output-during-start-and-stop-transitions">Testing component input and output during start and stop transitions</h3>
+
+<p>If you want to test what happens <em>during</em> a configuration, start or stop
+transition, you need to call <code>join_all_waiting_work(false)</code> on the value
+returned by <code>expect_execution</code>. This is needed only for expectations during
+which the task will not "have finished" to configure, start (or stop), e.g.:</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">sample</span> <span class="o">=</span> <span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">data</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">data</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">start_event</span> <span class="p">}</span>
+</code></pre></div>
+<p>If, instead, a single <code>expect_execution</code> is sufficient to test a whole start, you
+would omit <code>join_all_waiting_work</code></p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">sample</span> <span class="o">=</span> <span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+</code></pre></div>
+<p>In the first example, we expected a write from the component itself in the first
+<code>expect_execution</code>. We therefore know for sure that the component is in its
+<code>startHook</code> during the second <code>expect_execution</code>.</p>
+
+<p>When that's not the case, we can't simply call <code>syskit_write</code> first. This is
+because the <code>startHook</code> <a href="writing_the_hooks.html#ports">clears all inputs ports</a>.
+We have to ensure that the write happens after the clear was done. If there is
+no way to synchronize (such as the own component's write above), you will have
+to repeatedly write a sample until the component reads it. For this, the
+<code>expect_execution</code> harness offers <code>poll</code>.</p>
+
+<p>Moreover, in this instance, you can't use <code>syskit_write</code>. <code>syskit_write</code> creates
+a new port writer each time it is called, and since we will be doing so
+repeatedly it could create a lot of writers (which can cause problems). Instead,
+we create the writer outside the <code>expect_execution</code> and use it inside.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Prepare the sample you want to send</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">syskit_create_writer</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}</span>
+    <span class="c1"># only needed if the component won't be started at the end of this expectation</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">poll</span> <span class="p">{</span> <span class="n">writer</span><span class="p">.</span><span class="nf">write</span> <span class="n">sample</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></div>
+<p>In case it is not the <code>startHook</code>, but the <code>configureHook</code> that is being tested,
+you will need to start the component's deployment before you can create the writer:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Prepare the sample you want to send</span>
+<span class="n">syskit_start_execution_agents</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">syskit_create_writer</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span>
+<span class="n">expect_execution</span>
+    <span class="p">.</span><span class="nf">scheduler</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+    <span class="c1"># only needed if the component won't be configured at the end of this expectation</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">poll</span> <span class="p">{</span> <span class="n">writer</span><span class="p">.</span><span class="nf">write</span> <span class="n">sample</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></div>
+<p>Note that this "send repeatedly" mecanism mimics the reality: if a component
+does not have a mean of explicit synchronization, the input messages it expects
+would have to be sent repeatedly until it reads one.</p>
+
+<h2 id="using-test-components">Using test components</h2>
+
+<p>For some generic base component implementations, it can be beneficial to create
+a specific "stub" subclass of the component, or a "pair" component that will
+mock an expected "client". These test components should be defined in a <code>test</code>
+namespace, which ensures that the component will only be tested if the tests are
+enabled. In the orogen file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s1">'test::SlaveTask'</span><span class="p">,</span> <span class="ss">subclasses: </span><span class="s1">'Task'</span> <span class="k">do</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In the test file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">syskit_deploy</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="p">.</span><span class="nf">test</span><span class="o">.</span><span class="no">SlaveTask</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'test'</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Note</strong> that one would expect the test-specific component to be used in the
+test file for the base class, e.g. <code>task_test.rb</code> in the case above.</p>
+
+<h2 id="running-the-tests">Running the tests</h2>
+
+<p>Tests are started from within the package's build dir. Go into that directory
+with <code>acd -b path/to/package</code></p>
+
+<p>The complete test suite can be run with <code>ctest</code>. Use the <code>-V</code> option to get the
+complete output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code># Go in the package's build directory
+acd -b .
+ctest -V
+</code></pre></div>
+<p>If you want to focus on a particular test, run the syskit orogen tests manually
+with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>acd -b .
+syskit orogen-test `alocate .`/test/task_test.rb --workdir bundle -- "-n=/FILTER/"
+</code></pre></div>
+<p>where FILTER is a regular expression that should match the name of the test(s)
+you want to run.</p>
+
+<h2 id="using-a-debugger-or-valgrind">Using a Debugger or Valgrind</h2>
+
+<p>If you need to run the task under valgrind, pass the corresponding option to the
+<code>deployed_as</code> statement:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">syskit_deploy</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as</span><span class="p">(</span><span class="s1">'test'</span><span class="p">,</span> <span class="ss">valgrind: </span><span class="kp">true</span><span class="p">))</span>
+</code></pre></div>
+<p>Alternatively, you can start the component process manually within your debugger
+of choice (e.g. using <a href="https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock">rock.vscode's oroGen
+launcher</a>
+and tell the test to attach to it by replacing <code>deployed_as</code> with
+<code>deployed_as_unmanaged</code>.</p>
+
+<p>Start the component first before you run the test, or the tests might time out
+while waiting for the component to be started. This works best with the
+<code>-n=/FILTER/</code> option described above.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">syskit_deploy</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as_unmanaged</span><span class="p">(</span><span class="s1">'test'</span><span class="p">))</span>
+</code></pre></div>
+<p>In both cases, the standard default timeout used by the <code>expect_execution</code>
+statements will probably not be enough. Change it globally to something like one
+minute in the topmost <code>before</code> block with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">self</span><span class="p">.</span><span class="nf">expect_execution_default_timeout</span> <span class="o">=</span> <span class="mi">60</span>
+</code></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

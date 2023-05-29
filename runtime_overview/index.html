@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="runtime_overview runtime_overview_index">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Runtime Overview</a></span><ul><li class='child active'><a href="./">Introduction</a></li><li class='child'><a href="task_structure.html">Task Structures</a></li><li class='child'><a href="event_loop.html">Event Loop</a></li><li class='child'><a href="exceptions.html">Errors</a></li><li class='child'><a href="live_data.html">Live Data Visualization</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 id="syskit-runtime-behavior">Syskit Runtime Behavior</h1>
+
+<p>This part of the documentation deals with the Syskit "runtime model", that is
+how Syskit manages a system at runtime, the underlying mechanisms of execution
+and how a user can interact with a Syskit system.</p>
+
+<p>Later on this page, I will give a high-level explanation of <a href="../basics/deployment.html#final_video">the video we've
+seen at the end of the Basics
+section</a>. We will then get deeper
+into each part of Syskit that handle Syskit's runtime behavior: an overview of
+the <a href="event_loop.html">Syskit execution</a> and of <a href="exceptions.html">error
+representation and common type of errors</a></p>
+
+<p>This is the first part that will deal with runtime aspects. For more advanced
+related topics, one may want to also read all about
+<a href="../coordination/">coordination</a>.</p>
+
+<h2 id="actions-and-jobs">Actions and Jobs</h2>
+
+<p>In the <a href="../basics">Basics</a> part, we've seen how to define network of
+components on a <a href="../basics/devices.html">profile</a>, and that this profile could be then exposed on an
+action interface, which allowed us <a href="../basics/deployment.html">in the last
+part</a> to control the system.
+An <strong>action</strong> is an abstract concept that represents one thing the system can do.
+In order to actually have it executed, one starts a <strong>job</strong>.
+Once a job has been started it can be dropped, that is tell Syskit that this
+particular job is not part of current system's goal.</p>
+
+<p>All job-related commands are processed in batches: they are queued, and sent
+to the Syskit app and processed by it all at once. We will see the
+reason for this later in this section.</p>
+
+<h2 id="scheduling-and-garbage-collection">Scheduling and Garbage Collection</h2>
+
+<p>Starting the first two jobs from the IDE seemed to be a very transparent
+process. However, behind the scenes, even this seemingly simple actions require
+a bunch of things, such as (in no particular order):</p>
+
+<ul>
+  <li>connecting to the Gazebo task that handle our arm model</li>
+  <li>creating the joint constant generator task</li>
+  <li>connecting the two</li>
+  <li>configuring and starting the components</li>
+</ul>
+
+<p>The sequencing of these different actions is controlled by Syskit's
+<strong>scheduler</strong>. While the overall scheduler could be in principle arbitrary,
+Syskit internally relies on services that are currently provided by
+the temporal scheduler (that you had to set <a href="../basics/getting_started.html#initial_setup">in the initial bundle
+setup</a>). Startup of
+the <code>arm_safe_position_def</code> job looks like this:</p>
+
+<div id="job_start_step_by_step" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#job_start_step_by_step" data-slide-to="0" class="active"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="1"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="2"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="3"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="4"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="5"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="6"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="7"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="8"></li>
+    <li data-target="#job_start_step_by_step" data-slide-to="9"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active"><img src="media/scheduling_1.png" alt="start of the execution agents" /></div>
+    <div class="item"><img src="media/scheduling_2.png" alt="RubyTask ready" /></div>
+    <div class="item"><img src="media/scheduling_3.png" alt="Gazebo ready" /></div>
+    <div class="item"><img src="media/scheduling_4.png" alt="start JointPositionGenerator" /></div>
+    <div class="item"><img src="media/scheduling_5.png" alt="Wait" /></div>
+    <div class="item"><img src="media/scheduling_6.png" alt="JointPositionGenerator started" /></div>
+    <div class="item"><img src="media/scheduling_7.png" alt="Wait" /></div>
+    <div class="item"><img src="media/scheduling_8.png" alt="start ModelTask" /></div>
+    <div class="item"><img src="media/scheduling_9.png" alt="ModelTask running" /></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#job_start_step_by_step" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#job_start_step_by_step" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<p>Now, let's look at stopping things.</p>
+
+<p>If we have the two initial jobs running (<code>ur10_fixed_dev</code> and
+<code>arm_safe_position_def</code>) and stop the latter first and then the former. Focus
+on the right panel, that shows the state of the "real" components (i.e. not the
+compositions).</p>
+
+<div class="fluid-video" id="start_stop_video">
+  <iframe width="853" height="480" src="https://www.youtube.com/embed/OHFCvVYZSO8?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>When <code>arm_safe_position_def</code> was stopped, only the setpoint generator
+<code>joint_position_setpoint</code> has been stopped. The <code>ModelTask</code>
+<code>gazebo:empty_world:ur10_fixed</code> is still running. This is because we still have
+the <code>ur10_fixed_dev</code> action running and that this action "depends on" the
+component. When we stop <code>ur10_fixed_dev</code>, this one is stopped as well.  At the
+end, starting the <code>arm_safe_position_def</code> by itself starts both components, and
+stopping it stops both.</p>
+
+<p>Syskit maintains a set of components and compositions that are currently in use
+by its goals. Everything else is "not useful" and stopped. This relies on two
+things: the internal relationships between compositions and components which
+tracks the "usefulness" of a task, and a garbage collection mechanism that
+stops and removes not-useful tasks.</p>
+
+<p>In a nutshell, so far:</p>
+
+<ul>
+  <li>"starting" or "killing" a job is actually either adding a new goal
+or removing an existing goal from Syskit's goal set</li>
+  <li>the scheduler is what actually starts things based on this goal set</li>
+  <li>the garbage collector is what actually stops things based on this goal set</li>
+</ul>
+
+<h2 id="transitions">Transitions</h2>
+
+<p>One of Syskit's most important features is its ability to transparently
+<em>transform</em> the component network to build one or a combination of behaviors.
+We have seen this interactively in the video we saw <a href="../basics/deployment.html#final_video">at the end of the Basics
+section</a>: the system was maintaining the
+<code>arm_safe_position_def</code> and we transitioned it into a parametrized
+<code>arm_cartesian_constant_control_def</code> to move its tip into a given cartesian
+position. This entailed changing the network from a simple joint command to a
+network that can do cartesian arm control. What we saw was that the transition
+happened smoothly: the arm was controlled during the change of system
+configuration.</p>
+
+<p>The same mechanisms are key to autonomously transitioning between behaviours.
+This is how one can build <a href="../coordination/">coordination</a> models.</p>
+
+<p>When we transitioned from the joint control to the cartesian control, we first
+<strong>queued</strong> the action start and the action drop and then processed them at
+once.  When we clicked <code>Process</code>, the two changes were processed <em>together</em>.
+That is, Syskit could understand that the intent was to stop an action and
+start a new one <em>at the same time</em>, which it handled as a transition.
+Generally speaking, Syskit's execution engine acts as an <strong>event loop</strong>, in which all events that
+are received at the same time are processed <em>as if</em> they happened at the
+same time.</p>
+
+<p>What if we dropped the action first, and only then
+started <code>arm_cartesian_constant_control_def</code> ? Syskit would have applied the
+kill <em>first</em> and then the start. We would have basically had the same effect
+than in <a href="#start_stop_video">the video we just saw</a>, with the arm falling
+uncontrolled.</p>
+
+<p>What if we started
+<code>arm_cartesian_constant_control_def</code> and only then dropped the existing job ?</p>
+
+<div class="fluid-video">
+  <iframe width="853" height="480" src="https://www.youtube.com/embed/0N3ux-1pj4s?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p id="deployment_failure">Ouch … The start command failed. This is because we've tried to run two
+different control chains that controlled the same device. This is an
+impossibility, and the request is therefore rejected by Syskit's network
+generation.</p>
+
+<p class="next-page"><strong>Next</strong>: We'll now get to understand all of this step-by-step, starting with <a href="task_structure.html">Syskit's
+task structure</a>, how Syskit tracks a system's state.</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

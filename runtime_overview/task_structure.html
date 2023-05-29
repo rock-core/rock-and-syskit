@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="runtime_overview runtime_overview_task_structure">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Runtime Overview</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="task_structure.html">Task Structures</a></li><li class='child'><a href="event_loop.html">Event Loop</a></li><li class='child'><a href="exceptions.html">Errors</a></li><li class='child'><a href="live_data.html">Live Data Visualization</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="task-structures">Task Structures</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#dependency" id="markdown-toc-dependency">Dependency Graph</a></li>
+  <li><a href="#execution_agents" id="markdown-toc-execution_agents">Execution Agents</a></li>
+  <li><a href="#planning_task" id="markdown-toc-planning_task">Planning Tasks</a></li>
+  <li><a href="#usefulness" id="markdown-toc-usefulness">Jobs, Permanent Tasks and Usefulness</a></li>
+</ul>
+
+<p>Key to the scheduler and garbage collection mechanisms is Syskit's ability to
+maintain the set of components that are useful for the currently active jobs.</p>
+
+<p>Internally, Syskit maintains a set of directed graphs that represent the
+relationship between the components. These graphs are built so that the target
+of an edge is "useful" to the source of the edge. Obviously, this "usefulness"
+relationship is transitive, that is the target-of-a-target is useful to the
+root.</p>
+
+<p>In addition to representing a notion of usefulness, these relations also generally
+encode temporal relationships between the tasks. This page will hint at these, but
+we will see it later on <a href="exceptions.html">when we talk about exceptions</a>.</p>
+
+<h2 id="dependency">Dependency Graph</h2>
+
+<p>We've actually already seen one of these graphs: the <em>dependency graph</em> is what
+binds compositions to the composition children.  The tree structure we can see
+in the IDE when displaying information about a composition is a representation
+of this graph. The composition child (target in the edge) is useful to the
+parent (the source):</p>
+
+<p><img src="media/composition_dependency_graph.svg" alt="A composition dependency graph" class="fullwidth" /></p>
+
+<p>An edge in this graph encodes that the child must be "running" for its parent
+to function nominally.</p>
+
+<p class="callout callout-info">Note that the dependency graph is not necessarily a tree. A task can be shared
+among multiple functions, that is have multiple parents.</p>
+
+<h2 id="execution_agents">Execution Agents</h2>
+
+<p>The other graph that is of importance for us right now is the <em>execution agent</em>
+graph.  It represents a "execution support" relationship between a component -
+the one that is being executed - and the process that is actually executing it
+- the agent.</p>
+
+<p>The composition is therefore the source and its child the target. The agent is
+the target. In Syskit, this is used to represent the link between a component
+and the process that is actually "containing" it, such as Gazebo for our
+<code>ModelTask</code>, or the deployment of an orogen component. The two <code>Deployment::</code>
+tasks below are the agents for the corresponding components:</p>
+
+<p><img src="media/scheduling_4.png" alt="Example of execution agents" class="fullwidth" /></p>
+
+<p>The agent relationship is a lot stronger than the dependency relation. When a
+child in a dependency relation stops, the function can be recovered by e.g.
+simply restarting the child. If a component's agent dies, the component <em>is
+already dead</em>. This is unrecoverable.</p>
+
+<h2 id="planning_task">Planning Tasks</h2>
+
+<p>Jobs, when added to the system, are <em>abstract</em>. They represent the intent to
+deploy a certain component network, but the computation required to deploy the
+network has not yet been done. The jobs are related to another task that represents
+the process of computing the network through the <strong>Planning</strong> relation. This allows
+Syskit to represent error cases where the network cannot be computed (as e.g. the
+case we saw <a href="./#deployment_failure">at the end of the introduction</a>.</p>
+
+<p>Syskit-related planning is handled by <code>InstanceRequirementTask</code>:</p>
+
+<div id="planned_by" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#planned_by" data-slide-to="0" class="active"></li>
+    <li data-target="#planned_by" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active"><img src="media/planned_by_1.png" alt="start of the execution agents" /></div>
+    <div class="item"><img src="media/planned_by_2.png" alt="start of the execution agents" /></div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#planned_by" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#planned_by" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<h2 id="usefulness">Jobs, Permanent Tasks and Usefulness</h2>
+
+<p>We've already seen the jobs. Internally, Syskit simply remembers that a certain
+set of components are jobs. The garbage collection algorithm then determines
+what tasks are not useful by following the task structure.</p>
+
+<p>Because it is more optimal sometimes to keep some tasks alive, even though
+these tasks are not useful to the jobs, Syskit also maintains a set of
+<em>permanent tasks</em>. Once the cartesian control is started, its deployment keeps
+on running even if the job is stopped.  Because of the high cost of starting a
+whole process, and of configuring a component, Syskit marks the deployments as
+permanent. If one of them was to be killed, this would not affect the rest of
+the system, and it would be restarted when needed.</p>
+
+<p class="next-page"><strong>Next</strong>: now that we understand how Syskit determines a component's
+usefulness, we may get to <a href="event_loop.html">the event loop</a>
+which will detail among other things the scheduling and garbage collection
+mechanisms.</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="coordination coordination_action_methods">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Coordination</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="generalities.html">Generalities</a></li><li class='child'><a href="tasks_and_events.html">Tasks and Events</a></li><li class='child active'><a href="action_methods.html">Action Methods</a></li><li class='child'><a href="action_state_machines.html">Action State Machines</a></li><li class='child'><a href="component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="action-methods">Action Methods</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#definition" id="markdown-toc-definition">Definition</a></li>
+  <li><a href="#return-value" id="markdown-toc-return-value">Return Value</a></li>
+  <li><a href="#exception-handling" id="markdown-toc-exception-handling">Exception Handling</a></li>
+  <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
+  <li><a href="#use-cases" id="markdown-toc-use-cases">Use Cases</a>    <ul>
+      <li><a href="#generation-of-complex-parameters-from-simpler-action-arguments" id="markdown-toc-generation-of-complex-parameters-from-simpler-action-arguments">Generation of complex parameters from simpler action arguments</a></li>
+      <li><a href="#dynamic-dependency-injection" id="markdown-toc-dynamic-dependency-injection">Dynamic Dependency Injection</a></li>
+    </ul>
+  </li>
+  <li><a href="#and-many-other-things" id="markdown-toc-and-many-other-things">And many other things</a></li>
+</ul>
+
+<p>So far, we know of one way to create actions, by importing a whole profile in
+an action interface using the <code>use_profile</code> statement. This is rather static:
+the only parametrization is by passing arguments to the toplevel composition
+of the network, which may trickle down to lower levels.</p>
+
+<p>This section will present a second way, which allows to actually run code to
+"implement" the action. It essentially runs a method on the action interface,
+whose job is to create a small "plan" later executed by Syskit.</p>
+
+<p>This section will go through the general syntax for such actions, and will
+list a few use-cases for such actions.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>Action methods are methods that are defined on an action interface. To "export"
+them as actions, one must do a declaration before the method definition using
+the <code>describe</code> statement:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"a simple action"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">a_simple_action</span>
+    <span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">.</span><span class="nf">new</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The name of the method becomes the name of the action. The string given to
+<code>describe</code> is documentation only.</p>
+
+<p>If the action requires arguments, you must both declare them and allow them
+to be passed to the method as a keyword argument:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"a simple action"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"arg0"</span><span class="p">,</span> <span class="s2">"some documentation"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">a_simple_action</span><span class="p">(</span><span class="n">arg0</span><span class="p">:)</span>
+    <span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">arg0: </span><span class="n">arg0</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Optional arguments may be defined the same way, and require a default value.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"a simple action"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">optional_arg</span><span class="p">(</span><span class="s2">"arg1"</span><span class="p">,</span> <span class="s2">"some documentation"</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">a_simple_action</span><span class="p">(</span><span class="ss">arg1: </span><span class="mi">42</span><span class="p">)</span>
+    <span class="no">Tasks</span><span class="o">::</span><span class="no">ASimpleAction</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">arg1: </span><span class="n">arg1</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="return-value">Return Value</h2>
+
+<p>As with all actions, action methods are represented by a single "root" task. The
+action's return value is this very task.</p>
+
+<p>You <strong>MUST</strong> specify the type of the task that is being returned, the way
+we've done it in the examples above. It can be either its exact type, or a
+parent class. For instance, all actions could have a <code>returns(Roby::Task)</code>, but
+this would lead to a very confusing system (a.k.a. don't do that).</p>
+
+<p>Specifying task return types becomes even more important when creating <a href="action_state_machines.html">action
+state machines</a>, as the return type is used to
+determine which events are available for the state machine to transition on.</p>
+
+<p class="note">For historical reasons, if there is no return type specified, Syskit
+auto-generates a task model whose name is based on the action name (e.g.
+<code>ASimpleAction</code> for our action above). Do not rely on this behavior, which ended
+up being a lot more confusing than useful.</p>
+
+<h2 id="exception-handling">Exception Handling</h2>
+
+<p>The failure of an action method does <em>not</em> change the currently executed
+system. The changes are being made in a <em>transaction</em> that is rolled back if
+the action method raises an exception. In addition, the action's planning
+taks will fail in this case, which should allow your reporting subsystem or
+<a href="higher_level_control.html">higher-level control</a> to react.</p>
+
+<h2 id="tests">Tests</h2>
+
+<p>You can run an action through the action instanciation codepath using the
+<code>roby_run_planner</code> statement, e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">roby_run_planner</span> <span class="no">MyInterface</span><span class="p">.</span><span class="nf">my_action</span>
+<span class="c1"># Look for properties on `task`</span>
+</code></pre></div>
+<p>arguments are naturally passed to the action:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">roby_run_planner</span> <span class="no">MyInterface</span><span class="p">.</span><span class="nf">my_action</span><span class="p">(</span><span class="ss">arg1: </span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Look for properties on `task`</span>
+</code></pre></div>
+<h2 id="use-cases">Use Cases</h2>
+
+<h3 id="generation-of-complex-parameters-from-simpler-action-arguments">Generation of complex parameters from simpler action arguments</h3>
+
+<p>Let's consider a drone. The drone will usually have a trajectory following
+definition, which allows it to move along a curve, following some parameters
+such as for instance speed. Let's assume that the definition that implements
+this trajectory follower is called <code>trajectory_follower</code> in a <code>Navigation</code>
+profile. This definition's toplevel composition is <code>Compositions::TrajectoryFollowing</code>.</p>
+
+<p>Now, there are a lot of use-cases where generating a full trajectory is a
+rather complicated endeavour. We might want to design the system to provide
+higher-level behaviors such as <code>survey</code>, that would do a sweep of an area, or
+<code>straight_line</code> which does a line.</p>
+
+<p>One way to implement these would be to create separate compositions (possibly
+subclasses of the same base composition) that generate a trajectory based
+on their parameters, and write them to the trajectory follower.</p>
+
+<p>Another way is to keep the single trajectory following definition, but create
+one action per behavior, which generates the trajectory and returns the
+properly parametrized trajectory following definition:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Navigation</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+    <span class="n">use_profile</span> <span class="no">Profiles</span><span class="o">::</span><span class="no">Navigation</span>
+
+    <span class="n">describe</span><span class="p">(</span><span class="s2">"goes on a straight line"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"start_p"</span><span class="p">,</span> <span class="s2">"starting point, as an Eigen::Vector3"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"end_p"</span><span class="p">,</span> <span class="s2">"end point, as an Eigen::Vector3"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"speed"</span><span class="p">,</span> <span class="s2">"speed at which to execute the trajectory"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">Compositions</span><span class="o">::</span><span class="no">TrajectoryFollowing</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">straight_line</span><span class="p">(</span><span class="n">start_p</span><span class="p">:,</span> <span class="n">end_p</span><span class="p">:,</span> <span class="n">speed</span><span class="p">:)</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">model</span><span class="p">.</span><span class="nf">trajectory_follower_def</span><span class="p">(</span>
+            <span class="ss">trajectory: </span><span class="n">straight_line_trajectory</span><span class="p">(</span><span class="n">start_p</span><span class="p">,</span> <span class="n">end_p</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="c1"># @api private</span>
+    <span class="c1">#</span>
+    <span class="c1"># Helper that converts two points into a straight line trajectory</span>
+    <span class="k">def</span> <span class="nf">straight_line_trajectory</span><span class="p">(</span><span class="n">start_p</span><span class="p">,</span> <span class="n">end_p</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="o">...</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="dynamic-dependency-injection">Dynamic Dependency Injection</h3>
+
+<p>Thanks to action methods, it is possible to dynamically <a href="../component_networks/reusable_networks.html#injection">inject dependencies</a>
+Until now, the only mean we have seen was to pre-define the injections in the
+profiles and export them as action. Actions methods will allow to make the
+injection dependent on e.g. an action argument.</p>
+
+<p>For instance, in a 4-camera teleoperated system, we could choose a main and
+auxiliary camera using a <code>ui_camera_streamer</code> action:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">UI</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+    <span class="n">use_profile</span> <span class="no">Profiles</span><span class="o">::</span><span class="no">UI</span>
+
+    <span class="n">describe</span><span class="p">(</span><span class="s2">"runs the UI while selecting the current camera"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"main_camera"</span><span class="p">,</span> <span class="s2">"the camera to use as main"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">Compositions</span><span class="o">::</span><span class="no">CameraStreamer</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ui_camera_streamer</span><span class="p">(</span><span class="n">main_camera</span><span class="p">:)</span>
+        <span class="c1"># `resolve_cameras` is a helper that verifies the parameters,</span>
+        <span class="c1"># and returns the camera devices from Profiles::Base in the right</span>
+        <span class="c1"># order for injection</span>
+        <span class="n">main_camera</span><span class="p">,</span> <span class="n">left_thumb</span><span class="p">,</span> <span class="n">center_thumb</span><span class="p">,</span> <span class="n">right_thumb</span> <span class="o">=</span>
+            <span class="n">resolve_cameras</span><span class="p">(</span><span class="n">main_camera</span><span class="p">)</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">model</span><span class="p">.</span><span class="nf">camera_streamer_def</span>
+            <span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="s1">'main_camera'</span> <span class="o">=&gt;</span> <span class="n">main_camera</span><span class="p">,</span>
+                 <span class="s1">'left_thumb'</span> <span class="o">=&gt;</span> <span class="n">left_thumb</span><span class="p">,</span>
+                 <span class="s1">'center_thumb'</span> <span class="o">=&gt;</span> <span class="n">center_thumb</span><span class="p">,</span>
+                 <span class="s1">'right_thumb'</span> <span class="o">=&gt;</span> <span class="n">right_thumb</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="and-many-other-things">And many other things</h2>
+
+<p><em>In fine</em>, the action methods give direct access to Syskit's execution data
+structures. We will see how this can be leveraged for other uses in further
+sections of this chapter, as for instance the <a href="higher_level_control.html">creation of higher level controllers</a>
+or with the <a href="event_scheduling.html">event scheduling</a>.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

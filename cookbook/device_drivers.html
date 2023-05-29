@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="cookbook cookbook_device_drivers">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Cookbook</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="device-drivers">Device Drivers</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#roles-of-library-component-and-syskit" id="markdown-toc-roles-of-library-component-and-syskit">Roles of library, component and Syskit</a></li>
+  <li><a href="#guidelines" id="markdown-toc-guidelines">Design Guidelines</a>    <ul>
+      <li><a href="#reading-and-writing-threads" id="markdown-toc-reading-and-writing-threads">Reading and writing threads</a></li>
+      <li><a href="#saved-configuration" id="markdown-toc-saved-configuration">Saved Configuration</a></li>
+      <li><a href="#retrying" id="markdown-toc-retrying">Retrying</a></li>
+    </ul>
+  </li>
+  <li><a href="#implementation-using-iodriversbase" id="markdown-toc-implementation-using-iodriversbase">Implementation using <code>iodrivers_base</code></a>    <ul>
+      <li><a href="#library" id="markdown-toc-library">Library</a></li>
+      <li><a href="#component" id="markdown-toc-component">Component</a></li>
+    </ul>
+  </li>
+  <li><a href="#syskit-integration" id="markdown-toc-syskit-integration">Syskit Integration</a>    <ul>
+      <li><a href="#device-model" id="markdown-toc-device-model">Device model</a></li>
+      <li><a href="#device-driver-component" id="markdown-toc-device-driver-component">Device Driver Component</a></li>
+      <li><a href="#usage" id="markdown-toc-usage">Usage</a></li>
+      <li><a href="#logging" id="markdown-toc-logging">Logging</a></li>
+      <li><a href="#monitoring" id="markdown-toc-monitoring">Monitoring</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>From the perspective of this howto, a device driver really is a piece of
+software that interacts with another piece of software through OS-provided
+I/O, that could be low-level protocols (serial) or higher-level ones
+(network). This <em>howto</em> will explain what Rock provides you to integrate this
+type of I/O at the library and component level. See the <a href="../component_networks/devices_and_busses.html">network design page on
+devices and busses for the Syskit integration of these devices</a></p>
+
+<p>We also will provide design guidelines on how to interact with the special
+case of interacting with actual devices, that is the sensors and actuators
+that form your system.</p>
+
+<h2 id="roles-of-library-component-and-syskit">Roles of library, component and Syskit</h2>
+
+<p>As with all Rock software, the library must be the place where most of the work
+is being done. See the introduction to <a href="../libraries/">the library section</a>
+for the rationale behind this.</p>
+
+<p>In the more particular context of a device driver, the roles of library and
+component are:</p>
+
+<ul>
+  <li><em>library</em>: provide an API to the device's functionality. Ideally, when it makes
+sense, the API should be using Rock conventions and data types. But the goal
+really is to expose the <strong>device functionality</strong>, without presuming too much
+on how this functionality might be used in your particular robotic system</li>
+  <li><em>component</em>: provide the interface(s) that the robotic system needs. What you
+have to realize is that if the library is well-designed, it will be easy to
+build system-specific tasks if needed (most of the time they're not, but bear
+with me).</li>
+</ul>
+
+<h2 id="guidelines">Design Guidelines</h2>
+
+<h3 id="reading-and-writing-threads">Reading and writing threads</h3>
+
+<p>It is an (unfortunately) common reflex to spawn reading threads, to read the
+data from the device as it arrives. In the context of Rock, this threading is
+<strong>much more safely</strong> taken care of by the component implementation. Libraries
+should be "passive", that is should do something only when called, and do it
+in the thread of the caller.</p>
+
+<p>Of course, if you need to, it is also fine to write a higher-level layer that
+would do the threading <strong>on top of</strong> the driver API. Just don't embed it the driver
+API.</p>
+
+<h3 id="saved-configuration">Saved Configuration</h3>
+
+<p>Do not use <em>saved configuration</em>, that is configuration stored on the device.
+And do not assume that the device has a configuration that you already know,
+unless you explicitely reset it to default configuration each time the device
+connects to it (a valid practice in some cases).</p>
+
+<h3 id="retrying">Retrying</h3>
+
+<p>Use retries only as a very last resort (i.e. to workaround very broken devices).
+The system should be the one dealing with errors. Fail early.</p>
+
+<h2 id="implementation-using-iodriversbase">Implementation using <code>iodrivers_base</code></h2>
+
+<h3 id="library">Library</h3>
+
+<p>Let's start with the first level of implementation, <em>the library</em>. Rock has
+a very neat library meant to deal with I/O, <code>drivers/iodrivers_base</code>. Unless
+you really know what you are doing, we very strongly suggest you start by
+basing your device driver on <code>iodrivers_base</code>.</p>
+
+<p>Check out <a href="https://github.com/rock-core/drivers-iodrivers_base">its README</a>
+for documentation.</p>
+
+<h3 id="component">Component</h3>
+
+<p>As is usual within Rock, the <code>drivers/iodrivers_base</code> library has an equivalent
+oroGen integration. <code>drivers/orogen/iodrivers_base</code>. See
+<a href="https://github.com/rock-core/drivers-orogen-iodrivers_base">its README</a>
+for documentation.</p>
+
+<h2 id="syskit-integration">Syskit Integration</h2>
+
+<p>Two steps are needed to integrate a device driver in your Syskit environment:</p>
+
+<ol>
+  <li>define the supported device's model (if needed)</li>
+  <li>declare that your component is a driver for the device</li>
+</ol>
+
+<p>Then, to use a device, one declares it in a profile's <code>robot</code> context, as we
+have seen <a href="../basics/devices.html">in the Syskit basics tutorial</a>. Between this
+declaration and the loading of a compatible device driver component (with
+<code>using_task_library</code>), Syskit will be able to inject the device in your component
+network.</p>
+
+<h3 id="device-model">Device model</h3>
+
+<p>We have seen device models <a href="../basics/devices.html">in the Syskit basics tutorial</a>.
+The role of a device model is to represent an actual device in a network, without
+necessarily picking <em>how</em> this device will be interfaced with the Syskit system
+just yet.</p>
+
+<p>Because device models represent actual devices, the guideline for device naming
+is to categorize them by manufacturer and model. This makes creating the
+robot block declaration in the system's base profile much easier, as it leaves
+little to guessing.</p>
+
+<p>In practice, the device model hierarchy should follow the
+<code>App::Devices::Type::Manufacturer::Model</code> pattern, for instance
+<code>CommonModels::Devices::Sonar::Tritech::Micron</code>. As an example, let's declare
+the M8-class chip from Ublox.</p>
+
+<p>To create the new device model, one would run</p>
+
+<div class="highlight"><pre class="highlight shell"><code>syskit gen dev GPS::Ublox::M8
+</code></pre></div>
+<p>Within the device model, one declares the services that all drivers for this
+device <strong>must</strong> provide (they <em>may</em> provide more). Let's edit the newly
+created `models/devices/gps/ublox/m8.rb' file and modify the device declaration</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'common_models/services/pose'</span>
+
+<span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Devices</span>
+        <span class="k">module</span> <span class="nn">GPS</span>
+            <span class="k">module</span> <span class="nn">Ublox</span>
+                <span class="n">device_type</span> <span class="s1">'M8'</span> <span class="k">do</span>
+                    <span class="n">provides</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">GlobalPosition</span>
+                    <span class="n">provides</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">GPS</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="device-driver-component">Device Driver Component</h3>
+
+<p>A device driver component is an oroGen component that has been declared as
+being able to drive a device. This is done in the
+<a href="../basics/deployment.html">oroGen extension file</a>.</p>
+
+<p>Let's expand on our hypothetical Ublox M8. If we assume that we have written a
+<code>gps_ublox::M8Task</code> component to drive it, we can generate the orogen extension
+file with:</p>
+
+<div class="highlight"><pre class="highlight shell"><code>syskit gen orogen gps_ublox
+</code></pre></div>
+<p>And edit the created <code>models/orogen/gps_ublox.rb</code> file to add:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'models/devices/gps/ublox/m8'</span>
+
+<span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_task</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">gps_ublox</span><span class="o">.</span><span class="no">M8Task</span> <span class="k">do</span>
+    <span class="n">driver_for</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">Ublox</span><span class="o">::</span><span class="no">M8</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'ublox_m8'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This way, when you load the component model using <code>using_task_library 'gps_ublox'</code>,
+Syskit will be aware that the <code>M8Task</code> component can be used to drive a M8 device.</p>
+
+<h3 id="usage">Usage</h3>
+
+<p>On the usage side, one needs to declare the devices that are available on the
+device. Edit your robot's <code>Base</code> profile, and declare the device. This
+declaration a <code>gps_dev</code> entry in the profile, that can be used directly in
+the Syskit IDE and/or used in dependency injection in the other profiles.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
+    <span class="n">robot</span> <span class="k">do</span>
+        <span class="n">device</span> <span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">Ublox</span><span class="o">::</span><span class="no">M8</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'gps'</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>At runtime, the device configuration is done through the standard orogen
+configuration file(s). The device URI
+(as <a href="https://github.com/rock-core/drivers-iodrivers_base">supported by <code>iodrivers_base</code></a>)
+is given in the <code>io_port</code> property. Drivers should be designed so that only setting
+this property should be enough to have a functional component.</p>
+
+<p>Syskit will automatically pick a configuration with the device's name if one
+is available, e.g. with a configuration file containing two sections</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>--- name:default
+--- name:gps
+</code></pre></div>
+<p>Syskit will use the <code>['default', 'gps']</code> configuration by default (since the
+device declared in the <code>robot</code> block is called <code>gps</code>) for the driver. If the
+<code>gps</code> configuration does not exist, it will simply use <code>default</code>.</p>
+
+<p>In addition to the URI mechanism, the oroGen integration also allows you to
+communicate with the driver through the <code>io_raw_in</code> and <code>io_raw_out</code>
+component ports. To use this, connect the component that will handle the byte
+streams to these two ports and leave <code>io_port</code> empty.</p>
+
+<h3 id="logging">Logging</h3>
+
+<p><code>iodrivers_base</code>-based components "replicate" the data they
+exchange on their <code>io_read_listener</code> and <code>io_write_listener</code> ports. This can
+generate a <em>lot</em> of log data. We recommend that you configure Syskit to not
+log this by default using Syskit's log groups:</p>
+
+<p>In the <code>Robot.config</code> block of your robot configuration file,</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">logs</span><span class="p">.</span><span class="nf">create_group</span> <span class="s1">'RawIO'</span><span class="p">,</span> <span class="ss">enabled: </span><span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+    <span class="n">g</span><span class="p">.</span><span class="nf">add</span> <span class="sr">/iodrivers_base.RawIO/</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>You may then re-enable logging using the Syskit IDE for better debugging</p>
+
+<h3 id="monitoring">Monitoring</h3>
+
+<p><code>iodrivers_base</code>-based components output a <a href="https://github.com/rock-core/drivers-iodrivers_base/blob/master/src/Status.hpp"><code>iodrivers_base/Status</code></a>
+status structure on the <code>io_status</code> port. When things misbehave, this
+structure allows you to determine whether
+- the problem is that a device stopped sending data (<code>good_rx</code>/<code>bad_rx</code> stops
+  increasing)
+- the communication channel is bad or the packet extraction logic has a bug
+  (<code>bad_rx</code> is high)
+- the component stopped sending data even though it should not have (<code>tx</code> stops
+  increasing)</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

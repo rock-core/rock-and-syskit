@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="basics basics_installation">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent active'><span class='parent-label'><a href="./">Basics</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="installation.html">Installation</a></li><li class='child'><a href="day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="getting_started.html">Getting Started</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="constant_generator.html">Constant Generator</a></li><li class='child'><a href="devices.html">Profiles and Devices</a></li><li class='child'><a href="deployment.html">Deployment</a></li><li class='child'><a href="publishing.html">Publishing</a></li><li class='child'><a href="validation.html">Configuration Consistency</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="rock-installation">Rock Installation</h1>
+
+<div class="alert alert-warning" role="alert">
+  <p>If you are already familiar with Rock, note that this guide uses the buildconf
+repository on GitHub
+<a href="https://github.com/rock-gazebo/buildconf"><code>rock-gazebo/buildconf</code></a> instead of
+the default one at
+<a href="https://github.com/rock-core/buildconf"><code>rock-core/buildconf</code></a> to pull
+gazebo-specific packages and configuration. This
+installation guide already reflects this.</p>
+</div>
+
+<ul id="markdown-toc">
+  <li><a href="#supported-operating-systems" id="markdown-toc-supported-operating-systems">Supported Operating Systems</a></li>
+  <li><a href="#install" id="markdown-toc-install">Installation</a></li>
+  <li><a href="#global-setup" id="markdown-toc-global-setup">Global Setup</a>    <ul>
+      <li><a href="#autoloading-envsh-on-new-shells" id="markdown-toc-autoloading-envsh-on-new-shells">Autoloading env.sh on new shells</a></li>
+      <li><a href="#automatic-cleanup-of-omniorb-logs" id="markdown-toc-automatic-cleanup-of-omniorb-logs">Automatic cleanup of omniORB logs</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="supported-operating-systems">Supported Operating Systems</h2>
+
+<p>Rock's primary platform is Ubuntu. The only guarantee made by the Rock team is
+that Rock's current release and master branches work on the current Ubuntu LTS
+version and often works on the latest Ubuntu version.</p>
+
+<p>Rock has no option to install from binary, the only currently supported method
+of install is from source.</p>
+
+<p>Other linux-based platforms (Debian, Arch, …) are known to work, but since they
+don't see regular use, installation may not be as streamlined as on Ubuntu.
+MacOS X also has seen some Rock usage, but is seldom used and therefore can
+cause problems. Windows has seen some preliminary usage.</p>
+
+<h2 id="install">Installation</h2>
+
+<p>First step is to install Ruby. On <strong>Ubuntu 18.04</strong>, we recommend using the 2.5 ruby
+version as shipped by Ubuntu itself</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>sudo apt-get install ruby ruby-dev wget build-essential
+ruby --version
+</code></pre></div>
+<p>Unfortunately, on <strong>Ubuntu 20.04</strong>, the version of Ruby that Ubuntu ships has grave
+bugs that cause some of our tooling to randomly crash. Install ruby with version &gt;= 2.7.4 instead from
+the BrighBox PPA:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>sudo add-apt-repository ppa:brightbox/ruby-ng
+sudo apt-get install ruby2.7 ruby-dev wget build-essential
+ruby --version
+</code></pre></div>
+<ol>
+  <li>
+    <p>Create and "cd" into the directory in which you want to work. This directory will
+contain both the toolchain (that we will install in the next steps), as well as your
+own code. This is called a <em>workspace</em>.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>mkdir dev
+cd dev
+</code></pre></div>  </li>
+  <li>
+    <p>Download autoproj's bootstrap script</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>wget https://raw.githubusercontent.com/rock-core/autoproj/master/bin/autoproj_bootstrap
+</code></pre></div>  </li>
+  <li>
+    <p>Bootstrap your installation. This installs autoproj and checks out
+the main build configuration, but does not check out packages. One must use
+the master flavor of Rock to go through this documentation. Select the
+defaults for all the proposed configuration options.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>ruby autoproj_bootstrap \
+    git https://github.com/rock-gazebo/buildconf
+</code></pre></div>  </li>
+  <li>
+    <p>Update and build the installation's default packages.Select the defaults for all
+the proposed configuration options.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>source env.sh
+aup --all -k
+amake --all -k
+</code></pre></div>  </li>
+</ol>
+
+<p class="callout callout-warning">You <strong>must</strong> remember to source the generated env.sh script at the end of the
+amake command !!! You must also do in new terminals before you can interact with
+the Rock installation</p>
+
+<h2 id="global-setup">Global Setup</h2>
+
+<p>While not strictly required, we recommend to do the following <strong>once</strong>, to help
+support your development using Rock:</p>
+
+<h3 id="autoloading-envsh-on-new-shells">Autoloading env.sh on new shells</h3>
+
+<p>Rock requires you to source a file called <code>env.sh</code>, which configures your shell
+to include the software installed within your Rock workspace. The following <code>aenv</code>
+function is a shell function that will look for <code>env.sh</code> in the current directory
+or one of its parents, and source it. This allows to get env.sh automatically
+loaded when a new shell is created within a Rock workspace, as e.g. when opening
+a terminal in VSCode.</p>
+
+<p>Copy the following in e.g. <code>.bashrc</code></p>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="k">function </span>aenv<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">dir</span><span class="o">=</span><span class="nv">$PWD</span>
+    <span class="k">while </span><span class="nb">test</span> <span class="s2">"x</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"x/"</span><span class="p">;</span> <span class="k">do
+        </span><span class="nb">basename</span><span class="o">=</span><span class="sb">`</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span><span class="sb">`</span>
+        <span class="k">if </span><span class="nb">test</span> <span class="s2">"</span><span class="nv">$basename</span><span class="s2">"</span> <span class="o">!=</span> <span class="s1">'.autoproj'</span> <span class="o">&amp;&amp;</span> <span class="nb">test</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">/env.sh"</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">echo</span> <span class="s2">"sourcing </span><span class="nv">$dir</span><span class="s2">/env.sh"</span>
+            <span class="nb">source</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">/env.sh"</span>
+            <span class="nb">break
+        </span><span class="k">fi
+        </span><span class="nb">dir</span><span class="o">=</span><span class="sb">`</span><span class="nb">dirname</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span><span class="sb">`</span>
+    <span class="k">done
+
+    if </span><span class="nb">test</span> <span class="s2">"x</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"x/"</span><span class="p">;</span> <span class="k">then
+        if </span><span class="nb">test</span> <span class="s2">"x</span><span class="nv">$AUTOPROJ_CURRENT_ROOT</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"x"</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">echo</span> <span class="s2">"found no env.sh file to load"</span>
+        <span class="k">else
+            </span><span class="nb">source</span> <span class="nv">$AUTOPROJ_CURRENT_ROOT</span>/env.sh
+        <span class="k">fi
+    fi</span>
+<span class="o">}</span>
+aenv
+</code></pre></div>
+<h3 id="automatic-cleanup-of-omniorb-logs">Automatic cleanup of omniORB logs</h3>
+
+<p>Rock uses a daemon provided by omniORB, which gets installed the first time
+you bootstrap a Rock workspace. The Debian package (which is used by Ubuntu)
+is done in such a way that causes it sometimes to not start. A log file gets
+corrupted and then the daemon does not start anymore.</p>
+
+<p>To avoid this happening, we recommend that you download
+and install this file: <a href="omniorb4-clean-log.service">omniorb4-clean-log.service</a></p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>sudo cp omniorb4-clean-log.service /lib/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable omniorb4-clean-log
+</code></pre></div>
+<p class="next-page"><strong>Next</strong>: an overview of <a href="day_to_day.html">how to interact day-to-day with the Rock
+workspace</a>. Alternatively, if you already know about it, you
+can go straight to <a href="getting_started.html">setting up Syskit and Gazebo</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

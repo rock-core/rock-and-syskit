@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="workspace workspace_add_packages">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Workspace and Packages</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="conventions.html">Conventions</a></li><li class='child'><a href="setup.html">Starting a New Project</a></li><li class='child active'><a href="add_packages.html">Adding new packages</a></li><li class='child'><a href="os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="global_configuration.html">Global Configuration</a></li><li class='child'><a href="testing.html">Test Integration</a></li><li class='child'><a href="managing.html">Build configuration design</a></li><li class='child'><a href="troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="adding-new-packages">Adding new Packages</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#creating-a-package" id="markdown-toc-creating-a-package">Creating a package</a></li>
+  <li><a href="#adding-the-package-to-the-workspace" id="markdown-toc-adding-the-package-to-the-workspace">Adding the package to the workspace</a></li>
+  <li><a href="#manifest_xml" id="markdown-toc-manifest_xml">Package Description and Dependencies</a></li>
+  <li><a href="#autobuild" id="markdown-toc-autobuild">Declaring a package</a>    <ul>
+      <li><a href="#cmake" id="markdown-toc-cmake">CMake packages</a></li>
+      <li><a href="#autotools" id="markdown-toc-autotools">Autotools packages</a></li>
+      <li><a href="#ruby-packages" id="markdown-toc-ruby-packages">Ruby packages</a></li>
+      <li><a href="#orogen" id="markdown-toc-orogen">oroGen packages</a></li>
+      <li><a href="#simply-checking-out-packages" id="markdown-toc-simply-checking-out-packages">Simply checking out packages</a></li>
+      <li><a href="#custom-package-building" id="markdown-toc-custom-package-building">Custom package building</a></li>
+    </ul>
+  </li>
+  <li><a href="#version_control_resolution" id="markdown-toc-version_control_resolution">Version Control Resolution</a></li>
+  <li><a href="#version_control" id="markdown-toc-version_control">Available Version Control Systems</a>    <ul>
+      <li><a href="#git" id="markdown-toc-git">Git</a></li>
+      <li><a href="#github" id="markdown-toc-github">GitHub</a></li>
+      <li><a href="#git-lfs" id="markdown-toc-git-lfs">Git LFS</a></li>
+      <li><a href="#tar-archives" id="markdown-toc-tar-archives">Tar archives</a></li>
+      <li><a href="#subversion" id="markdown-toc-subversion">Subversion</a></li>
+      <li><a href="#cvs" id="markdown-toc-cvs">CVS</a></li>
+      <li><a href="#patch" id="markdown-toc-patch">Patching after checkout or update</a></li>
+      <li><a href="#how-to-create-a-patch" id="markdown-toc-how-to-create-a-patch">How to create a patch</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>As we already mentioned <a href="./">in the introduction</a>, within Rock, none of
+the packages should actually rely on Autoproj, Rock's build system. C++ Rock
+packages for instance rely on common build systems such as CMake or autotools
+to build, and pkg-config or CMake mechanisms to handle cross-package
+dependencies. Autoproj is only handling the scheduling of the configuration and
+build of each the packages, so that build systems and environment variables are
+set up as required, and dependencies are handled properly.</p>
+
+<p>As such, autoproj mainly needs to know two things about a package:</p>
+
+<ul>
+  <li><a href="#autobuild">what build system it uses</a>. This is done in a Ruby DSL in a file that lies in
+the package set, with a <code>.autobuild</code> extension. One usually starts with a
+<code>packages.autobuild</code> file. The list of declarations in these autobuild files make up the list
+of package names Autoproj knows about.</li>
+  <li><a href="#version_control">how to download it</a>. This is done in YAML in the package
+set's <code>source.yml</code> file we created when we created the package set. When
+looking for a package's version control information. Autoproj allows to
+overlay version control information (for e.g. change the branch that is being
+checked out). As such, it follows <a href="#version_control_resolution">resolution
+rules</a> to list all version control entries that
+match the package name, and compute the corresponding version control setup.</li>
+</ul>
+
+<p class="tip"><strong>Note</strong> for simplicity, it is possible to add autobuild files and define
+version control information straight into the main build configuration (the
+<code>autoproj/</code> folder). The version control information in this case is stored in
+the <code>overrides.yml</code> file instead of <code>source.yml</code>.</p>
+
+<h2 id="creating-a-package">Creating a package</h2>
+
+<p>The first step in creating a package is <a href="conventions.html#naming">to pick a name</a></p>
+
+<p>If you create a package from scratch, Rock provides a set of command-line tools
+to generate package scaffolds for you:</p>
+
+<ul>
+  <li><code>rock-create-lib</code> for a <a href="../libraries/cpp_libraries.html">C++ library</a></li>
+  <li><code>rock-create-rubylib</code> for <a href="../libraries/ruby_libraries.html">Ruby libraries</a></li>
+  <li><code>rock-create-orogen</code> for <a href="../components/">an oroGen component</a></li>
+  <li><code>rock-create-bundle</code> for <a href="../basics/getting_started.html">a bundle</a></li>
+</ul>
+
+<p>Each tool follows the same workflow: run the tool with the package path, and
+answer the tool's questions, e.g.:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>rock-create-lib drivers/imu-myahrs
+</code></pre></div>
+<p>While the other generation scripts create ready-to-use packages, the workflow
+of the <code>rock-create-orogen</code> tool is a bit different. It is covered
+<a href="../components/">in the Components chapter</a></p>
+
+<p>If you are integrating a package that already exists, it should be easy enough
+provided that the package uses widespread build systems and follows common
+conventions (such as having a separate source and build folder, and having an
+install step).</p>
+
+<h2 id="adding-the-package-to-the-workspace">Adding the package to the workspace</h2>
+
+<p>To <strong>share</strong> the package with your teammates, you <strong>must</strong> define the package type
+and VCS information, as detailed in the following of this page.</p>
+
+<p>However, when one starts developing on a new package, this is an unncessary step
+if the package uses a common build system (all rock-generate package templates
+do). Only add the package path to the <code>layout</code> section of <code>autoproj/manifest</code>
+For instance, when creating <code>drivers/imu-myahrs</code> one would do</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>rock-create-lib drivers/imu-myahrs
+</code></pre></div>
+<p>and then add</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">layout</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">...</span>
+  <span class="pi">-</span> <span class="s">drivers/imu-myahrs</span>
+</code></pre></div>
+<p>You will however have to define the package in the autobuild and <code>source.yml</code>
+files before you push the updated manifest to your team members</p>
+
+<h2 id="manifest_xml">Package Description and Dependencies</h2>
+
+<p>For documentation reason, the packages are expected to provide metadata such as
+a description of its purpose, the author(s), license, …</p>
+
+<p>Additionally, it is common for packages to depend on each other, meaning that a
+package needs another package to be there first, for it to build and/or run
+successfully. Autoproj supports having dependencies between source packages
+under its control, as well as with packages from other package managers (i.e.
+the underlying operating system or language-specific managers such as RubyGems
+or PIP). You will see how these packages are defined later in <a href="os_dependencies.html">the OS Dependencies
+section</a>.</p>
+
+<p>All this information is stored in a XML file whose format follows. If the
+package has been created for Rock specifically, it is saved as <code>manifest.xml</code>
+file directly at the root of the package. For packages that already exist but
+are being integrated in Rock, the file should be saved in the package set under
+<code>manifests/package/name.xml</code> (e.g. <code>simulation/gazebo</code>'s manifest is saved in
+<code>manifests/simulation/gazebo.xml</code>).</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+
+<span class="nt">&lt;package&gt;</span>
+  <span class="nt">&lt;description</span> <span class="na">brief=</span><span class="s">"one line of text"</span><span class="nt">&gt;</span>
+    long description goes here,
+    <span class="nt">&lt;em&gt;</span>XHTML is allowed<span class="nt">&lt;/em&gt;</span>
+  <span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;author&gt;</span>Alice/alice@somewhere.bar<span class="nt">&lt;/author&gt;</span>
+  <span class="nt">&lt;author&gt;</span>Bob/bob@nowhere.foo<span class="nt">&lt;/author&gt;</span>
+  <span class="nt">&lt;license&gt;</span>BSD<span class="nt">&lt;/license&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://rock-robotics.org/<span class="nt">&lt;/url&gt;</span>
+
+  <span class="nt">&lt;depend</span> <span class="na">package=</span><span class="s">"pkgname"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;depend</span> <span class="na">package=</span><span class="s">"common"</span><span class="nt">/&gt;</span>
+  <span class="c">&lt;!-- depend can handle both source and osdep packages --&gt;</span>
+  <span class="nt">&lt;depend</span> <span class="na">package=</span><span class="s">"ruby-dev"</span> <span class="nt">/&gt;</span>
+  <span class="c">&lt;!-- a dependency that will only be installed for testing --&gt;</span>
+  <span class="nt">&lt;test_depend</span> <span class="na">package=</span><span class="s">"minitest"</span> <span class="nt">/&gt;</span>
+  <span class="c">&lt;!-- a dependency that can be ignored if it is not available --&gt;</span>
+  <span class="nt">&lt;depend_optional</span> <span class="na">package=</span><span class="s">"gui/vizkit3d"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div>
+<p>The <code>&lt;test_depend …&gt;</code> tag is used for dependencies that are specific to <a href="../basics/day_to_day.html#test">the
+package's test suite</a>. The <code>&lt;depend_optional
+…&gt;</code> allows to <a href="managing.html">avoid building some dependencies within some builds</a>.</p>
+
+<h2 id="autobuild">Declaring a package</h2>
+
+<p>A package declaration has two functions: to tell autoproj what packages exist,
+and to tell it how it is meant to be configured, built and installed. These
+definitions are done in a Ruby DSL, within files with the <code>.autobuild</code> extension
+in the package set or in the main build configuration. While the file names can
+be arbitrary, one usually would start with <code>packages.autobuild</code>.</p>
+
+<p>What we will see in this section is what type of packages exist, how each of
+them are declared and the principal build configuration options.</p>
+
+<h3 id="cmake">CMake packages</h3>
+
+<p>A CMake package is defined with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s2">"package_name"</span>
+</code></pre></div>
+<p>More complex tweaking is achieved with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+  <span class="p">[</span><span class="n">modify</span> <span class="n">the</span> <span class="n">pkg</span> <span class="n">object</span><span class="p">]</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In particular, CMake build options are given with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+  <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"VAR"</span><span class="p">,</span> <span class="s2">"VALUE"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The above snippet being equivalent to calling <code>cmake -DVAR=VALUE</code></p>
+
+<p>Generally speaking, when integrating a CMake package, set as many of the
+optional feature knobs <strong>explicitly</strong>. See <a href="managing.html#optional_features">this
+page</a> for a more in-depth discussion.</p>
+
+<p>For instance, if you want some Python bindings to be built, resolve the Python
+interpreter once and for all for your whole workspace and pass the path to the
+interpreter explicitely. The <code>rock.core</code> package has <a href="https://github.com/rock-core/package_set/blob/master/rock/python.rb">explicit support for this
+mechanism for Python</a>.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># Helper from rock.core that resolves the Python binary that should be</span>
+    <span class="c1"># used by packages, Returns nil if the build has python support disabled</span>
+    <span class="c1"># (through a configuration options)</span>
+    <span class="n">bin</span><span class="p">,</span> <span class="o">=</span> <span class="no">Rock</span><span class="p">.</span><span class="nf">activate_python_path</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'BINDINGS_PYTHON'</span><span class="p">,</span> <span class="n">bin</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'PYTHON_EXECUTABLE'</span><span class="p">,</span> <span class="n">bin</span> <span class="k">if</span> <span class="n">bin</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Autoproj being Ruby-based, the Ruby interpreter you should be using is available
+within the Autoproj configuration. Rock's CMake macros control the build of Ruby
+bindings (present in <code>bindings/ruby</code> within the package) with the
+<code>BINDINGS_RUBY</code> variable. However, due to the heavily ruby-based nature of the
+toolchain, Rock currently does not have an overarching configuration flag to
+globally disable all Ruby bindings, so you would need to create one for your
+specific needs.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># Assuming that you use the `mypackage_ruby_bindings' flag to</span>
+    <span class="c1"># control the bindings, control them with (enabled by default)</span>
+    <span class="c1"># pkg.define 'BINDINGS_RUBY', Autoproj.config.get('mypackage_ruby_bindings', true)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'RUBY_EXECUTABLE'</span><span class="p">,</span> <span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">ruby_executable</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="autotools">Autotools packages</h3>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">autotools_package</span> <span class="s2">"package_name"</span>
+<span class="n">autotools_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">configureflags</span> <span class="o">&lt;&lt;</span> <span class="s2">"--enable-feature"</span> <span class="o">&lt;&lt;</span> <span class="s2">"VAR=VALUE"</span>
+    <span class="c1"># additional configuration</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Since autotools (and specifically, automake) environments are unfortunately
+not so reusable, autoproj tries to regenerate the autotools scripts forcefully.
+This can be disabled by setting the some flags on the package:</p>
+
+<ul>
+  <li>using[:aclocal]: set to false if aclocal should not be run</li>
+  <li>using[:autoconf]: set to false if the configure script should not be touched</li>
+  <li>using[:automake]: set to false if the automake part of the configuration
+should not be touched</li>
+  <li>using[:libtool]: set to false if the libtool part of the configuration should
+not be touched</li>
+</ul>
+
+<p>For instance, one would add</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">autotools_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">configureflags</span> <span class="o">&lt;&lt;</span> <span class="s2">"--enable-feature"</span> <span class="o">&lt;&lt;</span> <span class="s2">"VAR=VALUE"</span>
+    <span class="c1"># Do regenerate the autoconf part, but no the automake part</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">using</span><span class="p">[</span><span class="ss">:automake</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="ruby-packages">Ruby packages</h3>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">ruby_package</span> <span class="s2">"package_name"</span>
+<span class="n">ruby_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># additional configuration</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This package handles pure ruby libraries that do not need to be installed at
+all. Autoproj assumes that the directory layout of the package follows the following
+convention:</p>
+
+<ul>
+  <li>programs are in bin/</li>
+  <li>the library itself is in lib/</li>
+</ul>
+
+<p>If a Rakefile is present in the root of the source package, its <code>default</code>
+task will be called during the build. The <code>rake_setup_task</code> overrides this default
+setting, and to <code>nil</code> to avoid running a setup task at all.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">ruby_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">rake_setup_task</span> <span class="o">=</span> <span class="s2">"setup"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>If the ruby package has a <code>test/</code> subfolder, Autoproj will configure the test
+utility for this package, assuming that the tests are executed with <code>rake test</code>
+and reports are saved in <code>${srcdir}/.test-results</code>. This behavior can be
+disabled by setting <code>pkg.rake_test_task</code> to nil, and the rake target can be set to
+something else than <code>test</code> if needed.</p>
+
+<p>If you want to enable the tests even though there is no <code>test</code> folder, set
+<code>pkg.test_utility.source_dir</code> explicitly to the folder that will contain the
+test reports and call pkg.with_tests</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">ruby_package</span> <span class="s2">"something"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">source_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pkg</span><span class="p">.</span><span class="nf">srcdir</span><span class="p">,</span> <span class="s2">".test-results"</span><span class="p">)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">with_tests</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Alternatively, if there are no tests, set <code>no_results</code> to true</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">ruby_package</span> <span class="s2">"something"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">no_results</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">with_tests</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>If you want to override the complete process, that is run a different command than
+<code>rake</code>, set both <code>source_dir</code> and define the test task:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">ruby_package</span> <span class="s2">"something"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">source_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pkg</span><span class="p">.</span><span class="nf">srcdir</span><span class="p">,</span> <span class="s2">".test-output"</span><span class="p">)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">task</span> <span class="k">do</span>
+        <span class="c1"># Commands that will run the tests</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="orogen">oroGen packages</h3>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">orogen_package</span> <span class="s2">"package_name"</span>
+<span class="n">orogen_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># customization code</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>oroGen packages are the packages where Rock components are implemented. The
+oroGen handler runs the code generation, configuration and build/install steps.</p>
+
+<h3 id="simply-checking-out-packages">Simply checking out packages</h3>
+
+<p>The importer package type only checks it out, but does not perform any additional steps.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_package</span> <span class="s1">'package_name'</span>
+</code></pre></div>
+<h3 id="custom-package-building">Custom package building</h3>
+
+<p>Post-processing steps can be performed after the checkout using <code>post_install</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_package</span> <span class="s2">"package_name"</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">post_install</span> <span class="k">do</span>
+        <span class="c1"># add commands to build and install the package</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="version_control_resolution">Version Control Resolution</h2>
+
+<p>The general format of version control entries is:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">IMPORTER_TYPE</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">IMPORTER_URL</span>
+  <span class="s">&lt;importer specific control options&gt;</span>
+</code></pre></div>
+<p>The package set that defines a package must have at least one matching entry in
+the <code>version_control</code> section of its <code>source.yml</code> file.</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">version_control</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">package_name</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">...</span>
+</code></pre></div>
+<p>Follow-up package sets (following the order of the build configuration's
+manifest) might also have matching entries in their <code>source.yml</code> files, in the
+<code>overrides:</code> section. These <code>overrides</code> apply only to packages from other
+package sets. Only entries in <code>version_control</code> apply to the packages from the
+same package set.</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">overrides</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">package_name</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">...</span>
+</code></pre></div>
+<p>Finally, additional overrides may be specified in files in the
+<code>autoproj/overrides.d/</code> folder. The YAML files in this folder do not specify
+sections, only a list of packages:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">...</span>
+</code></pre></div>
+<p>Once all matching entries are found, Autoproj resolves the final configuration by
+"overlaying" the found entries, starting with the package set that defines the package,
+and finishing with <code>autoproj/overrides.d</code>.</p>
+
+<p>When overlaying definitions:</p>
+
+<ul>
+  <li>if the <code>type</code> field is not specified, updating existing settings</li>
+  <li>if the <code>type</code> field is set, clearing existing settings and using the new ones.</li>
+</ul>
+
+<p>For instance, the following two entries:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">version_control</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
+  <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/tools-syskit</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">master</span>
+</code></pre></div>
+<p>and (in <code>autoproj/overrides.d/50-syskit.yml</code>)</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">some_other_branch</span>
+</code></pre></div>
+<p>Will be equivalent to</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
+  <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/tools-syskit</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">some_other_branch</span>
+</code></pre></div>
+<p>At any time, matching entries as well as the resolved version control
+configuration for a package can be displayed with <code>autoproj show</code>. For
+instance, <code>autoproj show tools/roby</code> in the rock-gazebo build configuration
+as of today gives:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>source definition
+  type: git
+  url: https://github.com/rock-core/tools-syskit.git
+  branch: syskit2-test-refactoring
+  push_to: git@github.com:/rock-core/tools-syskit.git
+  repository_id: github:/rock-core/tools-syskit.git
+  retry_count: 10
+  first match: in rock.core (…/autoproj/remotes/rock.core/source.yml)
+    branch: $ROCK_BRANCH
+    github: rock-core/tools-$PACKAGE_BASENAME
+  overriden in main configuration (…/autoproj/overrides.d/01-syskit2.yml)
+    branch: syskit2-test-refactoring
+</code></pre></div>
+<p>The <code>$VARIABLE</code> syntax will be clarified <a href="managing.html#configuration_options">later</a>.  We will now see what version control
+systems are supported by autoproj.</p>
+
+<h2 id="version_control">Available Version Control Systems</h2>
+
+<p>The package name may contain regular expression characters, in which case the
+package name will be used to match against the package name(s).</p>
+
+<p class="callout callout-warning">Note that in all cases, the operations <em>must</em> succeed without any password -
+the import will fail if a password is needed.</p>
+
+<h3 id="git">Git</h3>
+
+<p>The general setup for git imports is:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">git</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">repository_url_or_path</span>
+  <span class="na">push_to</span><span class="pi">:</span> <span class="s">repository_url_or_path</span>
+  <span class="na">branch</span><span class="pi">:</span> <span class="s">branch_name</span>
+  <span class="na">tag</span><span class="pi">:</span> <span class="s">tag_name</span> <span class="c1"># it is branch OR tag</span>
+  <span class="na">commit</span><span class="pi">:</span> <span class="s">commit_id</span> <span class="c1"># it is tag OR commit ID</span>
+  <span class="na">with_submodules</span><span class="pi">:</span> <span class="no">false</span> <span class="c1"># true to checkout and update submodules</span>
+</code></pre></div>
+<p>Autoproj will maintain an 'autobuild' remote on the checked out repository:
+i.e., it will make sure that the URL of this remote is always linked to the
+right URL from the config file, and will update the relevant branch on update
+(beware: the other branches won't get updated).</p>
+
+<p>Moreover, autoproj will make sure that updating your local repository always
+resolves as a fast-forward. An update that would require a merge will fail.</p>
+
+<h3 id="github">GitHub</h3>
+
+<p>Autoproj allows to define shortcut handlers, that is to define custom entries
+that are expanded into full version control configurations. The
+<code>autoproj/git_server_configuration</code>, which is required by the Rock build
+configuration, defines one for github.</p>
+
+<p>This means that one may use the <code>github:</code> handler to check a package out from
+github, rather than defining the <code>type</code> and <code>url</code> manually. This has the benefit
+of setting the <code>push_to</code> automatically to the SSH URL (by default) while the plain
+URL is using https (usually faster).</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/buildconf</span>
+  <span class="s">… rest of options same as git …</span>
+</code></pre></div>
+<p>Note that Autoproj supports referring to the <code>refs/pull/*</code> references GitHub
+sets up for the pull requests. One can therefore point to a pull request with:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+    <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/tools-syskit</span>
+    <span class="na">remote_branch</span><span class="pi">:</span> <span class="s">refs/pull/52/head</span>
+    <span class="na">local_branch</span><span class="pi">:</span> <span class="s">pr-52</span>
+</code></pre></div>
+<h3 id="git-lfs">Git LFS</h3>
+
+<p>Autoproj may automatically handle Git repositories that also use
+<a href="https://git-lfs.github.com/">git-lfs</a>. You only need to add the following
+line to your package set's <code>init.rb</code> file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'autobuild/import/git-lfs'</span>
+</code></pre></div>
+<p>Autoproj will automatically checkout the LFS files if it detects that LFS is
+enabled on a git repository. Note that because of Autoproj's use of the
+<code>autobuild</code> remote, <code>git lfs</code> does not work from the command line - a known
+limitation of git-lfs itself. You need to use <code>aup</code> (with e.g. <code>aup -n</code> to
+update only a single package) to handle the LFS bits.</p>
+
+<p>Common LFS configurations can be added to the source entry, or augmented
+in <code>autoproj/overrides.d/</code> using the following options:</p>
+
+<ul>
+  <li><code>lfs</code> allows to disable autoproj's LFS handling for this package</li>
+  <li><code>lfs_exclude</code> is a list of patterns of LFS-managed files that should not be
+checked out. Use this to avoid checking out huge files that are usually not
+used.</li>
+  <li><code>lfs_include</code> is a list of patterns of LFS-managed files that should
+checked out, to possibly override files excluded by more encompassing
+patterns in <code>lfs_exclude</code></li>
+</ul>
+
+<p>For instance, in a package set's <code>source.yml</code>:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">git</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">repository_url_or_path</span>
+  <span class="na">lfs_exclude</span><span class="pi">:</span> <span class="c1"># avoid checking out the blender files by default</span>
+  <span class="pi">-</span> <span class="err">*</span><span class="s">.blend</span>
+</code></pre></div>
+<p>Or, to avoid checking out any LFS file locally because <em>you</em> don't need them,
+create <code>autoproj/overrides.d/50-no-lfs.yml</code>:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+    <span class="na">lfs</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div>
+<h3 id="tar-archives">Tar archives</h3>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">archive</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">http://sourceforge.net/blablabla.tar.gz?option=value</span>
+  <span class="na">filename</span><span class="pi">:</span> <span class="s">blabla.tar.gz</span> <span class="c1"># Optional: if the file name cannot be inferred from the URL</span>
+  <span class="na">no_subdirectory</span><span class="pi">:</span> <span class="no">false</span> <span class="c1"># Optional. Set to true if there is not a leading directory in the archive</span>
+  <span class="na">update_cached_file</span><span class="pi">:</span> <span class="no">false</span> <span class="c1"># Optional. Set to false to disable automatic updates</span>
+</code></pre></div>
+<p>The importer expects that there is a leading subdirectory in the archive, under
+which all files. If that is not the case, i.e. if all files are in the root of
+the archive, do not forget to set the no_subdirectory option.</p>
+
+<p>Autoproj tries to guess what is the name of the downloaded file by extracting it
+out of the URL. Sometimes, this does not work as the URL does not fit the
+expected scheme – in these cases you will get a tar error on update. To
+override this autodetection behaviour, set the filename option to the actual
+downloaded file name.</p>
+
+<p>By default, autoproj will check if the downloaded file has been updated on the
+server, and will download it again if it is the case. If you are downloading
+release tarballs, this is unneeded as the archive should not be updated. In that
+case, set the update_cached_file option to false to save the time needed to
+check for the update (can be long on, for instance, sourceforge). The source
+will of course be updated if you change the URL (i.e. to download a new release
+of the same software).</p>
+
+<h3 id="subversion">Subversion</h3>
+
+<p>The general setup for subversion imports is:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">svn</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">repository_url_or_path</span>
+</code></pre></div>
+<h3 id="cvs">CVS</h3>
+
+<p>The general setup for CVS imports is:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">cvs</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">cvs_root</span>
+  <span class="na">module</span><span class="pi">:</span> <span class="s">modulename</span>
+</code></pre></div>
+<p>In case a :pserver: is used, it must be quoted - YAML would interpret it
+the wrong way otherwise:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">cvs</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">:pserver:cvs@blabla:/"</span>
+  <span class="na">module</span><span class="pi">:</span> <span class="s">modulename</span>
+</code></pre></div>
+<h3 id="patch">Patching after checkout or update</h3>
+
+<p>It is possible to apply patches after a given package (imported by any of the
+importer types) has been checked out/updated. To do so, simply add the option
+<code>patches:</code> to the importer configuration and list the patches which should be
+applied:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">archive</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">http://sourceforge.net/blablabla</span>
+  <span class="na">patches</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">$AUTOPROJ_SOURCE_DIR/blablabla-01.patch</span>
+    <span class="pi">-</span> <span class="s">$AUTOPROJ_SOURCE_DIR/blablabla-02.patch</span>
+</code></pre></div>
+<p>Note that in the example above, the patch is saved in the package set's folder
+(the value of AUTOPROJ_SOURCE_DIR). This is a highly recommended practice.</p>
+
+<p>The provided patches are by default applied with a patch level of 0 (passed to
+patch through the -p option). This can be overriden on a patch-per-patch basis
+by making the patch name an array as well:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_name</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">archive</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">http://sourceforge.net/blablabla</span>
+  <span class="na">patches</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="pi">[</span><span class="nv">$AUTOPROJ_SOURCE_DIR/blablabla-01.patch</span><span class="pi">,</span> <span class="nv">1</span><span class="pi">]</span>
+    <span class="pi">-</span> <span class="s">$AUTOPROJ_SOURCE_DIR/blablabla-02.patch</span>
+</code></pre></div>
+<h3 id="how-to-create-a-patch">How to create a patch</h3>
+
+<p>If you are locally modifying a <code>git</code>-based package, you can simply run <code>git diff</code>,
+redirecting it to the final patch place, e.g.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>git diff &gt; $AUTOPROJ_CURRENT_ROOT/remotes/my.set/my-package_add_pkgconfig.patch
+</code></pre></div>
+<p>The generated patch will need the patch level of 1 as described above.</p>
+
+<p>If you are locally modifying a package based on an archive, use <code>diff -ru</code>:</p>
+
+<ol>
+  <li>
+    <p>move the modified package into a <code>.new</code> folder:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>cd some/
+mv package package.new
+</code></pre></div>  </li>
+  <li>
+    <p>Checkout the fresh package with <code>aup -n my/package</code></p>
+  </li>
+  <li>
+    <p>Generate the diff</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>cd some
+diff -r -u package package.new &gt; \
+    $AUTOPROJ_CURRENT_ROOT/remotes/my.set/my-package_add_pkgconfig.patch
+</code></pre></div>  </li>
+  <li>
+    <p>Add the patch to the package set, using a patch level of 1 as well,
+and verify the result</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup -n my/package
+acd my/package
+diff -r -u . ../package.new
+</code></pre></div>  </li>
+</ol>
+
+<p class="next-page"><strong>Next</strong>: let's get into <a href="os_dependencies.html">using packages from the underlying
+OS or from language-specific handlers</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

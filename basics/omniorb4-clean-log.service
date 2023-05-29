@@ -1,0 +1,11 @@
+[Unit]
+Description=Cleanup omniorb log before starting it
+Before=omniorb4-nameserver.service
+
+[Service]
+ExecStart=/bin/sh -c "rm -f /var/lib/omniorb/*"
+Type=oneshot
+
+[Install]
+WantedBy=omniorb4-nameserver.service
+

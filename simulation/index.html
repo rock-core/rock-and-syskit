@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="simulation simulation_index">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Simulation with Gazebo</a></span><ul><li class='child active'><a href="./">Introduction</a></li><li class='child'><a href="models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="plugins.html">Plugins</a></li><li class='child'><a href="transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="simulating-syskit-systems-with-gazebo">Simulating Syskit Systems with Gazebo</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#file-organization" id="markdown-toc-file-organization">File Organization</a></li>
+  <li><a href="#first_steps" id="markdown-toc-first_steps">First step: running Gazebo and linking it to Syskit</a></li>
+  <li><a href="#caveats" id="markdown-toc-caveats">Caveats</a></li>
+</ul>
+
+<p>Gazebo is fully integrated in Rock&amp;Syskit systems to support system development.
+Syskit's support for Gazebo includes:</p>
+
+<ul>
+  <li>control and status of any links</li>
+  <li>control and status of any joints</li>
+  <li>interface with Gazebo sensors</li>
+  <li>support for recursive models</li>
+  <li>using SDF as a representation of a system's kinematic configuration (i.e. as a
+source of configuration for the
+<a href="../component_networks/geometric_transformations.html">transformer</a>). This
+support is also usable in live systems, without Gazebo, allowing to use the SDF
+representation as a common source of truth</li>
+</ul>
+
+<p>This documentation chapter will cover first the link between the SDF model
+kinematics (links and joints) and Syskit, that is how to control and/or get
+information about a system that is running in Gazebo. We will then talk about
+extending gazebo with plugins, and adding support for them at the boundary with Rock
+and Syskit. We will then finally talk about the relationship between the SDF models
+in your simulation and the transformer - that is, Rock's system to handle
+<a href="../component_networks/geometric_transformations.html">geometric transformations</a> system-wide</p>
+
+<h2 id="file-organization">File Organization</h2>
+
+<p>By convention, a Gazebo world named <code>foobar</code> is saved within the
+<code>scenes/foobar/foobar.world</code> file in the bundles. SDF models are saved in the
+<code>models/sdf/</code> subfolder of the bundles.</p>
+
+<h2 id="first_steps">First step: running Gazebo and linking it to Syskit</h2>
+
+<p>The Gazebo-based workflow within Syskit assumes that gazebo is started externally.
+This is to avoid "resetting" the world when Syskit itself is restarted, a workflow
+that gets closer to the "real" development process.</p>
+
+<p>To have gazebo and Syskit together, you have to:</p>
+
+<ul>
+  <li>run your world using the <code>rock-gazebo</code> tool (instead of <code>gzserver</code> /
+<code>gazebo</code>). Apart from injecting our plugin, the tool also takes care of some
+preprocessing necessary to run oroGen task contexts within the gazebo context.</li>
+  <li>
+    <p>add the following snippet at the beginning of your robot config's <code>init</code> block:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"rock_gazebo/syskit
+</span></code></pre></div>  </li>
+  <li>
+    <p>add the following snippet at the beginning of your robot config's <code>requires</code> block:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_gazebo_world</span><span class="p">(</span><span class="n">world_name</span><span class="p">)</span>
+</code></pre></div>
+    <p>where <code>world_name</code> is the name of the world without the <code>.world</code></p>
+  </li>
+</ul>
+
+<p>Because <code>rock-gazebo</code> performs preprocessing, one may want to inspect the generated
+world. This can be done with <code>--parse-sdf-only</code></p>
+
+<p>The world name passed to <code>use_gazebo_world</code> ends up being your "default world", i.e.
+should be the world you use most of the time. If you want to switch to a different
+world, you may pass <code>--set sdf.world_name=another_world</code> to <code>syskit ide</code> or <code>syskit run</code></p>
+
+<h2 id="caveats">Caveats</h2>
+
+<div class="alert alert-info">
+  <p>The world name passed to <code>rock-gazebo</code> and the world name configured in Syskit do not
+match, Syskit will periodically display a message that says:</p>
+
+  <p><code>
+Syskit[WARN]: waiting for unmanaged task: cannot find naming context gazebo:empty
+</code></p>
+
+  <p>where <code>empty</code> in this case is the name of the default world.</p>
+</div>
+
+<p class="alert alert-info">The vizkit3d visualization does not support 100% of the same formats that Gazebo
+supports. For instance, the collada (<code>.dae</code>) format is not supported by gazebo itself.
+If you choose a 3D model that is not supported by both, either one or the other won't
+be able to visualize the model properly.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="workspace workspace_setup">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Workspace and Packages</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="conventions.html">Conventions</a></li><li class='child active'><a href="setup.html">Starting a New Project</a></li><li class='child'><a href="add_packages.html">Adding new packages</a></li><li class='child'><a href="os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="global_configuration.html">Global Configuration</a></li><li class='child'><a href="testing.html">Test Integration</a></li><li class='child'><a href="managing.html">Build configuration design</a></li><li class='child'><a href="troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="starting-a-new-project">Starting a new project</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#main-build-configuration" id="markdown-toc-main-build-configuration">Main build configuration</a></li>
+  <li><a href="#package-sets" id="markdown-toc-package-sets">Package sets</a></li>
+</ul>
+
+<h2 id="main-build-configuration">Main build configuration</h2>
+
+<p>One never starts a project from scratch. One usually instead starts off using
+either <a href="../basics/installation.html">the Rock bootstrap</a> or a project's main
+build configuration.</p>
+
+<p>After having bootstrapped, the "source" build configuration is checked out in
+the <code>autoproj/</code> folder at the root of the workspace. Commit the folder's current
+state, push it to a repository you would have created to hold your own
+project's build configuration. You can then change Autoproj's configuration
+to track it instead of the Rock build with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj switch-config git URL
+</code></pre></div>
+<p class="tip"><strong>Tip</strong> if you're using Git and GitHub under Linux or MacOSX, using SSH keys
+for authentication still proves to be the most practical option. Use the
+<code>git@github.com...</code> URL instead of the <code>https://</code> one.</p>
+
+<p class="tip"><strong>Tip</strong> when working in a company organization on github, a good naming scheme
+for build configurations is <code>company.project-buildconf</code> where <code>company</code> is your
+organization's name and <code>project</code> the name of the project you're setting up.</p>
+
+<h2 id="package-sets">Package sets</h2>
+
+<p>Package sets are a way in Rock's build system to share build information. It is
+customary start with an organization-wide (i.e.  company-wide) package set.
+One often also ends up with one package set per project.</p>
+
+<p>The only thing that autoproj requires to successfully import a package set is
+to have a <code>source.yml</code> YAML file in it with a <code>name:</code> field. A common
+convention is to use <code>company.project</code> for a project-specific package set or
+just <code>company</code> for the organization one. For example purposes, the rest of this
+page will use <code>company.project</code> as the package set name.</p>
+
+<p>Assuming you're using git and github, create a new repository on github,
+following the <code>company.project-package_set</code> pattern.</p>
+
+<p>In the context of the <a href="../basics/publishing.html">Basics section</a>, a good
+name for the package set would be <code>rock.rock_and_syskit</code> (i.e. <code>rock</code>
+organization, the <code>rock_and_syskit</code> project). The buildconf would be saved
+in a repository named <code>rock.rock_and_syskit-buildconf</code> and the package set
+in <code>rock.rock_and_syskit-package_set</code>.</p>
+
+<p>To create a minimal package set, create an empty directory (the name does not
+matter) and do (replacing the name by your actual package set name and the
+URL by your repository's URL):</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>git init
+echo "name: company.project" &gt; source.yml
+echo "version_control:" &gt;&gt; source.yml
+echo "overrides:" &gt;&gt; source.yml
+touch packages.autobuild packages.osdeps init.rb overrides.rb
+git add .
+git commit -m "Initial commit"
+git push URL master
+</code></pre></div>
+<p>At this point, the package set can be added to the buildconf's manifest. Add it
+at the end of the <code>package_sets</code> section. For a github package this would be:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_sets</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">...</span>
+<span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">organization/company.project-package_set</span>
+</code></pre></div>
+<p>For a general git URL:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_sets</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">...</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">git</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">URL</span>
+</code></pre></div>
+<p id="add_package_set_in_layout">In addition, one usually would want to build all packages defined in the package
+set (i.e. all packages from the project). This is done by adding the package set
+name in the <code>layout</code> section:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">layout</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">company.project</span>
+</code></pre></div>
+<p>E.g. for the Basics tutorial, assuming it is stored on the <code>rock-core</code> organization,
+the whole manifest would look like:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">package_sets</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/package_set</span>
+   <span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/rock-package_set</span>
+   <span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">rock-tutorials/tutorials-package_set</span>
+   <span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">rock-gazebo/package_set</span>
+   <span class="pi">-</span> <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/rock.rock_and_syskit-package_set</span>
+
+<span class="na">layout</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="s">rock.core</span>
+   <span class="pi">-</span> <span class="s">rock.gazebo</span>
+   <span class="pi">-</span> <span class="s">rock.rock_and_syskit</span>
+</code></pre></div>
+<p>There are other import possibilities, listed in the <a href="add_packages.html#version_control">adding new
+packages</a> section.</p>
+
+<p>After having added the package, check it out with:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup --config
+</code></pre></div>
+<p>The package set is now in <code>autoproj/remotes/company.project</code>.  You can go
+straight to it with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>acd company.project
+</code></pre></div>
+<p class="next-page"><strong>Next</strong>: let's learn how to <a href="add_packages.html">add new packages</a></p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="libraries libraries_geometric_transformations">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Libraries</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="add_packages.html">Add packages</a></li><li class='child'><a href="cpp_libraries.html">C++ Library Packages</a></li><li class='child active'><a href="geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="geometric-transformations">Geometric Transformations</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#relations-between-rigid-bodies" id="markdown-toc-relations-between-rigid-bodies">Relations between Rigid Bodies</a></li>
+  <li><a href="#defining-frames-of-reference-in-code" id="markdown-toc-defining-frames-of-reference-in-code">Defining frames of reference in code</a></li>
+  <li><a href="#conventions" id="markdown-toc-conventions">Conventions</a></li>
+  <li><a href="#common-and-non-recommended-frame-names" id="markdown-toc-common-and-non-recommended-frame-names">Common and Non-Recommended frame Names</a></li>
+  <li><a href="#geometric-relations-with-eigen-c" id="markdown-toc-geometric-relations-with-eigen-c">Geometric Relations with Eigen (C++)</a></li>
+  <li><a href="#uncertainties" id="markdown-toc-uncertainties">Uncertainties</a></li>
+  <li><a href="#relationship-with-rocks-basesamplesrigidbodystate-c" id="markdown-toc-relationship-with-rocks-basesamplesrigidbodystate-c">Relationship with Rock's base::samples::RigidBodyState (C++)</a></li>
+  <li><a href="#unset-values-in-combined-types" id="markdown-toc-unset-values-in-combined-types">Unset values in combined types</a></li>
+  <li><a href="#geometric-relations-in-ruby" id="markdown-toc-geometric-relations-in-ruby">Geometric Relations in Ruby</a></li>
+</ul>
+
+<div class="panel panel-default">
+  <p>This is a page in a 3-part series. This page will present the main issue at
+hand, and a set of conventions and tools that exist within Rock to deal with it.
+The <a href="../components/geometric_transformations.html">second part</a> talks about
+integration at the component boundary. The <a href="../component_networks/geometric_transformations.html">third
+page</a> explains how Syskit
+handles it at the system level.</p>
+</div>
+
+<p>One very common task in robotics code is to represent the relationship between
+different rigid bodies, and transform data between them.  For instance, a robot
+body (or one of its parts) and the world. E.g. a gripper and an object being
+gripped, an AUV and the ground, … These relations
+are usually estimated through complex processing chains. The object-gripper
+relation is built by sensing the object in one or multiple sensors (LIDAR,
+camera, …) which are attached on the robot. Each of these sensors provide
+information about the pose of the object <em>in the sensor frame</em>. A.k.a. the
+sensor-object transform.</p>
+
+<p>Within libraries, one will usually assume some data to represent given transformations,
+that will allow us to transform input data into some other representation on the output.
+For instance, a LIDAR will give us ranges from the LIDAR frame, but a library
+may want to transform that into a common fixed frame to fuse them as point clouds.</p>
+
+<p>This last example will be used as an illustration in the rest of this page</p>
+
+<h2 id="relations-between-rigid-bodies">Relations between Rigid Bodies</h2>
+
+<p>Some people did a much better work that I ever could to properly define, describe
+and discuss relations between rigid bodies. I highly recommend you read their work:
+<a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=U8peLJkAAAAJ&amp;citation_for_view=U8peLJkAAAAJ:evX43VCCuoAC">Geometric relations between rigid bodies (part 1): Semantics for standardization</a></p>
+
+<p>While their definition(s) are by far the most precise and useful, we'll narrow
+things down to transforming positions and orientations and/or velocities (linear
+and angular, that is twists) between frames of reference <em>considered fixed</em>. That
+is, we won't be combining velocities (yet).</p>
+
+<p>A <em>frame of reference</em> in this case is a combination of a 3-vector cartesian
+frame (which, in Rock, is always following the X-forward, Z-up convention) and
+an origin point.</p>
+
+<p>One thing to realize at this point is that all frame of references are relative
+to each other. What we call a <em>pose</em> is actually the pose of a frame of reference
+<em>expressed in another's frame of reference</em>. There is no such thing as a "position"
+in a vacuum.</p>
+
+<h2 id="defining-frames-of-reference-in-code">Defining frames of reference in code</h2>
+
+<p>When coding, we define (that is, name) frame of references locally to the algorithm.
+In the LIDAR-to-pointcloud example above, the common frame into which data will be
+transformed could be called "ref" (for "reference") regardless of what - when
+the algorithm will be used - this target is meant to be. The LIDAR frame could
+be "lidar".</p>
+
+<p>But what is <em>really</em> important is to properly define the meaning and orientation
+of each frame of reference, with:</p>
+
+<ul>
+  <li>its name</li>
+  <li>on which rigid body it is fixed</li>
+  <li>its orientation w.r.t. said rigid body.</li>
+</ul>
+
+<p>Regarding the last point: even though the "X-forward and Z-up" convention
+guideline already constrains choices, there are quite a few things for which
+"forward" and "up" are not obvious choices (example: a propeller)</p>
+
+<p>That documentation may be included:</p>
+
+<ul>
+  <li>in the algorithm's class or namespace documentation if these frames are used as part
+of the algorithm's public interface</li>
+  <li>within methods/functions that define them for intermediate frames</li>
+</ul>
+
+<h2 id="conventions">Conventions</h2>
+
+<p>That having been said, the most common error is to apply transformations in the
+wrong order and/or the wrong transformations. The following convention aims
+at reducing (drastically) the amount of such errors.</p>
+
+<p>Whenever you create a quantity that represents a state of the frame A, expressed
+in another's frame B (A and B being of course properly documented) you write:
+<code>A2B_quantity</code></p>
+
+<p>For instance, <code>lidar2vessel_pose</code> or <code>target2ref_ori</code></p>
+
+<p>With the following quantity keywords (as well as accepted short version):</p>
+
+<ul>
+  <li>pose,</li>
+  <li>orientation (ori),</li>
+  <li>position (pos),</li>
+  <li>angular_velocity (angv),</li>
+  <li>linear_velocity (linv),</li>
+  <li>twist, combination of linear and angular velocity</li>
+  <li>linear_acceleration (linacc),</li>
+  <li>angular_acceleration (angacc),</li>
+  <li>acceleration (acc), combination of linear and angular</li>
+</ul>
+
+<p>With this convention, for instance, 'lidar2vessel_pos' is the position of the
+lidar origin within the vessel frame</p>
+
+<p>To apply transformations, in all the implementation for transformations we're
+going to present, one combines quantities from right to left. Operations to the
+left allow to change the frame the quantity is expressed <em>in</em> (i.e. the right
+part), while operations to the right change the frame the quantity represents
+(i.e. the left part).</p>
+
+<p>The pose of the lidar in an arbitrary object frame, can for instance be computed
+with:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>lidar2object_pose = ref2object_pose * vessel2ref_pose * lidar2vessel_pose
+</code></pre></div>
+<p>While inverting a relation swaps the two sides:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>ref2object_pose = inverse(object2ref_pose)
+</code></pre></div>
+<p><strong>Recommendation</strong>: do not hesitate to create intermediate variables with the "right"
+names before you combine them in expressions. It makes validating the combinations
+(and therefore, avoiding mistakes that are hard to discover) that much easier.</p>
+
+<h2 id="common-and-non-recommended-frame-names">Common and Non-Recommended frame Names</h2>
+
+<p>We strongly recommend to never use <code>body</code> and <code>world</code> as frame names. <code>Body</code> is
+highly context dependent (which body are we talking about ?) and <code>world</code> is
+usually "any common fixed reference frame".</p>
+
+<p>Common frame names:</p>
+
+<ul>
+  <li><code>sensor</code> for the reference frame of the sensor being processed (if the
+algorithm only handles one)</li>
+  <li><code>ref</code> for the a common fixed reference frame</li>
+</ul>
+
+<h2 id="geometric-relations-with-eigen-c">Geometric Relations with Eigen (C++)</h2>
+
+<p>Eigen itself has easy-to-use implementations to deal with state (i.e. pose, position
+and orientation).</p>
+
+<p>The main type for position is <code>Eigen::Vector3d</code> (or <code>Vector3f</code> if you don't need
+the precision). Orientations are computed with <code>Eigen::Quaterniond</code> or
+<code>Eigen::Quaternionf</code> and poses with <code>Eigen::Affine3d</code> / <code>Eigen::Affine3f</code></p>
+
+<p>A well known pain point of Eigen is its alignment requirements. Rock provides
+unaligned specializations of these types: just include <code>base/Eigen.hpp</code> and
+replace <code>Eigen</code> by <code>base</code>. Use unaligned types in anything that looks like a
+container, and as fields of types that are meant to go on component interfaces.
+"Normal" Eigen types can be used without problem as class attributes, when
+allocated on the stack and as function arguments.</p>
+
+<p>These quantities are combined with the <code>*</code> operator, e.g.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>lidar2object_pose = ref2object_pose * vessel2ref_pose * lidar2vessel_pose
+</code></pre></div>
+<h2 id="uncertainties">Uncertainties</h2>
+
+<p>Transforming uncertainties is … patchy at best. The problem is the one of
+representation, as for instance a rotated gaussian distribution represented
+as a covariance matrix in a frame X is not itself represent-able as a covariance
+matrix.</p>
+
+<p>There are some types that can be used to manipulate and transform quantities
+with uncertainties: <code>base::TransformWithCovariance</code> applies some linearization
+algorithms to transform covariances on position and orientation while they
+are being transformed.</p>
+
+<h2 id="relationship-with-rocks-basesamplesrigidbodystate-c">Relationship with Rock's base::samples::RigidBodyState (C++)</h2>
+
+<p><code>base::samples::RigidBodyState</code> is a type that is usually not meant to be used
+inside libraries. It is meant to be used on a component's port, and may be used
+at the library interface. It is described in <a href="../components/geometric_transformations.html">the second
+part</a> of this series.</p>
+
+<p>The pose part of <code>RigidBodyState</code> can be converted to/from <code>Eigen::Affine3d</code> with
+<code>getTransform</code> and <code>setTransform</code>.</p>
+
+<h2 id="unset-values-in-combined-types">Unset values in combined types</h2>
+
+<p>It is common to use a combined type to avoid passing multiple fields as separate
+arguments to functions, but using only parts of them (e.g.  the twist and pose
+but not acceleration and wrench). When fields do not contain valid values, they
+should be initialized with NaN. Rock defines the <code>base::unset</code> template function
+to make the semantic of that assignation easier.</p>
+
+<p><code>base::samples::RigidBodyState</code> is always initialized with all fields unset.</p>
+
+<h2 id="geometric-relations-in-ruby">Geometric Relations in Ruby</h2>
+
+<p>Rock's Ruby bindings are nowhere nearly as complete than the C++ APIs. It simply
+includes Ruby bindings to Eigen's Vector3d (as <code>Eigen::Vector3</code>) and <code>Quaterniond</code>
+(<code>Eigen::Quaternion</code>). You need to <code>require "eigen"</code>. The easiest way to create
+a rotation is to use <code>Eigen::Quaternion.from_angle_axis(angle, vector)</code></p>
+
+<p>In addition, when within Syskit, <code>Types.base.samples.RigidBodyState.Invalid</code> allows
+to create a properly initialized RBS.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

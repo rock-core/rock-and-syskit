@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="basics basics_day_to_day">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent active'><span class='parent-label'><a href="./">Basics</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="installation.html">Installation</a></li><li class='child active'><a href="day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="getting_started.html">Getting Started</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="constant_generator.html">Constant Generator</a></li><li class='child'><a href="devices.html">Profiles and Devices</a></li><li class='child'><a href="deployment.html">Deployment</a></li><li class='child'><a href="publishing.html">Publishing</a></li><li class='child'><a href="validation.html">Configuration Consistency</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="day-to-day-workspace-commands">Day-to-day workspace commands</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#cli-help" id="markdown-toc-cli-help">CLI help</a></li>
+  <li><a href="#layout" id="markdown-toc-layout">Folder Structure</a></li>
+  <li><a href="#acd" id="markdown-toc-acd">Moving around</a></li>
+  <li><a href="#alog" id="markdown-toc-alog">Logs</a></li>
+  <li><a href="#updating" id="markdown-toc-updating">Updating</a></li>
+  <li><a href="#building" id="markdown-toc-building">Building</a></li>
+  <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
+  <li><a href="#test" id="markdown-toc-test">Running Tests</a></li>
+</ul>
+
+<p>This page covers the autoproj commands and behavior that make most of the days
+within a Rock workspace. More advanced topics are covered later in the
+documentation.</p>
+
+<h3 id="cli-help">CLI help</h3>
+
+<p>At any point, the autoproj CLI is documented through the –help option.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj --help
+</code></pre></div>
+<h3 id="layout">Folder Structure</h3>
+
+<dl>
+<dt>Workspace root</dt>
+<dd>Where your ran <a href="index.html">the bootstrap</a>, and where the <code>env.sh</code> script is located</dd>
+<dt>The autoproj/ folder</dt>
+<dd>Located at the root of the workspace, it contains all the build configuration</dd>
+<dt>Remotes</dt>
+<dd>The package build configuration downloaded by Autoproj, they are made available in autoproj/remotes/</dd>
+<dt>Package</dt>
+<dd>Packages are the unit that autoproj deals with. The Rock software is split
+into separate types of packages that are defined in the build configuration.
+The configuration tells Autoproj both the package type (how to install the
+package) and where the package's source code is located (e.g. the github
+repository).</dd>
+<dt>OS Depedency or osdep</dt>
+<dd>Packages in autoproj can either be checked out and built from source.
+Alternatively, autoproj allows to interact with the host OS package system
+(e.g. APT on Ubuntu). The osdep system is what makes this possible.</dd>
+<dt id="build_directory">Build folders</dt>
+<dd>When packages have build byproducts, they are saved within the package
+build folder. This is by default the <code>build/</code> directory under the packages.</dd>
+<dt id="prefix_directory">Prefix folder</dt>
+<dd>Packages that require an install step will install under this folder. By
+default the <code>install/</code> folder under the workspace root</dd>
+<dt>Logs</dt>
+<dd>The output of all commands ran by autoproj are redirected to separate files under <code>install/log/</code></dd>
+</dl>
+
+<h3 id="acd">Moving around</h3>
+
+<p><code>acd</code> allows to move from package to package within the workspace. Because it
+is a very common operation, <code>acd</code> accepts that each part of the package name be
+shortened as long as the result is unambiguous.</p>
+
+<p>For instance, in the default Rock installation:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ acd d/g
+# Now in drivers/gps_base
+$ acd c/k
+multiple packages match 'c/k' in the current autoproj installation: control/kdl, control/kdl_parser
+$ acd c/kdl
+# Now in control/kdl
+$ acd c/kdl_par
+# Now in control/kdl_parser
+</code></pre></div>
+<p class="callout callout-info"><code>acd</code> expects package names or package directories. A few packages – mainly
+orogen, typelib and rtt – do not include the package's category in them (they
+are named e.g. 'orogen' but are installed in <code>tools/</code>). <code>autoproj show
+path/to/directory</code> will allow you to find this out.</p>
+
+<p>The <code>-b</code> and <code>-p</code> options allow to move to a package's <a href="#build_directory">build</a> and <a href="#prefix_directory">prefix</a> directories.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ acd -b d/gps
+# Now in drivers/gps_base/build
+$ acd -p c/kdl
+# Now in install/
+</code></pre></div>
+<h3 id="alog">Logs</h3>
+
+<p>During build, and less often during updates, the tools autoproj calls will
+error out. However, to keep the output of autoproj manageable, it redirects the
+command output - where the error details usually are - to separate files.</p>
+
+<p>When one error does happen, autoproj displays the last 10 lines of that
+command. The intent is that these 10 lines may contain the error. If it does
+not, the easiest way to display the output of the failed command is to run
+<code>alog</code> with either the name of the failed package or its path</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>alog name/of/package
+alog path/to/package
+</code></pre></div>
+<p>Or, if your shell is already within a folder of said package,</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>alog .
+</code></pre></div>
+<p class="tip"><strong>Note</strong> that the logs are ordered by last modified date (the most recently
+modified being first). The first entry is therefore most likely the one you're
+looking for after an update or build failure.</p>
+
+<h3 id="updating">Updating</h3>
+
+<p>Most of the time, you will want to update the whole workspace (the <code>-k</code> option
+continues updating even if errors occur). This will also update OS
+dependencies.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup --all -k
+</code></pre></div>
+<p>If you want to restrict the update to a package and its dependencies, give its
+name or path on the command line</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup simulation/rock_gazebo
+</code></pre></div>
+<p>If given the path to a directory (as opposed to an actual package), it will
+update all packages under this directory</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code># Update all drivers libraries and orogen packages
+aup drivers/
+</code></pre></div>
+<p>Without arguments, it will update the package within the current directory</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup
+# Which is basically equivalent to
+aup .
+</code></pre></div>
+<p>If you want to update a package but not its dependencies, use <code>-n</code>, e.g.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup -n
+aup -n simulation/rock_gazebo
+cd simulation
+aup -n rock_gazebo
+</code></pre></div>
+<p>Finally, if you want to checkout missing packages, but without updating already
+checked out packages, use <code>--checkout-only</code>. This is useful if you want to
+install new packages, but not modify the already-installed ones.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code># Checkout all missing packages in the dependency chain of drivers/orogen/iodrivers_base
+aup --checkout-only drivers/orogen/iodrivers_base
+</code></pre></div>
+<p class="callout callout-info">All <code>aup</code> commands that concern specific package(s) will <strong>not</strong> update the
+workspace configuration. To update everything <strong>including the configuration</strong>,
+either run <code>aup</code> from within the workspace root, or <code>aup --all</code> from any
+directory. If you want to only update the configuration, do <code>aup --config</code></p>
+
+<p>In some situations, or if you're trying to keep track of all the changes that
+are happening to your system, you want want to check what will be pulled by
+<code>aup</code>. <code>autoproj status</code> allows to compare the status of the workspace w.r.t.
+the repositories. In case the changes would modify the configuration, it's a
+good idea to first update the configuration and re-run <code>autoproj status</code> to
+include possible changes in the package source information:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup --config
+autoproj status
+</code></pre></div>
+<h3 id="building">Building</h3>
+
+<p>To ensure that all changes have been built, run</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>amake --all
+</code></pre></div>
+<p>As with <code>aup</code>, <code>-k</code> can be added to continue even under error. This is less
+common for <code>amake</code>, though,  as a build error will usually cascade to its
+dependencies.</p>
+
+<p>If you want to restrict the build to a package and its dependencies, give its
+name or path on the command line</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>amake simulation/rock_gazebo
+</code></pre></div>
+<p>To restrict the build to the package, excluding its dependencies, add <code>-n</code>.</p>
+
+<p class="callout callout-info"><code>amake</code> without arguments is equivalent to <code>amake .</code>: update the package
+located in the current directory. If called outside of a package, it means
+"update all packages under this directory". <code>amake</code> in the root of the workspace
+is therefore equivalent to <code>amake --all</code>.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Build configurations may have some configuration options. These options are
+asked during the first build. If you need to change the answers after the first
+run, execute</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj reconfigure
+</code></pre></div>
+<h3 id="test">Running Tests</h3>
+
+<p>Test suites are expensive to build, and one does not want every test suite from
+every package to be available at all time. For this reason, test suite building
+is by default disabled for all packages. If you do want to use/develop the test
+suite of a package (great idea !), you need first to enable it, update and
+rebuild. The 'update' step is needed as some dependencies are only installed
+for the purpose of testing.</p>
+
+<p>From within the package's directory,</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj test enable .
+aup --no-deps
+amake
+</code></pre></div>
+<p><code>autoproj disable path/to/package</code> does the reverse.</p>
+
+<p>Use <code>autoproj test list</code> to see which packages do have a test suite and for
+which packages it is enabled.</p>
+
+<p>Running the tests can either be done using the package's test method, or through
+autoproj by running</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj test .
+</code></pre></div>
+<p>If you do want to enable all unit tests for all packages, run <code>enable</code> without
+arguments. <code>disable</code> without arguments disables all test suites.</p>
+
+<p class="next-page"><strong>Next</strong>: let's get to <a href="getting_started.html">create our first system integration</a></p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

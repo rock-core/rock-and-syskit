@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="coordination coordination_generalities">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Coordination</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="generalities.html">Generalities</a></li><li class='child'><a href="tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="action_methods.html">Action Methods</a></li><li class='child'><a href="action_state_machines.html">Action State Machines</a></li><li class='child'><a href="component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="generalities">Generalities</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#the-main-action-interface" id="markdown-toc-the-main-action-interface">The Main action interface</a></li>
+  <li><a href="#missions" id="markdown-toc-missions">Actions, tasks, missions and jobs</a></li>
+  <li><a href="#instanciating-actions" id="markdown-toc-instanciating-actions">Instanciating actions</a></li>
+  <li><a href="#what-happens-when-actions-are-instanciated" id="markdown-toc-what-happens-when-actions-are-instanciated">What happens when actions are instanciated</a></li>
+  <li><a href="#what-happens-when-missions-are-dropped" id="markdown-toc-what-happens-when-missions-are-dropped">What happens when missions are dropped</a></li>
+  <li><a href="#restarting" id="markdown-toc-restarting">"Restarting"</a></li>
+  <li><a href="#refining-and-reusing-existing-actions" id="markdown-toc-refining-and-reusing-existing-actions">Refining and reusing existing actions</a></li>
+</ul>
+
+<p>All the actions within a Syskit are all the "things" the system can do. The
+actions are gathered within "action interfaces", which are repositories of
+actions that "work together". They are all subclasses of <code>Roby::Actions::Interface</code>.
+A template interface can be created with <code>syskit gen action</code>. The
+corresponding file lies in <code>models/actions/</code> and its tests in <code>test/actions/</code></p>
+
+<p>The only way we know how to create new actions, so far, is by exporting component
+networks through <a href="../component_networks/profiles.html">profiles</a>. Component
+networks defined in profiles can be "exposed" as actions with the <code>use_profile</code>
+statement. Each definition gets a corresponding action named <code>${defname}_def</code>,
+which we have seen for instance in <a href="../basics/deployment.html#running-the-simulation-and-app">the syskit IDE</a>.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">Navigation</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+            <span class="n">use_profile</span> <span class="no">Profiles</span><span class="o">::</span><span class="no">Navigation</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Actions from an interface can be made available in another with the <code>use_library</code>
+statement</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">UI</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+            <span class="n">use_library</span> <span class="no">Navigation</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="the-main-action-interface">The Main action interface</h2>
+
+<p>One predefined action interface class is special, as it is the one that is available
+globally, the Main interface. It is available as <code>${AppName}::Actions::Main</code>. It
+is the interface that you set up with the <code>Robot.actions</code> block <a href="../basics/deployment.html#actions">in the robot
+configuration</a>.</p>
+
+<p>One usually only adds actions there using the <code>use_profile</code> and <code>use_library</code>
+statements, as e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">actions</span> <span class="k">do</span>
+    <span class="n">use_profile</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Base</span>
+    <span class="n">use_library</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">UI</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="missions">Actions, tasks, missions and jobs</h2>
+
+<p>Just a bit of vocabulary …</p>
+
+<ul>
+  <li><strong>actions</strong> are the definition of "something" the system can do. They are
+<strong>instanciated</strong> when they are added to the plan for execution</li>
+  <li>the <strong>plan</strong> is the data structure in which Syskit manages all the system's
+runtime state. It is essentially a <a href="../runtime_overview/task_structure.html">graph of tasks</a></li>
+  <li><strong>tasks</strong> are the basic building block used to track execution of parts of
+the system. Compositions and components are tasks. Tasks emit and receive <strong>events</strong>,
+which is the unit of control and monitoring.</li>
+  <li><strong>missions</strong> are tasks that have been marked as "important". They represent
+the current goal(s) of the Syskit system, and are used by <a href="../runtime_overview/">the garbage
+collection</a> to determine what should be stopped.</li>
+  <li><strong>jobs</strong> are missions which have a job ID assigned to them. Only jobs are shown
+in UIs such as the Syskit IDE.</li>
+</ul>
+
+<p>In addition, when instanciated, an action is represented by a single task in
+the plan. This task will often be the root of a subplan, that is a set of
+other tasks that actually implement the action.</p>
+
+<p>All actions work this way: they generate a single "root" task, and create a
+network of other tasks that support it. Syskit does this from component network
+definitions. One can also do it manually in e.g. <a href="action_methods.html">action methods</a>.</p>
+
+<p>For instance, the <a href="../basics/devices.html#profile_define"><code>arm_cartesian_constant_control_def</code> action</a> is represented by its
+<a href="../runtime_overview/task_structure.html#dependency">toplevel composition</a>. This task is
+the one task that is registered as a mission in the plan.</p>
+
+<h2 id="instanciating-actions">Instanciating actions</h2>
+
+<p>Within action interfaces, actions are only <em>definitions</em> of what the system can do.
+To run them, one needs to instanciate them and add them to Syskit's plan.
+Manually, one can use the Syskit IDE or the syskit shell to start an action.
+Programatically, they can be added in two ways:</p>
+
+<ul>
+  <li>
+    <p>using the <code>Robot</code> global interface with the <code>Robot.action_name!(arg: ...)</code>
+syntax. For instance, the following would look for a <code>go_to</code> action on the main
+interface and activate it</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">go_to!</span><span class="p">(</span><span class="ss">x: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">y: </span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>  </li>
+  <li>
+    <p>by adding the action to the plan manually, for instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Roby</span><span class="p">.</span><span class="nf">plan</span><span class="p">.</span><span class="nf">add_mission_task</span><span class="p">(</span>
+    <span class="no">MyApp</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Navigation</span><span class="p">.</span><span class="nf">go_to</span><span class="p">(</span><span class="ss">x: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">y: </span><span class="mi">20</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>  </li>
+</ul>
+
+<h2 id="what-happens-when-actions-are-instanciated">What happens when actions are instanciated</h2>
+
+<p>When instanciated, any action is first added into the plan as a <strong>planning
+pattern</strong>. This is a pair of tasks:
+- one task that represents the action itself in an abstract way,
+- one task that represents the creation of all the tasks necessary to
+  actually execute the action. This is called the planning task.</p>
+
+<p>For instance, adding a definition to a plan creates a task of the same type than
+the definition's toplevel, and a planning task of type <code>Syskit::InstanceRequirementsTask</code></p>
+
+<p><img src="../runtime_overview/media/planned_by_1.png" alt="Example of Syskit::InstanceRequirementsTask" class="fullwidth" /></p>
+
+<p>Then Syskit's <a href="../runtime_overview/event_loop.html#scheduling">scheduler</a> will first
+have to execute the planning task, which will replace the planned task (the
+action-represented-in-an-abstract-way task) by the actual tasks that can be executed:</p>
+
+<p><img src="../runtime_overview/media/planned_by_2.png" alt="Example of Syskit::InstanceRequirementsTask" class="fullwidth" /></p>
+
+<p>Which will then be scheduled (again) by Syskit's scheduler.</p>
+
+<p>This representation has two advantages:</p>
+
+<ol>
+  <li>it allows to explicitely order the plan generation (the planning step) using Syskit's
+<a href="event_scheduling.html">event scheduling primitives</a></li>
+  <li>it allows to do resolve all the planning tasks of a certain kind globally, as it is
+done by e.g. Syskit to resolve the component network taking into account everything
+that should be running in the whole system (network_generation.html)</li>
+</ol>
+
+<h2 id="what-happens-when-missions-are-dropped">What happens when missions are dropped</h2>
+
+<p>Dropping a mission is telling Syskit that the mission is not anymore an
+objective of the system. Syskit will terminate anything that is not in use by
+other missions, but leave the rest of the system alone.</p>
+
+<h2 id="restarting">"Restarting"</h2>
+
+<p>In the Syskit IDE, "restarting" a job is dropping it and creating a new one
+<em>at the same time</em>. When dealing with stateless actions (i.e. all profile
+definitions), this essentially does nothing:</p>
+
+<ul>
+  <li><em>dropping</em> the current mission is marking it as "not needed"</li>
+  <li><em>creating</em> the same mission with the same arguments will make syskit deploy it
+and generate a network that is exactly like the currently running one</li>
+  <li>since the current network and the old ones are identical, Syskit will just keep
+the current system.</li>
+</ul>
+
+<p>To actually restart the current component(s), you need to drop and then start.</p>
+
+<h2 id="refining-and-reusing-existing-actions">Refining and reusing existing actions</h2>
+
+<p>Generally speaking, action interfaces can be refined and reused.</p>
+
+<p>"Refined" means to "tune" the actions for specific systems, or to provide the
+implementation of abstract actions that were defined for the purpose of
+creating higher-level behaviors (e.g. state machines) without getting into
+the specifics of how these behaviors will be executed. This is done by
+subclassing the "parent" interface, usually while keeping the name but
+placing it into the specific system's namespace, for instance, in
+<code>models/actions/navigation.rb</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Generic</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">Navigation</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>is then refined for a <code>gazebo</code> robot configuration in simulation by creating
+<code>models/actions/gazebo/navigation.rb</code> this way:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"generic/models/actions/navigation"</span>
+
+<span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="k">class</span> <span class="nc">Navigation</span> <span class="o">&lt;</span> <span class="no">Generic</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Navigation</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>"Reused" means to create composite actions using actions from other
+interfaces, but without the ability of changing the reused actions. This is
+done with the <code>use_library</code> statement. For instance, the <code>Navigation</code>
+interface we just refined can be reused in a <code>UI</code> action interface which
+defines all the actions available to a control UI:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"my_app/models/actions/gazebo/navigation"</span>
+
+<span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="k">class</span> <span class="nc">UI</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+                <span class="n">use_library</span> <span class="no">Navigation</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>These techniques usually lead to a double refine &amp; reuse pattern, where
+the generic abstract actions are linked with a <code>use_library</code> and then refined
+by subclassing and again a <code>use_library</code>:</p>
+
+<p><img src="actions_refine_and_reuse.svg" alt="Reusing and refining actions in a diamond" class="fullwidth" /></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="cookbook cookbook_http_api">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Cookbook</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child active'><a href="http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="http-api-of-a-syskit-based-system">HTTP API of a Syskit-based System</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#overall-structure" id="markdown-toc-overall-structure">Overall Structure</a></li>
+  <li><a href="#implementing-the-endpoints-in-the-grape-class" id="markdown-toc-implementing-the-endpoints-in-the-grape-class">Implementing the endpoints in the Grape class</a>    <ul>
+      <li><a href="#synchronization-between-syskit-and-grape" id="markdown-toc-synchronization-between-syskit-and-grape">Synchronization between Syskit and Grape</a></li>
+      <li><a href="#storing-data-in-the-grape-endpoints" id="markdown-toc-storing-data-in-the-grape-endpoints">Storing data in the Grape endpoints</a></li>
+    </ul>
+  </li>
+  <li><a href="#common-operations" id="markdown-toc-common-operations">Common Operations</a>    <ul>
+      <li><a href="#reading-data-streams" id="markdown-toc-reading-data-streams">Reading data streams</a>        <ul>
+          <li><a href="#data-readers-with-port-queries" id="markdown-toc-data-readers-with-port-queries">Data readers with port queries</a></li>
+          <li><a href="#example-state-monitoring-composition-implementation" id="markdown-toc-example-state-monitoring-composition-implementation">Example state monitoring composition implementation</a></li>
+          <li><a href="#accessing-the-state-monitoring-composition-from-a-grape-endpoint" id="markdown-toc-accessing-the-state-monitoring-composition-from-a-grape-endpoint">Accessing the state monitoring composition from a Grape endpoint</a></li>
+          <li><a href="#final-word" id="markdown-toc-final-word">Final word</a></li>
+        </ul>
+      </li>
+      <li><a href="#controlling-the-system" id="markdown-toc-controlling-the-system">Controlling the System</a>        <ul>
+          <li><a href="#modifying-what-runs" id="markdown-toc-modifying-what-runs">Modifying what runs</a></li>
+          <li><a href="#dynamically-changing-configuration" id="markdown-toc-dynamically-changing-configuration">Dynamically changing configuration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>One way to create an external interface with a Syskit-based system is through a
+HTTP API. This is <strong>not</strong> a HTTP API that is generic and allow to automatically
+access Syskit and rock primitives such as ports or actions. The objective is to
+create a well-defined, system-specific interface that common UI development
+tools can easily hit (e.g. web frontend).</p>
+
+<p>The rest of this page will describe the overall structure and the various
+techniques related to this objective.</p>
+
+<h2 id="overall-structure">Overall Structure</h2>
+
+<p>The central idea is to provide a HTTP server inside the Syskit process, which naturally
+has access to the Syskit APIs to control and monitor the system. To make it practical,
+however, we have to split the implementation of this HTTP API in different bits and
+pieces.</p>
+
+<p>For the HTTP API itself, we will use <a href="https://github.com/ruby-grape/grape">Grape</a>,
+which provides a declarative way to create a HTTP API. Roby provides an integration
+of Grape with the thin web server to get the Grape API available.</p>
+
+<p>Usually, the main Grape class will be created in <code>lib/syskit_basics/rest/api.rb</code>. Roby task
+that manages the HTTP server is called <code>Tasks::REST</code> and the corresponding action
+<code>http_api</code>. Assuming we are within the <code>SyskitBasics</code> application of <a href="../basics/">the
+tutorials</a>, let's implement those now.</p>
+
+<p>Create <code>lib/syskit_basics/rest/api.rb</code> and fill it with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># frozen_string_literal: true</span>
+
+<span class="nb">require</span> <span class="s2">"roby/interface/rest/api"</span>
+<span class="nb">require</span> <span class="s2">"roby/interface/rest/helpers"</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">REST</span>
+        <span class="k">class</span> <span class="nc">API</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+            <span class="nb">format</span> <span class="ss">:json</span>
+
+            <span class="n">mount</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Interface</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">API</span>
+            <span class="n">helpers</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Interface</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Helpers</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Now, create the rest task with <code>syskit gen task http_api</code> and modify it to fit:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># frozen_string_literal: true</span>
+
+<span class="nb">require</span> <span class="s2">"syskit_basics/rest/api"</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Tasks</span>
+        <span class="k">class</span> <span class="nc">HTTP_API</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Interface</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Task</span>
+            <span class="n">terminates</span>
+
+            <span class="k">def</span> <span class="nf">rest_api</span>
+                <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">API</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>And finally create the action interface with <code>syskit gen act http_api</code>, and
+define the action within:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"start the HTTP API"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="s2">"port"</span><span class="p">,</span> <span class="s2">"the port on which the HTTP API should listen"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">http_api</span><span class="p">(</span><span class="n">port</span><span class="p">:)</span>
+    <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Tasks</span><span class="o">::</span><span class="no">HTTP_API</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">main_route: </span><span class="s2">"/"</span><span class="p">,</span> <span class="ss">port: </span><span class="n">port</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>You can then add the interface to the <code>actions</code> block and
+<code>Robot.http_api!(port: 5_000)</code> in the controller block within
+<code>config/robots/gazebo.rb</code>. You can check the API is alive using some browser
+extension Rested to call the <code>/ping</code> endpoint (which is part of
+<a href="https://github.com/rock-core/tools-roby/tree/master/lib/roby/interface/rest/api.rb">Roby::Interface::REST::API</a>)</p>
+
+<h2 id="implementing-the-endpoints-in-the-grape-class">Implementing the endpoints in the Grape class</h2>
+
+<p>There are a few rules regarding the interaction with the Syskit system from the
+Grape class. For starters, the two run in different threads so any access with
+Syskit data structures must be synchronized. Second of all, Grape does not provide
+a way to store data between different calls of the endpoints (i.e. there is no
+way built-in grape to have one call to one endpoint save a value so that )</p>
+
+<h3 id="synchronization-between-syskit-and-grape">Synchronization between Syskit and Grape</h3>
+
+<p>The <a href="https://github.com/rock-core/tools-roby/tree/master/lib/roby/interface/rest/helpers.rb">roby REST helpers</a>
+provide accessors to the internal Syskit data structures. This access <strong>must</strong> always
+be synchronized by calling them inside a <code>roby_execute</code> block:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/some/stuff"</span> <span class="k">do</span>
+    <span class="n">roby_execute</span> <span class="k">do</span>
+        <span class="c1"># Interact with Syskit</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Moreover, any data that is taken out of Syskit must be copied before getting
+out of the <code>roby_execute</code> block.</p>
+
+<p class="important"><code>roby_execute</code> actually blocks Syskit. You must not do anything that blocks for
+a long time in there, or your system will become unresponsive.</p>
+
+<h3 id="storing-data-in-the-grape-endpoints">Storing data in the Grape endpoints</h3>
+
+<p>Grape does not provide a way to store data between different calls of the
+endpoints (i.e. there is no way built-in grape to have one call to one endpoint
+save a value so that another call to an endpoint - the same or different - picks
+it up).</p>
+
+<p>The helpers provide <code>roby_storage</code>. This is a hash whose value will be kept
+across calls. You may use it to store information / data / configuration parameters
+and have it available across all endpoints. <code>roby_storage</code> may be initialized
+within the initial Roby task (<code>SyskitBasics::Tasks::HTTP_API</code> in our example
+application):</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Tasks</span>
+        <span class="k">class</span> <span class="nc">HTTP_API</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Interface</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Task</span>
+            <span class="n">terminates</span>
+
+            <span class="c1"># ID to be made available to the caller</span>
+            <span class="n">argument</span> <span class="ss">:system_id</span>
+
+            <span class="k">def</span> <span class="nf">rest_server_args</span>
+                <span class="k">super</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span>
+                    <span class="ss">storage: </span><span class="p">{</span>
+                        <span class="ss">system_id: </span><span class="n">system_id</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="k">end</span>
+
+            <span class="k">def</span> <span class="nf">rest_api</span>
+                <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">API</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="note">Since we are using <code>thin</code>, the different endpoints never run in
+parallel and there is no need to synchronize the access to <code>roby_storage</code></p>
+
+<p class="important">Be careful with <code>roby_storage</code>. Never store information in it that is already
+available within the Syskit plan, or you will more surely end up having a
+disconnection between the data you return to your clients and the actual state
+of the system. Use it for configuration parameters, or for data that is directly
+relevant to the API itself without being available within the Syskit system.</p>
+
+<h1 id="common-operations">Common Operations</h1>
+
+<h2 id="reading-data-streams">Reading data streams</h2>
+
+<p>The fact that Grape objects are short-lived - essentially living the time of a
+single HTTP call - reading and managing state within them is tricky. Managing
+the data readers themselves would already be a challenge. For this reason, we
+usually delegate the aggregation of data relevant to the HTTP API into one or
+more compositions, e.g. a <code>HTTPStateMonitoring</code> composition.</p>
+
+<h3 id="data-readers-with-port-queries">Data readers with port queries</h3>
+
+<p>However, we do not use the standard composition-child relationship to refer to
+the data sources. Indeed, using this strong relationship would make Syskit
+terminate the state monitoring composition every time a single data source fails,
+something that is obviously not desired.</p>
+
+<p>Instead, we use a different mode of the <a href="../coordination/tasks_and_events.html">data readers and
+writers</a>. Instead of providing
+composition children, these writers may be given plan queries. That is, objects
+that are used to find ports within Syskit's plan, and provide readers on them
+<em>when they are available</em>, letting the composition know when they are not
+available.</p>
+
+<p>In practice, the most common query is to provide a data service and its port. This
+query will match with any task that provides the data service, and will bind to its port.</p>
+
+<p class="important">If there is more than one match, it will pick the first one.</p>
+
+<p>For instance,</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">data_reader</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Pose</span><span class="p">.</span><span class="nf">match</span><span class="p">.</span><span class="nf">pose_samples_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"pose"</span>
+</code></pre></div>
+<p>will create a reader on the <code>pose_samples</code> port of any pose provider in the
+system. One usually wants to refine the query. Two very common predicates are
+<code>with_arguments</code> to match arguments, and <code>mission</code> to check if the task is marked
+as mission (has been started as a toplevel action, see below the <a href="#missions">Managing missions</a> section).
+For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">data_reader</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Pose</span>
+            <span class="p">.</span><span class="nf">match</span><span class="p">.</span><span class="nf">mission</span>
+            <span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">source: </span><span class="s2">"gps"</span><span class="p">).</span><span class="nf">pose_samples_port</span><span class="p">,</span>
+            <span class="ss">as: </span><span class="s2">"pose"</span>
+</code></pre></div>
+<p>See <a href="https://github.com/rock-core/tools-roby/blob/master/lib/roby/queries/query.rb">Roby::Queries::Query</a>
+API for a full list of predicates.</p>
+
+<p>To disambiguate sources, when more than one provide the service you use to identify them,
+you may:</p>
+
+<ol>
+  <li>create a "source selection" composition whose sole purpose is to "mark" the data
+source. This composition would export the relevant port(s), and you would use the
+composition model in the data reader match object.</li>
+  <li>create a new service for this purpose and make sure the task/composition you
+are targetting provide it.</li>
+  <li>directly use the task model of the task that implement the source (<strong>not recommended</strong>)</li>
+</ol>
+
+<h3 id="example-state-monitoring-composition-implementation">Example state monitoring composition implementation</h3>
+
+<p>Assuming we only want to read the pose source we defined above (the simplest version),
+the</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Compositions</span>
+        <span class="k">class</span> <span class="nc">HTTPStateMonitoring</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+            <span class="n">data_reader</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Pose</span>
+                        <span class="p">.</span><span class="nf">match</span><span class="p">.</span><span class="nf">pose_samples_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"pose"</span>
+
+            <span class="c1"># @return [Hash] the state to be returned from the HTTP endpoint</span>
+            <span class="c1">#   as a hash</span>
+            <span class="nb">attr_reader</span> <span class="ss">:json</span>
+
+            <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">**</span><span class="p">)</span>
+                <span class="k">super</span>
+
+                <span class="c1"># Data formatted to be ready to send to our caller</span>
+                <span class="vi">@json</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">end</span>
+
+            <span class="n">poll</span> <span class="k">do</span>
+                <span class="c1"># VERY important. This will update the readers</span>
+                <span class="k">super</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nb">p</span> <span class="o">=</span> <span class="n">pose_reader</span><span class="p">.</span><span class="nf">read_new</span><span class="p">)</span>
+                    <span class="c1"># Update @json</span>
+                    <span class="vi">@json</span><span class="p">[</span><span class="s2">"position"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">x: </span><span class="nb">p</span><span class="p">.</span><span class="nf">position</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="ss">y: </span><span class="nb">p</span><span class="p">.</span><span class="nf">position</span><span class="p">.</span><span class="nf">y</span> <span class="p">}</span>
+                <span class="k">elsif</span> <span class="o">!</span><span class="n">pose_reader</span><span class="p">.</span><span class="nf">connected?</span>
+                    <span class="c1"># No pose provider available</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="accessing-the-state-monitoring-composition-from-a-grape-endpoint">Accessing the state monitoring composition from a Grape endpoint</h3>
+
+<p>Within the endpoint, you have to do two things: find the <code>HTTPStateMonitoring</code> task
+and then return the JSON document</p>
+
+<p>While the second part is rather trivial, the first part requires using plan
+queries, akin to the port queries we have just seen to define the readers.
+<code>Plan#find_tasks</code> will allow us to find a running state monitoring task using a
+query and then we can access its <code>json</code> data.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">get</span> <span class="s2">"/state"</span> <span class="k">do</span>
+    <span class="n">roby_execute</span> <span class="k">do</span>
+        <span class="n">monitoring_task</span> <span class="o">=</span>
+            <span class="n">roby_plan</span><span class="p">.</span><span class="nf">find_tasks</span><span class="p">(</span><span class="no">Compositions</span><span class="o">::</span><span class="no">HTTPStateMonitoring</span><span class="p">).</span><span class="nf">running</span><span class="p">.</span><span class="nf">first</span>
+        <span class="n">monitoring_task</span><span class="o">&amp;</span><span class="p">.</span><span class="nf">json</span> <span class="o">||</span> <span class="p">{}</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="final-word">Final word</h3>
+
+<p>Once more, the objective of this HTTP API is to provide a well-defined interface
+to a complex system, <strong>not</strong> a generic "read whatever you want" type of debug
+interface. Use the Syskit IDE and other Rock tools (e.g. vizkit) for the latter.</p>
+
+<h2 id="controlling-the-system">Controlling the System</h2>
+
+<p>What we have just seen is how to read data streams. Now, we will most definitely
+want to also control the system through the same means (e.g. PUT or POST endpoints).
+This section will outline how that is done.</p>
+
+<p>First, within a Syskit system, a list of tasks are specially markes as
+"missions". Syskit considers these tasks to represent the objective of the
+system, and uses it as its basis to decide what to run. I recommend you
+(re-)read <a href="../runtime_overview/task_structure.html">this part of the documentation</a>
+if this concept is not familiar to you</p>
+
+<h3 id="modifying-what-runs">Modifying what runs</h3>
+
+<p>Essentially "controlling the system" at the level of the HTTP API works with adding
+and removing missions. This is what we are going to learn about right now.</p>
+
+<p>Let's assume, to simplify, that the system only has one "user-provided" mission at
+any given time. He would have auxiliary services, which also run as missions from
+Syskit's perspective, but only one of these is <em>the</em> mission set externally by
+the HTTP API. Let's create a task service to mark these missions and make them
+discoverable:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># frozen_string_literal: true</span>
+<span class="c1"># Created by syskit gen task-srv mission</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Services</span>
+        <span class="n">task_service</span> <span class="s2">"Mission"</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>From now on, the toplevel task of the missions that you want to be able to
+manipulate from the HTTP API will have to have <code>provides Services::Mission</code> in its
+declaration. These must be toplevel tasks - that is, they are used to represent
+the action itself, and are the return type of the action. In the case of profile
+definitions, this is the type of the definition. In the case of other actions
+(e.g. <a href="../coordination/action_methods.html">action methods</a> or <a href="../coordination/action_state_machines.html">action state
+machines</a> it has to be declared as
+the return type with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"the action documentation"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="no">MyReturnType</span><span class="p">)</span>
+</code></pre></div>
+<p>From this point on, the endpoint that will change the mission has two jobs:
+finding the current mission, ensuring it is available for <a href="../runtime_overview/task_structure.html">garbage
+collection</a> and then spawn the new
+mission.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># find the current mission</span>
+<span class="n">roby_execute</span> <span class="k">do</span>
+    <span class="c1"># Find the single task that provides the mission service, and that is also</span>
+    <span class="c1"># marked as mission</span>
+    <span class="n">mission_task</span> <span class="o">=</span> <span class="n">roby_plan</span><span class="p">.</span><span class="nf">find_tasks</span><span class="p">(</span><span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Mission</span><span class="p">).</span><span class="nf">mission</span><span class="p">.</span><span class="nf">first</span>
+    <span class="c1"># Make sure it is available for garbage collection</span>
+    <span class="n">roby_plan</span><span class="p">.</span><span class="nf">make_useless</span><span class="p">(</span><span class="n">mission_task</span><span class="p">)</span> <span class="k">if</span> <span class="n">mission_task</span>
+    <span class="c1"># And create the new mission</span>
+    <span class="no">Robot</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">new_mission_name</span><span class="si">}</span><span class="s2">!"</span><span class="p">,</span> <span class="o">**</span><span class="n">new_mission_args</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The core concepts here are:
+- the <code>mission</code> flag
+- the <code>find_tasks</code> API. Note that if more than one action of a given type are meant
+  to be running, you can filter with arguments or other services to disambiguate.</p>
+
+<p>The corresponding GET endpoint, which would allow to inspect what mission is running
+would use the <code>find_tasks</code> to get the task and then return the value:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">roby_execute</span> <span class="k">do</span>
+    <span class="n">mission_task</span> <span class="o">=</span> <span class="n">roby_plan</span><span class="p">.</span><span class="nf">find_tasks</span><span class="p">(</span><span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Mission</span><span class="p">).</span><span class="nf">mission</span><span class="p">.</span><span class="nf">first</span>
+    <span class="k">return</span> <span class="p">{}</span> <span class="k">unless</span> <span class="n">mission_task</span>
+
+    <span class="p">{</span>
+        <span class="ss">id: </span><span class="n">mission_task</span><span class="p">.</span><span class="nf">mission_id</span><span class="p">,</span>
+        <span class="c1"># fill the hash according to your API</span>
+    <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="dynamically-changing-configuration">Dynamically changing configuration</h3>
+
+<p>The technique above may be used to change the configuration of some running services.
+If <em>everywhere</em> in the system you rely on default arguments for a action or definition,
+then starting the same action/definition "on the side" with specific arguments will
+take precedence, that is, in the robot controller:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># We assume that some_action! uses for instance a gps_dev! with default arguments only</span>
+<span class="no">Robot</span><span class="p">.</span><span class="nf">some_action!</span>
+<span class="c1"># Start gps_dev! with specific arguments. The gps_dev of some_action will pick them up</span>
+<span class="no">Robot</span><span class="p">.</span><span class="nf">gps_dev!</span> <span class="ss">origin: </span><span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>However, this becomes tedious quickly, especially if some parameter value need to be
+propagated across different subnets. The alternative technique is to use Syskit's global
+<code>Conf</code> object, passing argument values with the <code>from_conf</code> helper.</p>
+
+<p>In the example above, in our system-specific profiles, we would inject
+<code>gps_dev</code> in <code>some_action</code> with <code>with_arguments(origin: Roby.from_conf.global_localization_origin)</code>.
+This makes Syskit pick up the actual value at deployment time (and every time
+there is a deployment). We will be able to change the value and trigger a deployment to
+propagate it.</p>
+
+<p>First, in the <code>Robot.init</code> block we initialize the value</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Conf</span><span class="p">.</span><span class="nf">global_localization_origin</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>Finally, in an endpoint we can do</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">roby_execute</span> <span class="k">do</span>
+    <span class="no">Conf</span><span class="p">.</span><span class="nf">global_localization_origin</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="ss">:origin</span><span class="p">]</span>
+    <span class="no">Syskit</span><span class="o">::</span><span class="no">Runtime</span><span class="p">.</span><span class="nf">apply_requirement_modifications</span><span class="p">(</span><span class="n">roby_plan</span><span class="p">,</span> <span class="ss">force: </span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

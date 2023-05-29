@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="component_networks component_networks_geometric_transformations">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Designing Component Networks</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="profiles.html">Profiles</a></li><li class='child'><a href="reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="dynamic_services.html">Dynamic Services</a></li><li class='child active'><a href="geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="geometric-transformations">Geometric Transformations</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#system-wide-frame-consistency" id="markdown-toc-system-wide-frame-consistency">System-wide frame consistency</a>    <ul>
+      <li><a href="#component_annotations" id="markdown-toc-component_annotations">Enabling propagation: additional component annotations in transformer-enabled components</a></li>
+      <li><a href="#enabling-propagation-adding-geometry-modelling-in-components-that-do-not-use-the-transformer" id="markdown-toc-enabling-propagation-adding-geometry-modelling-in-components-that-do-not-use-the-transformer">Enabling propagation: adding geometry modelling in components that do not use the transformer</a></li>
+      <li><a href="#annotating-devices" id="markdown-toc-annotating-devices">Annotating Devices</a></li>
+      <li><a href="#use_frames_in_profiles" id="markdown-toc-use_frames_in_profiles">Setting frames that can't be deduced by propagation</a></li>
+      <li><a href="#frame-related-errors" id="markdown-toc-frame-related-errors">Frame-related errors</a></li>
+    </ul>
+  </li>
+  <li><a href="#describing-frames-and-their-relations-using-sdf" id="markdown-toc-describing-frames-and-their-relations-using-sdf">Describing frames and their relations using SDF</a></li>
+  <li><a href="#caveats" id="markdown-toc-caveats">Caveats</a></li>
+  <li><a href="#guidelines" id="markdown-toc-guidelines">System Design Guidelines</a></li>
+</ul>
+
+<div class="note">
+  <p>This is a page in a 3-part series.The <a href="../libraries/geometric_transformations.html">first
+part</a> presented the issue, and how
+to handle geometric transformations within C++ libraries. The <a href="../components/geometric_transformations.html">second
+part</a> then discussed how it is
+handled at the component level.</p>
+
+  <p>This last part deals with system-level concerns of consistency (that readers and
+writers are expecting data in the same frame(s)) and configuration of Rock's
+transformer.</p>
+</div>
+
+<div class="panel panel-body">
+  <p>Geometry support requires that you have <code>drivers/orogen/transformer</code>
+in your workspace. Moreover, your Syskit bundle must have</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">init</span> <span class="k">do</span>
+  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">transformer_enabled</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre></div>
+  <p>in the robot configuration file (either <code>config/robots/default.rb</code>
+or a robot-specific configuration)</p>
+</div>
+
+<h2 id="system-wide-frame-consistency">System-wide frame consistency</h2>
+
+<p>The introduction of frames and frame transformations in components also
+introduce another dimension in the component configuration. All these frames
+need to be assigned to global frame names. However, what frame a component
+should be configured with is related to what it is connected to. There's a
+relationship between the shape of the component network (port-to-port
+connections) and the configuration of frames.</p>
+
+<p>Let's consider the visual servoing example outlined in
+<a href="../components/geometric_transformations.html">the component part</a>: a visual
+servoing component takes visual features as input and provides a command within
+a command frame on the vehicle body. The component's transformer was configured with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s2">"Task"</span> <span class="k">do</span>
+    <span class="n">needs_configuration</span>
+    <span class="o">...</span>
+    <span class="n">transformer</span> <span class="k">do</span>
+        <span class="n">align_port</span> <span class="s2">"detected_features"</span>
+        <span class="n">transform</span> <span class="s1">'features'</span><span class="p">,</span> <span class="s1">'command'</span>
+        <span class="n">max_latency</span> <span class="mf">0.1</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In this example, there is obviously the need for the <code>features</code> frame to be the
+reference frame from the <code>detected_features</code> input port. Which means for
+instance that it is either a camera frame, or the output reference frame of some
+intermediate detection component. If the chain starts using a different camera,
+the visual servoing component's <code>features</code> frame also needs to be changed.
+Breaking the consistency of the frames in the system usually leads to
+hard-to-find bugs.</p>
+
+<p>Given that the main paradigm in Syskit is to let the developer (you) build
+networks, Syskit handles this by (1) auto-configuring frames, when possible, by
+propagating them through the network and (2) when frames are set explicitly,
+verifying that it is done consistently.</p>
+
+<p>Devices are the main "anchor" for frames. Indeed frames are constrained by where
+each data stream "comes from" in the world. This is in practice defined by the
+placement of the device on the robot. What we will see in the following is how
+to annotate devices with frames, and how to add annotations to component models
+so that Syskit can propagate the frames in the network.</p>
+
+<h3 id="component_annotations">Enabling propagation: additional component annotations in transformer-enabled components</h3>
+
+<p>When using the transformer, one defines frames and transformations that are
+relevant for the component's computation. At this level, these frames are
+considered <em>internal</em> by Syskit, i.e. Syskit cannot guess what are the relations
+between the frames declared and the component ports.</p>
+
+<p>Let's open a Syskit IDE and display a component's transform annotations (the
+component is <a href="https://github.com/rock-slam/slam-orogen-uwv_kalman_filters">the <code>uwv_kalman_filters::VelocityProvider</code></a>
+component).</p>
+
+<p><img src="media/VelocityProvider_plain_transformer.svg" alt="Plain transformer information" /></p>
+
+<p>In this view, the frames are oval shaped, with the component-local frame name on
+the left of the equal sign, and the global frame name assigned to it on the
+right. Broken lines with a dot that connect two frames together represent
+transforms.</p>
+
+<p>The important aspect here is that none of these frames are associated with the
+component inputs and outputs. Let's change that.</p>
+
+<p>First, we need to create an orogen annotation file by running <code>syskit gen orogen
+uwv_kalman_filters</code>, and then edit the generated
+<code>models/orogen/uwv_kalman_filters.rb</code>. Let's add a transformer block to this,
+in which we'll add the required information:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">uwv_kalman_filters</span><span class="o">.</span><span class="no">VelocityProvider</span> <span class="k">do</span>
+    <span class="n">transformer</span> <span class="k">do</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Two types of annotations can be given:</p>
+
+<ul>
+  <li>annotate a port's data stream with a frame (such as e.g. the reference frame
+of visual features). This is done with <code>associate_ports_to_frame</code></li>
+  <li>provide the source and target frame of a <code>RigidBodyState</code> port, this is done
+with <code>associate_ports_to_transform</code></li>
+</ul>
+
+<p>Let's take the <code>VelocityProvider</code> ports one by one.</p>
+
+<ul>
+  <li>
+    <p><code>body_efforts</code> represents the efforts applied on the vehicle in the body
+frame. It is expressed in the body frame itself.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">associate_ports_to_frame</span> <span class="s2">"body_efforts"</span><span class="p">,</span> <span class="s2">"body"</span>
+</code></pre></div>
+    <p>After reloading, this new relation is represented by an edge between the port
+and the frame:</p>
+
+    <p><img src="media/VelocityProvider_body_efforts.svg" alt="body_efforts annotation" /></p>
+  </li>
+  <li>
+    <p><code>dvl_velocity_samples</code> is a <code>RigidBodyState</code> which represents the velocity of
+the vehicle expressed in the sensor's frame. It is therefore a dvl-to-dvl
+transform:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">associate_ports_to_transform</span> <span class="s2">"dvl_velocity_samples"</span><span class="p">,</span> <span class="s2">"dvl"</span> <span class="o">=&gt;</span> <span class="s2">"dvl"</span>
+</code></pre></div>
+    <p>The port-to-transform relation is represented by an edge between the port and
+the white dot in the middle of the transform:</p>
+
+    <p><img src="media/VelocityProvider_dvl.svg" alt="body_efforts annotation" /></p>
+  </li>
+  <li>
+    <p><code>imu_sensor_samples</code> is represented in the sensor's frame</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">associate_ports_to_frame</span> <span class="s2">"imu_sensor_samples"</span><span class="p">,</span> <span class="s2">"imu"</span>
+</code></pre></div>  </li>
+  <li>
+    <p><code>pressure_sensor_samples</code> represents the Z-only transform between the
+"surface" (an external frame) and the sensor. Since the surface is not part of
+the component's configuration, we can add a new frame to represent it.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">associate_ports_to_transform</span> <span class="s2">"pressure_samples"</span><span class="p">,</span> <span class="s2">"pressure_sensor"</span> <span class="o">=&gt;</span> <span class="s2">"surface"</span>
+</code></pre></div>  </li>
+  <li>
+    <p>Finally, the component generates the velocity of the body w.r.t. itself</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">associate_ports_to_transform</span> <span class="s1">'velocity_samples'</span><span class="p">,</span> <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'body'</span>
+</code></pre></div>  </li>
+</ul>
+
+<p>The final model looks like this:</p>
+
+<p><img src="media/VelocityProvider_all_annotations.svg" alt="All inputs modelled" /></p>
+
+<h3 id="enabling-propagation-adding-geometry-modelling-in-components-that-do-not-use-the-transformer">Enabling propagation: adding geometry modelling in components that do not use the transformer</h3>
+
+<p>As a design driver, one should minimize the amount of components that need to
+know about frames and frame transforms. For instance, an image preprocessing
+stage does not need to know about the frame of its image. Most devices do not
+either. Really, only components that generate RigidBodyState samples meant as input for
+the transformer do need to know about global frames.</p>
+
+<p>However, in order to enable propagation in the network, one still needs to
+add the same kind of annotations than with the transformer-enabled components.
+The annotations use the exact same syntax. The only difference is that unlike
+the transformer-based components the frame names are "free", i.e. have to be
+declared within the Syskit extension file as well.</p>
+
+<p>For instance, a hypothetical image preprocessing component would have</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">transformer</span> <span class="k">do</span>
+    <span class="n">configurable_frame</span> <span class="s2">"image"</span>
+    <span class="n">associate_ports_to_frame</span> <span class="s2">"image_in"</span><span class="p">,</span> <span class="s2">"image_out"</span><span class="p">,</span> <span class="s2">"image"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Note that if your component has a <code>${frame_name}_frame</code> property, it will be
+filled by Syskit at runtime, regardless of whether the component uses the
+transformer or not.</p>
+
+<h3 id="annotating-devices">Annotating Devices</h3>
+
+<p>Devices are the main "anchor" for frames within a component network. Indeed
+frames are constrained by where each data stream "comes from" in the world. This
+is in practice defined by the placement of the device on the robot.</p>
+
+<p>Devices that provide a data stream that is not itself a transformation are
+attached to a frame with the <code>.frame</code> declaration</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">device</span><span class="p">(</span><span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Camera</span><span class="o">::</span><span class="no">Firewire</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'left_camera'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">frame</span><span class="p">(</span><span class="s1">'robot::camera_left'</span><span class="p">)</span>
+</code></pre></div>
+<p>Devices that actually provide a transformation get it with the
+<code>.frame_transform</code> declaration.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">device</span><span class="p">(</span><span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">Generic</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'gps'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">frame_transform</span><span class="p">(</span><span class="s1">'robot::gps'</span> <span class="o">=&gt;</span> <span class="s1">'nwu'</span><span class="p">)</span>
+</code></pre></div>
+<p>Once the device is attached to a driver, the frame assignment is propagated to
+this driver's own frame definitions - assuming that the device driver has the
+right <code>associate_frame_to...</code> annotations. In the case of the GPS, it would end
+up looking like:</p>
+
+<p><img src="media/GPS_device_to_port.svg" alt="GPS task with annotations" /></p>
+
+<p>Where the device-assigned frames are shown with the <code>dev(...).frame_name</code>
+syntax.</p>
+
+<div class="alert alert-info">
+  <p>Note that unlike the TaskContext visualizations, where the transforms
+are shown by default, visualizing transforms in a profile (as, in this case,
+a device definition), requires to show the transforms explicitly by clicking
+the "Show transforms" link:</p>
+
+  <p><img src="media/SyskitIDE_show_transforms.jpg" alt="&quot;Show transforms&quot; button" /></p>
+</div>
+
+<h3 id="use_frames_in_profiles">Setting frames that can't be deduced by propagation</h3>
+
+<p>Once components and devices have been annotated, most frames are usually set by
+simply connecting the components together in a profile.</p>
+
+<p>However, certain frames are not tied to a device, but are in effect part of the
+overall system configuration. These frames must be set explicitly in the
+profiles. When this happens, one gets the following message while running the
+tests:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>could not find a frame for body in OroGen.uwv_kalman_filters.VelocityProvider
+</code></pre></div>
+<p>This can be inspected in e.g. the profile page in the Syskit IDE (see the red
+'body' frame in the VelocityProvider component)</p>
+
+<p><img src="media/VelocityProvider_no_body_frame.svg" alt="Missing body frame" /></p>
+
+<p>To fix this, one must explicitly set the body frame in the profile with the
+<code>.use_frames</code> statement. Frame selection is recursive (a frame selected in a
+composition applies to its children).</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span><span class="p">(</span><span class="s1">'velocity_provider_filter'</span><span class="p">,</span> <span class="no">Compositions</span><span class="o">::</span><span class="no">VelocityEstimation</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">use_frames</span><span class="p">(</span><span class="s2">"ref"</span> <span class="o">=&gt;</span> <span class="s2">"auv"</span><span class="p">)</span>
+</code></pre></div>
+<p>Where "body" is the component-local name and "auv" the actual global frame name.</p>
+
+<h3 id="frame-related-errors">Frame-related errors</h3>
+
+<p>Frame-related errors are caught during profile unit-testing and within the
+Syskit IDE when clicking on a profile definition. The development cycle is
+usually to run the tests to verify that all frames are set and consistent, and
+use the IDE to fix the possible problems - since the IDE allows to more easily
+look at how frames propagate through the ports.</p>
+
+<div class="alert alert-info">
+  <p><strong>Message</strong>: <code>could not find a frame for $frame_name in $component</code></p>
+
+  <p><strong>Problem</strong>: a frame cannot be deduced by network propagation</p>
+
+  <p><strong>Resolution</strong>: In a profile test or when inspecting a definition in the syskit
+IDE, this error indicates that some information is missing in the profile /
+network. If the frame is related to a port, make sure that <a href="#component_annotations">all
+frame-propagation annotations have been set</a>.
+Otherwise, set it explicitly <a href="#use_frames_in_profiles">in the profile</a>.</p>
+
+  <p>This error is expected when inspecting a composition within the IDE. If it
+happens during a composition or task context test, one needs to explicitely
+provide dummy frames in the stub calls:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">model</span> <span class="o">=</span> <span class="no">OrientationEstimator</span><span class="p">.</span>
+    <span class="nf">use_frames</span><span class="p">(</span><span class="s1">'map'</span> <span class="o">=&gt;</span> <span class="s1">'w'</span><span class="p">,</span> <span class="s1">'world'</span> <span class="o">=&gt;</span> <span class="s1">'w'</span><span class="p">,</span> <span class="s1">'imu'</span> <span class="o">=&gt;</span> <span class="s1">'body'</span><span class="p">,</span> <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="s1">'body'</span><span class="p">).</span>
+    <span class="nf">transformer</span> <span class="p">{</span> <span class="n">frames</span> <span class="s1">'w'</span><span class="p">,</span> <span class="s1">'body'</span> <span class="p">}</span>
+<span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</code></pre></div>
+</div>
+
+<div class="alert alert-info">
+  <p><strong>Message</strong>: <code>conflicting frames selected for $frame_name ($selection1 != $selection2)</code></p>
+
+  <p><strong>Problem</strong>: an output is connected to an input, but with different frames or
+transforms selections</p>
+
+  <p><strong>Resolution</strong>: either some definitions are over-constrained (have frames
+selected that do not need to be selected), or different selections are
+conflicting. Check the propagation of said frame in the IDE.</p>
+</div>
+
+<div class="alert alert-info">
+  <p><strong>Message</strong>: <code>error propagating information on port $port_name of $task</code>
+followed by <code>while adding information to port $port_name on $task, cannot merge
+a frame annotation with a transform annotation</code></p>
+
+  <p><strong>Problem</strong>: an output annotated with a frame is connected to an input annotated
+with a transform.</p>
+
+  <p><strong>Resolution</strong>: change the output to a transform (associate_ports_to_transform)
+or the input to a frame (associate_ports_to_frame)</p>
+</div>
+
+<div class="alert alert-info">
+  <p><strong>Message</strong>: <code>$task.$port_name was expecting an association with a frame, but
+one or more connections mismatch</code></p>
+
+  <p><strong>Problem</strong>: an output annotated with a transform is connected to an input annotated
+with a frame.</p>
+
+  <p><strong>Resolution</strong>: change the output to a frame (associate_ports_to_frame)
+or the input to a transform (associate_ports_to_transform)</p>
+</div>
+
+<h2 id="describing-frames-and-their-relations-using-sdf">Describing frames and their relations using SDF</h2>
+
+<p>The canonical way to describe all of a system's frames is to provide a SDF file
+that describes the vehicle, and another SDF file that represents its
+environment.</p>
+
+<p>Then, a <code>use_sdf_model</code> stanza can be added in a profile to import the SDF
+information into the transformer for live systems, and <code>use_gazebo_model</code> for
+systems in simulation that use Gazebo.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">profile</span> <span class="s2">"Base"</span> <span class="k">do</span>
+    <span class="n">use_sdf_model</span> <span class="s2">"model://shiny"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The vehicle's base model frame and all the vehicle's links are represented as
+frames in the transformer. All links that are joined by a static joint (either
+a "static" joint or a dynamic joint with same min/max limits) are related by a
+static transform in the transformer configuration. Links are prefixed by the
+model name (e.g. <code>shiny::gps</code>)</p>
+
+<p>Providers for the transformation of dynamic joints (e.g. a camera mounted on a
+PTU) must be explicitly given. A dynamic transformation can be provided by
+anything that look like a Syskit component (profile definition, particular
+service of a profile definition, device, …). When deploying networks, if a
+component needs a certain dynamic transformation, Syskit will instantiate this
+component and add it to the network.</p>
+
+<p>These components are declared as dynamic producers in the profile's
+<code>transformer</code> block</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">profile</span> <span class="s2">"Base"</span> <span class="k">do</span>
+  <span class="n">use_sdf_model</span> <span class="s2">"model://shiny"</span>
+
+  <span class="n">robot</span> <span class="k">do</span>
+    <span class="n">device</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">PTU</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'ptu'</span>
+  <span class="k">end</span>
+
+  <span class="n">transformer</span> <span class="k">do</span>
+    <span class="n">dynamic_transform</span> <span class="n">ptu_dev</span><span class="p">,</span>
+      <span class="s2">"shiny::ptu_base"</span> <span class="o">=&gt;</span> <span class="s2">"shiny::ptu_moving"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In addition to loading a vehicle model, it is possible to load a SDF world file
+to describe both apriori knowledge about the world, and "utility" frames within
+the world (such as e.g. a GPS local origin). This is done with the
+<code>use_sdf_world</code> stanza in the profile.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">profile</span> <span class="s2">"Base"</span> <span class="k">do</span>
+  <span class="n">use_gazebo_model</span> <span class="s1">'model://shiny'</span>
+  <span class="n">use_sdf_world</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The default world must be loaded within the <code>requires</code> block of the robot
+configuration file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">requires</span> <span class="k">do</span>
+  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_sdf_world</span> <span class="s1">'empty'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>the actual world can be overriden at startup time by setting the <code>sdf.world_path</code>
+variable, using the <code>--set</code> argument to <code>syskit ide</code> or <code>syskit run</code>, e.g.:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code># Will load the 'logistics' scene instead of `empty'
+syskit ide --set sdf.world_path=logistics
+</code></pre></div>
+<h2 id="caveats">Caveats</h2>
+
+<p>While the use of the geometry annotations in Syskit is only paid at deployment
+time, there's a dark side to the use of the transformer. Its usage may be paid
+in <em>latency</em>.</p>
+
+<p>The transformer is a stream aligner. Moreover, to allow for interpolation, it is
+a stream aligner where all transformation streams are setup with a lookahead
+("period") of zero.</p>
+
+<p>What this means in practice is that the stream aligner will have to wait for
+having two samples on <em>every</em> dynamic transformation stream before it can play
+anything. In other words, the lowest bound of a transformer's actual latency is
+the period of its slowest dynamic transformation stream. If you were to have a
+very slow dynamic transformation producer, it will impact every component that
+use it.</p>
+
+<p class="alert alert-danger">Make sure that all dynamic transformation producers are of sufficiently high
+frequency. The lowest producer in the system will drive the latency of all
+transformer-based components that require it.</p>
+
+<h2 id="guidelines">System Design Guidelines</h2>
+
+<p><strong>Component development</strong></p>
+
+<ul>
+  <li>really think before you use the transformer. Be aware of the <a href="#caveats">caveats</a>.</li>
+  <li>use the transformer only to handle robot-internal transformations</li>
+  <li>make sure that the frames of all RigidBodyState outputs can be parametrized.
+Use the <code>$(framename)_frame</code> pattern to name the relevant properties</li>
+  <li>name your frames in a way that is relevant to the component, and the component
+alone. Do not consider system-level concerns to pick these names</li>
+</ul>
+
+<p><strong>System integration</strong></p>
+
+<ul>
+  <li>only devices and very few definitions should have frame selection statements.
+Very few frames should be selected within the profile definitions. If you end
+up having to copy/paste a lot of <code>use_frames</code> statements, it usually means
+that some propagation annotations are missing</li>
+</ul>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

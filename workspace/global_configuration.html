@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="workspace workspace_global_configuration">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Workspace and Packages</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="conventions.html">Conventions</a></li><li class='child'><a href="setup.html">Starting a New Project</a></li><li class='child'><a href="add_packages.html">Adding new packages</a></li><li class='child'><a href="os_dependencies.html">OS Dependencies</a></li><li class='child active'><a href="global_configuration.html">Global Configuration</a></li><li class='child'><a href="testing.html">Test Integration</a></li><li class='child'><a href="managing.html">Build configuration design</a></li><li class='child'><a href="troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="global-configuration">Global Configuration</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#directory-layout" id="markdown-toc-directory-layout">Directory layout</a>    <ul>
+      <li><a href="#separate_prefixes" id="markdown-toc-separate_prefixes">Separated prefix root</a></li>
+      <li><a href="#separated-build-tree" id="markdown-toc-separated-build-tree">Separated build tree</a></li>
+      <li><a href="#auto-configuration-of-a-separated-build-and-prefix-tree-in-autoprojrc" id="markdown-toc-auto-configuration-of-a-separated-build-and-prefix-tree-in-autoprojrc">Auto-configuration of a separated build and prefix tree in .autoprojrc</a></li>
+    </ul>
+  </li>
+  <li><a href="#parallelism" id="markdown-toc-parallelism">Parallelism</a></li>
+  <li><a href="#interactivity" id="markdown-toc-interactivity">Interactivity</a></li>
+  <li><a href="#os-packages-vs-source-packages" id="markdown-toc-os-packages-vs-source-packages">OS Packages vs Source Packages</a></li>
+  <li><a href="#cmake-related-options" id="markdown-toc-cmake-related-options">CMake-related options</a>    <ul>
+      <li><a href="#make-messages" id="markdown-toc-make-messages">Make messages</a></li>
+      <li><a href="#clean-prefix" id="markdown-toc-clean-prefix">Clean prefix</a></li>
+    </ul>
+  </li>
+  <li><a href="#python-support" id="markdown-toc-python-support">Python support</a></li>
+  <li><a href="#clang-format-support" id="markdown-toc-clang-format-support">Clang-format support</a></li>
+  <li><a href="#clang-tidy-support" id="markdown-toc-clang-tidy-support">Clang-tidy support</a></li>
+</ul>
+
+<p>An Autoproj workspace configuration may have an <code>init.rb</code> file, that can be used
+to set configuration parameters for the whole workspace. This file is loaded
+first, before anything else in the workspace. In addition, if an <code>.autoprojrc</code>
+file is present in <code>$HOME</code>, it will also set default configuration parameters
+for all workspaces in a given system. A workspace's <code>init.rb</code> supersedes
+<code>.autoprojrc</code>. Both files are Ruby files in which one has full access to the
+Autoproj APIs.</p>
+
+<p>This section is an exhaustive list of all configurations that may be set in
+these files. When applicable, the corresponding configuration entry in
+<code>config.yml</code> is listed. For parameters that are stored in the configuration
+file, one can also set them during bootstrap by giving a YAML file to the
+<code>autoproj_bootstrap</code> file using the <code>--seed-config</code> option.</p>
+
+<h2 id="directory-layout">Directory layout</h2>
+
+<h3 id="separate_prefixes">Separated prefix root</h3>
+
+<p>By default, artifacts installed by packages are all stored in a common <code>install/</code> folder
+that sits at the root of the workspace.</p>
+
+<p>This prefix folder can also be set to a global path by setting either
+<code>Autoproj.config.prefix</code> or the <code>prefix</code> entry in <code>config.yml</code>.</p>
+
+<p>In addition, Autoproj can configure packages to have each installed in a
+separate folder. <strong>We recommend either migrating to this setting, or using it
+for new projects</strong>.  This requires stricter dependencies between packages, which
+allows to have a more robust development process.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">separate_prefixes</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre></div>
+<p>This setting is available as the <code>separate_prefixes</code> key in <code>config.yml</code></p>
+
+<p>The <code>-p</code> option of <code>acd</code> and <code>alocate</code> allow to navigate to a package's prefix dir
+regardless of <code>separate_prefixes</code> is enabled or not.</p>
+
+<h3 id="separated-build-tree">Separated build tree</h3>
+
+<p>By default, Autoproj packages will be configured to store their build byproducts
+in a <code>build/</code> subfolder under the source package. An alternative is to create
+a separate build tree by setting <code>Autoproj.config.build_dir</code> to an absolute
+path, e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">build_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">home</span><span class="p">,</span> <span class="s2">"build_area"</span><span class="p">,</span> <span class="s2">"rock-core"</span><span class="p">)</span>
+</code></pre></div>
+<p>The setting is stored in <code>config.yml</code> under the <code>build</code> key.</p>
+
+<p>Each package in will have its own build dir by concatenating the path in
+<code>build_dir</code> and the package name. Build directories can't be shared amongst
+workspaces.</p>
+
+<p>When navigating a workspace with a separated build directory, one can jump
+between the source and build dir of a given package using respectively <code>acd</code> and
+<code>acd -b .</code></p>
+
+<h3 id="auto-configuration-of-a-separated-build-and-prefix-tree-in-autoprojrc">Auto-configuration of a separated build and prefix tree in .autoprojrc</h3>
+
+<p>The following snippet will automatically configure the build and prefix settings
+to map a folder structure under a root (e.g. <code>$HOME/dev</code>) in a common build root
+(e.g. <code>$HOME/dev/build_area</code>)</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">dev_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">home</span><span class="p">,</span> <span class="s2">"dev"</span><span class="p">)</span>
+<span class="n">build_root_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">home</span><span class="p">,</span> <span class="s2">"dev"</span><span class="p">,</span> <span class="s2">"build_area"</span><span class="p">)</span>
+<span class="k">if</span> <span class="no">Autoproj</span><span class="p">.</span><span class="nf">workspace</span><span class="p">.</span><span class="nf">root_dir</span><span class="p">.</span><span class="nf">start_with?</span><span class="p">(</span><span class="n">dev_dir</span> <span class="o">+</span> <span class="s2">"/"</span><span class="p">)</span>
+    <span class="n">workspace_name</span> <span class="o">=</span> <span class="no">Pathname</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Autoproj</span><span class="p">.</span><span class="nf">workspace</span><span class="p">.</span><span class="nf">root_dir</span><span class="p">).</span>
+        <span class="nf">relative_path_from</span><span class="p">(</span><span class="no">Pathname</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">dev_dir</span><span class="p">)).</span><span class="nf">to_s</span>
+    <span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">prefix_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dev_dir</span><span class="p">,</span> <span class="s1">'build_area'</span><span class="p">,</span> <span class="n">workspace_name</span><span class="p">,</span> <span class="s1">'install'</span><span class="p">)</span>
+    <span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">build_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">dev_dir</span><span class="p">,</span> <span class="s1">'build_area'</span><span class="p">,</span> <span class="n">workspace_name</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>For instance, the workspace <code>$HOME/dev/vanilla/rock-core</code> will use
+<code>$HOME/dev/build_area/vanilla/rock-core</code> as its build folder and
+<code>$HOME/dev/build_area/vanilla/rock-core/install</code> as its prefix folder.</p>
+
+<h2 id="parallelism">Parallelism</h2>
+
+<p>By default, Autoproj will run up to 10 import processes in parallel, and up to
+the number of cores the machine has build processes. The build parallelism can
+be overriden for specific runs using the <code>-p</code> option (e.g. <code>amake -p2</code>).
+Alternatively, the <code>parallel_import_level</code> and <code>parallel_build_level</code> configuration
+options can be used:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">parallel_import_level</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">parallel_build_level</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></div>
+<p>These options are available under the same name in <code>config.yml</code>.</p>
+
+<h2 id="interactivity">Interactivity</h2>
+
+<p>By default, Autoproj will ask for any configuration option that has never been
+asked - regardless of whether it has a default value or not.</p>
+
+<p>This can be disabled (in which case Autoproj will use the default when possible)
+by using the <code>--no-interactive</code> command line option or the <code>AUTOPROJ_NONINTERACTIVE</code>
+environment variable to 1. Both settings are not permanent.</p>
+
+<p>To make the setting permanent, set the <code>interactive</code> configuration option to false</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">interactive</span> <span class="o">=</span> <span class="kp">false</span>
+</code></pre></div>
+<p>This option is available under the same name in <code>config.yml</code></p>
+
+<h2 id="os-packages-vs-source-packages">OS Packages vs Source Packages</h2>
+
+<p>When both an OS package and a source package are available under the same name,
+Autoproj will prefer using the OS package when available, using the source package
+only as a fallback. This behavior can be inverted (using the source package by
+default, using the OS package only if the source package is not available) by
+setting the <code>prefer_indep_over_os_packages</code> configuration option:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">prefer_indep_over_os_packages</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre></div>
+<p>This option is available under the same name in <code>config.yml</code></p>
+
+<h2 id="cmake-related-options">CMake-related options</h2>
+
+<h3 id="make-messages">Make messages</h3>
+
+<p>By default, the CMake package handler will redirect all messages to the package's
+log file, only showing a digest of the number of warnings at the end of a package's
+build.</p>
+
+<p>Alternatively, one can instruct the package handler to let messages that are recognized
+as warnings through and display them during the build:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autobuild</span><span class="o">::</span><span class="no">CMake</span><span class="p">.</span><span class="nf">show_make_messages</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre></div>
+<h3 id="clean-prefix">Clean prefix</h3>
+
+<p>When using the {#separate_prefixes} mode, Autoproj can use information generated by
+CMake to remove obsolete files from the prefix. This ensures for instance that a
+file that was installed but is not is removed, making sure that nothing else depends
+on it during the build.</p>
+
+<p><strong>This mode should only be enabled if the separate_prefixes option is set (or if
+you have implemented an equivalent scheme)</strong>. Otherwise, Autoproj will delete most
+of the workspace's prefix.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Autobuild</span><span class="o">::</span><span class="no">CMake</span><span class="p">.</span><span class="nf">delete_obsolete_files_in_prefix</span> <span class="o">=</span> <span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">separate_prefixes?</span>
+</code></pre></div>
+<h2 id="python-support">Python support</h2>
+
+<p>Multiple Python versions can now coexist in a system, although not in a single
+Autoproj workspace.  For this purpose Autoproj users can now be explicitly asked
+for any needed Python support during a bootstrap, by adding the following to the
+<code>init.rb</code>:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>require 'autoproj/python'
+Autoproj::Python.setup_python_configuration_options()
+</code></pre></div>
+<p>In case Python support is requested or implicitly needed, e.g., following a pip
+dependency in a layout, the user is asked to provide the path to the Python
+executable to use. By default the Python executable is searched/guessed
+automatically. Corresponding shims are installed for an active workspace:
+<code>install/bin/python</code> and <code>install/bin/pip</code>, to ensure that the right versions
+are called when a workspace's <code>env.sh</code> has been loaded.</p>
+
+<p>To ensure a consistent setup for the generation of language bindings, package
+definitions in <code>*.autobuild</code> file can be extended as follows:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'custom/pkg_with_python_bindings'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">bin</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">sitelib_path</span> <span class="o">=</span> <span class="no">Autoproj</span><span class="o">::</span><span class="no">Python</span><span class="p">.</span><span class="nf">activate_python_path</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'PYTHON_EXECUTABLE'</span><span class="p">,</span> <span class="n">bin</span> <span class="k">if</span> <span class="n">bin</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'PYTHON_VERSION'</span><span class="p">,</span> <span class="n">version</span> <span class="k">if</span> <span class="n">version</span>
+<span class="k">end</span>
+</code></pre></div>
+<p><code>activate_python_path</code> above will return <code>nil</code> if the user disabled Python support.
+Either guard for it (if possible for the package)), or raise an error if Python
+is required for said package.</p>
+
+<h2 id="clang-format-support">Clang-format support</h2>
+
+<p>To enforce a standard C++ coding style, one can enable <code>clang-format</code> as a test target.
+This can be done by extending a package definition in the <code>*.autobuild</code> file as follows:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'custom/pkg_with_style_enforced'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_STYLING_CHECK_ENABLED"</span><span class="p">,</span> <span class="kp">true</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_FORMAT_EXECUTABLE"</span><span class="p">,</span> <span class="s2">"path-to-clang-format-executable"</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_FORMAT_CONFIG_PATH"</span><span class="p">,</span> <span class="s2">"path-to-clang-format-config-file"</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_FORMAT_OPTIONS"</span><span class="p">,</span> <span class="s2">"any-option-one-wishes-to-add"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Keep in mind that this check is non-intrusive, meaning that it will only report what
+is not conforming to the defined standard as warnings (by default) and won't actively
+change any code. The command will run for all the C++ files in the <code>src/</code> and <code>test/</code>
+folders. Please refer to the
+<a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format documentation</a> for more
+information.</p>
+
+<h2 id="clang-tidy-support">Clang-tidy support</h2>
+
+<p>If one wishes to have some coverage against well known bugs and not-so-well designed code,
+it's possible to add <code>clang-tidy</code> checks as a test target. Similarly to
+<code>clang-format</code> support, one should extend a package definition in the <code>*.autobuild</code> file
+as follows:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'custom/pkg_with_linting'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_LINTING_CHECK_ENABLED"</span><span class="p">,</span> <span class="kp">true</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_TIDY_EXECUTABLE"</span><span class="p">,</span> <span class="s2">"path-to-clang-tidy-executable"</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_TIDY_CONFIG_PATH"</span><span class="p">,</span> <span class="s2">"path-to-clang-tidy-config-file"</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s2">"ROCK_CLANG_TIDY_OPTIONS"</span><span class="p">,</span> <span class="s2">"any-option-one-wishes-to-add"</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>By default, this checks will only output the linting errors. If one wants <code>clang-tidy</code> to
+actually fix the errors it encountered, one can do so by adding the proper argument as an option.
+Like <code>clang-format</code>, this command will run for all the C++ files in the <code>src/</code> and <code>test/</code>
+folders. Prefer refer to the
+<a href="https://clang.llvm.org/extra/clang-tidy/index.html">clang-tidy documentation</a> for more
+information.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

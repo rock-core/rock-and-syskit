@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="basics basics_devices">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent active'><span class='parent-label'><a href="./">Basics</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="installation.html">Installation</a></li><li class='child'><a href="day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="getting_started.html">Getting Started</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="constant_generator.html">Constant Generator</a></li><li class='child active'><a href="devices.html">Profiles and Devices</a></li><li class='child'><a href="deployment.html">Deployment</a></li><li class='child'><a href="publishing.html">Publishing</a></li><li class='child'><a href="validation.html">Configuration Consistency</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="profiles-and-devices">Profiles and Devices</h1>
+
+<div class="callout callout-info">
+  <p><strong>Where are we ?</strong> So far, we have a control composition. But as we noticed
+when we created <a href="composition.html">the arm control network</a>, it is not using a
+real component as the arm, only a device model. This page will be talking about
+devices, and telling how one replaces the device model by something that can be
+run.</p>
+
+  <p>There are no pages in blue this time … the purpose of this page will be to
+replace the Model device (in red) by the actual device … but first to learn
+about devices themselves.</p>
+
+  <p><img src="media/progression_devices.svg" alt="Where are we ?" class="fullwidth" /></p>
+</div>
+
+<ul id="markdown-toc">
+  <li><a href="#defining-devices-for-the-gazebo-system" id="markdown-toc-defining-devices-for-the-gazebo-system">Defining devices for the Gazebo system</a></li>
+  <li><a href="#profile_define" id="markdown-toc-profile_define">Injecting the device into the arm control network</a></li>
+</ul>
+
+<p>One can partition a component network into three categories:</p>
+
+<ul>
+  <li>source of data</li>
+  <li>sinks of data</li>
+  <li>transformation of data</li>
+</ul>
+
+<p>Within a robotic system, the source and sinks of data are the sensors and
+actuators of the robot itself. What makes them unique when building the system's
+component network is that they are indeed <em>unique</em>.</p>
+
+<p>While the data processing components can easily be duplicated - an image
+preprocessing component can be instantiated multiple times to process multiple
+streams of data - one cannot duplicate devices.  They are bound to hardware,
+and we still don't know how to grow new devices on the robot on-demand.</p>
+
+<p>This difference shows up in the Syskit modelling system. Devices
+are defined separately within a <em>robot interface</em>. We will now see how this is done, and
+how we can use these devices within our arm control network, binding the
+simulated arm with the control network.</p>
+
+<h2 id="defining-devices-for-the-gazebo-system">Defining devices for the Gazebo system</h2>
+
+<p>A robot definition is created within a Syskit <em>profile</em>. Profiles are the models
+that bind network definitions (compositions) with devices and other
+compositions. It's also where the robot definition happens.<br />
+By convention, one usually creates a per-robot <code>Base</code> profile that
+contains the robot definition.  Let's do that now.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ syskit gen profile gazebo/base
+      create  models/profiles/gazebo
+      create  models/profiles/gazebo/base.rb
+      create  test/profiles/gazebo
+      create  test/profiles/gazebo/test_base.rb
+</code></pre></div>
+<p class="callout callout-warning">Note how the addition of <code>-rgazebo</code> to the command line ensured that the model
+is generated within the <code>gazebo/</code> subdirectory of the <code>profiles/</code> folder and
+within the <code>Gazebo</code> namespace of <code>Profiles</code>. This is a general convention (e.g.
+compositions specific to our <code>gazebo</code> robot would be in <code>compositions/gazebo/</code> and
+within the <code>Compositions::Gazebo</code> namespace.</p>
+
+<p>Now, here's the catch: we will actually not really learn to define devices, since
+the mapping from the simulation model to devices is done automatically from the
+robot model. One only has to declare the robot model in the <code>Base</code> profile we
+just created:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
+                <span class="n">use_gazebo_model</span> <span class="s1">'model://ur10'</span><span class="p">,</span>
+                    <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+                <span class="n">use_sdf_world</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="note"><strong>Note</strong> the <code>prefix_device_with_name</code> argument is here for backward
+compatibility reasons. Syskit will issue a deprecation warning if you forget
+it.</p>
+
+<p>And have a look at the generated devices with <code>syskit ide -rgazebo models/profiles/gazebo/base.rb</code>:</p>
+
+<p><img src="media/devices.png" alt="Devices from the UR10 model" class="fullwidth" /></p>
+
+<p>One can see that there is one device definition per link in the model, and one
+for the model itself. Let's click on the model and have a look at the <strong>Dataflow</strong> section.
+Enable both "Show all ports" and "Show task info" to get port information .</p>
+
+<p><img src="media/ur10_dev.svg" alt="ModelTask interface" class="fullwidth" /></p>
+
+<h2 id="profile_define">Injecting the device into the arm control network</h2>
+
+<p>As said, profiles is where this kind of injection is done. But let's keep <code>Base</code>
+for really low-level stuff like devices. Let's create an <code>ArmControl</code> profile to
+integrate the arm control stuff.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen profile gazebo/arm_control
+</code></pre></div>
+<p>We need to require the <code>Base</code> profile and <code>ArmCartesianControlWdls</code> composition
+definition.  Then, <code>define</code> the cartesian and joint position controls <em>for our
+UR10 robot in gazebo</em> by injecting the UR10 device as the 'arm' child of the
+composition.</p>
+
+<p class="callout callout-warning">The model name given to <code>define</code> in a profile is made out of a <a href="https://martinfowler.com/bliki/FluentInterface.html">demeter
+chain</a>. In Ruby, this is usually
+done by breaking each method call with a newline, leaving a trailing dot on the
+previous line. Don't forget these dots !</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/base'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/joint_position_constant_control'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
+                <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>As we mentioned <a href="constant_generator.html#joint_position_constant_generator">when we defined it</a>,
+the joint position constant control has been defined with the goal of providing a sane default
+position. Let's make sure this is available easily by creating a definition with a default
+setpoint. This will reuse the <code>arm_joint_position_constant_control</code> definition, which is accessed
+with the <code>_def</code> suffix. Usable joint positions can be found using the <code>rock-roboviz</code> tool:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ rock-roboviz model://ur10
+</code></pre></div>
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/base'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/arm_cartesian_constant_control_wdls'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/joint_position_constant_control'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="no">UR10_SAFE_POSITION</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">[</span>
+                <span class="s1">'ur10::shoulder_pan'</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::shoulder_lift'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                <span class="s1">'ur10::elbow'</span>         <span class="o">=&gt;</span> <span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_1'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_2'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_3'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
+                <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span>
+                    <span class="n">arm_joint_position_constant_control_def</span><span class="p">.</span>
+                        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="callout callout-info">A device model is accessed using the device's name with a <code>_dev</code> suffix on the
+profile it is defined. Here <code>Base.ur10_dev</code> is the <code>ur10</code> device
+defined on the robot definition in <code>Base</code>.</p>
+
+<p class="callout callout-info"><strong>Note</strong> when building profiles, the require lines as well as the names of
+models and roles that can be used in the <code>use</code> statement can easily be browsed
+using the IDE</p>
+
+<p>Let's have a look at the final <code>arm_cartesian_constant_control</code> definition.</p>
+
+<p><img src="media/injected_arm_control_network.svg" alt="Final injected arm control network" class="fullwidth" /></p>
+
+<p class="next-page"><strong>Next</strong>: we're almost there, just need now to map the components to actual processes,
+<a href="deployment.html">a.k.a. deploy the network</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

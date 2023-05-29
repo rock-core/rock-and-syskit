@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="libraries libraries_ruby_libraries">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Libraries</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="add_packages.html">Add packages</a></li><li class='child'><a href="cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child active'><a href="ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="ruby-library-packages">Ruby Library Packages</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#creating-and-adding-packages-to-the-workspace" id="markdown-toc-creating-and-adding-packages-to-the-workspace">Creating and Adding Packages to the Workspace</a></li>
+  <li><a href="#integrating-3rd-party-libraries" id="markdown-toc-integrating-3rd-party-libraries">Integrating 3rd-party libraries</a></li>
+  <li><a href="#package-dependencies" id="markdown-toc-package-dependencies">Package Dependencies</a></li>
+  <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
+  <li><a href="#type-system-plugins" id="markdown-toc-type-system-plugins">Type System Plugins</a></li>
+</ul>
+
+<p>On the C++ side, we have already discussed the separation between the bulk of
+the implementation in C++ libraries and their framework integration in
+components.</p>
+
+<p>The same should be applied on the Ruby side of the system. A lot of the
+functionality needed to e.g. look at diagnostics data streams from the
+components can be made framework-independent (i.e. Syskit independent). It is
+somehow weaker in the Ruby case though, as in the end most of the data
+processing is done in C++ in a Rock system.</p>
+
+<p>For code meant to be executed within Syskit, generally speaking, <strong>do not do
+too many things within the Syskit process</strong>. Syskit is in charge of
+coordinating the system's components, and having long computations within the
+Syskit process will increase Syskit's reaction times.</p>
+
+<h2 id="creating-and-adding-packages-to-the-workspace">Creating and Adding Packages to the Workspace</h2>
+
+<p>This is covered in the <a href="../workspace/add_packages.html">Workspace and Packages section</a></p>
+
+<p><strong>Executive Summary</strong>: You need to first pick a category and a name <a href="../workspace/conventions.html">the workspace
+conventions</a> for information about how to name
+your library package.</p>
+
+<p>The Ruby packages are expected to follow the de-factor standard Ruby package
+layout set forth by RubyGems. The best way to create a new ruby package is to
+use <a href="https://bundler.io/v1.15/guides/creating_gem.html"><code>bundle gem</code></a> and add
+Rock's <a href="../workspace/add_packages.html"><code>manifest.xml</code></a> to it.</p>
+
+<p>When using VSCode, the package will not be picked up by the <a href="https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock"><code>vscode-rock</code>
+extension</a>
+until it is part of the main manifest.
+Adding the package path to the layout section of <code>autoproj/manifest</code> is
+enough at this stage. You will however have to <a href="../workspace/add_packages.html">define the
+package</a> in the autobuild and <code>source.yml</code>
+files before you push the updated manifest to your team members. For instance,
+when creating <code>tools/timeseries</code> one would do</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>bundle gem tools/timeseries
+&lt;create tools/timeseries/manifest.xml&gt;
+</code></pre></div>
+<p>and then add</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">layout</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">...</span>
+  <span class="pi">-</span> <span class="s">tools/timeseries</span>
+</code></pre></div>
+<p><code>autoproj</code> runs <code>rake</code> within the package during the build, which means that
+it runs the <code>Rakefile</code>'s <code>default</code> task.</p>
+
+<h2 id="integrating-3rd-party-libraries">Integrating 3rd-party libraries</h2>
+
+<p>External gems can be installed by autoproj using <a href="../workspace/os_dependencies.html">the osdeps
+mechanism</a>. For now, autoproj does not know
+how to look at a package's gemspec (which defines the gem's dependencies), so
+you will have to duplicate dependencies between the gemspec and the
+<code>manifest.xml</code>.</p>
+
+<p>You may also install them in the workspace if you plan to work on them. You
+would however have to declare their path manually within <code>autoproj/Gemfile</code>
+to make sure the checked out repository is used:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>gem 'timeseries', path: File.expand_path(File.join('..', 'tools', 'timeseries'), __dir__)
+</code></pre></div>
+<h2 id="package-dependencies">Package Dependencies</h2>
+
+<p>It is common for packages to depend on other packages.</p>
+
+<p>When adding a dependency to a Ruby package, you <strong>must</strong> add it to the
+package's <code>manifest.xml</code> file. If you do mean to distribute your Ruby package
+as a RubyGem, you will also have to modify the bundler-generated <code>gemspec</code>
+file.</p>
+
+<h2 id="tests">Tests</h2>
+
+<p>Testing is now an integral part of modern development process, and Rock
+provides support to integrate unit testing in the development workflow.</p>
+
+<p>Ruby packages are expected to provide a <code>test</code> target in their <code>Rakefile</code> to run
+the tests. The <code>Rakefile</code> generated by <code>bundle gem</code> has one.</p>
+
+<p>Rock's preferred test framework is <code>minitest</code> and mocking framework is <code>flexmock</code>.</p>
+
+<h2 id="type-system-plugins">Type System Plugins</h2>
+
+<p>In order to smooth the interface between the Rock type system and the Ruby
+layers, one <a href="../components/types_in_ruby.html">can provide a
+<code>typelib_plugin.rb</code></a> file within a Ruby
+package. Just put the file under your package's main directory (e.g.
+<code>lib/mypackage/typelib_plugin.rb</code>) to have it automatically loaded.</p>
+
+<p class="next-page">Let's go now to the Rock specific part of functionality integration, <a href="../components/">components</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

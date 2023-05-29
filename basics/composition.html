@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="basics basics_composition">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent active'><span class='parent-label'><a href="./">Basics</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="installation.html">Installation</a></li><li class='child'><a href="day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="getting_started.html">Getting Started</a></li><li class='child active'><a href="composition.html">Compositions</a></li><li class='child'><a href="constant_generator.html">Constant Generator</a></li><li class='child'><a href="devices.html">Profiles and Devices</a></li><li class='child'><a href="deployment.html">Deployment</a></li><li class='child'><a href="publishing.html">Publishing</a></li><li class='child'><a href="validation.html">Configuration Consistency</a></li><li class='child'><a href="recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="compositions-designing-the-network-for-the-cartesian-control-of-an-arm">Compositions: designing the network for the cartesian control of an arm</h1>
+
+<div class="callout callout-info">
+  <p><strong>Where are we ?</strong> We are now going to try and do simple control <a href="getting_started.html">of our simulated
+arm</a>. We are going to do the integration of the control
+components and UR10 arm on Gazebo from scratch. However, we are going to see
+later than Syskit allows to make this integration generic, so that it can be
+reused.</p>
+
+  <p>Below, the parts we will handle on this page are <span style="color: #5bc0de;">in blue</span> and the things that will be handled later <span style="opacity: 0.4;">in grey</span></p>
+
+  <p><img src="media/progression_composition.svg" alt="Where are we ?" class="fullwidth" /></p>
+</div>
+
+<ul id="markdown-toc">
+  <li><a href="#add_package" id="markdown-toc-add_package">Installing the necessary packages</a></li>
+  <li><a href="#using-the-installed-components" id="markdown-toc-using-the-installed-components">Using the installed components</a></li>
+</ul>
+
+<p>In Syskit, one has to <em>declare</em> how components must be connected together to
+form a function, and then can request the system to actually run that function.
+This page deals with the first step (design). The <a href="constant_generator.html">next
+page</a> will create the command generator, and we will
+then <a href="deployment.html"><em>deploy</em> the network</a> and run it.</p>
+
+<p>But let's not get too much ahead of ourselves. We will need to first install
+the control package that will implement the control.</p>
+
+<h2 id="add_package">Installing the necessary packages</h2>
+
+<p>Packages in Rock as maintained within the overall Rock workspace. Package
+related configuration is contained within the <code>autoproj/</code> folder within the
+workspace's root directory (where you <a href="installation.html">originally
+bootstrapped</a>). When working in a terminal, you can go
+at any time to the workspace's root directory by running <code>acd</code> without
+arguments (there's more about <code>acd</code> in this section's <a href="day_to_day.html#acd">Day to Day Commands</a>).</p>
+
+<p>Within the <code>autoproj/</code> directory, packages are defined within <em>package sets</em>.
+These package sets define both how to build the package and where it should be
+downloaded from. The default installation imports at least the <code>rock.core</code> and
+the <code>rock</code> package sets (see the <code>package_sets</code> section in
+<code>autoproj/manifest</code>). The <code>rock</code> package set is where the control packages we
+will be using are defined.</p>
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <p><a class="btn btn-warning" role="button" data-toggle="collapse" href="#autoproj_show" aria-expanded="false" aria-controls="autoproj_show">
+  Advanced
+</a><span class="advanced_description">Finding more about a package using <code>autoproj show</code></span></p>
+  </div>
+
+  <div class="collapse panel-body" id="autoproj_show">
+    <p>Use <code>autoproj show</code> to find more about a given package. For <code>cart_ctrl_wdls</code>, this gives:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ autoproj show cart_ctrl_wdls
+source package control/orogen/cart_ctrl_wdls
+this package is not checked out yet, the dependency information will probably be incomplete
+source definition
+  WARN: control/orogen/cart_ctrl_wdls from rock does not have a manifest
+	type: git
+	url: https://github.com/rock-control/control-orogen-cart_ctrl_wdls.git
+	branch: master
+	interactive: false
+	push_to: git@github.com:/rock-control/control-orogen-cart_ctrl_wdls.git
+	repository_id: github:/rock-control/control-orogen-cart_ctrl_wdls.git
+	retry_count: 10
+	first match: in rock (/home/doudou/dev/vanilla/rock-website/autoproj/remotes/rock/source.yml)
+		branch: $ROCK_BRANCH
+		github: rock-control/control-$PACKAGE_BASENAME
+	overriden in rock (/home/doudou/dev/vanilla/rock-website/autoproj/remotes/rock/source.yml)
+		branch: $ROCK_BRANCH
+		github: rock-control/control-orogen-$PACKAGE_BASENAME
+	is not directly selected by the manifest
+</code></pre></div>
+    <p>The "first match" line is always the package set where the package is defined. In this case, the
+<code>rock</code> package set, which is checked out in <code>autoproj/remotes/rock/</code></p>
+  </div>
+</div>
+
+<p>In this tutorial, we will want to use the <code>control/orogen/cart_ctrl_wdls</code> which
+uses the KDL library to do cartesian control of a robotic arm.  To install the
+package, add it in the <code>layout</code> section of <code>autoproj/manifest</code>:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">layout</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">rock.core</span>
+<span class="pi">-</span> <span class="s">rock.gazebo</span>
+<span class="pi">-</span> <span class="s">control/orogen/cart_ctrl_wdls</span>
+</code></pre></div>
+<p>Then, run the following to checkout missing packages but avoid updating the existing ones:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>aup --checkout-only --all
+</code></pre></div>
+<p>And finally build and install</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>amake --all
+</code></pre></div>
+<h2 id="using-the-installed-components">Using the installed components</h2>
+
+<p>Now that everything's installed, go back within the bundle folder. You may not
+use <code>acd</code> for this (<a href="day_to_day.html#acd">more about <code>acd</code></a>) yet, since the
+bundle has not been registered in autoproj.</p>
+
+<p>Compositions declare groups of components and connects them together. Once
+defined, compositions can be used in other compositions to build more complex
+networks.</p>
+
+<p>Let's create our first building block, the <code>ArmCartesianControlWdls</code> composition</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$ syskit gen cmp arm_cartesian_control_wdls
+      create  models/compositions
+      create  models/compositions/arm_cartesian_control_wdls.rb
+      create  test/compositions
+      create  test/compositions/test_arm_cartesian_control_wdls.rb
+</code></pre></div>
+<p>As described in our <a href="./">brief introduction</a>, oroGen packages are where
+the functionality implemented in the library packages are "packaged" into
+things that can be used at runtime. To be used in Syskit, these oroGen
+components must be first imported using the <code>using_task_library</code> statement. In
+our case, <code>cart_ctrl_wdls</code>, this is done with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">using_task_library</span> <span class="s2">"cart_ctrl_wdls"</span>
+</code></pre></div>
+<p>This loads the oroGen project, and imports the components in it to make them
+available in the Syskit models. The task models from the oroGen project are
+then made available within the Syskit app under the
+<code>OroGen.project_name.ComponentName</code> scheme, e.g. the
+<code>cart_ctrl_wdls::ToPosConverter</code> component is accessible under
+<code>OroGen.cart_ctrl_wdls.ToPosConverter</code> in Syskit.</p>
+
+<p>In case you're not sure about the naming, just add the <code>using_task_library</code>
+statement at the toplevel of a file and load it with <code>syskit ide</code>.</p>
+
+<p>Let's do so in our newly created
+<code>models/compositions/arm_cartesian_control_wdls.rb</code>. Then, run</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit ide -r gazebo models/compositions/arm_cartesian_control_wdls.rb
+</code></pre></div>
+<p class="callout callout-info">The <code>-r</code> option above instructs <code>syskit ide</code> to load the configuration file
+<code>config/robots/gazebo.rb</code> that we
+<a href="getting_started.html#syskit_r_option">previously created</a></p>
+
+<p><img src="media/syskit_name_mapping.png" alt="Name mapping between oroGen and Syskit" class="fullwidth" /></p>
+
+<p class="note"><strong>Note</strong> Leave the IDE open, we will reuse it</p>
+
+<p>We now want to build the cartesian control network. What each component does in
+the <code>cart_ctrl_wdls</code> project can be found by reading the documentation displayed
+in the IDE (at the top of each component's page), and the documentation of the ports (displayed as tooltips).</p>
+
+<p><img src="media/wdls_solver_page.png" alt="Component information page" class="fullwidth" /></p>
+
+<p>We will want to run the
+control components, and the simulated arm. The latter is represented by a
+<code>CommonModels::Devices::Gazebo::Model</code> (we will see what <code>Devices</code> are about at a
+later point). So edit the newly-created
+<code>models/compositions/arm_cartesian_control_wdls.rb</code> and <code>add</code> the components</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'common_models/models/devices/gazebo/model'</span>
+<span class="c1"># Load the oroGen project</span>
+<span class="n">using_task_library</span> <span class="s1">'cart_ctrl_wdls'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Compositions</span>
+        <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+            <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>At this stage, we will have to connect the ports together. To see what inputs
+and outputs are available, one can have a look at the component's <code>.orogen</code>
+files. The alternative is to use the IDE. Click the <code>Reload Models</code> button and
+open the composition page:</p>
+
+<div class="fluid-video">
+  <iframe width="853" height="480" src="https://www.youtube.com/embed/9Sz7gREngHM?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>We may now start adding connections in the composition definition. The <code>as</code>
+arguments when adding composition elements create an accessor for the children.
+The children ports are then accessible with a <code>_port</code> accessor. For instance,
+the <code>ctrl_out</code> port of the <code>CartCtrl</code> component is accessed with
+<code>position2twist_child.ctrl_out_port</code>.</p>
+
+<p>Let's connect that one to the <code>WDLSSolver</code> twist input, and the WDLSSolver
+command to the actual arm command input:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+    <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+    <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+    <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+
+    <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
+        <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
+    <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
+        <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>And hit the "Reload Models" button at the top of the IDE window. Syntax errors
+(such as a misspelled port name) are shows at the bottom of the view. Just
+click reload after you fixed them.</p>
+
+<p>Let's inspect the remaining unconnected input ports. There's <code>command</code>,
+<code>cartesian_status</code> and <code>joint_status</code> ports that obviously need to be connected
+to something. <code>joint_status</code> is the direct joint feedback from the arm:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
+    <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
+</code></pre></div>
+<p>However, the cartesian position feedback is not directly provided by the Gazebo
+model. Fortunately, the <code>control/orogen/robot_frames</code> project provides components
+to do the joint-to-cartesian conversion. Add it now to the workspace <a href="#add_package">in the same way we added
+<code>control/orogen/cart_ctrl_wdls</code></a>, import it in the composition
+file with <code>using_task_library</code> and reload models within the IDE.
+Then, finally add it to the composition.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># This is in bundles/common_models</span>
+<span class="nb">require</span> <span class="s1">'common_models/models/devices/gazebo/model'</span>
+<span class="c1"># Load the oroGen projects</span>
+<span class="n">using_task_library</span> <span class="s1">'cart_ctrl_wdls'</span>
+<span class="n">using_task_library</span> <span class="s1">'robot_frames'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Compositions</span>
+        <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+            <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'joint2pose'</span>
+
+            <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
+            <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
+            <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
+            <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">joints_samples_port</span>
+            <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">tip_pose_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">cartesian_status_port</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This leaves us with the command port.</p>
+
+<p>The role of this composition is to provide us with a cartesian control of an
+arm. It currently does that. Leaving the command out of the composition allows
+us to reuse it with different command producers.</p>
+
+<p>We will now turn this composition into a "component" with a single command input
+by <strong>exporting</strong> the command port on the composition interface. This is done
+with the <code>export</code> keyword, in the composition class context:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">export</span> <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">command_port</span>
+</code></pre></div>
+<p>In the IDE, this is represented as a port on the composition, and a connection
+between this port and the exported port. These are the only connections that can
+bind two input ports or two input ports together.</p>
+
+<p><img src="media/arm_cartesian_control_export.png" alt="Example or a port export" class="fullwidth" /></p>
+
+<p class="next-page"><strong>Next</strong>: before we can actually run the whole thing, <a href="constant_generator.html">we must create a command generator for it</a></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

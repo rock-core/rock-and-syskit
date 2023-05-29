@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_geometric_transformations">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child'><a href="./">Writing Components</a></li><li class='child'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child active'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="geometric-transformations">Geometric Transformations</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#generic-handling-of-kinematic-chains-rocks-transformer" id="markdown-toc-generic-handling-of-kinematic-chains-rocks-transformer">Generic Handling of Kinematic Chains: Rock's Transformer</a></li>
+  <li><a href="#correspondence-of-global-and-local-frame-names" id="markdown-toc-correspondence-of-global-and-local-frame-names">Correspondence of global and local frame names</a></li>
+  <li><a href="#using-the-transformer" id="markdown-toc-using-the-transformer">Using the transformer</a>    <ul>
+      <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+      <li><a href="#transformer-definition-in-the-orogen-file" id="markdown-toc-transformer-definition-in-the-orogen-file">Transformer definition in the orogen file</a></li>
+      <li><a href="#transformer-in-the-c-code" id="markdown-toc-transformer-in-the-c-code">Transformer in the C++ Code</a></li>
+    </ul>
+  </li>
+  <li><a href="#limitations-and-guidelines" id="markdown-toc-limitations-and-guidelines">Limitations and Guidelines</a></li>
+</ul>
+
+<div class="note">
+  <p>This is a page in a 3-part series.The <a href="../libraries/geometric_transformations.html">first
+part</a> presented the issue, and how
+to handle geometric transformations within C++ libraries. The <a href="../component_networks/geometric_transformations.html">third
+part</a> dealt with system-level
+concerns.</p>
+
+  <p>This part presents how it is handled at the component level.</p>
+</div>
+
+<p>At the component boundary (i.e. ports), one has to use Rock's
+<code>base::samples::RigidBodyState</code> (RBS) type to represent the state (pose and
+velocity) of a rigid body expressed in a certain reference frame, and in
+particular frame transforms. Unlike in libraries, where a certain flexibility
+exists, that flexibility disappears at the component interface because inputs
+and outputs must be of the same type to connect.</p>
+
+<p>However, just as with libraries, one has to see the component as a self-contained
+algorithm. Frames names inside the component's code must be chosen <em>in relation
+to</em> the algorithm and not the system it will be integrated into. This applies
+to the component ports as well.</p>
+
+<p>Generally speaking, define your frames precisely either in the orogen file (if
+it is relevant for the component interface) or in the C++ files if it is
+internal, and follow for ports <a href="../libraries/geometric_transformations.html#conventions">the same conventions</a> than with variables in C++ code.
+The one deviation from this convention is to use <code>_samples</code> as output prefix
+(instead of one of the accepted prefixes) for RigidBodyState values that contain
+composite quantities (e.g. pose+velocities).</p>
+
+<h2 id="generic-handling-of-kinematic-chains-rocks-transformer">Generic Handling of Kinematic Chains: Rock's Transformer</h2>
+
+<p>A popular functionality in robotic software frameworks is the ability to
+transparently provide to components the transformations between any two frames
+on the system. This is critical to avoid embedding the kinematic structure of
+a system in components that don't need it.</p>
+
+<p>In Rock, this is done by the transformer. Each component that uses the transformer
+gets as well:</p>
+
+<ul>
+  <li>a certain number of transformation on the component's <code>dynamic_transforms</code> input port</li>
+  <li>a certain number of transformation on the component's <code>static_transforms</code> property</li>
+</ul>
+
+<p>The transformer then will be able to compute certain frame transforms for the benefit
+of the algorithm inside the component. The rest of this page will present its usage.</p>
+
+<p class="alert alert-danger">It is somewhat tempting to use the transformer to manage all transformations
+within a system. <strong>Don't</strong>. The transformer is really meant to handle variations
+in the robotic system itself (placement of sensors and actuators). For
+environment-robot transformations (pose and velocity of the robot, …), stick
+to having separate input ports.</p>
+
+<h2 id="correspondence-of-global-and-local-frame-names">Correspondence of global and local frame names</h2>
+
+<p>Any RigidBodyState that is meant to be passed as an input to the transformer
+<strong>must</strong> fill the <code>RigidBodyState</code> <code>sourceFrame</code> and <code>targetFrame</code> field. As a
+reminder, the <code>sourceFrame</code> is the object whose pose is being described, while
+<code>targetFrame</code> is the reference frame.</p>
+
+<p>Unlike the "internal" frame names chosen for variables or ports, the names
+within the <code>RigidBodyState</code> are global frame names. As such, they have to be
+configurable. To play nice with Syskit's support for the transformer, you must
+name the property that will contain these names <code>${internal_frame_name}_frame</code>, of
+type <code>/std/string</code></p>
+
+<p>For instance, let's assume I have a component that uses a lidar to compute the
+transformation between an object and a reference frame. I would naturally define
+<code>object</code> and <code>ref</code> as the frames of my output, name the output port <code>object2ref_pose</code>
+and, assuming that I intend to use this output in the transformer, I would:</p>
+
+<ul>
+  <li>define the <code>object_frame</code> and <code>ref_frame</code> properties of type '/std/string'</li>
+  <li>fill the <code>RigidBodyState</code>'s <code>sourceFrame</code> with <code>_object_frame.get()</code> and
+the <code>targetFrame</code> with <code>_ref_frame.get()</code></li>
+</ul>
+
+<h2 id="using-the-transformer">Using the transformer</h2>
+
+<p>Components that require a transformation between two frames on the system's body
+should use the transformer to get it. The main advantage to do so is that it
+gives the system a single source of truth, and makes configuration a lot easier.</p>
+
+<p>What should <em>never</em> be injected in the transformer are output of probabilistic
+estimations that have high uncertainty (such as any SLAM, really)</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>Components that will want to use the transformer must depend on
+the <code>drivers/orogen/transfomer</code> package, by adding the following line to the
+package's <code>manifest.xml</code>.</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;depend</span> <span class="na">package=</span><span class="s">"drivers/orogen/transformer"</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<h3 id="transformer-definition-in-the-orogen-file">Transformer definition in the orogen file</h3>
+
+<p>Within the <code>task_context</code> block, one configures the transformer by passing
+a block to the <code>transformer</code> statement, like so:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s2">"Task"</span> <span class="k">do</span>
+    <span class="n">needs_configuration</span>
+    <span class="o">...</span>
+    <span class="n">transformer</span> <span class="k">do</span>
+        <span class="c1"># Configuration statements</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Transformers are also <a href="stream_aligner.html">stream aligners</a>: they align
+streams to compute the best transform estimate, and also to optionally align
+other data streams with the transform stream. As such, they need a <code>max_latency</code>
+argument to set a default latency.</p>
+
+<p>The main transform declaration statement is <code>transform</code>. It declares that the
+component needs a certain transform, using frame names specific to the
+component/algorithm.  For instance, in the context of the lidar object pose
+estimation component I outlined above, we would do</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s2">"Task"</span> <span class="k">do</span>
+    <span class="n">needs_configuration</span>
+    <span class="o">...</span>
+    <span class="n">transformer</span> <span class="k">do</span>
+        <span class="n">transform</span> <span class="s2">"lidar"</span><span class="p">,</span> <span class="s2">"ref"</span>
+        <span class="n">max_latency</span> <span class="mf">0.1</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Another example: a visual servoing component that takes visual features as input
+and provides a command within the vehicle's body frame would have the need for
+the <code>features</code> to <code>command</code> transform. It would be declared with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s2">"Task"</span> <span class="k">do</span>
+    <span class="n">needs_configuration</span>
+    <span class="o">...</span>
+    <span class="n">transformer</span> <span class="k">do</span>
+        <span class="n">transform</span> <span class="s1">'features'</span><span class="p">,</span> <span class="s1">'command'</span>
+        <span class="n">max_latency</span> <span class="mf">0.1</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The data that is meant to be processed with the transform can be <em>aligned</em> with it.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">transformer</span> <span class="k">do</span>
+    <span class="n">align_port</span> <span class="s2">"detected_features"</span>
+    <span class="n">transform</span> <span class="s2">"features"</span><span class="p">,</span> <span class="s2">"command"</span>
+    <span class="n">max_latency</span> <span class="mf">0.1</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In that case, a callback will be generated, much like with the <a href="stream_aligner.html">stream
+aligner</a>.  The difference is in the name: while the
+stream aligner callbacks are named <code>${port_name}Callback</code>, the transformer ones
+are named <code>${port_name}TransformerCallback</code>. In doubt, always look at the fresh
+templates in the orogen's <code>templates/</code> folder.</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">Task</span><span class="o">::</span><span class="n">detected_featuresTransformerCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">base</span><span class="o">::</span><span class="n">Time</span> <span class="o">&amp;</span><span class="n">ts</span><span class="p">,</span> <span class="k">const</span> <span class="o">::</span><span class="n">VisualFeatures</span><span class="o">&amp;</span> <span class="n">features</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="transformer-in-the-c-code">Transformer in the C++ Code</h3>
+
+<p class="alert alert-danger">Being, under the hood, a stream aligner, <a href="stream_aligner.html#cpp">the rules</a>
+related to usage of ports and <code>updateHook</code> implementation apply to the
+transformer as well</p>
+
+<p>Within the C++, the transform object is available through a generated
+<code>_features2command</code> object which can be queried through its <code>.get</code> method.</p>
+
+<p>The first argument to <code>.get</code> controls what is the expected time of the queried
+transform. It is needed only if the transformer is expected to generate an
+<em>interpolated transform</em> by setting the third argument to <code>true</code>.</p>
+
+<p>When the third argument is <code>false</code>, the transformer computes the kinematic
+chain using the transforms whose timestamp is just before the given <code>time</code>. If
+it is <code>true</code>, it interpolates the transformation from the transforms it
+received with a timestamp just before the passed timestamp, with the transforms
+it received with a timestamp just after.</p>
+
+<p>Note that this functionality will only work reliably inside the transformer
+callbacks, since it ensures that the given time is ordered in time. The
+transformer does not keep a full history of everything it receives, and is
+therefore very likely to fail to interpolate or even return a transform if
+called outside the stream alignment callback.</p>
+
+<p>While the type to represent poses on the component interfaces is
+<code>base::samples::RigidBodyState</code>, the working type is usually <code>Eigen::Affine3d</code>.
+The transformer's <code>get</code> method accept returning that data right away. When
+reading ports, you can get an <code>Affine3d</code> from a <code>RigidBodyState</code> with <code>getTransform()</code></p>
+
+<p><strong>Example</strong>: accessing a transformation within a transformer callback</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">Task</span><span class="o">::</span><span class="n">detected_featuresTransformerCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">base</span><span class="o">::</span><span class="n">Time</span> <span class="o">&amp;</span><span class="n">ts</span><span class="p">,</span> <span class="k">const</span> <span class="o">::</span><span class="n">VisualFeatures</span><span class="o">&amp;</span> <span class="n">features</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Eigen</span><span class="o">::</span><span class="n">Affine3d</span> <span class="n">features2command</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_features2command</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">features2command</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span>
+  <span class="p">{</span>
+      <span class="c1">// no transform available yet, do nothing</span>
+      <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Do the processing</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Example</strong>: accessing a transformation in the updateHook</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">Task</span><span class="o">::</span><span class="n">updateHook</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// VERY IMPORTANT. Must be first, ports are read here by the stream aligner</span>
+    <span class="n">TaskBase</span><span class="o">::</span><span class="n">updateHook</span><span class="p">();</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Affine3d</span> <span class="n">features2command</span><span class="p">;</span>
+    <span class="c1">// Thirsd argument MUST be false as we are not within a TransformerCallback</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_features2command</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="o">::</span><span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">(),</span> <span class="n">features2command</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// no transform available yet, do nothing</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Do the processing</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Example</strong>: processing a "plain" rigidbodystate output to combine it with a transform</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">Task</span><span class="o">::</span><span class="n">updateHook</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// VERY IMPORTANT. Must be first, ports are read here by the stream aligner</span>
+    <span class="n">TaskBase</span><span class="o">::</span><span class="n">updateHook</span><span class="p">();</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Affine3d</span> <span class="n">features2command</span><span class="p">;</span>
+    <span class="c1">// Thirsd argument MUST be false as we are not within a TransformerCallback</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_features2command</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="o">::</span><span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">(),</span> <span class="n">features2command</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// no transform available yet, do nothing</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// We usually suffix the RigidBodyState with _rbs to keep the 'clean' name for the</span>
+    <span class="c1">// Affine3d variable</span>
+    <span class="n">base</span><span class="o">::</span><span class="n">samples</span><span class="o">::</span><span class="n">RigidBodyState</span> <span class="n">target2features_rbs</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_target2features_pose</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">target2features_rbs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">RTT</span><span class="o">::</span><span class="n">NewData</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Affine3d</span> <span class="n">target2features</span> <span class="o">=</span> <span class="n">target2features_rbs</span><span class="p">.</span><span class="n">getTransform</span><span class="p">();</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Affine3d</span> <span class="n">target2command</span> <span class="o">=</span> <span class="n">features2command</span> <span class="o">*</span> <span class="n">target2features</span><span class="p">;</span>
+
+    <span class="n">base</span><span class="o">::</span><span class="n">samples</span><span class="o">::</span><span class="n">RigidBodyState</span> <span class="n">target2command_rbs</span><span class="p">;</span>
+    <span class="n">target2command_rbs</span><span class="p">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">target2command</span><span class="p">);</span>
+    <span class="c1">// IMPORTANT: figure out the best timestamp</span>
+    <span class="n">target2command_rbs</span><span class="p">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">target2features_rbs</span><span class="p">.</span><span class="n">time</span><span class="p">;</span>
+    <span class="n">_target2command_pose</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">target2command_rbs</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="limitations-and-guidelines">Limitations and Guidelines</h2>
+
+<p>See the <a href="../component_networks/geometric_transformations.html#caveats">caveats</a> and
+the <a href="../component_networks/geometric_transformations.html#guidelines">guidelines</a> from
+the system part.</p>
+
+<p class="alert alert-danger">As you can see, the transformer uses the <code>Eigen</code> library frequently. Unfortunately, it has
+some pitfalls that are important to keep in mind. One of the most common is how Eigen
+operations interact with the C++ <code>auto</code> keyword, spoiler alert it isn't how one would
+expect. Refer to the <a href="https://eigen.tuxfamily.org/dox/TopicPitfalls.html">Eigen Common Pitfalls
+page</a> for more details.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_index">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child active'><a href="./">Writing Components</a></li><li class='child'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="writing-components">Writing Components</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#designing-the-interface" id="markdown-toc-designing-the-interface">Designing the Interface</a>    <ul>
+      <li><a href="#the-component-name" id="markdown-toc-the-component-name">The component name</a></li>
+      <li><a href="#note-about-data-types" id="markdown-toc-note-about-data-types">Note about data types</a></li>
+      <li><a href="#input-and-output-ports" id="markdown-toc-input-and-output-ports">Input and Output Ports</a></li>
+      <li><a href="#properties" id="markdown-toc-properties">Properties</a></li>
+      <li><a href="#actually-writing-and-updating-the-interface-description" id="markdown-toc-actually-writing-and-updating-the-interface-description">Actually Writing and Updating the Interface Description</a></li>
+    </ul>
+  </li>
+  <li><a href="#componentlibrary-separation" id="markdown-toc-componentlibrary-separation">Component/Library Separation</a></li>
+  <li><a href="#implementation" id="markdown-toc-implementation">Implementation</a></li>
+  <li><a href="#deployment" id="markdown-toc-deployment">Deployment</a></li>
+</ul>
+
+<p>Within Rock, components are <em>implemented</em> in C++. They are also <em>specified</em> in a
+Ruby domain-specific language that is processed by a code generation tool,
+<strong>oroGen</strong>. This tool ensures that the component's interface matches its
+specification. It also removes most of the crude boilerplate-writing code that
+is the declaration in C++ of the component interfaces.</p>
+
+<p>From a package point of view, components are defined in an orogen package. The
+orogen packages are all placed in the <code>/orogen/</code> subdirectory of one of the
+<a href="../workspace/conventions.html">package categories</a>. Additionally, an oroGen
+package and a library can share the same basename (e.g.  <code>drivers/hokuyo</code> and
+<code>drivers/orogen/hokuyo</code>). This is even a recommended behavior when an orogen
+package is mainly tied to a certain library.</p>
+
+<p>Follows, for instance, some packages from one of my workspaces:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>base/types
+base/orogen/types
+drivers/iodrivers_base
+drivers/orogen/iodrivers_base
+control/motor_controller
+gui/vizkit3d_world
+gui/orogen/vizkit3d_world
+simulation/rock_gazebo
+simulation/orogen/rock_gazebo
+simulation/orogen/underwater_camera_simulation # work on top of gui/orogen/vizkit3d_world
+</code></pre></div>
+<p>This page will not dwell on how to create an orogen package. <a href="orogen_packages.html">Check this page
+out</a> for more details on the subject.</p>
+
+<p>Within oroGen packages, the components are named <em>Task Contexts</em>. This is
+historically the name chosen by the developers of the Orocos RTT toolkit, the
+underlying C++ component implementation used by Rock and orogen.</p>
+
+<p>A component is like a black box that you configure, start, feed data to (write
+data) to get some data out (read data). This page will give you an overview of how
+to create your own, along with the most important guidelines on how to write a
+"good" component.</p>
+
+<p>To start building a component, you have to <em>define its interface</em>, answering
+four questions:</p>
+
+<ol>
+  <li>what is its name ?</li>
+  <li>what data will it need as input ? (<em>input ports</em>)</li>
+  <li>what data will it need as output ? (<em>output ports</em>)</li>
+  <li>what data will it need as configuration ? (<em>properties</em>)</li>
+</ol>
+
+<p>Once the interface is defined, you can use orogen to generate a C++ scaffold, and
+fill the scaffold to actually implement the component.</p>
+
+<p>In summary, the overall development process looks like this:</p>
+
+<p><img src="media/deployment_process.svg" alt="Runtime Workflow Diagram" class="fullwidth" /></p>
+
+<ol>
+  <li>components are implemented and unit-tested in orogen projects (design and
+implementation)</li>
+  <li>you choose how the components will actually run in your system (deployment)</li>
+  <li>the component is being executed (by Syskit)</li>
+</ol>
+
+<h2 id="designing-the-interface">Designing the Interface</h2>
+
+<p>The component interfaces are written in the package's <code>.orogen</code> file. This section
+will first present the role of the major parts of a component interface, to finish
+with pointers to other pages for details on how to actually write the component's interface definition.</p>
+
+<h3 id="the-component-name">The component name</h3>
+
+<p>This is the one thing that is painful to change. Changing data types, adding and
+removing inputs, outputs or properties is painless. The easiest way to change a
+component's name is to copy all the component implementation from one class to
+another.</p>
+
+<p><strong>Guidelines</strong></p>
+
+<ul>
+  <li>suffix all component names by <code>Task</code></li>
+  <li>if the oroGen package you are writing should not have more than one component,
+simply use <code>Task</code></li>
+  <li>avoid duplicating the namespace. Almost every place where you will refer to the
+component name will require you to specify the namespace, so it makes names
+only longer. For instance, do not name <code>camera_gigevision::GigEVisionCameraTask</code>, but
+simply <code>camera_gigevision::Task</code></li>
+</ul>
+
+<h3 id="note-about-data-types">Note about data types</h3>
+
+<p>Provided you followed a few rules, oroGen is meant to be using the C++ types you
+are using in your libraries directly. This is by far the recommended workflow,
+as your components will follow the progress on the library implementation naturally,
+without adding to the library code a dependency on orogen-generated code.</p>
+
+<h3 id="input-and-output-ports">Input and Output Ports</h3>
+
+<p>The list of input and output ports is obviously very system-specific. While port names
+are relatively easy to change, port <em>types</em> are a rather critical choice.</p>
+
+<p>It is nonetheless generally speaking a very good idea to replicate the naming
+scheme used by other components in your system. We only recommend a specific
+naming scheme for ports that <a href="geometric_transformations.html">generate transformations</a>.</p>
+
+<p><strong>Reusing the types is critical</strong>. For an input to be connected to an
+output, they need to share the same type. This is the reason why "superset" types
+such as for instance Rock's base/samples/RigidBodyState exist. They are here to allow
+using a full state estimate with linear and angular position and velocities to be used
+for e.g. a simple position.</p>
+
+<p>Also, for this reason, changing a port's type is close to impossible in practice, since
+it requires changing the type in all the system(s) the component is being used. What
+is done instead is creating another port with the updated type and change step by step,
+which is rather effort-consuming (and therefore, avoided in practice)</p>
+
+<p class="note">What has just been said obviously applies only to ports that are meant to be
+connected to another component in the system. As we will see, it is a very good
+practice to have "status" or "debug" ports in your components. These ports will
+only ever be connected to a logger, and for those we usually define a data
+structure that is specific to the component being developed.</p>
+
+<p><strong>Guidelines</strong></p>
+
+<ul>
+  <li><strong>group together data that belong together</strong>. Do not create 5 ports to get a piece of
+data because, for instance, you could not find an existing data structure for that
+combination. Re-combining data that belong together is difficult in an asynchronous
+system like Rock.</li>
+  <li><strong>port names need to be unique</strong>, an input cannot be named the same as an output</li>
+</ul>
+
+<h3 id="properties">Properties</h3>
+
+<p>The property interface has a lot less constraints than the ports, especially when
+it comes to types. It is really only a contract between Syskit and the
+component, that does not involve other components in the system. However, it is
+generally speaking good to follow the same naming scheme than other components
+of the same kind in your system, for simplicity of development.  As for ports,
+it is good to group properties that really belong together in structures, to
+avoid creating massive unstructured configuration interfaces.</p>
+
+<p>oroGen allows you to define default parameters for simple types in the specification
+directly, and allows you to initialize the more complex types in the C++ code. Always
+do so. Always go for "safe" values as defaults, abstracting yourself from the system
+you are currently developing as much as possible.</p>
+
+<h3 id="actually-writing-and-updating-the-interface-description">Actually Writing and Updating the Interface Description</h3>
+
+<p>Now is a good time to go read on:</p>
+
+<ul>
+  <li><a href="defining_types.html">how to define types</a></li>
+  <li><a href="importing_types.html">how to import types</a></li>
+  <li><a href="interface.html">how to declare a component interface</a></li>
+</ul>
+
+<p>Once you have created / updated a <code>task_context</code> block, run <code>amake</code> to do
+code generation and verify that everything is fine. Code generation will create
+a C++ class for you to modify in <code>tasks/</code>, matching exactly the task context name.</p>
+
+<p><strong>Implementation Detail</strong>: That class depends on a <code>Base</code> class that is managed
+*by orogen within the <code>.orogen/tasks/</code> folder. This is how orogen manages to update
+the task interface after the first generation. There are very few operations that
+require a manual change in the <code>tasks/</code> folder. They are detailed in the corresponding
+documentation.</p>
+
+<h2 id="componentlibrary-separation">Component/Library Separation</h2>
+
+<p>We <strong>strongly recommend</strong> that you develop most of your system's functionality
+in <strong>libraries</strong>, instead of doing within the component framework itself. For C++, this
+means creating C++ library packages that are then later integrated into Rock
+components to expose that functionality to the system. For Ruby, this means
+creating Ruby packages that are then used within the Ruby layers (e.g. Syskit)</p>
+
+<p><strong>Why ?</strong> Developing libraries is a matter of "general" software engineering
+best practices. Robotics is a small field, software engineering is not. By
+doing most of your work in a framework-independent manner, you ensure that you
+can benefit from the much bigger ecosystem. Moreover, we haven't seen the end
+of the robotic frameworks. By developing libraries that are
+framework-independent, you ensure that you can integrate them elsewhere if needs
+be, cutting the time and effort by <strong>a lot</strong>.</p>
+
+<p class="note"><strong>How does Rock help the library/framework separation ?</strong> Supporting this
+separation during the development process is a main design driver for the
+tooling. For instance, Rock's build system - <code>autoproj</code> - is not assumed to be
+present by the rest of the packages. Second, <code>orogen</code> exposes C++ structures
+directly into the type system. The widespread approach - using IDLs - usually
+end up pushing the developers to integrate code-generated structures in their
+libraries thus tying them to the framework itself.</p>
+
+<p>Developing libraries is covered in the <a href="../libraries">libraries</a> section.
+This section deals with using library-integrated functionality and using them
+to build data-processing components.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Once the component C++ class has been generated, you need to actually implement it.
+Familiarize yourself with the Rock component's</p>
+
+<ul>
+  <li><a href="state_machine.html">state machine</a></li>
+  <li><a href="writing_the_hooks.html">how to interact with the interface elements from C++</a></li>
+</ul>
+
+<p>And, additionally, re-read the part about <a href="interface.html#properties">initializing properties</a></p>
+
+<p>We recommend that you unit-test your components. Rock has a built-in support using
+Syskit as a backend. See <a href="testing.html">this page</a>.</p>
+
+<p>This documentation also provides pages on specific topics important to robotics:</p>
+
+<ul>
+  <li><a href="timestamping.html">Timestamping of data</a></li>
+  <li><a href="geometric_transformations.html">Handling geometric transformations</a></li>
+</ul>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>In Rock, the <em>deployment</em> is the process to how all these components will be
+split in threads, processes and machines. The oroGen layer deals with the first
+two, Syskit allows you to handle the third.</p>
+
+<p>In general, with your first components, you will want to keep with <a href="deployment.html#default">the default
+deployment</a>.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="workspace workspace_testing">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Workspace and Packages</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="conventions.html">Conventions</a></li><li class='child'><a href="setup.html">Starting a New Project</a></li><li class='child'><a href="add_packages.html">Adding new packages</a></li><li class='child'><a href="os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="global_configuration.html">Global Configuration</a></li><li class='child active'><a href="testing.html">Test Integration</a></li><li class='child'><a href="managing.html">Build configuration design</a></li><li class='child'><a href="troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="test-integration">Test Integration</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#running-a-packages-tests" id="markdown-toc-running-a-packages-tests">Running a package's tests</a></li>
+  <li><a href="#the-rock-cmake-macros" id="markdown-toc-the-rock-cmake-macros">The Rock CMake macros</a></li>
+  <li><a href="#generic-cmake-support" id="markdown-toc-generic-cmake-support">Generic CMake support</a></li>
+  <li><a href="#ruby-packages" id="markdown-toc-ruby-packages">Ruby packages</a></li>
+  <li><a href="#manual-integration-of-a-packages-test-suite" id="markdown-toc-manual-integration-of-a-packages-test-suite">Manual integration of a package's test suite</a></li>
+</ul>
+
+<p>Autoproj provides support to run all package's unit tests, including gathering
+the unti test results at standard places, for further processing.</p>
+
+<p>In this section, we will start by describing how to run a package's test suite
+with Autoproj. Then, we'll talk about how to integrate your package's test suite
+so that Autoproj can run it.</p>
+
+<h2 id="running-a-packages-tests">Running a package's tests</h2>
+
+<p>Autoproj provides a way to identify which dependencies are needed exclusively
+for the benefit of a package's tests. In order to run the tests, you must first
+tell autoproj you needed these dependencies (and install/build them). This is
+done by <em>enabling</em> the tests for the package you're interested in:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>cd path/to/my/package
+autoproj test enable
+aup --checkout-only
+amake
+</code></pre></div>
+<p>Note that once a package's tests are enabled, following updates/build will also
+update/build its test dependencies - i.e. you need to run the commands above
+only once.</p>
+
+<p>If you want to enable all tests suites of a workspace, run</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>autoproj test enable
+</code></pre></div>
+<p>And then a full update/build cycle.</p>
+
+<p>Finally, to run the tests, do <code>autoproj test .</code> if within the package. Use the
+<code>--tool</code> option to see the package's output right away, or use <code>alog</code> to see the
+test log file afterwards.</p>
+
+<p>Run <code>autoproj test list .</code> to know if a package has a test suite that can be
+executed under Autoproj. If not, you can integrate it (see below)</p>
+
+<h2 id="the-rock-cmake-macros">The Rock CMake macros</h2>
+
+<p>The Rock CMake macros provide all that's needed to run tests with CMake's CTest,
+and generate JUnit files where Autoproj expects them. The <code>rock.core</code> package
+set automatically configures the necessary CMake variables for the integration
+with Autoproj.</p>
+
+<p>In other words, if you're using the Rock CMake macros and the <code>rock.core</code>
+package set, you're covered.</p>
+
+<h2 id="generic-cmake-support">Generic CMake support</h2>
+
+<p>The <code>cmake_package</code> definition looks for a <code>test/</code> folder in the package, and
+declares that tests are available in this package if one is found. Tests are
+executed with <code>make test</code> within the package's build directory. Test results are
+expected to be generated in the <code>test/results/</code> subdirectory of the build
+directory.</p>
+
+<p>Use <code>#source_dir</code> if test results are generated in another subdirectory.
+Relative paths are resolved with respect to the package's source directory.
+We recommend always setting a full path.</p>
+
+<p>If the package does not generate test results, set the <code>#no_results</code> attribute
+to false:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'my/pkg'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">post_import</span> <span class="k">do</span>
+        <span class="c1"># Enable tests at the CMake level when they are enabled at the Autoproj</span>
+        <span class="c1"># level</span>
+        <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'SOME_FLAG'</span><span class="p">,</span> <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">enabled?</span>
+        <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">source_dir</span> <span class="o">=</span>
+            <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pkg</span><span class="p">.</span><span class="nf">builddir</span><span class="p">,</span> <span class="s1">'test'</span><span class="p">,</span> <span class="s1">'results'</span><span class="p">)</span>
+        <span class="c1">## If the tests don't generate anything</span>
+        <span class="c1"># pkg.test_utility.no_results</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="ruby-packages">Ruby packages</h2>
+
+<p>The <code>ruby_package</code> handler looks for a <code>test/</code> folder in the package, and
+declares that tests are available if it finds one. Tests are executed with <code>rake
+test</code>. Results are expected in the <code>.test_results</code> subdirectory of the sources.</p>
+
+<p>In addition, the <code>rock.core</code> package set installs the <code>minitest-junit</code> minitest
+plugin, and ensures that JUnit reports are created where Autoproj expects them.</p>
+
+<h2 id="manual-integration-of-a-packages-test-suite">Manual integration of a package's test suite</h2>
+
+<p>Autoproj provides three functionalities regarding test suites:</p>
+
+<ul>
+  <li>providing the CLI interface needed to control whether tests should be enabled
+and executed</li>
+  <li>running them</li>
+  <li>optionally copying the test results in a common directory tree (the
+<code>test_results/&lt;package_name&gt;</code> folder under the log directory)</li>
+</ul>
+
+<p>If your package(s) don't neatly fall within the standard Autoprojg package
+handling, here's how you can integrate it.</p>
+
+<p>First, you need to declare that tests are available. Tests are available if</p>
+
+<ol>
+  <li>a test <em>task</em> is defined, that is Autoproj knows how to run the tests</li>
+  <li>a test result dir is set, or the <code>#no_results</code> flag is set to declare that
+none should be expected</li>
+</ol>
+
+<p>A test task is defined by passing a block to <code>test_utility.task</code>, e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">task</span> <span class="k">do</span>
+        <span class="c1"># Code to run the tasks</span>
+    <span class="k">end</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">no_results</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="important"><strong>Note</strong> that if you need to test for the presence of folder/files on disk, you
+<strong>must</strong> do it in a <code>post_import</code> block. Otherwise, your code will be executed
+<em>before</em> the package is imported and the test will fail. See for example
+<a href="https://github.com/rock-core/autoproj/blob/372dd3252ca91d0f5ba1b0854619d37e1aa5d881/lib/autoproj/autobuild_extensions/dsl.rb#L228">autoproj's definition of tests for the base package types</a></p>
+
+<p>Check whether Autoproj believes tests are available by running <code>autoproj test
+list &lt;PACKAGE_NAME&gt;</code>.</p>
+
+<p>The next step is to ensure that tests are available if they are enabled. The
+goal here is to avoid unnecessary work when tests are not needed.</p>
+
+<p>To do so,</p>
+
+<ol>
+  <li>
+    <p id="test_dependency">add test-only dependencies using the <code>test_depend</code> tag in
+the package's <code>manifest.xml</code>. This ensures that these dependencies will be
+ignored if the tests are not enabled:</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;test_depend</span> <span class="na">name=</span><span class="s">"some/package"</span> <span class="nt">/&gt;</span>
+</code></pre></div>  </li>
+  <li>
+    <p>control whether tests are built (when applicable) within
+the autobuild files. For instance, <code>rock.core</code> controls whether
+<code>ROCK_TEST_ENABLED</code> is set with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">post_import</span> <span class="k">do</span>
+        <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'ROCK_TEST_ENABLED'</span><span class="p">,</span> <span class="n">pkg</span><span class="p">.</span><span class="nf">test_utility</span><span class="p">.</span><span class="nf">enabled?</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+</ol>
+
+<p class="important"><code>#enabled?</code> will return false if the tests are not <em>available</em> through the
+settin of <code>#source_dir</code> or <code>#no_results</code>. This means that you need to check for
+<code>#enabled?</code> in a <code>post_import</code> block if the test setup is done in a
+<code>post_import</code> block as well</p>
+
+<p class="important"><strong>Do not</strong> conditionally set the variable that controls the test like so:
+<code>pkg.define 'ROCK_TEST_ENABLED', true if pkg.test_utility.enabled?</code> as it would
+enable the tests, but never disable them. Use instead the pattern seen above,
+that is <code>pkg.define 'ROCK_TEST_ENABLED', pkg.test_utility.enabled?</code></p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

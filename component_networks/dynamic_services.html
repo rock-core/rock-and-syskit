@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="component_networks component_networks_dynamic_services">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Designing Component Networks</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="profiles.html">Profiles</a></li><li class='child'><a href="reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child active'><a href="dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="dynamic-services">Dynamic Services</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#concept" id="markdown-toc-concept">Concept</a></li>
+  <li><a href="#declaring-a-dynamic-service" id="markdown-toc-declaring-a-dynamic-service">Declaring a dynamic service</a></li>
+  <li><a href="#component-configuration" id="markdown-toc-component-configuration">Component Configuration</a></li>
+  <li><a href="#instanciating-a-dynamic-service" id="markdown-toc-instanciating-a-dynamic-service">Instanciating a dynamic service</a></li>
+  <li><a href="#dynamic-services-on-compositions" id="markdown-toc-dynamic-services-on-compositions">Dynamic Services on Compositions</a></li>
+</ul>
+
+<p>In the <a href="../components/writing_the_hooks.html#dynamic_ports">Components reference section</a>, we briefly
+breached the subject of how one could create ports dynamically on a component.
+This is rarely used, but is actually, nonetheless, very useful.</p>
+
+<p>This page will expand on the subject from the perspective of Syskit: how, in
+Syskit, dynamic ports are modelled and handled. The core concept behind this
+integration is the <em>dynamic service</em>.</p>
+
+<p class="important"><strong>Best practice</strong> prefer instanciating more than one component to having dynamic
+ports and dynamic services when possible</p>
+
+<h2 id="concept">Concept</h2>
+
+<p>Conceptually, dynamic ports are part of both a component's data flow interface
+and its configuration interface. Syskit being rather obviously very dataflow oriented,
+this "dual identity" is solved by providing a way to <em>declare</em> that ports will exist
+that are not part of the "main" component interface, along with some configuration
+data. It is up to the component's <a href="../components/runtime.html#extension_file">extension block</a>
+to configure the component as required by the instanciated dynamic services.</p>
+
+<p>For instance, the rock-gazebo integration has <a href="https://github.com/rock-gazebo/simulation-orogen-rock_gazebo"><code>rock_gazebo::ModelTask</code></a>.
+The component's <code>exported_joints</code> property is a list of set of joints that should be
+exported on an output port (and for which commands can be received on an input port).</p>
+
+<p>To integrate this in Syskit, we define a dynamic service in the
+<a href="https://github.com/rock-core/bundles-common_models/blob/master/models/orogen/rock_gazebo.rb#L83">rock_gazebo.rb extension file</a>.
+The block passed to <code>dynamic_service</code> does some bit of argument normalization and
+then defines the required service (a device driver is a type of data service, and
+therefore valid)</p>
+
+<p>Later, the component updates the <code>exported_links</code> property accordingly within its own
+<a href="../components/runtime.html#extension_file"><code>#update_properties</code></a> method.</p>
+
+<h2 id="declaring-a-dynamic-service">Declaring a dynamic service</h2>
+
+<p>Dynamic services are declared on the component model using the <code>dynamic_service</code> method.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">dynamic_service</span> <span class="no">Services</span><span class="o">::</span><span class="no">ServiceModel</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"dynamic_service_name"</span> <span class="k">do</span>
+    <span class="c1"># Put here what to do to actually instanciate the service ... It usually is</span>
+    <span class="c1"># simply a call to provides</span>
+    <span class="c1">#</span>
+    <span class="c1"># The name of the instanciated service is accessible as `name`. Instanciation</span>
+    <span class="c1"># options (if any) are available as 'options' (a Hash)</span>
+    <span class="c1">#</span>
+    <span class="c1"># The name is omitted in the provides call. It is handled by the dynamic</span>
+    <span class="c1"># service instanciation logic.</span>
+    <span class="n">provides</span> <span class="no">Services</span><span class="o">::</span><span class="no">ServiceModel</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The service model is the model of the data services that will be instanciated.
+The <code>dynamic_service_name</code> is arbitrary, used when the dynamic services are to
+be instanciated.</p>
+
+<p>Within the block, the only thing that is required is to actually call <code>provides</code>
+with the required model (that is, either the model itself, or a service that is
+declared as <a href="reusable_networks.html#data_service_relationships">providing that model</a>).
+However, this <code>provides</code> is different than the non-dynamic one. In the 'static' case,
+<code>provides</code> will map the ports of the service to the ports of the task, and fail if ports
+do not exist.</p>
+
+<p>In the 'dynamic' case, however, Syskit will interpret missing ports as ports
+that will be created by the component at runtime (that's the "dynamic" part).
+One will often make these ports unique, which is done by using the
+instanciated port name - available as the <code>name</code> method within the block. In the
+example below, instanciating the <code>object_position</code> service with a name of <code>wall</code>
+will be interpreted by Syskit as creating a port called <code>wall_position_samples</code></p>
+
+<p class="note">Dynamic services can also refer to static ports. For instance, the <code>canbus::Task</code>
+component will create one output per client, but has a single input for all the
+CAN-connected devices.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">dynamic_service</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Position</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"object_position"</span> <span class="k">do</span>
+    <span class="n">provides</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Services</span><span class="o">::</span><span class="no">Position</span><span class="p">,</span>
+             <span class="s2">"position_samples"</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">_position_samples"</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="component-configuration">Component Configuration</h2>
+
+<p>The configuration that matches the instanciated dynamic services must be generated
+within the <code>#update_properties</code> method within the <a href="../components/runtime.html">component extension
+file</a>. One calls <code>#each_required_dynamic_service</code>
+and update the configuration accordingly.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">Orogen</span><span class="p">.</span><span class="nf">project</span><span class="o">.</span><span class="no">Task</span> <span class="k">do</span>
+    <span class="k">def</span> <span class="nf">update_properties</span>
+        <span class="k">super</span>
+
+        <span class="n">properties</span><span class="p">.</span><span class="nf">exported_objects</span> <span class="o">=</span> <span class="n">each_required_dynamic_service</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">srv</span><span class="o">|</span>
+            <span class="c1"># Options pass during instanciation are available as</span>
+            <span class="c1"># `srv.model.dynamic_service_options`</span>
+            <span class="p">{</span> <span class="ss">name: </span><span class="n">srv</span><span class="p">.</span><span class="nf">name</span> <span class="p">}</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="instanciating-a-dynamic-service">Instanciating a dynamic service</h2>
+
+<p>Let's reinforce something: instanciating a dynamic service actually <em>updates the
+component model</em>. It does not actually create ports. Port creation will happen
+at runtime, when the component is configured.</p>
+
+<p>That "addition of new ports", however, allows to use the new ports in the
+component network(s) as if they existed in the original model.</p>
+
+<p>Instanciating a dynamic service is done with <code>with_dynamic_service</code>.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_m_with_instanciated_service</span> <span class="o">=</span> <span class="n">task_m</span><span class="p">.</span><span class="nf">with_dynamic_service</span><span class="p">(</span>
+    <span class="s2">"dynamic_service_name"</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"service_name"</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Where <code>"dynamic_service_name"</code> is the name of the dynamic service as provided to
+<code>dynamic_service</code>. <code>service_name</code> is the name of the service once instanciated and
+<code>options</code> is passed as-is to the dynamic service block, and is available as
+<code>dynamic_service_options</code> during configuration.</p>
+
+<div class="important">
+  <p><strong>Very important</strong> the method returns the component model with the newly added
+dynamic service, which might be different from the original. For instance,</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_m</span> <span class="o">=</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">rock_gazebo</span><span class="o">.</span><span class="no">ModelTask</span><span class="p">.</span><span class="nf">with_dynamic_service</span><span class="p">(</span><span class="s2">"link_export"</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"new_s"</span><span class="p">)</span>
+<span class="c1"># Here, task_m != OroGen.rock_gazebo.ModelTask</span>
+<span class="n">task_m</span> <span class="o">=</span> <span class="n">task_m</span><span class="p">.</span><span class="nf">with_dynamic_service</span><span class="p">(</span><span class="s2">"link_export"</span><span class="p">,</span> <span class="ss">as: </span><span class="s2">"another_s"</span><span class="p">)</span>
+<span class="c1"># Here, task_m stayed the same</span>
+</code></pre></div>
+</div>
+
+<h2 id="dynamic-services-on-compositions">Dynamic Services on Compositions</h2>
+
+<p>Dynamic services can also be defined on composition, in which case</p>
+
+<ul>
+  <li>there is (obviously) no <code>update_properties</code> step</li>
+  <li>the <code>dynamic_service</code> block is still expected to provide the service, which can e.g.
+be done by either overloading an existing child, or even adding a new child</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

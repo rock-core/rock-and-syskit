@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="log_management log_management_runtime">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Log Management</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="datastore.html">Storing Logs</a></li><li class='child'><a href="jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="log-generation-at-runtime">Log Generation at Runtime</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#component-output-ports" id="markdown-toc-component-output-ports">Component Output Ports</a></li>
+  <li><a href="#controlling-which-outputs-ports-are-logged" id="markdown-toc-controlling-which-outputs-ports-are-logged">Controlling Which Outputs Ports are Logged</a></li>
+  <li><a href="#component-standard-output-and-error" id="markdown-toc-component-standard-output-and-error">Component Standard Output and Error</a></li>
+  <li><a href="#component-properties" id="markdown-toc-component-properties">Component Properties</a></li>
+  <li><a href="#syskit-events" id="markdown-toc-syskit-events">Syskit Events</a></li>
+  <li><a href="#limitations" id="markdown-toc-limitations">Limitations</a></li>
+</ul>
+
+<p>Whenever a new Syskit instance is started, for instance by executing <code>syskit
+run</code>, Syskit creates a new log directory. This log directory is named after the
+date and time - for instance <code>20211011-1123</code> for 11:23 on the 11/10/2021 - and
+optionally an index if more than one Syskit instance was started within the same
+minute (e.g. <code>20211011-1123.1</code>). These folders are by default created within the
+bundle itself, under <code>logs/</code>. The logs of the currently running Syskit instance
+(or the last instance that was started) is pointed to by a <code>current</code> symlink
+under the same folder.</p>
+
+<p>Instead of the <code>logs</code> folder, one can choose a different base folder by setting
+the <code>ROBY_BASE_LOG_DIR</code> environment variable. If it is set, the logs will be
+created under <code>$ROBY_BASE_LOG_DIR/$APPNAME/$TIME_TAG</code> where <code>$APPNAME</code> is the
+basename of the Syskit app folder (e.g. $APPNAME is <code>tutorials</code> in
+<code>bundles/tutorials</code>)</p>
+
+<p>All Syskit-deployed systems should strive to put all runtime-generated data within
+the log folder. The remainder of this section will describe what type of data is
+stored there by default, and how that can be controlled. The analysis of these log
+files will be handled in followup sections.</p>
+
+<h2 id="component-output-ports">Component Output Ports</h2>
+
+<p>In a Rock system, all output ports may be logged by the system. By default, they
+<strong>are</strong> all logged. Logging is the default.</p>
+
+<p>Each deployment - i.e. each process that contains component - has a single log component
+(the <code>logger::Logger</code> from the <code>tools/logger</code> package) that is configured by Syskit to
+log the output ports of the components that run within that process.</p>
+
+<p>When using a <a href="../components/deployment.html#default">default deployment</a>, the generated
+log file has the same name than the component that is being deployed, suffixed with <code>.N.log</code>
+where <code>N</code> is a sequential number starting at zero. This number is incremented each time
+the process is restarted. For instance, the logs of</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">use_task_context</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">motors_weg_cvw300</span><span class="o">.</span><span class="no">Task</span> <span class="o">=&gt;</span> <span class="s2">"left_motor"</span>
+</code></pre></div>
+<p>will be named <code>left_motor.0.log</code>, <code>left_motor.1.log</code> and so on.</p>
+
+<p>When using <a href="../components/deployment.html#explicit">explicit deployments</a>, the generated
+log file has the same name than the deployment, including <a href="../components/runtime.html">the specified prefix if there
+is one</a>. For instance, the logs of a <code>motor_control</code>
+deployment declared with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="o">::</span><span class="no">Deployments</span><span class="p">.</span><span class="nf">motor_control</span> <span class="o">=&gt;</span> <span class="s2">"left_"</span>
+</code></pre></div>
+<p>will be stored in <code>left_motor_control.0.log</code>, <code>left_motor_control.1.log</code></p>
+
+<h2 id="controlling-which-outputs-ports-are-logged">Controlling Which Outputs Ports are Logged</h2>
+
+<p>As we just saw, a Rock+Syskit system will log all output ports. This may become
+a bit much in a production system - especially with sensors like cameras or
+LIDARs.</p>
+
+<p>Syskit of course has a way to enable and disable ports from being logged. The way
+to do it is by defining <em>log groups</em>, that declare sets of output ports based on
+port, component or type names. These log groups can then be enabled or disabled.
+Ports are not logged if all groups that match them are disabled.</p>
+
+<p>Group declarations are usually done within a robot configuration (in <code>config/robots/</code>):</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">logs</span><span class="p">.</span><span class="nf">create_group</span> <span class="s2">"Images"</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+    <span class="n">g</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="sr">/REGEXP/</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The regexp is matched against the port name, the task name and the type name.
+For instance, to control logging of Rock's default image type:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">logs</span><span class="p">.</span><span class="nf">create_group</span> <span class="s2">"Images"</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+    <span class="n">g</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="sr">/base.samples.frame.Frame/</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Groups are enabled on creation. To disable a group on creation instead, do</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">logs</span><span class="p">.</span><span class="nf">create_group</span> <span class="s2">"Images"</span><span class="p">,</span> <span class="ss">enabled: </span><span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+    <span class="n">g</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="sr">/base.samples.frame.Frame/</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The easiest way to control a group is through the Syskit IDE. In the runtime
+pane, open the Logs tab and enable/disable groups:</p>
+
+<p>TODO: screencast</p>
+
+<h2 id="component-standard-output-and-error">Component Standard Output and Error</h2>
+
+<p>The component's standard output and error streams are streamed to text files. The
+text files are named with $NAME.$PID.txt, where $NAME follows the same rules than
+the data logs (above), and $PID is the process ID of the underlying process.</p>
+
+<h2 id="component-properties">Component Properties</h2>
+
+<p>Syskit creates a single <code>properties.0.log</code> file containing all property values
+from the components. When a process is started, Syskit reads the initial
+property values and save them. Afterwards, it will save any update it applies to
+the properties.</p>
+
+<h2 id="syskit-events">Syskit Events</h2>
+
+<p>In addition to the component data, text output and properties, Syskit has an
+extensive system for its own internal events. The corresponding log is named
+<code>$ROBOTNAME-events.log</code> (e.g. <code>gazebo-events.log</code> for a Syskit instance executed
+with <code>syskit run -r gazebo</code>). This log can be analyzed to determine the task
+structure (composition / tasks) as well as event information.</p>
+
+<h2 id="limitations">Limitations</h2>
+
+<ul>
+  <li>Syskit currently does not log any data from the ruby tasks</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

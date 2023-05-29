@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="coordination coordination_action_state_machines">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Coordination</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="generalities.html">Generalities</a></li><li class='child'><a href="tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="action_methods.html">Action Methods</a></li><li class='child active'><a href="action_state_machines.html">Action State Machines</a></li><li class='child'><a href="component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="action-state-machines">Action State Machines</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#concept" id="markdown-toc-concept">Concept</a></li>
+  <li><a href="#declaration" id="markdown-toc-declaration">Declaration</a></li>
+  <li><a href="#states-and-transitions" id="markdown-toc-states-and-transitions">States and transitions</a></li>
+  <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+  <li><a href="#using-dynamic-data---captures" id="markdown-toc-using-dynamic-data---captures">Using Dynamic Data - Captures</a>    <ul>
+      <li><a href="#the-acquire-functor" id="markdown-toc-the-acquire-functor">The Acquire functor</a></li>
+    </ul>
+  </li>
+  <li><a href="#dynamic-state-machine-creation" id="markdown-toc-dynamic-state-machine-creation">Dynamic State Machine Creation</a></li>
+  <li><a href="#testing" id="markdown-toc-testing">Testing</a>    <ul>
+      <li><a href="#captures" id="markdown-toc-captures">Captures</a></li>
+      <li><a href="#dynamically-created-state-machines" id="markdown-toc-dynamically-created-state-machines">Dynamically Created State Machines</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>We have seen so far a way for tasks to emit <strong>events</strong>. That is, "export"
+synchronization points on top of which one can build. The action state machines
+is a powerful primitive that allows to combine actions temporally, leveraging
+the events to do so.</p>
+
+<h2 id="concept">Concept</h2>
+
+<p>While they are called "state machines", the action state machines are between
+"pure" state machines and what has recently appeared in the ROS community under
+the "behavior tree" name. Which also had the name of HTNs before.</p>
+
+<p>In an action state machine, a "state" is a combination of Syskit actions.
+Actions in this case can either be behaviours defined as Syskit definitions,
+<a href="action_methods.html">action methods</a> or other action state machines. Syskit
+will ensure that the set of actions associated with a state runs when that state
+is active, and only one state may be active at any given time (in a given action
+state machine … multiple state machines can run in parallel).</p>
+
+<p>As an example, let's use a hypothetical docking maneuver. Medium range, the
+maneuver would use an approach that uses a global localization mechanism. When
+getting close, the system has to switch to a more precise system. The general
+behavior will be to</p>
+
+<ul>
+  <li>approach</li>
+  <li>stay in position until the more precise localization system is running and working</li>
+  <li>switch to the final docking maneuver</li>
+</ul>
+
+<p><img src="action_state_machine_high_level_docking.svg" alt="Action state machine example for docking" /></p>
+
+<h2 id="declaration">Declaration</h2>
+
+<p>Action state machines are declared in an <a href="generalities.html">action interface</a> using
+the <code>action_state_machine</code> statement. As for action methods, they must be preceded by
+a "describe" statement that declares what the action does.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyApp</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">Navigation</span> <span class="o">&lt;</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Interface</span>
+            <span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="states-and-transitions">States and transitions</h2>
+
+<p>A machine's state is based on a single action. Assuming that our docking's
+sequence coarse approach is a single profile definition called <code>docking_coarse_approach</code>,
+we would do</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>You must convert an action into a state object using the <code>state</code> statement,
+because the same action can be the basis of two different states (which would
+allow having different in/out transitions)</p>
+
+<p>If we now assume that the station keeping and final approach actions are
+<code>station_keep_def</code> and <code>final_approach_def</code>, we would define our three main
+states with the following snippet. We also tell Syskit which state is the machine's
+start state:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span><span class="p">(</span><span class="n">coarse</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Let's now assume we have defined a <code>reached_position</code> event on the
+<code>docking_coarse_approach_def</code> action. This event can be the basis of the transition
+between <code>coarse</code> and <code>station</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span> <span class="n">coarse</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_position_event</span><span class="p">,</span> <span class="n">station</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="note">The <code>reached_position</code> event should <strong>not</strong> be a terminal event for
+<code>docking_coarse_approach</code>, i.e. it should not be terminating the task. Syskit is
+far from being a realtime engine, so each action should have a "stable" end
+state. In this case, I would design <code>coarse_approach</code> to actually hover at the
+target point. It may make the <code>station</code> state useless unless <code>station_keep</code> does
+it better. We will see how we could do without the station keep action later.</p>
+
+<p>Now, during the <code>station</code> state, we want to run the localization method that
+will be used during the final approach, and make sure it works before we go
+for the final approach (for instance, that it found visual markers). Such combination
+of actions in a state is a staple of the actions state machines:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span>
+    <span class="n">localization</span> <span class="o">=</span> <span class="n">state</span> <span class="n">visual_localization_def</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span> <span class="n">coarse</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_position_event</span><span class="p">,</span> <span class="n">station</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>However, <code>visual_localization_def</code> should be running the localization, but won't
+be providing us with the events we need for our synchronization. It is common to
+build a library of tiny steps for this. In this case, we would create a
+<code>validate_visual_localization</code> action that would run the action and emit success
+once the visual location has a hit. We can then use the success event for our
+purposes</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span>
+    <span class="c1"># States can be made of any action, not only of profile definitions.</span>
+    <span class="c1"># Here `validate_visual_localization` is built on top of the</span>
+    <span class="c1"># visual_localizations_def (see paragraph above)</span>
+    <span class="n">validate</span> <span class="o">=</span> <span class="n">state</span> <span class="n">validate_visual_localization</span>
+    <span class="n">station</span><span class="p">.</span><span class="nf">depends_on</span><span class="p">(</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span> <span class="n">coarse</span>
+    <span class="c1"># Since reached_position_event is an event of a state, you do not need</span>
+    <span class="c1"># to specify the state, i.e. the following is equivalent to</span>
+    <span class="c1"># transition coarse, coarse.reached_position_event, station</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_position_event</span><span class="p">,</span> <span class="n">station</span>
+    <span class="n">transition</span> <span class="n">station</span><span class="p">,</span> <span class="n">validate</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">final</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="note">Because of how Syskit handles transitions, the visual localization network will
+remain unchanged between the station and final states.</p>
+
+<p>Finally, we would build the final_approach_def action to emit <code>success</code> when docked,
+which would become the success criteria for the state machine itself:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span>
+    <span class="n">validate</span> <span class="o">=</span> <span class="n">state</span> <span class="n">validate_visual_localization</span>
+    <span class="n">station</span><span class="p">.</span><span class="nf">depends_on</span><span class="p">(</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span> <span class="n">coarse</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_position_event</span><span class="p">,</span> <span class="n">station</span>
+    <span class="n">transition</span> <span class="n">station</span><span class="p">,</span> <span class="n">station</span><span class="p">.</span><span class="nf">validate_child</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">final</span>
+    <span class="n">final</span><span class="p">.</span><span class="nf">success_event</span><span class="p">.</span><span class="nf">forward_to</span> <span class="n">success_event</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="parameters">Parameters</h2>
+
+<p>The action state machine may take arguments of its own. They are declared the same way
+than with <a href="action_methods.html#definition">action methods</a>, that is using the
+<code>required_arg</code> and <code>optional_arg</code> statements to <code>describe</code>. The arguments are then
+made available with <code>_arg</code> accessors and can thus be used as arguments to the underlying
+actions.</p>
+
+<p>As an example, let's assume we want to parametrize the target point for the <code>coarse</code>
+and <code>station</code> states:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"action that docks"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="ss">:target</span><span class="p">,</span> <span class="s2">"the target point as { x:, y:, z: } object"</span><span class="p">)</span>
+<span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_coarse_approach_def</span><span class="p">(</span><span class="ss">target: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span><span class="p">(</span><span class="ss">point: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">validate</span> <span class="o">=</span> <span class="n">state</span> <span class="n">validate_visual_localization</span>
+    <span class="n">station</span><span class="p">.</span><span class="nf">depends_on</span><span class="p">(</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span><span class="p">(</span><span class="n">coarse</span><span class="p">)</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_position_event</span><span class="p">,</span> <span class="n">station</span>
+    <span class="n">transition</span> <span class="n">station</span><span class="p">,</span> <span class="n">station</span><span class="p">.</span><span class="nf">validate_child</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">final</span>
+    <span class="n">final</span><span class="p">.</span><span class="nf">success_event</span><span class="p">.</span><span class="nf">forward_to</span> <span class="n">success_event</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="using-dynamic-data---captures">Using Dynamic Data - Captures</h2>
+
+<p>It is sometimes useful to get information passed from one action to another. This is
+done through a combination of event and arguments. I.e. the action state machines provide
+you with the means to 'read' data associated with an event and use it to compute another
+state's argument.</p>
+
+<p>Indeed, tasks, when emitting events, may "attach" an object to them (the "event
+context"), e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">success_event</span><span class="p">.</span><span class="nf">emit</span><span class="p">(</span><span class="n">some_data</span><span class="p">)</span>
+</code></pre></div>
+<p>In action state machines, the event's context can be captured and transformed into
+another state's argument with the <code>capture</code> statement:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">c</span> <span class="o">=</span> <span class="n">capture</span><span class="p">(</span><span class="n">my_state</span><span class="p">.</span><span class="nf">success_event</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">event</span><span class="o">|</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">context</span><span class="p">.</span><span class="nf">first</span> <span class="c1"># 'context' is an array</span>
+    <span class="o">...</span> <span class="n">convert</span> <span class="sb">`data`</span> <span class="n">into</span> <span class="n">something</span> <span class="n">usable</span> <span class="n">as</span> <span class="n">an</span> <span class="n">argument</span> <span class="o">...</span>
+<span class="k">end</span>
+<span class="n">state</span> <span class="n">some_action</span><span class="p">(</span><span class="ss">target: </span><span class="n">c</span><span class="p">)</span>
+</code></pre></div>
+<p>As an example, let's assume we want to use a generic line follower to go from
+the current system position to the coarse approach target. We would read the
+current system position first and then transition to the line follower:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"action that docks"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="ss">:target</span><span class="p">,</span> <span class="s2">"the target point as { x:, y:, z: } object"</span><span class="p">)</span>
+<span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">acquire_pose</span> <span class="o">=</span> <span class="n">state</span> <span class="n">acquire_pose_def</span>
+    <span class="c1"># the state must have been passed to `start` or as a state</span>
+    <span class="c1"># in `transition` before it can be used in `capture`</span>
+    <span class="n">start</span><span class="p">(</span><span class="n">acquire_pose</span><span class="p">)</span>
+    <span class="n">from</span> <span class="o">=</span> <span class="n">capture</span><span class="p">(</span><span class="n">acquire_pose</span><span class="p">.</span><span class="nf">success_event</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">pose</span><span class="o">|</span>
+        <span class="nb">p</span> <span class="o">=</span> <span class="n">pose</span><span class="p">.</span><span class="nf">position</span>
+        <span class="p">{</span> <span class="ss">x: </span><span class="nb">p</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="ss">y: </span><span class="nb">p</span><span class="p">.</span><span class="nf">y</span><span class="p">,</span> <span class="ss">z: </span><span class="nb">p</span><span class="p">.</span><span class="nf">z</span> <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">follow_line</span><span class="p">(</span><span class="ss">from: </span><span class="n">from</span><span class="p">,</span> <span class="ss">to: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span><span class="p">(</span><span class="ss">point: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">validate</span> <span class="o">=</span> <span class="n">state</span> <span class="n">validate_visual_localization</span>
+    <span class="n">station</span><span class="p">.</span><span class="nf">depends_on</span><span class="p">(</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">transition</span> <span class="n">acquire_pose</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">coarse</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_target_event</span><span class="p">,</span> <span class="n">station</span>
+    <span class="n">transition</span> <span class="n">station</span><span class="p">,</span> <span class="n">validate</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">final</span>
+    <span class="n">final</span><span class="p">.</span><span class="nf">success_event</span><span class="p">.</span><span class="nf">forward_to</span> <span class="n">success_event</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>If repeated, the "go there using a line from the current position" can be
+factored in a separate action state machine, using the state machine's support
+to get custom events:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span><span class="p">(</span><span class="s2">"go to a target following a line from the current position"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="ss">:to</span><span class="p">,</span> <span class="s2">"the target point as { x:, y:, z: } object"</span><span class="p">)</span>
+<span class="n">action_state_machine</span> <span class="s2">"follow_line_from_here"</span> <span class="k">do</span>
+    <span class="n">acquire_pose</span> <span class="o">=</span> <span class="n">state</span> <span class="n">acquire_pose_def</span>
+    <span class="n">from</span> <span class="o">=</span> <span class="n">capture</span><span class="p">(</span><span class="n">acquire_pose</span><span class="p">.</span><span class="nf">success_event</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">pose</span><span class="o">|</span>
+        <span class="nb">p</span> <span class="o">=</span> <span class="n">pose</span><span class="p">.</span><span class="nf">position</span>
+        <span class="p">{</span> <span class="ss">x: </span><span class="nb">p</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="ss">y: </span><span class="nb">p</span><span class="p">.</span><span class="nf">y</span><span class="p">,</span> <span class="ss">z: </span><span class="nb">p</span><span class="p">.</span><span class="nf">z</span> <span class="p">}</span>
+    <span class="k">end</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">state</span> <span class="n">follow_line</span><span class="p">(</span><span class="ss">from: </span><span class="n">from</span><span class="p">,</span> <span class="ss">to: </span><span class="n">target_arg</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="n">acquire_pose</span>
+    <span class="n">transition</span> <span class="n">acquire_pose</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">line</span>
+
+    <span class="n">event</span> <span class="ss">:reached_target</span>
+    <span class="n">line</span><span class="p">.</span><span class="nf">reached_target_event</span> <span class="n">reached_target_event</span>
+<span class="k">end</span>
+
+<span class="n">describe</span><span class="p">(</span><span class="s2">"action that docks"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">required_arg</span><span class="p">(</span><span class="ss">:target</span><span class="p">,</span> <span class="s2">"the target point as { x:, y:, z: } object"</span><span class="p">)</span>
+<span class="n">action_state_machine</span> <span class="s2">"docking"</span> <span class="k">do</span>
+    <span class="n">coarse</span> <span class="o">=</span> <span class="n">state</span> <span class="n">follow_line_from_here</span><span class="p">(</span><span class="ss">to: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="n">state</span> <span class="n">station_keep_def</span><span class="p">(</span><span class="ss">point: </span><span class="n">target_arg</span><span class="p">)</span>
+    <span class="n">validate</span> <span class="o">=</span> <span class="n">state</span> <span class="n">validate_visual_localization</span>
+    <span class="n">station</span><span class="p">.</span><span class="nf">depends_on</span><span class="p">(</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">state</span> <span class="n">docking_final_approach_def</span>
+
+    <span class="n">start</span> <span class="n">coarse</span>
+    <span class="n">transition</span> <span class="n">coarse</span><span class="p">.</span><span class="nf">reached_target_event</span><span class="p">,</span> <span class="n">station</span>
+    <span class="n">transition</span> <span class="n">station</span><span class="p">,</span> <span class="n">validate</span><span class="p">.</span><span class="nf">success_event</span><span class="p">,</span> <span class="n">final</span>
+    <span class="n">final</span><span class="p">.</span><span class="nf">success_event</span><span class="p">.</span><span class="nf">forward_to</span> <span class="n">success_event</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="the-acquire-functor">The Acquire functor</h3>
+
+<p><code>bundles/common_models</code> defines the <code>Acquire</code> "functor" that creates a composition
+suitable to follow the "acquire data and pass it to success" pattern. Acquire takes
+a component model and will emit <code>success</code> once it received data on all of its ports.</p>
+
+<p>For instance, one use the following definition to read the global pose:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s2">"acquire_global_pose"</span><span class="p">,</span>
+       <span class="no">CommonModels</span><span class="o">::</span><span class="no">Compositions</span><span class="o">.</span><span class="no">Acquire</span><span class="p">(</span><span class="no">Services</span><span class="o">::</span><span class="no">Pose</span><span class="p">)</span>
+       <span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="s2">"data_source"</span> <span class="o">=&gt;</span> <span class="n">global_pose_def</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="dynamic-state-machine-creation">Dynamic State Machine Creation</h2>
+
+<p>State machines can be defined at toplevel, the way we just saw, but may also be
+defined dynamically in an <a href="action_methods.html">action method</a>. When doing so,
+one has to first define a root task and attach the machine to that task. For
+instance,</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">root_task</span> <span class="o">=</span> <span class="no">MyActionMethodRoot</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">action_state_machine</span> <span class="n">root_task</span> <span class="k">do</span>
+<span class="k">end</span>
+<span class="n">root_task</span>
+</code></pre></div>
+<p>The <code>action_state_machine</code> block behaves the same than in "toplevel" state
+machines, but has access to instance methods and action method arguments
+directly.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>State machines defined at toplevel are evaluated at loading time, and the presence
+of actions and events is validated at loading time as well.</p>
+
+<p>Therefore, there are only mainly two points that are needed to test in relation
+with action state machines:</p>
+
+<ul>
+  <li>captures</li>
+  <li>dynamically generated state machines</li>
+</ul>
+
+<h3 id="captures">Captures</h3>
+
+<p>In the action interface's test suite, create the state machine's task instance
+and then use <code>run_state_machine_capture</code> to execute the capture:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task</span> <span class="o">=</span> <span class="n">run_planners</span> <span class="n">my_action</span><span class="p">(</span><span class="ss">x: </span><span class="mi">5</span><span class="p">,</span> <span class="ss">y: </span><span class="mi">10</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_state_machine_capture</span> <span class="n">task</span><span class="p">,</span> <span class="s2">"capture_name"</span><span class="p">,</span> <span class="ss">context: </span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+</code></pre></div>
+<p>In the rare occasion that the capture would need some more information from the
+event, pass a full <code>Roby::Event</code> as the <code>event</code> argument instead of <code>context</code></p>
+
+<h3 id="dynamically-created-state-machines">Dynamically Created State Machines</h3>
+
+<p>To test that a state machine was properly generated, create the toplevel task and
+then use the <code>validate_state_machine</code> helper to get into a context that allows
+you to "play" with the machine's state tasks:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">it</span> <span class="s2">"transitions to 'coarse' once the pose is acquired"</span> <span class="k">do</span>
+    <span class="n">interface</span> <span class="o">=</span> <span class="no">MyInterface</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">root_task</span> <span class="o">=</span> <span class="n">interface</span><span class="p">.</span><span class="nf">some_action</span>
+    <span class="n">validate_state_machine</span> <span class="n">root_task</span> <span class="k">do</span>
+        <span class="c1"># The start sate is available as `current_state_task`. It is ready to</span>
+        <span class="c1"># start, but is unstarted. If you need to read/write ports, you will</span>
+        <span class="c1"># have to call syskit_configure_and_start(current_state_task)</span>
+        <span class="n">next_task</span> <span class="o">=</span> <span class="n">assert_transitions_to_state</span><span class="p">(</span><span class="ss">:state_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">current_task</span><span class="o">|</span>
+            <span class="c1"># Act on 'current_task' using the normal test primitives, e.g.</span>
+            <span class="c1"># syskit_configure_and_start, expect_execution, ...</span>
+        <span class="k">end</span>
+        
+        <span class="c1"># next_task here is the new state's toplevel task. It is ready to start,</span>
+        <span class="c1"># but is unstarted. Call syskit_configure_and_start for a Syskit task,</span>
+        <span class="c1"># or execute { next_task.start! } for a plain Roby task.</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p class="warning">Do not get into the trap of testing the states themselves, the "test space" will
+get very big very quickly. The point of these tests is to check the state
+machine's own structure. Test each state's implementation in separate unit tests.</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

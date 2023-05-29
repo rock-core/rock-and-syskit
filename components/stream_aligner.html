@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="components components_stream_aligner">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Components</a></span><ul><li class='child'><a href="./">Writing Components</a></li><li class='child'><a href="orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="defining_types.html">Defining Types</a></li><li class='child'><a href="importing_types.html">Importing Types</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child active'><a href="stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li><li class='child'><a href="testing.html">Testing</a></li><li class='child'><a href="types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="../component_networks/dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="../component_networks/geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="the-stream-aligner">The Stream Aligner</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#stream-aligner-principles" id="markdown-toc-stream-aligner-principles">Stream Aligner Principles</a></li>
+  <li><a href="#period-latency-and-stream-aligner-timeout" id="markdown-toc-period-latency-and-stream-aligner-timeout">Period, latency and stream aligner timeout</a></li>
+  <li><a href="#using-the-stream-aligner-in-orogen-components" id="markdown-toc-using-the-stream-aligner-in-orogen-components">Using the stream aligner in oroGen components</a>    <ul>
+      <li><a href="#declaration" id="markdown-toc-declaration">Declaration</a></li>
+      <li><a href="#cpp" id="markdown-toc-cpp">Usage in C++</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>The dataflow in component-based systems, like what happens in Rock, is done
+asynchronously: components process data as it arrives. Since different
+processing chains have different computation times, it means that our <a href="timestamping.html">carefully
+timestamped data</a> will most probably arrive out-of-order at
+the components that need it.</p>
+
+<p>Let’s see, as an example, the following processing chain:</p>
+
+<p><img src="media/stream_aligner_chain.png" alt="Processing chain example exhibiting latency" /></p>
+
+<p>In this chain, sensors are fused through two paths. One path processes lidar
+data to remove outliers and body parts (laser filter). In another path, a stereo
+camera rig is used to generate a separate point clouds. The two informations are
+then merged to form a pointcloud that is represented in a frame that is centered
+on the body, but aligned to the world (i.e. a tabletop would look horizontal
+even if the robot’s body is on an incline). To achieve this, a motion tracker
+gives the pose of the body in the reference frame.</p>
+
+<p>To add a bit more interesting effects, the lidar and cameras are mounted on a
+tilt unit with a single servo motor. The position of these sensors w.r.t. the
+body is therefore changing during operation.</p>
+
+<p>If the robot moves during acquisition, it is obviously critical that the “right”
+association is made between the different channels. However, the different data
+processing paths have widely different processing times. Indeed, a realistic
+sample arrival diagram would look like:</p>
+
+<p><img src="media/stream_aligner_timeline.png" alt="Timeline of arriving samples in real and logical times" /></p>
+
+<p>In this diagram, both times, the pointcloud processing must make sure that it is
+processing data that is properly associated in time. Moreover, this diagram does
+not take into account that sensors have different acquisition latencies. It
+would not be uncommon, in such a processing pipeline, that the first lidar
+sample arrives after the second motion tracker (or servo) sample.</p>
+
+<p>In Rock, there is one piece of software that handles these problems in a common
+way: the stream aligner. As we will see later, this method has its drawbacks,
+and might not be right for your problem. However, it has shown to be a good
+solution in most cases.</p>
+
+<h2 id="stream-aligner-principles">Stream Aligner Principles</h2>
+
+<p>Rock’s stream aligner (in the drivers/aggregator package) ensures that data is
+processed in order by</p>
+
+<ol>
+  <li>queueing timestamped data, and</li>
+  <li>calling registered callbacks in the order of the timestamps.</li>
+</ol>
+
+<p>The general principle is therefore that:</p>
+
+<ul>
+  <li>one callback is registered for each data stream</li>
+  <li>data is pushed as it arrives in the corresponding streams. The leading
+assumption is that, on each stream, the timestamps are monotonous (they don’t go
+back in time).</li>
+  <li>the respective callbacks get called when it is time to process the relevant
+samples. This is done only when the stream aligner determined that no sample
+from other streams can arrive with an earlier timestamp then the one that is
+being passed to a callback.</li>
+</ul>
+
+<p>We’ll now see how the decision is being made.</p>
+
+<h2 id="period-latency-and-stream-aligner-timeout">Period, latency and stream aligner timeout</h2>
+
+<p>Let’s look at the example of the laser filter again:</p>
+
+<p><img src="media/stream_aligner_period_latency_timeout_1.png" alt="Stream aligner eager processing" /></p>
+
+<p>On this diagram, the laser filter starts processing as soon as the
+lidar sample arrives. The stream aligner would do this only if it knows, when the
+first lidar sample arrives, that no motion tracker sample will arrive later with a
+timestamp before the lidar sample.</p>
+
+<p>With no additional information allowing it to determine this, however, the
+stream aligner would have to wait that another sample arrives on the motion
+tracker before processing the first laser sample:</p>
+
+<p><img src="media/stream_aligner_period_latency_timeout_2.png" alt="Stream aligner zero lookahead" /></p>
+
+<p>Which builds up latency …</p>
+
+<p>To avoid this, the stream aligner allows to set a period parameter on each
+stream. This period parameter (which is also called lookahead in event-based
+systems) is the time after a sample in which there is a guarantee that no other
+sample arrives. It is called period in the stream aligner as it is the value of
+the input periods, for periodic inputs such as common robotic sensors. When
+visualizing the period, the above example looks therefore like:</p>
+
+<p><img src="media/stream_aligner_period_latency_timeout.png" alt="Stream aligner with periods" /></p>
+
+<p class="alert alert-danger">Because processing based on the stream aligner is based on the fact that samples
+are passed in-order, the stream aligner must drop samples that arrive “in the
+past”, i.e. that arrive with an earlier timestamp that the last sample “played”
+by the stream aligner. So, it is better to give a period that is lower than the
+actual sensor period so that the aligner does not drop samples unnecessarily.</p>
+
+<p>In order to not wait forever for samples that will never arrive (lost samples),
+the stream aligner also allows to set a timeout parameter, which is the highest
+latency that the aligner would allow to build up. When the latency induced by
+the stream aligner is higher than this value, the aligner starts playing queued
+samples regardless of the fact that, in principle, some samples should arrive on
+the other streams. If these samples do arrive anyway, they will therefore get
+dropped. This parameter is therefore a trade-off between the maximum latency
+that the processing chain can accept and how exact the result needs to be.</p>
+
+<h2 id="using-the-stream-aligner-in-orogen-components">Using the stream aligner in oroGen components</h2>
+
+<p>While the stream aligner is a C++ library, its most interesting use-case in
+Rock is within oroGen components. A plugin extends orogen to ease its use.</p>
+
+<p>This section will detail this usage, both at the orogen level and at the C++ level</p>
+
+<h3 id="declaration">Declaration</h3>
+
+<p>Each stream meant to be aligned is simply added in a <code>stream_aligner</code> block
+within the task context using the <code>align_port</code> statement. The statement takes
+the name of the input port to align, and a default period. Note that the safest
+period is always zero.</p>
+
+<p>The laser filtering example above would be declared with:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">task_context</span> <span class="s2">"Task"</span> <span class="k">do</span>
+  <span class="n">input_port</span> <span class="s2">"lidar_samples"</span><span class="p">,</span> <span class="s2">"/base/samples/LaserScan"</span>
+  <span class="n">input_port</span> <span class="s2">"transformation"</span><span class="p">,</span> <span class="s2">"/base/samples/RigidBodyState"</span>
+  <span class="n">output_port</span> <span class="s2">"filtered_samples"</span><span class="p">,</span> <span class="s2">"/base/samples/LaserScan"</span>
+
+  <span class="n">stream_aligner</span> <span class="k">do</span>
+    <span class="n">max_latency</span> <span class="mf">0.5</span>
+    <span class="n">align_port</span> <span class="s2">"lidar_samples"</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">align_port</span> <span class="s2">"transformation"</span><span class="p">,</span> <span class="mi">0</span>
+  <span class="k">end</span>
+
+  <span class="n">port_driven</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The usage of this plugin requires the <code>drivers/orogen/aggregator</code> package. The
+package's <code>manifest.xml</code> must therefore contain:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;depend package="drivers/orogen/aggregator" /&gt;
+</code></pre></div>
+<p>The following statements are available in the <code>stream_aligner</code> block:</p>
+
+<ul>
+  <li><code>max_latency(timeout_in_seconds)</code>: The max_latency statement sets the timeout
+of the stream aligner. It can be overriden through a generated
+<code>aggregator_max_latency</code> property on the task.</li>
+  <li><code>align_port(name, period)</code>: Registers a stream on the task’s stream aligner,
+and pushes all the data that arrives on the specified port to this stream. The
+provided period is the default period for the stream. It can be overriden at
+runtime by setting a generated property called <code>${port_name}_period</code> (e.g.
+<code>lidar_samples_period</code> for the <code>lidar_samples</code> stream)</li>
+</ul>
+
+<h3 id="cpp">Usage in C++</h3>
+
+<p>For each stream declared with <code>align_port</code>, a C++ callback method, of the form
+<code>void stream_nameCallback(timestamp, sample)</code> is generated. For instance, for
+the <code>lidar_samples</code> port above:</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="nf">lidar_samplesCallback</span><span class="p">(</span><span class="n">base</span><span class="o">::</span><span class="n">Time</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">::</span><span class="n">samples</span><span class="o">::</span><span class="n">LaserScan</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">sample</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// timestamp is the current time of the stream aligner. It is in most cases</span>
+    <span class="c1">// the sample's time, but might not be if a timeout was reached.</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Because these callbacks are in the "user" part of the code, oroGen cannot update
+them automatically. If you add or remove streams after the first code
+generation, you must update the files in <code>tasks/</code> yourself, using if needed the
+templates generated in <code>templates/tasks/</code></p>
+
+<p class="alert alert-danger">Ports that are processed by the stream aligner <strong>MUST NOT</strong> be read "manually"
+by accessing the port. Use the callbacks to access new samples</p>
+
+<div class="alert alert-danger">
+  <p>When using the stream aligner, it is critical that the call to the parent's class
+<code>updateHook</code> is done first within <code>updateHook</code>. This is indeed where the stream aligner
+processing happens</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">Task</span><span class="o">::</span><span class="n">updateHook</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">TaskBase</span><span class="o">::</span><span class="n">updateHook</span><span class="p">();</span> <span class="c1">// call this first</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>

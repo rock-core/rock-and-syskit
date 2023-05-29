@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="component_networks component_networks_devices_and_busses">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/global_configuration.html">Global Configuration</a></li><li class='child'><a href="../workspace/testing.html">Test Integration</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/geometric_transformations.html">Geometric Transformations in C++ Libraries</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Writing Components</a></li><li class='child'><a href="../components/orogen_packages.html">oroGen Packages</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/stream_aligner.html">Stream Aligner</a></li><li class='child'><a href="../components/geometric_transformations.html">Geometric Transformations</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/testing.html">Testing</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Designing Component Networks</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="profiles.html">Profiles</a></li><li class='child'><a href="reusable_networks.html">Reusable Networks</a></li><li class='child active'><a href="devices_and_busses.html">Robot definition&colon; Devices and Busses</a></li><li class='child'><a href="dynamic_services.html">Dynamic Services</a></li><li class='child'><a href="geometric_transformations.html">Geometric Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../coordination/">Coordination</a></span><ul><li class='child'><a href="../coordination/">Introduction</a></li><li class='child'><a href="../coordination/generalities.html">Generalities</a></li><li class='child'><a href="../coordination/tasks_and_events.html">Tasks and Events</a></li><li class='child'><a href="../coordination/action_methods.html">Action Methods</a></li><li class='child'><a href="../coordination/action_state_machines.html">Action State Machines</a></li><li class='child'><a href="../coordination/component_networks.html">Component Networks</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../simulation/">Simulation with Gazebo</a></span><ul><li class='child'><a href="../simulation/">Introduction</a></li><li class='child'><a href="../simulation/models_links_and_joints.html">Models, Links, Joints and Sensors</a></li><li class='child'><a href="../simulation/plugins.html">Plugins</a></li><li class='child'><a href="../simulation/transformer.html">Transformer</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../syskit_error_handling/">Error Handling</a></span><ul><li class='child'><a href="../syskit_error_handling/">Introduction</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../log_management/">Log Management</a></span><ul><li class='child'><a href="../log_management/">Introduction</a></li><li class='child'><a href="../log_management/runtime.html">Log Generation at Runtime</a></li><li class='child'><a href="../log_management/datastore.html">Storing Logs</a></li><li class='child'><a href="../log_management/jupyter.html">Log Analysis with Jupyter</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/component.html">Component Tests</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../cookbook/">Cookbook</a></span><ul><li class='child'><a href="../cookbook/">Introduction</a></li><li class='child'><a href="../cookbook/device_drivers.html">Device Drivers with iodrivers_base</a></li><li class='child'><a href="../cookbook/http_api.html">Control and Monitoring through a HTTP API</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../deprecations/">Deprecated Behaviors</a></span><ul><li class='child'><a href="../deprecations/">Introduction</a></li><li class='child'><a href="../deprecations/backward_compatible_naming.html">Backward compatible naming</a></li><li class='child'><a href="../deprecations/update_properties.html">Introduction of the `update_properties` method</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="devices-and-communication-busses">Devices and Communication Busses</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#devices" id="markdown-toc-devices">Devices</a>    <ul>
+      <li><a href="#device-models" id="markdown-toc-device-models">Device Models</a></li>
+      <li><a href="#device-declarations" id="markdown-toc-device-declarations">Device Declarations</a></li>
+      <li><a href="#device-drivers" id="markdown-toc-device-drivers">Device Drivers</a></li>
+      <li><a href="#defining-multiple-devices-of-the-same-type" id="markdown-toc-defining-multiple-devices-of-the-same-type">Defining multiple devices of the same type</a></li>
+    </ul>
+  </li>
+  <li><a href="#communication-busses" id="markdown-toc-communication-busses">Communication Busses</a>    <ul>
+      <li><a href="#using-an-existing-communication-bus" id="markdown-toc-using-an-existing-communication-bus">Using an Existing Communication Bus</a></li>
+      <li><a href="#defining-new-busses" id="markdown-toc-defining-new-busses">Defining New Busses</a></li>
+      <li><a href="#bus-and-device-orogen-drivers" id="markdown-toc-bus-and-device-orogen-drivers">Bus and Device oroGen Drivers</a></li>
+      <li><a href="#integrating-a-combus-driver-that-does-not-demultiplex" id="markdown-toc-integrating-a-combus-driver-that-does-not-demultiplex">Integrating a Combus Driver that does not Demultiplex</a></li>
+      <li><a href="#integrating-a-combus-driver-that-demultiplexes" id="markdown-toc-integrating-a-combus-driver-that-demultiplexes">Integrating a Combus Driver that Demultiplexes</a></li>
+      <li><a href="#shared-input-port-on-the-combus-driver" id="markdown-toc-shared-input-port-on-the-combus-driver">Shared Input Port on the Combus Driver</a></li>
+      <li><a href="#declaring-one-way-communications" id="markdown-toc-declaring-one-way-communications">Declaring One Way Communications</a></li>
+    </ul>
+  </li>
+  <li><a href="#advanced-topics" id="markdown-toc-advanced-topics">Advanced Topics</a>    <ul>
+      <li><a href="#disambiguating-bus-ports-on-device-drivers" id="markdown-toc-disambiguating-bus-ports-on-device-drivers">Disambiguating Bus Ports on Device Drivers</a></li>
+      <li><a href="#extend_attached_device_configuration" id="markdown-toc-extend_attached_device_configuration">Per-device configuration in the robot declaration</a></li>
+      <li><a href="#association-between-driver-and-device" id="markdown-toc-association-between-driver-and-device">Association Between Driver and Device</a></li>
+      <li><a href="#defining-informations-at-the-device-model-level" id="markdown-toc-defining-informations-at-the-device-model-level">Defining informations at the device model level</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>We have briefly seen <em>devices</em> during <a href="../basics/devices.html">the Basics tutorial</a>.
+This section will expand on the notion of device, and explore a related subject,
+the notion of communication bus.</p>
+
+<p>Briefly, the role of a device and a device model in a Syskit model is to
+represent the system's hardware interfaces. From the perspective of the
+component network, it is to represent which components are truly <em>unique</em>,
+that is aren't "simply" processors of data.</p>
+
+<p>The role of device model's is also to allow to describe a robot's hardware in
+terms of <em>what</em> is on it (the devices), not <em>how</em> the software can talk to the
+devices (the device drivers). Device models are indeed named after the type of
+device, not the driver implementation/component, and will provide the
+<a href="reusable_networks.html#data_services">data services</a> that
+<em>this particular device</em> provides. The link between device and
+its driver is declared in the driver model.</p>
+
+<p>This section will <em>not</em> explain how to write an actual device driver, only how
+one is to be integrated in the system. For the actual implementation, Rock
+provides <code>iodrivers_base</code>, a flexible C++ library and associated component.
+See <a href="../cookbook/device_drivers.html">the associated cookbook page</a>.</p>
+
+<h2 id="devices">Devices</h2>
+
+<p>Three different entities are used to handle a device in Syskit:</p>
+
+<ol>
+  <li>the device model. This is what describes a class of device(s). A device
+type if you will</li>
+  <li>the device instance. This is a particular instance of a given device class,
+present on a robot.</li>
+  <li>the device driver. This is the actual component that will allow the Rock
+system to interface with devices of a certain class (or class_es_)</li>
+</ol>
+
+<p>We will now detail how to create all three. The next section will deal with
+communication busses, that is communication mediums that provide means of
+communication between devices and the control computer(s).</p>
+
+<h3 id="device-models">Device Models</h3>
+
+<p>Device models are generated with <code>syskit gen dev type/manufacturer/model</code>.
+The <code>type/manufacturer/model</code> triplet should rather closely follow Rock's convention
+for the naming of device drivers:</p>
+
+<ul>
+  <li><code>type</code> represents <em>what</em> the device does</li>
+  <li><code>manufacturer</code> is the device manufacturer</li>
+  <li><code>model</code> is the device model. This is the least well-defined part of the whole naming
+scheme, as one would want to avoid listing every single device type in
+existence, using instead groups of devices that have the same capabilities but
+different performance. A set of different LIDARS from the same manufacturer that
+use the same protocol(s) could be defined this way in a group.</li>
+</ul>
+
+<p><strong>Naming Convention</strong> device models are by convention defined in the
+<code>AppName::Devices</code> module, and are saved in
+<code>models/devices/name_of_service.rb</code>. For instance, the <code>GPS::Ublox::F9</code>
+device models would be saved in <code>models/devices/gps/ublox/f9.rb</code> and its full
+name would be <code>AwesomeRobot::Devices::GPS::Ublox::F9</code> (assuming that the
+bundle is <code>awesome_robot</code>).</p>
+
+<p><strong>Generation</strong> A template for a device, following Syskit's naming
+conventions and file system structure, can be generated with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen dev type/manufacturer/model
+</code></pre></div>
+<p>For instance, Ublox's F9 model would be defined with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen dev gps/ublox/f9
+</code></pre></div>
+<p>Device models can have <code>provides</code> relationships, <a href="reusable_networks.html#data_service_relationships">just like data
+services</a>. A device model
+can provide data services and/or other device models (I don't have an example
+of the latter in the wild, though)</p>
+
+<h3 id="device-declarations">Device Declarations</h3>
+
+<p>We have just learned how to create a device <em>model</em>. We now need to create
+a device <em>instance</em> that will be controlled by a device <em>driver</em>.</p>
+
+<p>The robot's actual devices are declared within the robot definition block,
+within a profile (each profile may have a different robot block). It is
+customary to declare a given system's robot in that system's <code>Base</code> profile.
+For instance, the <a href="../basics/devices.html">basic tutorial's <code>gazebo</code> robot</a> was
+declared in <code>SyskitBasics::Profiles::Gazebo::Base</code>.</p>
+
+<p>The robot definition block looks like</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'devices/gps/ublox/f9'</span>
+
+<span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
+  <span class="n">robot</span> <span class="k">do</span>
+    <span class="n">device</span> <span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">UBlox</span><span class="o">::</span><span class="no">F9</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'gps'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Declaring a device creates a corresponding <code>_dev</code> action on the profile that
+can be used in place of the device model for
+<a href="reusable_networks.html#injection">injection</a> or at runtime to start the
+device driver.</p>
+
+<p>That's it …</p>
+
+<h3 id="device-drivers">Device Drivers</h3>
+
+<p>Devices are obvisouly abstract, the way data services are. One needs to
+associate them with a device <em>driver</em> to be able to actually <em>use</em> the device
+at runtime. <strong>One or more device driver must be available at the point of
+definition of the device</strong> - for instance by loading them first with <code>using_task_library</code>.</p>
+
+<p>A device driver is a component which has a <code>driver_for</code> declaration in its <a href="../components/runtime.html">extension file</a>. For instance, assuming a
+<code>gps_ublox::F9Task</code> driver, able to handle our F9 model, we would generate
+the extension file with:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen orogen gps_ublox
+</code></pre></div>
+<p>then edit <code>models/orogen/gps_ublox.rb</code> to modify the model extension block for <code>F9Task</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'models/devices/gps/ublox/f9'</span>
+
+<span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">gps_ublox</span><span class="o">.</span><span class="no">F9Task</span> <span class="k">do</span>
+    <span class="n">driver_for</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">Ublox</span><span class="o">::</span><span class="no">F9</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'f9'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>After this, adding <code>using_task_library 'gps_ublox'</code> at the top of
+<code>models/profiles/live/base.rb</code> would make Syskit associate the device with
+this given driver. Remember that there <strong>must</strong> be at least one device driver
+available at the point of definition of the device.</p>
+
+<p>In some cases, one will have more than one driver component compatible with a
+given device loaded in a Syskit app. When this happens, you have to explicitely
+tell Syskit which component should be used. This is done with the <code>using</code> option.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">using_task_library</span> <span class="s1">'gps_ublox'</span>
+
+<span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
+  <span class="n">robot</span> <span class="k">do</span>
+    <span class="n">device</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">UBlox</span><span class="o">::</span><span class="no">F9</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'gps'</span><span class="p">,</span> <span class="ss">using: </span><span class="no">OroGen</span><span class="p">.</span><span class="nf">gps_ublox</span><span class="o">.</span><span class="no">F9Task</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Note that the driver component must of course <a href="../components/runtime.html">be deployed in the app's robot
+config</a></p>
+
+<p>Before attempting to run your newly defined devices, run the profile's test file
+to check that they have been properly deployed. The test file is in <code>test/profiles</code>,
+matching the profile's name. For instance <code>models/profiles/live/base.rb</code>'s test
+file is in <code>test/profiles/live/test_base.rb</code>.</p>
+
+<h3 id="defining-multiple-devices-of-the-same-type">Defining multiple devices of the same type</h3>
+
+<p>The definition of multiple devices of the same type is directly related to
+the <a href="reusable_networks.html#deployments">deployment</a> of profile definitions. One must
+indeed</p>
+
+<ol>
+  <li>define multiple deployments with appropriate names (usually one picks the same
+name for the deployment than for the device itself)</li>
+  <li>use the <code>prefer_deployed_tasks</code> mechanism to assign a deployment to a device.</li>
+  <li>choose different configurations for the different device instances</li>
+</ol>
+
+<p>For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">device</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Camera</span><span class="o">::</span><span class="no">GigE</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'forward_camera'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">prefer_deployed_tasks</span><span class="p">(</span><span class="sr">/forward/</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'forward'</span><span class="p">)</span>
+<span class="n">device</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Camera</span><span class="o">::</span><span class="no">GigE</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'aft_camera'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">prefer_deployed_tasks</span><span class="p">(</span><span class="sr">/aft/</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'aft'</span><span class="p">)</span>
+</code></pre></div>
+<p>Update the relevant device driver's <a href="../components/runtime.html#config_files">configuration
+file</a> with the separate named sections:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>--- name:default
+&lt;common parameters&gt;
+--- name:forward
+ip: 10.40.50.50
+--- name:aft 
+ip: 10.40.50.51
+</code></pre></div>
+<p>Running the profile's test file, as described just above this section, is
+even more critical in this use-case as it is easy to forget a deployment
+or fail to properly remove the ambiguities between the deployments and the
+devices.</p>
+
+<h2 id="communication-busses">Communication Busses</h2>
+
+<p>In some (relatively) common cases, devices are attached to <em>communication
+busses</em> (combus). From Syskit's perspective, a communication bus is</p>
+
+<ul>
+  <li>a <em>shared</em> means of communication: multiple devices use the same communication
+bus</li>
+  <li>a <em>shared</em> component that multiplexes and demultiplexes each device drivers'
+I/O to and from the actual device</li>
+</ul>
+
+<p>Syskit's communication bus support is useful when the handling of the bus
+itself is done through Rock components. If the multiplexing and demultiplexing
+on the bus is done transparently by the operating system, this support is not needed.</p>
+
+<p>CAN is a good example of a shared communication link that can use Syskit's
+combus support. Ethernet would be a good example of a shared communication
+link that does <strong>not</strong> require to use Syskit's communication bus support.</p>
+
+<p>Syskit's communication bus support provides the protocols needed to
+auto-configure the bus-handling component to properly connect the devices
+that are attached to the bus. It really is a <em>protocol</em>, that is a set of
+conventions that bus and device drivers need to follow.</p>
+
+<p>The remainer of this section will explain these conventions, and help you understand
+how you can use existing bus support and/or integrate a new bus.</p>
+
+<h3 id="using-an-existing-communication-bus">Using an Existing Communication Bus</h3>
+
+<p>We will use Rock's CAN support as example here, as it is a relatively common
+bus type on robots.</p>
+
+<p>To use Syskit's combus support, one has to (1) declare the bus and (2) declare
+the devices that are attached to it. This is done with the <code>com_bus</code> and
+and <code>through</code> statements within the same <code>robot</code> block that defines the system's
+devices:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">using_task_library</span> <span class="s1">'canbus'</span> <span class="c1"># canbus driver</span>
+<span class="n">using_task_library</span> <span class="s1">'can_temperature_sensor'</span> <span class="c1"># does not exist, just an example</span>
+
+<span class="k">module</span> <span class="nn">MyApp</span>
+  <span class="k">module</span> <span class="nn">Profiles</span>
+    <span class="k">module</span> <span class="nn">Base</span>
+      <span class="n">robot</span> <span class="k">do</span>
+        <span class="n">com_bus</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'can0'</span>
+        <span class="n">through</span> <span class="s1">'can0'</span> <span class="k">do</span>
+          <span class="n">device</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">can_temperature_sensor</span><span class="o">.</span><span class="no">Task</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'temperature_sensor'</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">can_id</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">,</span> <span class="mh">0xffff</span><span class="p">)</span> <span class="c1"># CAN ID filter</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>If the <code>can_temperature_sensor::Task</code> has been integrated with Syskit's combus
+handling in mind, this is all that is needed.</p>
+
+<p>The combus device is first and foremost a <em>device</em>. So, as we just saw, it needs
+to have a device driver component available at the point of declaration,
+and an instance of that component needs to be deployed. The attached device(s)
+as well.</p>
+
+<p>In the case of the CAN bus, in the generated network, this bus-device pair will
+be:
+- configured to create a single output port named
+  <code>temperature_sensor</code> on which CAN messages which match the <code>can_id</code> filter
+  <code>(id &amp; 0xffff == 0x1234)</code> are routed.
+- connected that output port to the device's input port for CAN messages
+- connected the device's output for CAN messages to the bus component's <code>can_in</code>
+  port. This port is shared for all attached devices.
+- ensures that the CAN component is started before the attached devices are
+  <strong>configured</strong></p>
+
+<h3 id="defining-new-busses">Defining New Busses</h3>
+
+<p>As we just mentioned, a communication bus is also seen by Syskit as a device.
+Just as for the device, one has to declare a com bus model to use it in the
+robot definition. They usually simply named by their common name (e.g. CAN)
+and lie in the <code>Devices::Bus</code> namespace.</p>
+
+<p><strong>Naming Convention</strong> combus models are by convention defined in the
+<code>AppName::Devices::Bus</code> module, and are saved in
+<code>models/devices/bus/name_of_bus.rb</code>. For instance, the <code>CAN</code>
+combus model would be saved in <code>models/devices/bus/can.rb</code> and its full
+name would be <code>AwesomeRobot::Devices::Bus::CAN</code> (assuming that the
+bundle is <code>awesome_robot</code>).</p>
+
+<p><strong>Generation</strong> A template for a device, following Syskit's naming
+conventions and file system structure, can be generated with</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen bus bus/name
+</code></pre></div>
+<p>In addition to the template generation, one has to declare which datatype is
+used by the bus to communicate with the devices. Syskit's combus support
+currently assumes the same datatype is used in both directions (e.g.
+<code>/canbus/Message</code> for CAN). This datatype is passed as second argument
+to the <code>com_bus_type</code> declaration, as generated in the template:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">import_types_from</span> <span class="s1">'canbus'</span>
+<span class="n">com_bus_type</span> <span class="s1">'CAN'</span><span class="p">,</span> <span class="ss">message_type: </span><span class="no">Types</span><span class="p">.</span><span class="nf">canbus</span><span class="o">.</span><span class="no">Message</span> <span class="k">do</span>
+  <span class="c1"># any declaration valid for data services, for instance 'provides' other</span>
+  <span class="c1"># services</span>
+<span class="k">end</span>
+</code></pre></div>
+<h3 id="bus-and-device-orogen-drivers">Bus and Device oroGen Drivers</h3>
+
+<p>To run over a communication bus, the device driver only needs to provide an
+input and/or an output port of the bus' data type. Syskit's support won't
+require anything more (but specific combus drivers might, see below).</p>
+
+<p>The communication bus implementation may be a little more complex, depending
+on the level of functionality required by the integration:</p>
+
+<ul>
+  <li>
+    <p>one option is to keep the combus driver simple, with one input and one
+output, and let the device drivers filter the combus data. This is simpler
+to implement, and will have little performance impact if relatively few
+messages are exchanged on the bus. The downside to this method is that the
+components will have to do the filtering, which also means that it won't be
+simple to look at a particular device's I/O stream in the IDE or in the log
+files. Making things harder for monitoring as well.</p>
+  </li>
+  <li>
+    <p>the other option is to demultiplex the data stream on the combus component side.
+This is more complicated to implement as the combus component needs to
+dynamically create ports (but must be implemented once). It is easier to monitor
+at runtime and will be more efficient if there is a lot of traffic on the bus.</p>
+  </li>
+</ul>
+
+<h3 id="integrating-a-combus-driver-that-does-not-demultiplex">Integrating a Combus Driver that does not Demultiplex</h3>
+
+<p>As we just said, in this case the combus driver itself is fairly simple. The
+only combus-specific code that will need to be added is to configure the device
+driver (since the filtering will have to be done on the device driver).</p>
+
+<p>On the combus driver side, we need to have an input and an output port of the combus's
+data type, and its Syskit <a href="../components/runtime.html#extension_file">orogen extension file</a>
+must add a <code>provides</code> on the com bus <code>BusSrv</code> service. Assuming a <code>canbus.Task</code> driver
+for our CAN bus:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">canbus</span><span class="o">.</span><span class="no">Task</span> <span class="k">do</span>
+  <span class="n">provides</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="o">::</span><span class="no">BusSrv</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'canbus'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>On the device driver side, the
+<a href="../components/runtime.html#extension_file">component's Syskit's <code>configure</code> method</a>
+would pass the bus information (the <code>can_id</code> attribute in the case of CAN) to
+the component's own configuration, for instance, assuming it has two <code>can_id</code>
+and <code>can_mask</code> properties defined by</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">property</span> <span class="s1">'can_id'</span><span class="p">,</span> <span class="s1">'int'</span>
+<span class="n">property</span> <span class="s1">'can_mask'</span><span class="p">,</span> <span class="s1">'int'</span>
+</code></pre></div>
+<p>one would pass the information with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">driver_for</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Roboteq</span><span class="o">::</span><span class="no">CANOpen</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'roboteq'</span>
+
+<span class="k">def</span> <span class="nf">configure</span>
+  <span class="k">super</span>
+  <span class="c1"># 'roboteq' in roboteq_dev matches the 'roboteq' name in `driver_for`</span>
+  <span class="nb">id</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">roboteq_dev</span><span class="p">.</span><span class="nf">can_id</span>
+  <span class="n">properties</span><span class="p">.</span><span class="nf">can_id</span> <span class="o">=</span> <span class="nb">id</span>
+  <span class="n">properties</span><span class="p">.</span><span class="nf">can_mask</span> <span class="o">=</span> <span class="n">mask</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This configure method is tested with:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Create a bus, as if defined in a robot model</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="n">syskit_stub_com_bus</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="p">)</span>
+<span class="c1"># Create a device attached to that bus</span>
+<span class="n">dev</span> <span class="o">=</span> <span class="n">syskit_stub_attached_device</span><span class="p">(</span><span class="n">bus</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">can_id</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">dev_task</span> <span class="o">=</span> <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+
+<span class="c1"># Verify values on dev_task.properties</span>
+<span class="n">assert_equal</span> <span class="mi">10</span><span class="p">,</span> <span class="n">dev_task</span><span class="p">.</span><span class="nf">properties</span><span class="p">.</span><span class="nf">can_id</span>
+<span class="n">assert_equal</span> <span class="mi">20</span><span class="p">,</span> <span class="n">dev_task</span><span class="p">.</span><span class="nf">properties</span><span class="p">.</span><span class="nf">can_mask</span>
+</code></pre></div>
+<p>For additional information about how this <code>can_id</code> attribute is defined,
+see <a href="#extend_attached_device_configuration">Configuration in the robot declaration</a>
+below.</p>
+
+<h3 id="integrating-a-combus-driver-that-demultiplexes">Integrating a Combus Driver that Demultiplexes</h3>
+
+<p>By <em>demultiplexing</em> here, we mean tha the combus driver separates per-device
+data streams and puts them on separate output ports, and receives per-device
+input streams on separate input ports.</p>
+
+<p>This can be useful if the combus driver itself adds per-device information
+on the data streams, instead of having it done by the driver (maybe because
+the drivers don't know about the combus itself, think for instance an IP
+multiplexing component that would take raw IO as input)</p>
+
+<p>To handle demultiplexing, the combus driver will need to provide
+- a property to define the devices that are attached, in terms of a name
+  (to name the created ports) and the information needed to filter the
+  bus messages
+- code to create the necessary ports in <code>configureHook</code> and remove them in
+  <code>cleanupHook</code>. The output ports (that is, the ports that send data from
+  the bus to the device) are expected to be named the same way than the device
+  name. The input ports are named <code>w${device_name}</code>. This is a convention that
+  will be enforced by Syskit, but needs to be explicitely implemented by the
+  orogen component implementation and its Syskit integration. Note that
+  the input port is commonly shared, see following section.</p>
+
+<p>When using dynamic ports, Syskit requires the component to declare that
+it can create ports and of which type. In addition to the property described
+in (1) above, one therefore has to add the dynamic ports declarations to the
+orogen file, matching the dynamic port patterns we described above:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Replace canbus/Message by the actual bus data type</span>
+<span class="n">dynamic_input_port</span><span class="p">(</span><span class="sr">/^w\w+$/</span><span class="p">,</span> <span class="s1">'/canbus/Message'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">needs_reliable_connection</span>
+<span class="n">dynamic_output_port</span> <span class="sr">/^\w+$/</span><span class="p">,</span> <span class="s1">'/canbus/Message'</span>
+</code></pre></div>
+<p>Internally, the component will have to create the ports at configure time, like
+so:</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">dev</span> <span class="o">:</span> <span class="n">_devices</span><span class="p">.</span><span class="n">get</span><span class="p">())</span> <span class="p">{</span>
+  <span class="k">auto</span><span class="o">*</span> <span class="n">output_port</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RTT</span><span class="o">::</span><span class="n">OutputPort</span><span class="o">&lt;</span><span class="n">canbus</span><span class="o">::</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">(</span><span class="n">dev</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+  <span class="k">auto</span><span class="o">*</span> <span class="n">input_port</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RTT</span><span class="o">::</span><span class="n">InputPort</span><span class="o">&lt;</span><span class="n">canbus</span><span class="o">::</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"w"</span> <span class="o">+</span> <span class="n">dev</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">provides</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addPort</span><span class="p">(</span><span class="o">*</span><span class="n">output_port</span><span class="p">);</span>
+  <span class="n">provides</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addPort</span><span class="p">(</span><span class="o">*</span><span class="n">input_port</span><span class="p">);</span>
+  <span class="c1">// Some attribute suitably setup to store the allocated ports</span>
+  <span class="n">m_allocated_ports</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="n">name</span><span class="p">,</span> <span class="n">output_port</span><span class="p">,</span> <span class="n">input_port</span> <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>These ports must be removed and deallocated in cleanupHook:</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">dev</span> <span class="o">:</span> <span class="n">m_allocated_ports</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">provides</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">removePort</span><span class="p">(</span><span class="n">dev</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">provides</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">removePort</span><span class="p">(</span><span class="s">"w"</span> <span class="o">+</span> <span class="n">dev</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+  <span class="k">delete</span> <span class="n">dev</span><span class="p">.</span><span class="n">output_port</span><span class="p">;</span>
+  <span class="k">delete</span> <span class="n">dev</span><span class="p">.</span><span class="n">input_port</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">m_allocated_ports</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</code></pre></div>
+<p>On the Syskit side, the hypothetical <code>devices</code> property we defined would be
+filled in the combus' <code>configure</code> method:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">configure</span>
+  <span class="k">super</span>
+
+  <span class="n">properties</span><span class="p">.</span><span class="nf">devices</span> <span class="o">=</span> <span class="n">each_declared_attached_device</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">dev</span><span class="o">|</span>
+    <span class="no">Types</span><span class="p">.</span><span class="nf">my_bus</span><span class="o">.</span><span class="no">Device</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">dev</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="o">*</span><span class="n">dev</span><span class="p">.</span><span class="nf">can_id</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Before we can test the bus device, we need to stub the port creation
+behavior. Tests that deal only with checking correctness of the configuration
+blocks don't run the actual components. It is therefore needed to "stub" the
+fact that filling certain properties cause ports to be created. The following
+code does so, and is to be placed at the same context than the configure method:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">configure</span>
+  <span class="k">super</span>
+
+  <span class="n">properties</span><span class="p">.</span><span class="nf">devices</span> <span class="o">=</span> <span class="n">each_declared_attached_device</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">dev</span><span class="o">|</span>
+    <span class="no">Types</span><span class="p">.</span><span class="nf">my_bus</span><span class="o">.</span><span class="no">Device</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">dev</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="o">*</span><span class="n">dev</span><span class="p">.</span><span class="nf">can_id</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">stub</span> <span class="k">do</span>
+  <span class="n">devices</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">dev</span><span class="o">|</span>
+    <span class="n">create_input_port</span> <span class="s2">"w</span><span class="si">#{</span><span class="n">dev</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="no">Types</span><span class="p">.</span><span class="nf">canbus</span><span class="o">.</span><span class="no">Message</span>
+    <span class="n">create_output_port</span> <span class="n">dev</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="no">Types</span><span class="p">.</span><span class="nf">canbus</span><span class="o">.</span><span class="no">Message</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Finally, the configure method is tested with:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Create a bus, as if defined in a robot model</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="n">syskit_stub_com_bus</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="p">)</span>
+<span class="c1"># Create a device attached to that bus</span>
+<span class="n">dev</span> <span class="o">=</span> <span class="n">syskit_stub_attached_device</span><span class="p">(</span><span class="n">bus</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">can_id</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">dev_task</span> <span class="o">=</span> <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">bus_task</span><span class="p">,</span> <span class="o">=</span> <span class="n">task</span><span class="p">.</span><span class="nf">each_child</span><span class="p">.</span><span class="nf">first</span>
+
+<span class="c1"># Verify bus_task.properties.devices</span>
+</code></pre></div>
+<h3 id="shared-input-port-on-the-combus-driver">Shared Input Port on the Combus Driver</h3>
+
+<p>It is usually not necessary to have one input port per device. To simplify,
+it is possible to have a single input port instead. To make this work,
+one needs to add the <code>multiplexes</code> attribute to the port - to make Syskit
+accept connecting more than one output to it - and to provide the bus'
+<code>BusInSrv</code> service as follows.</p>
+
+<p>In the orogen file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">input_port</span><span class="p">(</span><span class="s1">'msg_in'</span><span class="p">,</span> <span class="s1">'/canbus/Message'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">needs_reliable_connection</span> <span class="c1"># make sure buffers are big enough to avoid losing samples</span>
+  <span class="p">.</span><span class="nf">multiplexes</span>
+</code></pre></div>
+<p>In the task's extension file:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">provides</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="o">::</span><span class="no">BusInSrv</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'bus_in'</span>
+</code></pre></div>
+<p>Obviously, everything related to input ports must be removed from both
+the oroGen declaration, component implementation and Syskit integration.</p>
+
+<h3 id="declaring-one-way-communications">Declaring One Way Communications</h3>
+
+<p>Some devices are read-only or write-only. For instance, NMEA2000 sensors often
+have no configuration to speak of, and only automatically put their sensor values
+on the bus (so, the driver reads only). A CANOpen SYNC message generator would not
+need to read the bus.</p>
+
+<p>To integrate a read-only device driver, pass the <code>client_to_bus: false</code> option
+to the <code>device</code> declaration:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyApp</span>
+  <span class="k">module</span> <span class="nn">Profiles</span>
+    <span class="k">module</span> <span class="nn">Base</span>
+      <span class="n">robot</span> <span class="k">do</span>
+        <span class="n">com_bus</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'can0'</span>
+        <span class="n">through</span> <span class="s1">'can0'</span> <span class="k">do</span>
+          <span class="n">device</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">can_temperature_sensor</span><span class="o">.</span><span class="no">Task</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'temperature_sensor'</span><span class="p">,</span>
+                                                     <span class="ss">client_to_bus: </span><span class="kp">false</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">can_id</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">,</span> <span class="mh">0xffff</span><span class="p">)</span> <span class="c1"># CAN ID filter</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>To integrate a write-only device driver, pass the <code>bus_to_client: false</code> option
+to the <code>device</code> declaration:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">MyApp</span>
+  <span class="k">module</span> <span class="nn">Profiles</span>
+    <span class="k">module</span> <span class="nn">Base</span>
+      <span class="n">robot</span> <span class="k">do</span>
+        <span class="n">com_bus</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Bus</span><span class="o">::</span><span class="no">CAN</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'can0'</span>
+        <span class="n">through</span> <span class="s1">'can0'</span> <span class="k">do</span>
+          <span class="n">device</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">can_open</span><span class="o">.</span><span class="no">SyncTask</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'sync'</span><span class="p">,</span> <span class="ss">bus_to_client: </span><span class="kp">false</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">can_id</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">,</span> <span class="mh">0xffff</span><span class="p">)</span> <span class="c1"># CAN ID filter</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The same parameters can be provided to <code>syskit_stub_attached_device</code> in the
+tests.</p>
+
+<h2 id="advanced-topics">Advanced Topics</h2>
+
+<h3 id="disambiguating-bus-ports-on-device-drivers">Disambiguating Bus Ports on Device Drivers</h3>
+
+<p>The <code>device</code> declaration basically auto-add the <code>provides</code> on the relevant
+data services (<code>bus_model::ClientInSrv</code> and <code>bus_model::ClientOutSrv</code>) before
+attempting to setup the network. This works only if the device driver
+components have single input or output ports of the com bus message type. If
+it is not the case, one needs to disambiguate which ports should be used.</p>
+
+<p>This is done by (1) declaring the data services explicitely and (2) passing
+the bus names to the <code>bus_to_client</code> and <code>client_to_bus</code> options to <code>device</code>.
+The data service definition will have to provide the disambiguation using
+<a href="reusable_networks.html#multiple_data_services">port mappings</a>.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">OroGen</span><span class="p">.</span><span class="nf">extend_task</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">project</span><span class="o">.</span><span class="no">Task</span> <span class="k">do</span>
+  <span class="n">provides</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">SomeBus</span><span class="o">::</span><span class="no">ClientSrv</span><span class="p">,</span>
+           <span class="ss">as: </span><span class="s1">'client_in'</span><span class="p">,</span>
+           <span class="s1">'can_in'</span> <span class="o">=&gt;</span> <span class="s1">'bus_in'</span><span class="p">,</span>
+           <span class="s1">'can_out'</span> <span class="o">=&gt;</span> <span class="s1">'bus_out'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>If the component is read-only resp. write-only, use <code>ClientInSrv</code> resp.
+<code>ClientOutSrv</code> instead of <code>ClientSrv</code></p>
+
+<h3 id="extend_attached_device_configuration">Per-device configuration in the robot declaration</h3>
+
+<p>The <code>can_id</code> information attached to the device definition we have seen in
+the section's example is defined by the com bus itself. The call appears
+only on devices that are attached to a CAN bus.</p>
+
+<p>One defines such bus-specific configurations with <code>extend_attached_device_configuration</code>
+in the com bus model definition:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">com_bus_type</span> <span class="s1">'CAN'</span><span class="p">,</span> <span class="ss">message_type: </span><span class="s1">'/canbus/Message'</span> <span class="k">do</span>
+  <span class="n">extend_attached_device_configuration</span> <span class="k">do</span>
+    <span class="c1"># This context will be added to any device 'attached' to the bus 'self' is</span>
+    <span class="c1"># the device object</span>
+    <span class="k">def</span> <span class="nf">can_id</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Syskit provides the <code>dsl_attribute</code> helper which provides proper fluid interface:
+- without arguments, returns the attribute value
+- with arguments, set the attribute value
+- always returns 'self' to allow for method chaining</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">dsl_attribute</span> <span class="ss">:can_id</span> <span class="k">do</span> <span class="o">|</span><span class="nb">id</span><span class="p">,</span> <span class="n">mask</span><span class="o">|</span>
+  <span class="c1"># Validate 'id' and 'mask', and return the value</span>
+  <span class="c1"># that will be set</span>
+  <span class="p">[</span><span class="nb">id</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mask</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+<span class="k">end</span>
+</code></pre></div>
+<div class="highlight"><pre class="highlight plaintext"><code>device.can_id # =&gt; nil
+device.can_id(1, 2) # =&gt; device
+device.can_id # =&gt; [2, 4]
+</code></pre></div>
+<h3 id="association-between-driver-and-device">Association Between Driver and Device</h3>
+
+<p>In practice, Syskit will refuse running a device driver component if no devices
+are attached to it. The association between device driver and device is done
+through task arguments. Calling <code>driver_for</code> also creates an argument named
+after the driver data service's name. The device is passed to this argument.</p>
+
+<p>For instance, <code>OroGen.gps_ublox.Task</code> components defined after</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">gps_ublox</span><span class="o">.</span><span class="no">Task</span> <span class="k">do</span>
+  <span class="n">driver_for</span> <span class="no">MyApp</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">GPS</span><span class="o">::</span><span class="no">Ublox</span><span class="o">::</span><span class="no">F9</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'f9p'</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>will have a <code>f9p_dev</code> argument, and the argument's value will be the device
+object itself.</p>
+
+<h3 id="defining-informations-at-the-device-model-level">Defining informations at the device model level</h3>
+
+<p>In some cases, the device model itself provides information relevant to the
+device driver. For instance, the NMEA2000 specification defines the relationship
+between PGNs (a numerical message ID) and the type of message/device that will
+send this PGN. This is a static association that is specific to the device
+model, not to a particular device instance of this model.</p>
+
+<p>To simplify creating systems with busses that are constructed this way, it
+is possible to attach the information to the device model itself. To do so,
+one needs to create a device model class that is then used as root for
+all the device models for the bus.</p>
+
+<p>The new device model class is created by subclassing <code>Syskit::Models::DeviceModel</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Seabots</span>
+  <span class="k">module</span> <span class="nn">Devices</span>
+    <span class="k">module</span> <span class="nn">N2k</span>
+      <span class="k">class</span> <span class="nc">DeviceModel</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Models</span><span class="o">::</span><span class="no">DeviceModel</span>
+        <span class="c1"># Define nmea2000-specific API for all device models of this class</span>
+        <span class="k">def</span> <span class="nf">pgn</span><span class="p">(</span><span class="n">pgn</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="c1"># Make the device model available to define other models</span>
+      <span class="no">Device</span> <span class="o">=</span> <span class="no">DeviceModel</span><span class="p">.</span><span class="nf">new</span>
+      <span class="no">Device</span><span class="p">.</span><span class="nf">provides</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Device</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Then, devices for this class may be defined by passing the <code>parent: Device</code> option:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'seabots/models/devices/n2k/device'</span>
+
+<span class="k">module</span> <span class="nn">Seabots</span>
+  <span class="k">module</span> <span class="nn">Devices</span>
+    <span class="k">module</span> <span class="nn">N2k</span>
+      <span class="n">device_type</span> <span class="s1">'FluidLevel'</span><span class="p">,</span> <span class="ss">parent: </span><span class="no">Device</span> <span class="k">do</span>
+        <span class="n">pgn</span> <span class="mi">127_505</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The information is then available at configure time through the device's
+<code>#model</code> attribute, for instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">configure</span>
+  <span class="k">super</span>
+
+  <span class="n">each_declared_attached_device</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">dev</span><span class="o">|</span>
+    <span class="p">[</span><span class="n">dev</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="n">dev</span><span class="p">.</span><span class="nf">model</span><span class="p">.</span><span class="nf">pgn</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>When creating stub devices in tests, one passes the base model with
+the <code>parent_model: </code> option to <code>syskit_stub_attached_device</code>, e.g.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">bus</span> <span class="o">=</span> <span class="n">syskit_stub_com_bus</span><span class="p">(</span><span class="no">Seabots</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">N2k</span><span class="o">::</span><span class="no">Bus</span><span class="p">,</span>
+                          <span class="ss">driver: </span><span class="no">OroGen</span><span class="p">.</span><span class="nf">nmea2000</span><span class="o">.</span><span class="no">CANTask</span><span class="p">)</span>
+<span class="vi">@dev</span> <span class="o">=</span> <span class="n">syskit_stub_attached_device</span><span class="p">(</span>
+    <span class="n">bus</span><span class="p">,</span> <span class="ss">client_to_bus: </span><span class="kp">false</span><span class="p">,</span>
+         <span class="ss">base_model: </span><span class="no">Seabots</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">N2k</span><span class="o">::</span><span class="no">Device</span>
+<span class="p">)</span>
+</code></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>
