@@ -155,10 +155,11 @@ expect_execution { syskit_write task.in_port, sample }
     .to { EXPECTATIONS }
 ~~~
 
-If you need to queue more than one sample in a single test, pass them all to
-a single `syskit_write` call. Calling `syskit_write` with the same port more
-than once in a single `expect_execution` does not guarantee the order in which
-the samples will be received.
+Calling `syskit_write` more than
+once with the same portin a single `expect_execution` statement does not guarantee
+the order in which the samples will be received. If you need to queue more than one
+sample in a single test, to guarantee ordering, pass all samples instead to a single
+`syskit_write` call.  
 
 ~~~ ruby
 sample1 = ...
