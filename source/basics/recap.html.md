@@ -65,7 +65,7 @@ more complex functional units, by binding the components together.
 - a composition template is created using
 
   ~~~
-  syskit gen NameOfComposition
+  syskit gen cmp NameOfComposition
   ~~~
 - an element within a composition is declared with `add`, a component model
   (which can be another composition) and a name:
