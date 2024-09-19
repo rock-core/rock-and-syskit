@@ -146,9 +146,21 @@ done with `syskit_write`. Assuming the task under test has an `in` port, for
 example:
 
 ~~~ ruby
-task = syskit_deploy_configure_and_start(
+task = syskit_deploy(
     OroGen.project_name.Task.deployed_as('task')
 )
+
+task.properties.myproperty = 10
+task.properties.complex_property = Types.myproject.Complex.nwe(
+    field: 10
+)
+# Struct properties must be explicitly written to. You can't modify them in-place
+p = task.properties.complex_property
+p.some_field = 10
+task.properties.complex_property = p
+
+syskit_configure_and_start(task)
+
 sample = Types.project_name.SomeDataType.new
 sample.value = 20
 expect_execution { syskit_write task.in_port, sample }
@@ -159,7 +171,7 @@ Calling `syskit_write` more than once with the same port in a single
 `expect_execution` statement does not guarantee
 the order in which the samples will be received. If you need to queue more than one
 sample in a single test, to guarantee ordering, pass all samples instead to a single
-`syskit_write` call.  
+`syskit_write` call.
 
 ~~~ ruby
 sample1 = ...
@@ -196,6 +208,10 @@ expect_execution { task.start! }
 expect_execution { task.stop! }
     .to { EXPECTATIONS }
 ~~~
+
+If you want to test the start step, replace first `syskit_configure_and_start`
+by `syskit_configure`
+
 
 ### Expectations
 
