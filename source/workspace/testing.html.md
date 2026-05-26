@@ -27,7 +27,7 @@ done by _enabling_ the tests for the package you're interested in:
 
 ~~~
 cd path/to/my/package
-autoproj test enable
+autoproj test enable .
 aup --checkout-only
 amake
 ~~~
